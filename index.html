@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Panel personal para organizar y acceder a servicios online">
+<title>Gestión de Servicios Online</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+  <style>
+  .spotify-fondo {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+  }
+</style>
+
+
+
+<header>
+  <h1>🧭 Panel de Servicios Web </h1>
+  <p>Acceso rápido a mis plataformas</p>
+</header>
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Buscar servicio...">
+  <button id="toggleTheme">🌙</button>
+</div>
+
+<main id="services">
+
+<section>
+<h2>📧 Correo Web</h2>
+<ul>
+  <li><a href="https://mail.google.com/" target="_blank">Gmail</a></li>
+  <li><a href="https://es.yahoo.com/" target="_blank">Yahoo</a></li>
+  <li><a href="https://outlook.live.com/" target="_blank">Hotmail</a></li>
+</ul>
+</section>
+
+<section>
+<h2>☁️ Almacenamiento</h2>
+<ul>
+  <li><a href="https://drive.google.com/" target="_blank">Google Drive</a></li>
+  <li><a href="https://mega.nz/" target="_blank">MEGA</a></li>
+  <li><a href="https://onedrive.live.com/" target="_blank">OneDrive</a></li>
+</ul>
+</section>
+
+<!-- Incluimos Font Awesome para los iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-pVjF1k5a1Bv3uXkpJ6k7TtJxq5GdGnh/0D4g+Zd1TTcR1p/cUfXg2R6b5hwc3mPQPRYJ+fZ1gh0qEOZ+oxF0Zg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<section style="width:200px; font-family:Arial, sans-serif;">
+  <h2 onclick="toggleCompras()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
+    🛒 Compras <span id="arrowCompras">▼</span>
+  </h2>
+  <ul id="comprasMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
+    <li style="margin:5px 0;">
+      <a href="https://www.amazon.es/" target="_blank" style="text-decoration:none; color:#ff9900; display:flex; align-items:center; gap:8px;">
+        <i class="fab fa-amazon"></i> Amazon
+      </a>
+    </li>
+    <li style="margin:5px 0;">
+      <a href="https://www.aliexpress.com/" target="_blank" style="text-decoration:none; color:#ff5000; display:flex; align-items:center; gap:8px;">
+        <i class="fas fa-shopping-bag"></i> AliExpress
+      </a>
+    </li>
+    <li style="margin:5px 0;">
+      <a href="https://www.temu.com/" target="_blank" style="text-decoration:none; color:#ff3333; display:flex; align-items:center; gap:8px;">
+        <i class="fas fa-box-open"></i> Temu
+      </a>
+    </li>
+  </ul>
+</section>
+
+<script>
+  function toggleCompras() {
+    const menu = document.getElementById('comprasMenu');
+    const arrow = document.getElementById('arrowCompras');
+    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+      menu.style.maxHeight = '0';
+      arrow.textContent = '▼';
+    } else {
+      menu.style.maxHeight = menu.scrollHeight + 'px';
+      arrow.textContent = '▲';
+    }
+  }
+</script>
+
+
+<!-- Incluimos Font Awesome para los iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-pVjF1k5a1Bv3uXkpJ6k7TtJxq5GdGnh/0D4g+Zd1TTcR1p/cUfXg2R6b5hwc3mPQPRYJ+fZ1gh0qEOZ+oxF0Zg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<section style="width:200px; font-family:Arial, sans-serif;">
+  <h2 onclick="toggleGames()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
+    🎮 Videojuegos <span id="arrowGames">▼</span>
+  </h2>
+  <ul id="gamesMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
+    <li style="margin:5px 0;">
+      <a href="https://www.playstation.com/" target="_blank" style="text-decoration:none; color:#003791; display:flex; align-items:center; gap:8px;">
+        <i class="fab fa-playstation"></i> PlayStation
+      </a>
+    </li>
+    <li style="margin:5px 0;">
+      <a href="https://www.xbox.com/" target="_blank" style="text-decoration:none; color:#107C10; display:flex; align-items:center; gap:8px;">
+        <i class="fab fa-xbox"></i> Xbox
+      </a>
+    </li>
+    <li style="margin:5px 0;">
+      <a href="https://www.nintendo.com/" target="_blank" style="text-decoration:none; color:#e60012; display:flex; align-items:center; gap:8px;">
+        <i class="fas fa-gamepad"></i> Nintendo
+      </a>
+    </li>
+  </ul>
+</section>
+
+<script>
+  function toggleGames() {
+    const menu = document.getElementById('gamesMenu');
+    const arrow = document.getElementById('arrowGames');
+    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+      menu.style.maxHeight = '0';
+      arrow.textContent = '▼';
+    } else {
+      menu.style.maxHeight = menu.scrollHeight + 'px';
+      arrow.textContent = '▲';
+    }
+  }
+</script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-pVjF1k5a1Bv3uXkpJ6k7TtJxq5GdGnh/0D4g+Zd1TTcR1p/cUfXg2R6b5hwc3mPQPRYJ+fZ1gh0qEOZ+oxF0Zg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<section style="width:200px; font-family:Arial, sans-serif;">
+  <h2 onclick="toggleMenu()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
+    📱 Redes & Streaming <span id="arrow">▼</span>
+  </h2>
+  <ul id="redesMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
+    <li style="margin:5px 0;">
+      <a href="https://www.facebook.com/" target="_blank" style="text-decoration:none; color:#3b5998; display:flex; align-items:center; gap:8px;">
+        <i class="fab fa-facebook-f"></i> Facebook
+      </a>
+    </li>
+    <li style="margin:5px 0;">
+      <a href="https://twitter.com/" target="_blank" style="text-decoration:none; color:#1da1f2; display:flex; align-items:center; gap:8px;">
+        <i class="fab fa-twitter"></i> Twitter
+      </a>
+    </li>
+    <li style="margin:5px 0;">
+      <a href="https://www.twitch.tv/" target="_blank" style="text-decoration:none; color:#9146ff; display:flex; align-items:center; gap:8px;">
+        <i class="fab fa-twitch"></i> Twitch
+      </a>
+    </li>
+  </ul>
+</section>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('redesMenu');
+    const arrow = document.getElementById('arrow');
+    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+      menu.style.maxHeight = '0';
+      arrow.textContent = '▼';
+    } else {
+      menu.style.maxHeight = menu.scrollHeight + 'px';
+      arrow.textContent = '▲';
+    }
+  }
+</script>
+
+
+<section>
+<h2>🏦 Banca</h2>
+<ul>
+  <li><a href="https://www.openbank.es/" target="_blank">OpenBank</a></li>
+  <li><a href="https://www.paypal.com/" target="_blank">PayPal</a></li>
+  <li><a href="https://www.bbva.es/" target="_blank">BBVA</a></li>
+</ul>
+</section>
+
+<section>
+<h2>💼 Empleo</h2>
+<ul>
+  <li><a href="https://www.ecyl.es/" target="_blank">ECYL</a></li>
+  <li><a href="https://www.linkedin.com/" target="_blank">LinkedIn</a></li>
+  <li><a href="https://www.uva.es/" target="_blank">UVA</a></li>
+  <li><a href="https://www.ubu.es/" target="_blank">UBU</a></li>
+  <li><a href="https://www.diputacionvalladolid.es/" target="_blank">Diputación Valladolid</a></li>
+</ul>
+</section>
+
+<section>
+<h2>🎮 Videojuegos y aficiones</h2>
+<ul>
+  <li><a href="https://www.printables.com/" target="_blank">Printables</a></li>
+  <li><a href="https://www.youtube.com/" target="_blank">YouTube</a></li>
+  <li><a href="https://www.gog.com/" target="_blank">GOG</a></li>
+  <li><a href="https://store.steampowered.com/" target="_blank">Steam</a></li>
+</ul>
+</section>
+
+
+
+</main>
+<footer class="site-footer">
+  <div class="footer-content">
+    <p>© 2025 Alfonso Rubio — Todos los derechos reservados</p>
+
+    <div class="social-icons">
+      <a href="https://www.facebook.com/AlfonsoRubioRioseras" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://x.com/alfrubrio" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://www.youtube.com/@AlfonsoRubioRioseras" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.tiktok.com/@alfonsorubio007" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.linkedin.com/in/alfonsorubiorioseras/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      
+    </div>
+  </div>
+  <p>Musica by Spotify</p>
+  <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2Y96ztQ2K4246vZYMJd9Or?utm_source=generator" width="300" height="240" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+   <p>Información meteorológica</p>
+   <div id="tiempo" style="position: center">
+    <iframe
+  src="https://api.wo-cloud.com/content/widget/?geoObjectKey=15557284&language=es&region=ES&timeFormat=HH:mm&windUnit=kmh&systemOfMeasurement=metric&temperatureUnit=celsius"
+  name="CW2"
+  scrolling="no"
+  width="290"
+  height="318"
+  frameborder="0"
+  style="border: 1px solid #10658E; border-radius: 8px;">
+</iframe>
+
+</div>
+
+</footer>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
