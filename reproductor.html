@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reproductor Audio Web</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: #b30000;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 10px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    nav {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 10px 40px;
+    }
+
+    section {
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+      padding-bottom: 4px;
+    }
+
+    #caratulas {
+      text-align: center;
+    }
+
+    #caratulas img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      margin-bottom: 10px;
+    }
+
+    #reproductor {
+      text-align: left;
+    }
+
+    .track {
+      margin-bottom: 15px;
+    }
+
+    .track-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    audio {
+      width: 100%;
+      max-width: 400px;
+      outline: none;
+    }
+
+    audio:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px 10px;
+      background: rgba(0, 0, 0, 0.4);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bienvenido a mi reproductor audio web</h1>
+  </header>
+
+  <nav aria-label="Navegación principal">
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#sobre">Sobre mí</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="#caratulas">Carátulas disco</a></li>
+      <li><a href="#reproductor">Reproductor audio</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="inicio">
+      <h2>Inicio</h2>
+      <p>Reproductor de audio web</p>
+    </section>
+
+    <section id="sobre">
+      <h2>Sobre mí</h2>
+      <p>
+        (C) Alfonso RUbio Rioseras - Todos los derechos reservados.
+        Para ver mis videos hechos con I.A visite mi canal de YouTube
+        <a href="https://www.youtube.com/@AlfonsoRubioRioseras" target="_blank" rel="noopener noreferrer">
+          Alfonso Rubio Rioseras</a>
+      </p>
+    </section>
+
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <p>Puedes contactarme a través de mi correo electrónico:
+        <a href="mailto:arioseras@hotmail.com">arioseras@hotmail.com</a>
+      </p>
+    </section>
+
+    <section id="caratulas">
+      <h2>Biografia del cantante</h2>
+      <p>Para más información sobre el cantante, pulsa el siguiente enlace a Wikipedia  </p>
+        <p><a href="https://es.wikipedia.org/wiki/Julio_Iglesias" target="_blank" rel="noopener noreferrer">
+            Julio Iglesias - Wikipedia</a></p>
+            <br>
+            <p>🎵 Disfruta del disco</p>
+      <p>Carátulas del disco</p>
+      <img src="covers/front.jpg" alt="Carátula frontal del disco" width="458" height="458">
+      <p>------</p>
+      <img src="covers/back.jpg" alt="Carátula trasera del disco" width="594" height="458">
+    </section>
+<div id="contenedor" align="center">
+    <section id="reproductor" align="center">
+      <h2 align="center">Selector de canciones</h2>
+
+      <div class="track" align="center"></div>
+        <p class="track-title">A flor de piel</p>
+        <audio controls>
+          <source src="musica/pista1.mp3" type="audio/mp3">
+          Tu navegador no soporta audio HTML5.
+        </audio>
+      </div>
+
+      <div class="track">
+        <p class="track-title">Vivir</p>
+        <audio controls>
+          <source src="musica/pista2.mp3" type="audio/mp3">
+          Tu navegador no soporta audio HTML5.
+        </audio>
+      </div>
+
+      <div class="track">
+        <p class="track-title">Dicen</p>
+        <audio controls>
+          <source src="musica/pista3.mp3" type="audio/mp3">
+          Tu navegador no soporta audio HTML5.
+        </audio>
+      </div>
+
+      <div class="track">
+        <p class="track-title">Manuela</p>
+        <audio controls>
+          <source src="musica/pista4.mp3" type="audio/mp3">
+          Tu navegador no soporta audio HTML5.
+        </audio>
+      </div>
+
+      <div class="track">
+        <p class="track-title">Un adiós a media luz</p>
+        <audio controls>
+          <source src="musica/pista5.mp3" type="audio/mp3">
+          Tu navegador no soporta audio HTML5.
+        </audio>
+      </div>
+
+      <div class="track">
+        <p class="track-title">Te quiero así</p>
+        <audio controls>
+          <source src="musica/pista6.mp3" type="audio/mp3">
+          Tu navegador no soporta audio HTML5.
+        </audio>
+      </div>
+
+      <div class="track">
+        <p class="track-title">Por el amor de una mujer</p>
+        <audio controls>
+          <source src="musica/pista7.mp3" type="audio/mp3">
+          Tu navegador no soporta audio HTML5.
+        </audio>
+      </div>
+
+      <div class="track">
+        <p class="track-title">Desde que tú te has ido</p>
+        <audio controls>
+          <source src="musica/pista8.mp3" type="audio/mp3">
+          Tu navegador no soporta audio HTML5.
+        </audio>
+      </div>
+
+      <div class="track">
+        <p class="track-title">Aún me queda la esperanza</p>
+        <audio controls>
+          <source src="musica/pista9.mp3" type="audio/mp3">
+          Tu navegador no soporta audio HTML5.
+        </audio>
+      </div>
+
+      <div class="track">
+        <p class="track-title">En cualquier parte</p>
+        <audio controls>
+          <source src="musica/pista10.mp3" type="audio/mp3">
+          Tu navegador no soporta audio HTML5.
+        </audio>
+      </div>
+    </section>
+</div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Reproductor audio HTML. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
