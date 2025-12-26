@@ -290,6 +290,46 @@ text-shadow:
         }
 
 
+    /* Contenedor del reloj */
+    #container {
+      display: inline-block;
+      padding: 18px 36px;
+      border-radius: 18px;
+      background: rgba(0,0,0,0.55); /* semitransparente para legibilidad */
+      box-shadow: 0 0 30px rgba(0,234,255,0.45);
+    }
+
+    #fecha {
+      font-size: 32px;
+      font-weight: 600;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(0,234,255,0.9);
+      letter-spacing: 1px;
+    }
+
+    #hora {
+      font-size: 100px;
+      font-weight: 600;
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(0,234,255,0.95);
+      line-height: 0.95;
+    }
+
+    /* Ajustes responsive por si usas distintas resoluciones */
+    @media (max-width: 700px) {
+      #fecha { font-size: 28px; }
+      #hora  { font-size: 60px; }
+    }
+
+
+
+
+
+
+
+
+
+
 .footer-bottom {
   margin-top: 15px;
   font-size: 13px;

@@ -32,7 +32,7 @@
 </div>
 
 
-<!--Dayspedia.com widget--><div class="DPDC" cityid="1184" lang="es" id="dayspedia_widget_6b48a0a42641e5be" host="https://dayspedia.com" ampm="true" nightsign="true" sun="true" style="background-image: url(&quot;https://cdn.dayspedia.com/img/widgets/bg-13.png&quot;); width: 15%; height: 12%; padding: 24px;">
+<!--Dayspedia.com widget--><div class="DPDC" cityid="1197" lang="es" id="dayspedia_widget_6b48a0a42641e5be" host="https://dayspedia.com" ampm="true" nightsign="true" sun="true" style="background-image: url(&quot;https://cdn.dayspedia.com/img/widgets/bg-13.png&quot;); width: 15%; height: 12%; padding: 24px;">
 
 	<style media="screen" id="dayspedia_widget_6b48a0a42641e5be_style">
 				/*COMMON*/
@@ -105,14 +105,13 @@
 	</div><!--Dayspedia.com widget ENDS-->
 
 
-<div id="relojuanjo" style="position: absolute; top: 300px; left: 1300px;" >
-      <div id="container">
-      <div id="fecha"></div>
-      <div id="hora"></div>
 
-    </div>
 
-  </div>
+
+
+
+
+
 
 
 
@@ -126,9 +125,6 @@
   <input type="text" id="search" placeholder="Buscar servicio...">
   <button id="toggleTheme"><i style='font-size:24px' class='fas'>&#xf002;</i></button>
 </div>
-
- 
-<div id="juanjo" style="position:absolute; top:350px; left:900px;"><a href="https://antonio2709.synology.me/pc.html#gsc.tab=0"><img src="imagenes/iconjuanjo.png" width="48px" height="48px">Web Juanjo</a></div>
 
 <main id="services">
 
@@ -415,23 +411,6 @@
     });
   });
 </script>
-
-
-  <!-- Moment.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
-  <script>
-    moment.locale('es');
-
-    function actualizar() {
-      document.getElementById("fecha").innerText =
-        moment().format('dddd DD/MM/YYYY').toUpperCase();
-      document.getElementById("hora").innerText =
-        moment().format('HH:mm:ss');
-    }
-
-    actualizar();
-    setInterval(actualizar, 1000);
-  </script>
 
 
 </body>
