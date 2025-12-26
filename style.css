@@ -195,7 +195,7 @@ footer {
   width: 100%;
   padding: 14px;
   background: #222;
-  color: #ab2f2f;
+  color: #c1910c;
   font-size: 18px;
   border: none;
   cursor: pointer;
@@ -203,7 +203,7 @@ footer {
 }
 
 .media-title:hover {
-  background: #333;
+  background: #813939;
 }
 
 .media-list {
@@ -216,18 +216,18 @@ footer {
 }
 
 .media-list li {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #9aaf31;
 }
 
 .media-list a {
   display: block;
   padding: 12px 14px;
   text-decoration: none;
-  color: #222;
+  color: #efedf4;
 }
 
 .media-list a:hover {
-  background: #ddd;
+  background: #6896ac;
 }
 
 /* ===== EFECTO CRT ===== */
