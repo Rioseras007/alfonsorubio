@@ -10,40 +10,6 @@
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-
-
-
-
-<script>
-function actualizarTodo() {
-    const ahora = new Date();
-
-    const h = String(ahora.getHours()).padStart(2, '0');
-    const m = String(ahora.getMinutes()).padStart(2, '0');
-    const s = String(ahora.getSeconds()).padStart(2, '0');
-
-    const dias = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
-    const meses = ["enero","febrero","marzo","abril","mayo","junio",
-                    "julio","agosto","septiembre","octubre","noviembre","diciembre"];
-
-    const diaSemana = dias[ahora.getDay()];
-    const dia = ahora.getDate();
-    const mes = meses[ahora.getMonth()];
-    const año = ahora.getFullYear();
-
-    document.getElementById("reloj-retro").innerHTML =
-        `${h}<span class="blink">:</span>${m}<span class="blink">:</span>${s}`;
-
-    document.getElementById("fecha-retro").textContent =
-        `${diaSemana}, ${dia} ${mes} ${año}`;
-}
-
-setInterval(actualizarTodo, 1000);
-actualizarTodo();
-</script>
-
-
-
 </head>
 <body>
   <style>
@@ -64,10 +30,10 @@ actualizarTodo();
   <img src="banner.png"  alt="Banner de Redes Sociales" style="max-width: 25%; max-height: 25%; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
 </div>
 
-<div class="panel-retro">
-    <div id="reloj-retro">00<span class="blink">:</span>00<span class="blink">:</span>00</div>
-    <div id="fecha-retro"></div>
-</div>
+
+
+
+
 
 
 
@@ -77,8 +43,7 @@ actualizarTodo();
 
 <div class="controls">
   <input type="text" id="search" placeholder="Buscar servicio...">
-  <button id="toggleTheme" style='font-size:24px'>Buscar <i class='fas fa-search'></i></button>
- 
+  <button id="toggleTheme">🌙</button>
 </div>
 
 <main id="services">
@@ -86,18 +51,18 @@ actualizarTodo();
 <section>
 <h2>📧 Correo Web</h2>
 <ul>
-  <li style="margin:5px 0;"><a href="https://mail.google.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf1a0; </i> Gmail</a></li>
-  <li style="margin:5px 0;"><a href="https://es.yahoo.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf19e;</i> Yahoo</a></li>
-  <li style="margin:5px 0;"><a href="https://outlook.live.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf17a;</i> Hotmail</a></li>
+  <li style="margin:5px 0;"><a href="https://mail.google.com/" target="_blank">Gmail</a></li>
+  <li style="margin:5px 0;"><a href="https://es.yahoo.com/" target="_blank">Yahoo</a></li>
+  <li style="margin:5px 0;"><a href="https://outlook.live.com/" target="_blank">Hotmail</a></li>
 </ul>
 </section>
 
 <section>
 <h2>☁️ Almacenamiento</h2>
 <ul>
-  <li style="margin:5px 0;"><a href="https://drive.google.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf3aa;</i>Google Drive</a></li>
-  <li style="margin:5px 0;"><a href="https://mega.nz/" target="_blank"><i style='font-size:24px' class='fas'>&#xf381;</i>MEGA</a></li>
-  <li style="margin:5px 0;"><a href="https://onedrive.live.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf17a;</i>One Drive</a></li>
+  <li style="margin:5px 0;"><a href="https://drive.google.com/" target="_blank">Google Drive</a></li>
+  <li style="margin:5px 0;"><a href="https://mega.nz/" target="_blank">MEGA</a></li>
+  <li style="margin:5px 0;"><a href="https://onedrive.live.com/" target="_blank">One Drive</a></li>
 </ul>
 </section>
 
@@ -225,35 +190,34 @@ actualizarTodo();
 <section  style="width: 250px; font-family:Arial, sans-serif;">
 <h2>🏦 Banca</h2>
 <ul>
-  <li style="margin:5px 0;"><a href="https://www.openbank.es/" target="_blank">🏦OpenBank</a></li>
-  <li style="margin:5px 0;"><a href="https://www.paypal.com/" target="_blank">💳 PayPal</a></li>
-  <li style="margin:5px 0;"><a href="https://www.bbva.es/" target="_blank">🏦 BBVA</a></li>
+  <li style="margin:5px 0;"><a href="https://www.openbank.es/" target="_blank">OpenBank</a></li>
+  <li style="margin:5px 0;"><a href="https://www.paypal.com/" target="_blank">PayPal</a></li>
+  <li style="margin:5px 0;"><a href="https://www.bbva.es/" target="_blank">BBVA</a></li>
 </ul>
 </section>
 
 <section  style="width:260px; font-family:Arial, sans-serif;">
 <h2>💼 Empleo</h2>
 <ul>
-  <li style="margin:5px 0;"><a href="https://empleocastillayleon.jcyl.es/oficinavirtual/index.do" target="_blank">🧑‍🏭 ECYL</a></li>
-  <li style="margin:5px 0;"><a href="https://www.linkedin.com/" target="_blank">🔗 LinkedIn</a></li>
-  <li style="margin:5px 0;"><a href="https://www.uva.es/" target="_blank">🏫 UVA</a></li>
-  <li style="margin:5px 0;"><a href="https://www.ubu.es/" target="_blank">🍔UBU</a></li>
-  <li style="margin:5px 0;"><a href="https://www.diputaciondevalladolid.es/" target="_blank">🏠 Diputación Valladolid</a></li>
+  <li style="margin:5px 0;"><a href="https://empleocastillayleon.jcyl.es/oficinavirtual/index.do" target="_blank">ECYL</a></li>
+  <li style="margin:5px 0;"><a href="https://www.linkedin.com/" target="_blank">LinkedIn</a></li>
+  <li style="margin:5px 0;"><a href="https://www.uva.es/" target="_blank">UVA</a></li>
+  <li style="margin:5px 0;"><a href="https://www.ubu.es/" target="_blank">UBU</a></li>
+  <li style="margin:5px 0;"><a href="https://www.diputaciondevalladolid.es/" target="_blank">Diputación Valladolid</a></li>
 </ul>
 </section>
 
 <section  style="width:270px; font-family:Arial, sans-serif;">
 <h2>🎮 Videojuegos y aficiones</h2>
 <ul>
-  <li style="margin:5px 0;"><a href="https://www.printables.com/" target="_blank">🖨️ Printables</a></li>
-  <li style="margin:5px 0;"><a href="https://www.youtube.com/" target="_blank">📹 YouTube</a></li>
-  <li style="margin:5px 0;"><a href="https://www.gog.com/" target="_blank">🎮 GOG</a></li>
-  <li style="margin:5px 0;"><a href="https://store.steampowered.com/" target="_blank"><i class='fab fa-steam'></i> Steam</a></li>
-  <li style="margin:5px 0;"><a href="https://scratch.mit.edu/" target="_blank">😺 Scratch</a></li>
-   <li style="margin:5px 0;"><a href="https://www.canva.com/" target="_blank">🖊️ Canva</a></li>
+  <li style="margin:5px 0;"><a href="https://www.printables.com/" target="_blank">Printables</a></li>
+  <li style="margin:5px 0;"><a href="https://www.youtube.com/" target="_blank">YouTube</a></li>
+  <li style="margin:5px 0;"><a href="https://www.gog.com/" target="_blank">GOG</a></li>
+  <li style="margin:5px 0;"><a href="https://store.steampowered.com/" target="_blank">Steam</a></li>
+  <li style="margin:5px 0;"><a href="https://scratch.mit.edu/" target="_blank">Scratch</a></li>
+  <li style="margin:5px 0;"><a href="https://www.canva.com/" target="_blank">Canva</a></li>
   <li style="margin:5px 0;"><a href="musica.html" target="_blank">🎵 Músisa 007</a></li>
-  <li style="margin:5px 0;"><a href="https://antonio2709.synology.me/" target="_blank">📁 Synology Nas Juanjo</a></li>
-
+   <li style="margin:5px 0;"><a href="reproductor.html" target="_blank">🎵 Músisa Julio Iglesias</a></li>
 </ul>
 </section>
 
@@ -264,20 +228,18 @@ actualizarTodo();
     <li style="margin:5px 0;"><a href="https://emisora.org.es/#onda-cero" target="_blank">🎙 Onda Cero</a></li>
     <li style="margin:5px 0;"><a href="https://emisora.org.es/#cope" target="_blank">📡 COPE</a></li>
     <li style="margin:5px 0;"><a href="https://emisora.org.es/#40-principales" target="_blank">🎶 Los 40</a></li>
-    <li style="margin:5px 0;"><a href="https://emisora.org.es/#cadena-dial" target="_blank">📻 Cadena Dial</a></li>
-    <li style="margin: 5px 0 ;" text-color="red"> Canales TDT </li>
-    <li style="margin:5px 0;"><a href="https://www.rtve.es/play/videos/directo/canales-lineales/la-1/" target="_blank">📺 La 1 TVE</a></li>
-    <li style="margin:5px 0;"><a href="https://www.rtve.es/play/videos/directo/canales-lineales/la-2/" target="_blank">📺 La 2 TVE</a></li>
-    <li style="margin:5px 0;"><a href="https://www.atresplayer.com/directos/antena3/" target="_blank">📺 Antena 3</a></li>   
-    <li style="margin:5px 0;"><a href="https://www.cuatro.com/en-directo/" target="_blank">📺 Cuatro</a></li>
-    <li style="margin:5px 0;"><a href="https://www.mitele.es/directo/telecinco/" target="_blank">📺 Telecinco</a></li>
-    <li style="margin:5px 0;"><a href="https://www.atresplayer.com/directos/lasexta/" target="_blank">📺 La Sexta</a></li>
+    <li style="margin:5px 0;"><a href="https://emisora.org.es/#cadena-dial" target="_blank">💿 Cadena Dial</a></li>
+    <li style="margin: 5px 0 ;">Canales TDT </li>
+    <li style="margin:5px 0;"><a href="https://www.rtve.es/play/videos/directo/canales-lineales/la-1/" target="_blank"> La 1 TVE</a></li>
+    <li style="margin:5px 0;"><a href="https://www.rtve.es/play/videos/directo/canales-lineales/la-2/" target="_blank"> La 2 TVE</a></li>
+    <li style="margin:5px 0;"><a href="https://www.atresplayer.com/directos/antena3/" target="_blank"> Antena 3</a></li>
+    <li style="margin:5px 0;"><a href="https://www.cuatro.com/en-directo/" target="_blank">Cuatro</a></li>
+    <li style="margin:5px 0;"><a href="https://www.mitele.es/directo/telecinco/" target="_blank">💿 Telecinco</a></li>
+    <li style="margin:5px 0;"><a href="https://www.atresplayer.com/directos/lasexta/" target="_blank">💿 La Sexta</a></li>
     
   
   </ul>
 </section>
-
-
 
 <section  style="width:270px; font-family:Arial, sans-serif;" class="media-tv">
   <button class="media-title">📺 Streaming</button>
@@ -286,17 +248,6 @@ actualizarTodo();
     <li><a href="https://www.primevideo.com/">📽 Prime Video</a></li>
     <li><a href="https://www.hbomax.com/">🎞 HBO Max</a></li>
   </ul>
-
-</section>
-
-<section  style="width:270px; font-family:Arial, sans-serif;">
-<h2>🏣 Mensajeria</h2>
-<ul>
-  <li style="margin:5px 0;"><a href="https://web.whatsapp.com/" target="_blank">💚 Whatsup</a></li>
-  <li style="margin:5px 0;"><a href="https://web.telegram.org/k/" target="_blank">💙 Telegram</a></li>
-  <li style="margin:5px 0;"><a href="https://www.messenger.com/" target="_blank">💜 Messenger</a></li>
-
-</ul>
 </section>
 
 
