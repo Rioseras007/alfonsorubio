@@ -284,7 +284,10 @@ text-shadow:
     mix-blend-mode: screen;
 }
  
-
+  .icono {
+            width: 48px;   /* Tamaño del icono de juanjo */
+            height: 48px;
+        }
 
 
 .footer-bottom {
