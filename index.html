@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Panel personal para organizar y acceder a servicios online">
+
 <link rel="icon" href="styles/favicon.ico" type="image/x-icon"> <!-- Favicon -->
 <title>Gestión de Servicios Online</title>
-
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -28,11 +28,12 @@
 <header>
 
 <!-- Banner principal -->
-<div align="center">
+<div class="topbaner" align="center">
   <img src="banner3.png"  alt="Banner de Redes Sociales" style="max-width: 50%; max-height: 50%; min-height: auto; min-width: auto; border-radius: 25px; box-shadow: 0 10px 10px rgba(130, 88, 237, 0.3);">
  
 </div>
 
+<div id="relojroto" class="casio"  z-index="9" style="margin-bottom: 100px; padding: 10px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 <!--Dayspedia.com widget--><div class="DPDC" cityid="1184" lang="es" id="dayspedia_widget_5279723ae43ec6d2" host="https://dayspedia.com" ampm="true" nightsign="true" sun="true" style="width: 300px; background-image: url(&quot;https://cdn.dayspedia.com/img/widgets/bg-10.png&quot;);" auto="true">
 
 	<style media="screen" id="dayspedia_widget_5279723ae43ec6d2_style">
@@ -106,8 +107,15 @@
 	</div><!--Dayspedia.com widget ENDS-->
 
 
+</div>
 
-<div id="relojuanjo" style="position: absolute; top: 300px; left: 1300px;" >
+
+
+<!-- Reloj juanjo -->
+
+
+
+<div id="caja" class="caja">
       <div id="container">
       <div id="fecha"></div>
       <div id="hora"></div>
@@ -116,6 +124,11 @@
     
 
   </div>
+
+
+<div id="juanjo" class="webjuanjo" z-index="10"><a href="https://antonio2709.synology.me/pc.html#gsc.tab=0"><img src="imagenes/iconjuanjo.png" width="48px" height="48px">Web Juanjo</a></div>
+
+
 
 <!-- BUSCADOR WEB google-->
 <div class="search-box">
@@ -184,22 +197,47 @@ function buscar() {
 </div>
 
  
-<div id="juanjo" style="position:absolute; top:350px; left:900px;"><a href="https://antonio2709.synology.me/pc.html#gsc.tab=0"><img src="imagenes/iconjuanjo.png" width="48px" height="48px">Web Juanjo</a></div>
+
+
 
 <main id="services">
 
-<section>
-<h2>📧 Correo Web</h2>
-<ul>
+<section style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
+<h2 onclick="toggleCorreo()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">📧 Correo Web<span id="arrowCorreo">▼</span></h2>
+
+<ul id="correoMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
+
   <li style="margin:5px 0;"><a href="https://mail.google.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf1a0;</i> Gmail</a></li>
   <li style="margin:5px 0;"><a href="https://es.yahoo.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf19e;</i> Yahoo</a></li>
   <li style="margin:5px 0;"><a href="https://outlook.live.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf17a;</i>Hotmail</a></li>
+
 </ul>
 </section>
 
-<section>
-<h2>☁️ Almacenamiento</h2>
-<ul>
+<script>
+  function toggleCorreo() {
+    const menu = document.getElementById('correoMenu');
+    const arrow = document.getElementById('arrowCorreo');
+    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+      menu.style.maxHeight = '0';
+      arrow.textContent = '▼';
+    } else {
+      menu.style.maxHeight = menu.scrollHeight + 'px';
+      arrow.textContent = '▲';
+    }
+  }
+</script>
+
+
+
+
+
+<!-- seccion almacenamiento en la nube-->
+
+<section style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
+<h2 onclick="toggleNube()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">☁️ Almacenamiento<span id="arrowNube">▼</span></h2>
+
+<ul id="nubeMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
   <li style="margin:5px 0;"><a href="https://drive.google.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf3aa;</i> Google Drive</a></li>
   <li style="margin:5px 0;"><a href="https://mega.nz/" target="_blank"><i style='font-size:24px' class='fas'>&#xf381;</i> MEGA</a></li>
   <li style="margin:5px 0;"><a href="https://onedrive.live.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf17a;</i> One Drive</a></li>
@@ -207,10 +245,29 @@ function buscar() {
 </ul>
 </section>
 
+<script>
+  function toggleNube() {
+    const menu = document.getElementById('nubeMenu');
+    const arrow = document.getElementById('arrowNube');
+    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+      menu.style.maxHeight = '0';
+      arrow.textContent = '▼';
+    } else {
+      menu.style.maxHeight = menu.scrollHeight + 'px';
+      arrow.textContent = '▲';
+    }
+  }
+</script>
+
+
+
+
+
+
 <!-- Incluimos Font Awesome para los iconos -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-pVjF1k5a1Bv3uXkpJ6k7TtJxq5GdGnh/0D4g+Zd1TTcR1p/cUfXg2R6b5hwc3mPQPRYJ+fZ1gh0qEOZ+oxF0Zg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<section style="width:200px; font-family:Arial, sans-serif;">
+<section style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
   <h2 onclick="toggleCompras()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
     🛒 Compras <span id="arrowCompras">▼</span>
   </h2>
@@ -261,7 +318,7 @@ function buscar() {
 <!-- Incluimos Font Awesome para los iconos -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-pVjF1k5a1Bv3uXkpJ6k7TtJxq5GdGnh/0D4g+Zd1TTcR1p/cUfXg2R6b5hwc3mPQPRYJ+fZ1gh0qEOZ+oxF0Zg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<section style="width:200px; font-family:Arial, sans-serif;">
+<section style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
   <h2 onclick="toggleGames()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
     🎮 Videojuegos <span id="arrowGames">▼</span>
   </h2>
@@ -311,7 +368,7 @@ function buscar() {
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-pVjF1k5a1Bv3uXkpJ6k7TtJxq5GdGnh/0D4g+Zd1TTcR1p/cUfXg2R6b5hwc3mPQPRYJ+fZ1gh0qEOZ+oxF0Zg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<section style="width:200px; font-family:Arial, sans-serif;">
+<section style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
   <h2 onclick="toggleMenu()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
     📱 Redes & Streaming <span id="arrow">▼</span>
   </h2>
@@ -327,7 +384,7 @@ function buscar() {
       </a>
     </li>
     <li style="margin:5px 0;">
-      <a href="https://www.twitch.tv/" target="_blank" style="text-decoration:none; color:#9146ff; display:flex; align-items:center; gap:8px;">
+      <a href="https://www.twitch.tv/" target="_blank" style="text-decoration:none; color:#43266d; display:flex; align-items:center; gap:8px;">
         <i style='font-size:24px' class="fab fa-twitch"></i> Twitch
       </a>
     </li>
@@ -341,6 +398,7 @@ function buscar() {
       </a>
   </ul>
 </section>
+
 
 <script>
   function toggleMenu() {
@@ -357,9 +415,18 @@ function buscar() {
 </script>
 
 
-<section  style="width: 250px; font-family:Arial, sans-serif;">
-<h2>🏦 Banca</h2>
-<ul>
+
+
+
+<!-- seccion bancos -->
+
+
+<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
+<h2 onclick="toggleBanks()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
+  🏦 Bancos <span id="arrowBanks">▼</span></h2>
+
+<ul id="banksMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
+
   <li style="margin:5px 0;"><a href="https://www.openbank.es/" target="_blank"><i style="font-size:24px" class="fa">&#xf19c;</i> OpenBank</a></li>
   <li style="margin:5px 0;"><a href="https://www.paypal.com/" target="_blank"><i style='font-size:24px' class='far'>&#xf09d;</i> PayPal</a></li>
   <li style="margin:5px 0;"><a href="https://www.bbva.es/" target="_blank"><i style='font-size:24px' class='fas'>&#xf4d3;</i> BBVA</a></li>
@@ -369,18 +436,71 @@ function buscar() {
 </ul>
 </section>
 
-<section  style="width:260px; font-family:Arial, sans-serif;">
-<h2>💼 Empleo</h2>
-<ul>
+<script>
+  function toggleBanks() {
+    const menu = document.getElementById('banksMenu');
+    const arrow = document.getElementById('arrowBanks');
+    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+      menu.style.maxHeight = '0';
+      arrow.textContent = '▼';
+    } else {
+      menu.style.maxHeight = menu.scrollHeight + 'px';
+      arrow.textContent = '▲';
+    }
+  }
+</script>
+
+
+
+
+
+<!-- contenido segunda fila -->
+
+
+<!-- seccion empleo -->
+
+
+
+<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
+<h2  onclick="toggleEmpleo()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">💼 Empleo<span id="arrowEmpleo">▼</span></h2>
+<ul id="empleoMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
+
   <li style="margin:5px 0;"><a href="https://empleocastillayleon.jcyl.es/oficinavirtual/index.do" target="_blank"><i class='far fa-address-card' style='font-size:24px;color:rgb(45, 150, 96)'></i> ECYL</a></li>
   <li style="margin:5px 0;"><a href="https://www.linkedin.com/" target="_blank"><i class='fab fa-linkedin' style='font-size:24px;color:rgb(81, 41, 192)'></i> LinkedIn</a></li>
   <li style="margin:5px 0;"><a href="https://www.uva.es/" target="_blank"><i class='fas fa-university' style='font-size:24px;color:rgb(166, 64, 150)'></i>UVA</a></li>
   <li style="margin:5px 0;"><a href="https://www.ubu.es/" target="_blank"><i class='fas fa-university' style='font-size:24px;color:red'></i>UBU</a></li>
   <li style="margin:5px 0;"><a href="https://www.diputaciondevalladolid.es/" target="_blank"><i class='far fa-address-card' style='font-size:24px;color:rgb(125, 164, 33)'></i>Diputación Valladolid</a></li>
+  <li style="margin:5px 0;"><a href="https://www.infojobs.net/" target="_blank"><i class='far fa-address-card' style='font-size:24px;color:rgb(125, 164, 33)'></i>Infojobs</a></li>
 </ul>
 </section>
 
-<section  style="width:270px; font-family:Arial, sans-serif;">
+
+<script>
+  function toggleEmpleo() {
+    const menu = document.getElementById('empleoMenu');
+    const arrow = document.getElementById('arrowEmpleo');
+    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+      menu.style.maxHeight = '0';
+      arrow.textContent = '▼';
+    } else {
+      menu.style.maxHeight = menu.scrollHeight + 'px';
+      arrow.textContent = '▲';
+    }
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
  <button class="media-title">🎮 Frikismos</button>
 <ul>
   <li style="margin:5px 0;"><a href="https://www.printables.com/" target="_blank">👿 Printables</a></li>
@@ -399,7 +519,10 @@ function buscar() {
 </section>
 
 
-<section  style="width:270px; font-family:Arial, sans-serif;">
+<!-- seccion radio y tv -->
+
+
+<section style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
   <button class="media-title">📻 Radio & TV</button>
   <ul class="media-list">
     <li style="margin:5px 0;"><a href="https://emisora.org.es/#onda-cero" target="_blank">🎙 Onda Cero</a></li>
@@ -418,7 +541,10 @@ function buscar() {
   </ul>
 </section>
 
-<section  style="width:270px; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
+
+
+
+<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
   <button class="media-title">📺 Streaming</button>
   <ul class="media-list">
     <li style="margin:5px 0;"><a href="https://www.netflix.com/es/">🎬 Netflix</a></li>
@@ -431,7 +557,7 @@ function buscar() {
 </section>
 
 
-<section  style="width:270px; font-family:Arial, sans-serif; height: 300px; overflow-y: auto;">
+<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
   <button class="media-title">📺 Fotografia& Diseño</button>
   <ul class="media-list">
     <li style="margin:5px 0;"><a href="https://photos.google.com/">🟦 Google Photos</a></li>
@@ -439,7 +565,7 @@ function buscar() {
     <li style="margin:5px 0;"><a href="https://es.pinterest.com/">🟥 Pinterest</a></li>
   </ul>
 </section>
-<section  style="width:270px; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
+<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
   <button class="media-title">📺 Prensa & Noticias</button>
   <ul class="media-list">
     <li style="margin:5px 0;"><a href="https://www.marca.com/">📰 El Marca</a></li>
@@ -452,7 +578,7 @@ function buscar() {
   </ul>
 </section>
 
-<section  style="width: 300px; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
+<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
   <button class="media-title">🖥️ Informatica & Electronico</button>
   <ul class="media-list">
     <li style="margin:5px 0;"><a href="https://www.mediamark.es/">🔴 MediaMark España</a></li>
@@ -464,9 +590,6 @@ function buscar() {
     <li style="margin:5px 0;"><a href="https://www.pcbox.es/">🟢 PCBox</a></li>
   </ul>
 </section>
-
-
-
 
 
 
@@ -487,10 +610,20 @@ function buscar() {
       <a href="https://github.com/Rioseras007" target="_blank"><i class="fab fa-github"></i></a>
       
     </div>
+
+
+
+
   </div>
+
+
+<div id="musica" style="margin-top: 20px; text-align: center;" class="spoty">
   <p>Musica by Spotify</p>
   <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2Y96ztQ2K4246vZYMJd9Or?utm_source=generator" width="300" height="240" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-   
+</div>
+
+
+
   <p>Información meteorológica</p>
    <div id="tiempo" style="position: center">
     <iframe
@@ -502,24 +635,25 @@ function buscar() {
   frameborder="0"
   style="border: 1px solid #10658E; border-radius: 8px;">
 </iframe>
-
-
-<!-- Elfsight Visitor Counter | Untitled Visitor Counter -->
+  <div id="misvisitas" class="visitas"> <p>Contador de Visitas</p> <!-- Elfsight Visitor Counter | Untitled Visitor Counter -->
 <script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-f0dd5049-5b47-44da-a659-2caa35193356" data-elfsight-app-lazy style="position:absolute; top:1700px; left:300px">Contador de Visitas</div>
+<div class="elfsight-app-f0dd5049-5b47-44da-a659-2caa35193356" data-elfsight-app-lazy >Contador de Visitas</div> </div>
 
 
+  </div>
+  
 
 
-
+ 
 
 
 <div id="horoscopo"></div>
 <p align="center">Horóscopo Diario Gratis</p>
 <iframe style="min-width:70%; min-height: 120px;" 
-    src="https://mydailyhoroscope.org/widget.php?bc=000000&fc=FFFF33" 
-    width="100%" frameborder="0" scrolling="no"></iframe> 
+    src="https://mydailyhoroscope.org/widget.php?bc=000000&fc=43266d" 
+    width="80%" frameborder="0" scrolling="no"></iframe> 
 <script type="text/javascript" src="https://mydailyhoroscope.org/js/iframeResizer.js"></script>
+</div>
 
 </footer>
 

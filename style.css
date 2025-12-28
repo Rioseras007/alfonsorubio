@@ -323,9 +323,80 @@ text-shadow:
 
 
 
+  .caja {
+    position: absolute;
+
+    top: 300px;
+    right: auto;
+    left: 1300px;
+    background: rgb(116, 71, 184);
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+  }
+
+   .topbaner {
+ 
+    background: rgba(126, 80, 235, 0.794);
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+  }
+
+
+  .visitas {
+ position: absolute;
+    top: 1500px;
+    right: auto;
+    left: 200px;
+    background: rgba(102, 138, 89, 0.794);
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    max-width: auto;
+    max-height: auto;
+  }
+
+
+ .futuro{
+   
+
+   background: #ddc80a;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+      max-width: auto;
+    max-height: auto;
+  }
 
 
 
+
+
+
+    .casio{
+    position: absolute;
+
+    top: 300px;
+    right: 100px;
+    left: 100px;
+
+   
+    color: white;
+  }
+
+   .webjuanjo{
+    position: absolute;
+
+    top: 350px;
+    
+    left: 500px;
+
+   background: #b7b1d1;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+  }
 
 
 
@@ -333,4 +404,6 @@ text-shadow:
 .footer-bottom {
   margin-top: 15px;
   font-size: 13px;
+  background: rgba(80, 235, 152, 0.794);
+  padding: 10px;
 } 

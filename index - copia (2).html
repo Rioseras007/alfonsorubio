@@ -4,11 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Panel personal para organizar y acceder a servicios online">
+<link rel="icon" href="styles/favicon.ico" type="image/x-icon"> <!-- Favicon -->
 <title>Gestión de Servicios Online</title>
 
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script async src="https://cse.google.com/cse.js?cx=123456"></script>
 
 </head>
 <body>
@@ -105,15 +107,66 @@
 
 
 
+<div id="relojuanjo" style="position: absolute; top: 300px; left: 1300px;" >
+      <div id="container">
+      <div id="fecha"></div>
+      <div id="hora"></div>
 
+    </div>
+    
 
+  </div>
 
+<!-- BUSCADOR WEB google-->
+<div class="search-box">
+  <input type="text" placeholder="Buscar con Google en la web..." id="searchInput" border style="background-color: #acbeef; border:4px solid #b95f71;">
+  <button onclick="buscar()">
+    🧭
+  </button>
+</div>
 
+<style>
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 420px;
+}
 
+.search-box input {
+  flex: 1;
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 8px 0 0 8px;
+  border: 2px solid #333;
+  outline: none;
+}
 
+.search-box button {
+  padding: 12px 18px;
+  font-size: 18px;
+  border-radius: 0 8px 8px 0;
+  border: 2px solid #333;
+  border-left: none;
+  cursor: pointer;
+  background: #111;
+  color: white;
+  transition: 0.2s;
+}
 
+.search-box button:hover {
+  background: #444;
+}
+</style>
 
-
+<script>
+function buscar() {
+  const q = document.getElementById("searchInput").value.trim();
+  if(q !== "") {
+    window.open("https://www.google.com/search?q=" + encodeURIComponent(q), "_blank");
+  }
+}
+</script>
 
 
 
@@ -125,7 +178,13 @@
 <div class="controls">
   <input type="text" id="search" placeholder="Buscar servicio...">
   <button id="toggleTheme"><i style='font-size:24px' class='fas'>&#xf002;</i></button>
+
+
+
 </div>
+
+ 
+<div id="juanjo" style="position:absolute; top:350px; left:900px;"><a href="https://antonio2709.synology.me/pc.html#gsc.tab=0"><img src="imagenes/iconjuanjo.png" width="48px" height="48px">Web Juanjo</a></div>
 
 <main id="services">
 
@@ -144,6 +203,7 @@
   <li style="margin:5px 0;"><a href="https://drive.google.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf3aa;</i> Google Drive</a></li>
   <li style="margin:5px 0;"><a href="https://mega.nz/" target="_blank"><i style='font-size:24px' class='fas'>&#xf381;</i> MEGA</a></li>
   <li style="margin:5px 0;"><a href="https://onedrive.live.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf17a;</i> One Drive</a></li>
+   <li style="margin:5px 0;"><a href="https://www.dropbox.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf16b;</i> Drop Box</a></li>
 </ul>
 </section>
 
@@ -169,6 +229,16 @@
       <a href="https://www.temu.com/" target="_blank" style="text-decoration:none; color:#ff3333; display:flex; align-items:center; gap:8px;">
         <i style='font-size:24px' class="fas fa-box-open"></i> Temu
       </a>
+    </li>
+      <li style="margin:5px 0;">
+      <a href="https://www.ebay.com/" target="_blank" style="text-decoration:none; color:#7d5fb9; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fas fa-box-open"></i> Ebay
+      </a>
+        <li style="margin:5px 0;">
+      <a href="https://www.elcorteingles.es/" target="_blank" style="text-decoration:none; color:#0f9648; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fas fa-box-open"></i> El Corte Inglés
+      </a>
+    </li>
     </li>
   </ul>
 </section>
@@ -211,6 +281,17 @@
         <i style='font-size:24px' class="fas fa-gamepad"></i> Nintendo
       </a>
     </li>
+     <li style="margin:5px 0;">
+      <a href="https://luna.amazon.es/" target="_blank" style="text-decoration:none; color:#ad3089; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fas fa-gamepad"></i> Amazon Luna
+      </a>
+    </li>
+     </li>
+     <li style="margin:5px 0;">
+      <a href="https://store.epicgames.com/es-ES/" target="_blank" style="text-decoration:none; color:#c39019; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fas fa-gamepad"></i> Epic Store Games
+      </a>
+    </li>
   </ul>
 </section>
 
@@ -250,6 +331,14 @@
         <i style='font-size:24px' class="fab fa-twitch"></i> Twitch
       </a>
     </li>
+    <li style="margin:5px 0;">
+      <a href="https://www.instagram.com/" target="_blank" style="text-decoration:none; color:#e1306c; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fab fa-instagram"></i> Instagram
+      </a>
+       <li style="margin:5px 0;">
+      <a href="https://www.snapchat.com/" target="_blank" style="text-decoration:none; color:#f6f21b; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fab fa-instagram"></i> Snapchat
+      </a>
   </ul>
 </section>
 
@@ -274,6 +363,9 @@
   <li style="margin:5px 0;"><a href="https://www.openbank.es/" target="_blank"><i style="font-size:24px" class="fa">&#xf19c;</i> OpenBank</a></li>
   <li style="margin:5px 0;"><a href="https://www.paypal.com/" target="_blank"><i style='font-size:24px' class='far'>&#xf09d;</i> PayPal</a></li>
   <li style="margin:5px 0;"><a href="https://www.bbva.es/" target="_blank"><i style='font-size:24px' class='fas'>&#xf4d3;</i> BBVA</a></li>
+  <li style="margin:5px 0;"><a href="https://www.ing.es/" target="_blank"><i style='font-size:24px' class='fas'>&#xf4d3;</i> ING</a></li>
+  <li style="margin:5px 0;"><a href="https://www.revolut.com/" target="_blank"><i style='font-size:24px' class='fas'>&#xf4d3;</i> Revolut</a></li>
+
 </ul>
 </section>
 
@@ -289,7 +381,7 @@
 </section>
 
 <section  style="width:270px; font-family:Arial, sans-serif;">
-<h2>🎮 Videojuegos y aficiones</h2>
+ <button class="media-title">🎮 Frikismos</button>
 <ul>
   <li style="margin:5px 0;"><a href="https://www.printables.com/" target="_blank">👿 Printables</a></li>
   <li style="margin:5px 0;"><a href="https://www.youtube.com/" target="_blank">📹 YouTube</a></li>
@@ -300,6 +392,7 @@
   <li style="margin:5px 0;"><a href="musica.html" target="_blank">🎵 Músisa 007</a></li>
   <li style="margin:5px 0;"><a href="reproductor.html" target="_blank">🎵 Músisa Julio Iglesias</a></li>
   <li style="margin:5px 0;"><a href="https://antonio2709.synology.me/pc.html#gsc.tab=0" target="_blank">🌐 Web NAS Juanjo</a></li>
+  <li style="margin:5px 0;"><a href="https://suno.com/@rioseras007" target="_blank">👨‍🎤 Suno</a></li>
  
    
 </ul>
@@ -325,13 +418,15 @@
   </ul>
 </section>
 
-<section  style="width:270px; font-family:Arial, sans-serif; height: 300px; overflow-y: auto;">
+<section  style="width:270px; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
   <button class="media-title">📺 Streaming</button>
   <ul class="media-list">
     <li style="margin:5px 0;"><a href="https://www.netflix.com/es/">🎬 Netflix</a></li>
     <li style="margin:5px 0;"><a href="https://www.primevideo.com/">📽 Prime Video</a></li>
     <li style="margin:5px 0;"><a href="https://www.hbomax.com/">🎞 HBO Max</a></li>
-     <li style="margin:5px 0;"><a href="https://www.disneyplus.com/es-es">🐭 Disney +</a></li>
+    <li style="margin:5px 0;"><a href="https://www.disneyplus.com/es-es">🐭 Disney +</a></li>
+    <li style="margin:5px 0;"><a href="https://www.pluto.tv/">🪐 Pluto TV</a></li>
+    <li style="margin:5px 0;"><a href="https://play.tdtchannels.com/">📺 TDT gratis Online</a></li>
   </ul>
 </section>
 
@@ -344,6 +439,33 @@
     <li style="margin:5px 0;"><a href="https://es.pinterest.com/">🟥 Pinterest</a></li>
   </ul>
 </section>
+<section  style="width:270px; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
+  <button class="media-title">📺 Prensa & Noticias</button>
+  <ul class="media-list">
+    <li style="margin:5px 0;"><a href="https://www.marca.com/">📰 El Marca</a></li>
+    <li style="margin:5px 0;"><a href="https://www.as.com/">📰 Diario deportivo As</a></li>
+    <li style="margin:5px 0;"><a href="https://www.elmundo.com/">📰 El mundo</a></li>
+    <li style="margin:5px 0;"><a href="https://www.elpais.com/">📰 El País</a></li>
+    <li style="margin:5px 0;"><a href="https://www.abc.es/">📰 ABC</a></li>
+    <li style="margin:5px 0;"><a href="https://www.20minutos.es/">📰 20 Minutos</a></li>
+    <li style="margin:5px 0;"><a href="https://www.larazon.es/">📰 La Razón</a></li>
+  </ul>
+</section>
+
+<section  style="width: 300px; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
+  <button class="media-title">🖥️ Informatica & Electronico</button>
+  <ul class="media-list">
+    <li style="margin:5px 0;"><a href="https://www.mediamark.es/">🔴 MediaMark España</a></li>
+    <li style="margin:5px 0;"><a href="https://www.pccomponentes.com/">🟡 PC Componentes</a></li>
+    <li style="margin:5px 0;"><a href="https://www.fnac.es">🟣 Fnac España</a></li>
+    <li style="margin:5px 0;"><a href="https://www.coolmod.com">🔵 Coolmod</a></li>
+    <li style="margin:5px 0;"><a href="https://www.computertparts.es">🟢 ComputertParts</a></li>
+    <li style="margin:5px 0;"><a href="https://www.appinformatico.es/">🟤 APP</a></li>
+    <li style="margin:5px 0;"><a href="https://www.pcbox.es/">🟢 PCBox</a></li>
+  </ul>
+</section>
+
+
 
 
 
@@ -362,12 +484,14 @@
       <a href="https://www.youtube.com/@AlfonsoRubioRioseras" target="_blank"><i class="fab fa-youtube"></i></a>
       <a href="https://www.tiktok.com/@alfonsorubio007" target="_blank"><i class="fab fa-tiktok"></i></a>
       <a href="https://www.linkedin.com/in/alfonsorubiorioseras/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://github.com/Rioseras007" target="_blank"><i class="fab fa-github"></i></a>
       
     </div>
   </div>
   <p>Musica by Spotify</p>
   <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2Y96ztQ2K4246vZYMJd9Or?utm_source=generator" width="300" height="240" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-   <p>Información meteorológica</p>
+   
+  <p>Información meteorológica</p>
    <div id="tiempo" style="position: center">
     <iframe
   src="https://api.wo-cloud.com/content/widget/?geoObjectKey=15557284&language=es&region=ES&timeFormat=HH:mm&windUnit=kmh&systemOfMeasurement=metric&temperatureUnit=celsius"
@@ -379,9 +503,16 @@
   style="border: 1px solid #10658E; border-radius: 8px;">
 </iframe>
 
+
 <!-- Elfsight Visitor Counter | Untitled Visitor Counter -->
 <script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-f0dd5049-5b47-44da-a659-2caa35193356" data-elfsight-app-lazy style="position:absolute; top:1600px; left:300px">Contador de Visitas</div>
+<div class="elfsight-app-f0dd5049-5b47-44da-a659-2caa35193356" data-elfsight-app-lazy style="position:absolute; top:1700px; left:300px">Contador de Visitas</div>
+
+
+
+
+
+
 
 <div id="horoscopo"></div>
 <p align="center">Horóscopo Diario Gratis</p>
@@ -389,10 +520,6 @@
     src="https://mydailyhoroscope.org/widget.php?bc=000000&fc=FFFF33" 
     width="100%" frameborder="0" scrolling="no"></iframe> 
 <script type="text/javascript" src="https://mydailyhoroscope.org/js/iframeResizer.js"></script>
-
-
-
-
 
 </footer>
 
@@ -420,6 +547,23 @@
     });
   });
 </script>
+
+
+  <!-- Moment.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
+  <script>
+    moment.locale('es');
+
+    function actualizar() {
+      document.getElementById("fecha").innerText =
+        moment().format('dddd DD/MM/YYYY').toUpperCase();
+      document.getElementById("hora").innerText =
+        moment().format('HH:mm:ss');
+    }
+
+    actualizar();
+    setInterval(actualizar, 1000);
+  </script>
 
 
 </body>
