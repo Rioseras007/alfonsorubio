@@ -327,12 +327,20 @@ text-shadow:
     position: absolute;
 
     top: 300px;
-    right: auto;
-    left: 1300px;
-    background: rgb(116, 71, 184);
+    right: 25%;
+    left: 30%;
+    background: rgb(141, 124, 193);
     color: white;
     border-radius: 10px;
     padding: 5px;
+
+   
+    width: 450px;
+    height: auto;
+
+
+
+
   }
 
    .topbaner {
@@ -345,11 +353,20 @@ text-shadow:
 
 
   .visitas {
- position: absolute;
-    top: 1300px;
-    right: auto;
-    left: 1200px;
-    background: rgba(102, 138, 89, 0.794);
+
+position: relative;
+
+    top: auto;
+    right: 33%;
+    left: 40%;
+
+    min-width: 300px;
+    min-height: 328px;
+
+     max-width: 340px;
+    max-height: auto;
+
+    background: rgba(48, 46, 48, 0.794);
     color: white;
     border-radius: 10px;
     padding: 5px;
@@ -375,28 +392,109 @@ text-shadow:
 
 
     .casio{
-    position: absolute;
+    top: 700px;
+    right: 33%;
+    left: 40%;
 
-    top: 300px;
-    right: 100px;
-    left: 100px;
+    min-width: 300px;
+    min-height: 200px;
 
-   
+     max-width: 320px;
+    max-height: auto;
+
+    background: rgba(104, 142, 20, 0.794);
     color: white;
+    border-radius: 10px;
+    padding: 5px;
+    max-width: auto;
+    max-height: auto;
+
+
+
+
+
+
   }
 
    .webjuanjo{
-    position: absolute;
+    position: relative;
 
-    top: 350px;
-    
-    left: 500px;
+    top: 200px;
+    right: 25%;
+    left: 25%;
 
-   background: #b7b1d1;
+    min-width: 7%;
+    min-height: 7%;
+
+     max-width: 8%;
+    max-height: 8%;
+
+
+   background: #ab9fde;
     color: white;
     border-radius: 10px;
     padding: 5px;
   }
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 420px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 8px 0 0 8px;
+  border: 2px solid #333;
+  outline: none;
+}
+
+.search-box button {
+  padding: 12px 18px;
+  font-size: 18px;
+  border-radius: 0 8px 8px 0;
+  border: 2px solid #333;
+  border-left: none;
+  cursor: pointer;
+  background: #111;
+  color: white;
+  transition: 0.2s;
+}
+
+.search-box button:hover {
+  background: #444;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
