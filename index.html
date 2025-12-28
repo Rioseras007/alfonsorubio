@@ -202,16 +202,41 @@ function buscar() {
 
 <main id="services">
 
+
+<!-- seccion correo web-->
+
 <section style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-<h2 onclick="toggleCorreo()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">📧 Correo Web<span id="arrowCorreo">▼</span></h2>
+
+<h2 onclick="toggleCorreo()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">📧 Correo Web<span id="arrowCorreo">▼</span>
+
+</h2>
 
 <ul id="correoMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
 
-  <li style="margin:5px 0;"><a href="https://mail.google.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf1a0;</i> Gmail</a></li>
-  <li style="margin:5px 0;"><a href="https://es.yahoo.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf19e;</i> Yahoo</a></li>
-  <li style="margin:5px 0;"><a href="https://outlook.live.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf17a;</i>Hotmail</a></li>
+  <li style="margin:5px 0;">
+    <a href="https://mail.google.com/" target="_blank" style="text-decoration:none; color:#ef640e; display:flex; align-items:center; gap:8px;">
+
+      <i style='font-size:24px' class='fab'>&#xf1a0;</i> Gmail
+    
+    </a>
+
+  </li>
+
+  <li style="margin:5px 0;"><a href="https://es.yahoo.com/" target="_blank" style="text-decoration:none; color:#8b66d4; display:flex; align-items:center; gap:8px;">
+    
+    <i style='font-size:24px' class='fab'>&#xf19e;</i> Yahoo</a>
+  
+  </li>
+
+
+  <li style="margin:5px 0;"><a href="https://outlook.live.com/" target="_blank" style="text-decoration:none; color:#108d65; display:flex; align-items:center; gap:8px;">
+
+    <i style='font-size:24px' class='fab'>&#xf17a;</i>Hotmail</a>
+  
+  </li>
 
 </ul>
+
 </section>
 
 <script>
@@ -227,9 +252,6 @@ function buscar() {
     }
   }
 </script>
-
-
-
 
 
 <!-- seccion almacenamiento en la nube-->
@@ -443,18 +465,42 @@ function buscar() {
 
 
 <section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
+
 <h2 onclick="toggleBanks()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
+
   🏦 Bancos <span id="arrowBanks">▼</span></h2>
 
 <ul id="banksMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
 
-  <li style="margin:5px 0;"><a href="https://www.openbank.es/" target="_blank"><i style="font-size:24px" class="fa">&#xf19c;</i> OpenBank</a></li>
-  <li style="margin:5px 0;"><a href="https://www.paypal.com/" target="_blank"><i style='font-size:24px' class='far'>&#xf09d;</i> PayPal</a></li>
-  <li style="margin:5px 0;"><a href="https://www.bbva.es/" target="_blank"><i style='font-size:24px' class='fas'>&#xf4d3;</i> BBVA</a></li>
-  <li style="margin:5px 0;"><a href="https://www.ing.es/" target="_blank"><i style='font-size:24px' class='fas'>&#xf4d3;</i> ING</a></li>
-  <li style="margin:5px 0;"><a href="https://www.revolut.com/" target="_blank"><i style='font-size:24px' class='fas'>&#xf4d3;</i> Revolut</a></li>
+  <li style="margin:5px 0;">
+
+
+    <a href="https://www.openbank.es/" target="_blank"><i style='font-size:24px;color:rgb(239, 239, 32)' class="fa">&#xf19c;</i> OpenBank</a>
+  
+  </li>
+
+
+  <li style="margin:5px 0;"><a href="https://www.paypal.com/" target="_blank"><i style='font-size:24px;color:rgb(237, 21, 118)' class='far'>&#xf09d;</i> PayPal</a>
+  
+  </li>
+
+  <li style="margin:5px 0;"><a href="https://www.bbva.es/" target="_blank"><i style='font-size:24px;color:rgb(7, 199, 164)' class='fas'>&#xf4d3;</i> BBVA</a>
+
+  </li>
+
+  <li style="margin:5px 0;"><a href="https://www.ing.es/" target="_blank"><i style='font-size:24px;color:rgba(209, 155, 7, 0.505)' class='fas'>&#xf4d3;</i> ING</a>
+  
+  </li>
+
+  <li style="margin:5px 0;"><a href="https://www.revolut.com/" target="_blank"><i style='font-size:24px;color:rgb(25, 9, 247)' class='fas'>&#xf4d3;</i> Revolut</a>
+  
+
+  
+  </li>
 
 </ul>
+
+
 </section>
 
 <script>
@@ -487,11 +533,16 @@ function buscar() {
 <ul id="empleoMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
 
   <li style="margin:5px 0;"><a href="https://empleocastillayleon.jcyl.es/oficinavirtual/index.do" target="_blank"><i class='far fa-address-card' style='font-size:24px;color:rgb(45, 150, 96)'></i> ECYL</a></li>
+
   <li style="margin:5px 0;"><a href="https://www.linkedin.com/" target="_blank"><i class='fab fa-linkedin' style='font-size:24px;color:rgb(81, 41, 192)'></i> LinkedIn</a></li>
+
   <li style="margin:5px 0;"><a href="https://www.uva.es/" target="_blank"><i class='fas fa-university' style='font-size:24px;color:rgb(166, 64, 150)'></i>UVA</a></li>
+
   <li style="margin:5px 0;"><a href="https://www.ubu.es/" target="_blank"><i class='fas fa-university' style='font-size:24px;color:red'></i>UBU</a></li>
+
   <li style="margin:5px 0;"><a href="https://www.diputaciondevalladolid.es/" target="_blank"><i class='far fa-address-card' style='font-size:24px;color:rgb(125, 164, 33)'></i>Diputación Valladolid</a></li>
-  <li style="margin:5px 0;"><a href="https://www.infojobs.net/" target="_blank"><i class='far fa-address-card' style='font-size:24px;color:rgb(125, 164, 33)'></i>Infojobs</a></li>
+  
+  <li style="margin:5px 0;"><a href="https://www.infojobs.net/" target="_blank"><i class='far fa-address-card' style='font-size:24px;color:rgb(104, 64, 221)'></i>Infojobs</a></li>
 </ul>
 </section>
 
@@ -643,11 +694,14 @@ function buscar() {
     <p>© 2025 Alfonso Rubio — Todos los derechos reservados</p>
 
     <div class="social-icons">
+
       <a href="https://www.facebook.com/AlfonsoRubioRioseras" target="_blank"><i class="fab fa-facebook-f"></i></a>
       <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
       <a href="https://x.com/alfrubrio" target="_blank"><i class="fab fa-x-twitter"></i></a>
       <a href="https://www.youtube.com/@AlfonsoRubioRioseras" target="_blank"><i class="fab fa-youtube"></i></a>
       <a href="https://www.tiktok.com/@alfonsorubio007" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://discord.com/" target="_blank"><i class="fab fa-discord"></i></a>
+      <a href="https://web.whatsapp.com/" target="_blank"><i class="fab fa-whatsapp"></i></a>
       <a href="https://www.linkedin.com/in/alfonsorubiorioseras/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
       <a href="https://github.com/Rioseras007" target="_blank"><i class="fab fa-github"></i></a>
       

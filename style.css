@@ -346,9 +346,9 @@ text-shadow:
 
   .visitas {
  position: absolute;
-    top: 1150px;
+    top: 1300px;
     right: auto;
-    left: 500px;
+    left: 1200px;
     background: rgba(102, 138, 89, 0.794);
     color: white;
     border-radius: 10px;
