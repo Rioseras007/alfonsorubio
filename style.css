@@ -329,7 +329,9 @@ text-shadow:
     top: 300px;
     right: 25%;
     left: 30%;
-    background: rgb(141, 124, 193);
+   
+
+     background: linear-gradient(135deg, #1d0476 0%, #764ba2 100%);
     color: white;
     border-radius: 10px;
     padding: 5px;
@@ -345,10 +347,12 @@ text-shadow:
 
    .topbaner {
  
-    background: rgba(126, 80, 235, 0.794);
+   
     color: white;
     border-radius: 10px;
     padding: 5px;
+
+     background: linear-gradient(135deg, #1d0476 0%, #764ba2 100%);
   }
 
 
@@ -358,7 +362,7 @@ position: relative;
 
     top: auto;
     right: 33%;
-    left: 40%;
+    left: 42%;
 
     min-width: 300px;
     min-height: 328px;
@@ -366,7 +370,8 @@ position: relative;
      max-width: 340px;
     max-height: auto;
 
-    background: rgba(48, 46, 48, 0.794);
+   
+     background: linear-gradient(135deg, #737275 0%, #6f4d90 100%);
     color: white;
     border-radius: 10px;
     padding: 5px;
@@ -387,12 +392,29 @@ position: relative;
   }
 
 
+  .inicio{
+   position: relative;
+   top: auto;
+   right: auto;
+   left: 50%;
+
+
+    color: white;
+    border-radius: 2px;
+    padding: 5px;
+
+    width: 100px;
+    height: auto
+    
+  }
+
+
 
 
 
 
     .casio{
-    top: 700px;
+    top: 750px;
     right: 33%;
     left: 40%;
 
@@ -402,7 +424,7 @@ position: relative;
      max-width: 320px;
     max-height: auto;
 
-    background: rgba(104, 142, 20, 0.794);
+    background: linear-gradient(90deg, #278e65 0%, #764ba2 100%);
     color: white;
     border-radius: 10px;
     padding: 5px;
