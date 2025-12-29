@@ -324,26 +324,28 @@ text-shadow:
 
 
   .caja {
-    position: absolute;
-
-    top: 300px;
-    right: 25%;
-    left: 30%;
    
+ display: flex;               /* Activa Flexbox */
+  justify-content: right;     /* Centra horizontalmente */
+  align-items: right;         /* Centra verticalmente */
+  height: 200px;               /* Altura para ver el efecto */
+  width: 10%              /* Ancho para ver el efecto */
 
-     background: linear-gradient(135deg, #1d0476 0%, #764ba2 100%);
-    color: white;
-    border-radius: 10px;
-    padding: 5px;
-
-   
-    width: 450px;
-    height: auto;
-
-
+  border: 1px solid #ccc;
+  background: linear-gradient(135deg, #1d0476 0%, #764ba2 100%);
+ 
 
 
   }
+
+  .spotify-fondo {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+  }
+
+
 
    .topbaner {
  
@@ -356,7 +358,7 @@ text-shadow:
   }
 
 
-  .visitas {
+  .visitas{
 
 position: relative;
 
@@ -378,6 +380,9 @@ position: relative;
     max-width: auto;
     max-height: auto;
   }
+
+
+
 
 
  .futuro{
@@ -414,22 +419,20 @@ position: relative;
 
 
     .casio{
-    top: 750px;
-    right: 33%;
-    left: 40%;
+  
+  display: flex;               /* Activa Flexbox */
+  justify-content: left;     /* Centra horizontalmente */
+  align-items: left;         /* Centra verticalmente */
+  height: 200px;               /* Altura para ver el efecto */
+  width: 10%              /* Ancho para ver el efecto */
 
-    min-width: 300px;
-    min-height: 200px;
-
-     max-width: 320px;
-    max-height: auto;
+  border: 1px solid #ccc;
+  background: linear-gradient(135deg, #1d0476 0%, #764ba2 100%);
 
     background: linear-gradient(90deg, #278e65 0%, #764ba2 100%);
     color: white;
     border-radius: 10px;
-    padding: 5px;
-    max-width: auto;
-    max-height: auto;
+
 
 
 
@@ -491,29 +494,59 @@ position: relative;
 }
 
 
+.hero {
+  position: relative;
+  background-image: url("assests/img/hero-banner.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
 
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
 
+.hero-content {
+  position: relative;
+  max-width: 1200px;
+  padding: 2rem;
+  color: #fff;
+}
 
+.hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 1rem;
+}
 
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 700px;
+}
 
+.hero-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #d62828;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
 
+.hero-btn:hover {
+  background: #2d0c8f;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@media (max-width: 768px) {
+  .hero {
+    min-height: 60vh;
+  }
+}
 
 
 

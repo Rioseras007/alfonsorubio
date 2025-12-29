@@ -14,24 +14,27 @@
 
 </head>
 <body>
-  <style>
-  .spotify-fondo {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    z-index: 1000;
-  }
-</style>
 
 
 
 <header>
 
 <!-- Banner principal -->
-<div class="topbaner" align="center">
-  <img src="banner3.png"  alt="Banner de Redes Sociales" style="max-width: 50%; max-height: 50%; min-height: auto; min-width: auto; border-radius: 25px; box-shadow: 0 10px 10px rgba(130, 88, 237, 0.3);">
- 
-</div>
+
+<section class="hero">
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <h1>Alfonso Rubio Rioseras</h1>
+    <p>Friki desde joven · Tio de Martina  · Gamer sin punteria</p>
+    <a href="#contenido" class="hero-btn">Ver contenido</a>
+  </div>
+</section>
+
+
+
+
+
 
 <div id="relojroto" class="casio"  z-index="9" style="margin-bottom: 100px; padding: 10px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 <!--Dayspedia.com widget--><div class="DPDC" cityid="1184" lang="es" id="dayspedia_widget_5279723ae43ec6d2" host="https://dayspedia.com" ampm="true" nightsign="true" sun="true" style="width: 300px; background-image: url(&quot;https://cdn.dayspedia.com/img/widgets/bg-10.png&quot;);" auto="true">
@@ -62,7 +65,7 @@
 		/*CUSTOM*/
 		
 		.DPDC{width:auto;padding:24px;background-color:#ffffff;border:1px solid #343434;border-radius:8px} /* widget width, padding, background, border, rounded corners */
-		.DPDCh{color:#007DBF;font-weight:normal} /* headline color, font-weight*/
+		.DPDCh{color:#3aa877;font-weight:normal} /* headline color, font-weight*/
 		.DPDCt,.DPDCd{color:#343434;font-weight:bold} /* time & date color, font-weight */
 		.DPDCtn{border-color:#343434} /* night-sign color = time & date color */
 		.DPDCtn>i{background-color:#343434} /* night-sign color = time & date color */
@@ -72,7 +75,7 @@
 
 	<a class="DPl" href="https://dayspedia.com/time/es/Valladolid/" target="_blank" style="display:block!important;text-decoration:none!important;border:none!important;cursor:pointer!important;background:transparent!important;line-height:0!important;text-shadow:none!important;position:absolute;z-index:1;top:0;right:0;bottom:0;left:0">
 		<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" style="position:absolute;right:8px;bottom:0;width:16px;height:16px">
-			<path style="fill:/*defined*/#007DBF" d="M0,0v16h1.7c-0.1-0.2-0.1-0.3-0.1-0.5c0-0.9,0.8-1.6,1.6-1.6c0.9,0,1.6,0.8,1.6,1.6c0,0.2,0,0.3-0.1,0.5h1.8 c-0.1-0.2-0.1-0.3-0.1-0.5c0-0.9,0.8-1.6,1.6-1.6s1.6,0.8,1.6,1.6c0,0.2,0,0.3-0.1,0.5h1.8c-0.1-0.2-0.1-0.3-0.1-0.5 c0-0.9,0.8-1.6,1.6-1.6c0.9,0,1.6,0.8,1.6,1.6c0,0.2,0,0.3-0.1,0.5H16V0H0z M4.2,8H2V2h2.2c2.1,0,3.3,1.3,3.3,3S6.3,8,4.2,8z M11.4,6.3h-0.8V8H9V2h2.5c1.4,0,2.4,0.8,2.4,2.1C13.9,5.6,12.9,6.3,11.4,6.3z M4.4,3.5H3.7v3h0.7C5.4,6.5,6,6,6,5 C6,4.1,5.4,3.5,4.4,3.5z M11.3,3.4h-0.8V5h0.8c0.6,0,0.9-0.3,0.9-0.8C12.2,3.7,11.9,3.4,11.3,3.4z">
+			<path style="fill:/*defined*/#8657e4" d="M0,0v16h1.7c-0.1-0.2-0.1-0.3-0.1-0.5c0-0.9,0.8-1.6,1.6-1.6c0.9,0,1.6,0.8,1.6,1.6c0,0.2,0,0.3-0.1,0.5h1.8 c-0.1-0.2-0.1-0.3-0.1-0.5c0-0.9,0.8-1.6,1.6-1.6s1.6,0.8,1.6,1.6c0,0.2,0,0.3-0.1,0.5h1.8c-0.1-0.2-0.1-0.3-0.1-0.5 c0-0.9,0.8-1.6,1.6-1.6c0.9,0,1.6,0.8,1.6,1.6c0,0.2,0,0.3-0.1,0.5H16V0H0z M4.2,8H2V2h2.2c2.1,0,3.3,1.3,3.3,3S6.3,8,4.2,8z M11.4,6.3h-0.8V8H9V2h2.5c1.4,0,2.4,0.8,2.4,2.1C13.9,5.6,12.9,6.3,11.4,6.3z M4.4,3.5H3.7v3h0.7C5.4,6.5,6,6,6,5 C6,4.1,5.4,3.5,4.4,3.5z M11.3,3.4h-0.8V5h0.8c0.6,0,0.9-0.3,0.9-0.8C12.2,3.7,11.9,3.4,11.3,3.4z">
 			</path>
 		</svg>
 		<span title="DaysPedia.com" style="position:absolute;right:28px;bottom:6px;height:10px;width:60px;overflow:hidden;text-align:right;font:normal 10px/10px Arial,sans-serif!important;color:/*defined*/#007DBF">Powered&nbsp;by DaysPedia.com</span>
@@ -131,7 +134,7 @@
 
 
 <!-- BUSCADOR WEB google-->
-<div class="search-box">
+<div class="search-box" id="contenido">
   <input type="text" placeholder="Buscar con Google en la web..." id="searchInput" border style="background-color: #acbeef; border:4px solid #b95f71;">
   <button onclick="buscar()">
     🧭
@@ -725,9 +728,11 @@ function buscar() {
 
 
     <div id="home" class="inicio" align="center"><p><a href="#inicio">🏠 INCIO</a></div>
+    
 
-
-
+   <div style="position:absolute; left:45%; width: 300px; height: 100px;"><a href="https://wa.me/34676589037" target="_blank" style="background:#c3c6c8; color:rgb(20, 156, 70); padding:10px 20px; border-radius:5px; text-decoration:none; font-family:sans-serif;">💬 Chatea conmigo  en WhatsApp </a>
+ 
+   </p>
 
   </div>
 
