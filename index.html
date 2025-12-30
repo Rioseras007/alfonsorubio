@@ -55,9 +55,7 @@
 
 </section>
 -->
-<div id="juanjo" class="webjuanjo" z-index="10"><button class="boton-epico" >
-    <img src="logo.png" alt="Juanjo website logo link to personal computer homepage" class="icono"><a href="https://antonio2709.synology.me/pc.html#gsc.tab=0" style="text-decoration:none; color:#000000; font-size: 4cqh; text-align: center;"></a>
-    🗺️
+<div id="juanjo" class="webjuanjo" z-index="10"><button class="boton-epico" title="Website de Juanjo" onclick="window.open('https://antonio2709.synology.me/pc.html#gsc.tab=0', '_blank')"><img src="logo.png" alt="Juanjo" width="30" height="30">  
 </button>
 </div>
 
@@ -631,10 +629,12 @@ function buscar() {
   style="border: 1px solid #b69de8; border-radius: 8px;">
 </iframe>
 
-  <div id="misvisitas" class="visitas"> <p>Contador de Visitas</p> <!-- Elfsight Visitor Counter | Untitled Visitor Counter -->
-  <script src="https://elfsightcdn.com/platform.js" async></script>
- <div class="elfsight-app-f0dd5049-5b47-44da-a659-2caa35193356" data-elfsight-app-lazy >Contador de Visitas</div> </div>
 
+ <!-- Visitor Counter -->
+
+  <div id="visitas" class="viwers" > <p>Contador de Visitas</p>
+   
+<a href="https://websmultimedia.com/contador-de-visitas-gratis" title="Contador De Visitas Gratis" ><img style="border: 0px solid; display: inline;" alt="contador de visitas" src="https://websmultimedia.com/contador-de-visitas.php?id=23719"></a>
 
   </div>
   
@@ -733,7 +733,6 @@ const dias = [
 ];
 
 const hoy = new Date().getDay();
-
 document.body.style.background = dias[hoy].fondo;
 document.getElementById("mensaje").textContent =
     "Hoy es " + dias[hoy].nombre;

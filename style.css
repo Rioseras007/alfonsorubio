@@ -217,7 +217,7 @@ footer {
 }
 
 .media-title:hover {
-  background: #813939;
+  background: #b37878;
 }
 
 .media-list {
@@ -365,7 +365,7 @@ text-shadow:
   }
 
 
-  .visitas{
+  .viwers{
 
 position: relative;
 
@@ -373,22 +373,19 @@ position: relative;
     right: 33%;
     left: 42%;
 
-    min-width: 300px;
-    min-height: 328px;
-
-     max-width: 340px;
-    max-height: auto;
-
+  display: flex;
+   align-items: center; /* Centra verticalmente */
+   justify-content: center; /* Opcional: centra horizontalmente */
+   height: 100vh; /* Ajusta según el tamaño del contenedor */
    
-     background: linear-gradient(135deg, #737275 0%, #6f4d90 100%);
+     background: color(srgb-linear rgb(77, 189, 138) green blue)
     color: white;
     border-radius: 10px;
     padding: 5px;
-    max-width: auto;
-    max-height: auto;
+    max-width: 320px;
+    max-height: 200px;
+    contain: layout style;
   }
-
-
 
 
 
@@ -493,18 +490,6 @@ position: relative;
     width: 48px;
     height: 48px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
