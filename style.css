@@ -17,6 +17,20 @@ body {
   color: var(--text);
 }
 
+body {
+    background-size: 400% 400%;
+    animation: gradiente 20s ease infinite;
+}
+
+@keyframes gradiente {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+
+
 /* Header */
 
 header {
@@ -230,11 +244,7 @@ footer {
   background: #6896ac;
 }
 
-/* ===== EFECTO CRT ===== */
-.panel-retro {
-    position: relative;
-    overflow: hidden;
-}
+
 
 .panel-retro::before {
     content: "";
@@ -330,8 +340,7 @@ text-shadow:
   align-items: center;         /* Centra verticalmente */
   height: 200px;               /* Altura para ver el efecto */
   width: 400px;            /* Ancho para ver el efecto */
-  border: 1px solid #ccc;
-  background: linear-gradient(135deg, #1d0476 0%, #764ba2 100%);
+
 }
 
 
@@ -419,6 +428,10 @@ position: relative;
    .webjuanjo{
     position: relative;
 
+      display: flex;               /* Activa Flexbox */
+  justify-content: center;     /* Centra horizontalmente */
+  align-items: center; 
+
     top: 200px;
     right: 25%;
     left: 25%;
@@ -435,6 +448,67 @@ position: relative;
     border-radius: 10px;
     padding: 5px;
   }
+
+.boton-epico {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* espacio entre logo y texto */
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.boton-epico:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+
+.boton-epico::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255,255,255,0.2);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+}
+
+.boton-epico:hover::before {
+    top: 100%;
+    left: 100%;
+}
+
+.icono {
+    width: 48px;
+    height: 48px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .search-box {
   display: flex;
@@ -525,14 +599,13 @@ position: relative;
 
 .tiempo {
   position: relative;
-  width: 20%;
-  height: 400px;
+  width: 18%;
+  height: 280px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-    background: linear-gradient(135deg, #32058b 0%, #6f4d90 100%);
   border-radius: 10px;
 }
 
