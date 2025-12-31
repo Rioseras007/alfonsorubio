@@ -2,138 +2,186 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Overlay PRO Twitch Mejorado</title>
+<title>Overlay Fortnite PRO MAX</title>
+
 <style>
-body, html {
-  margin: 0; padding: 0; overflow: hidden;
-  font-family: 'Arial', sans-serif; background: transparent;
+html,body{margin:0;padding:0;overflow:hidden;background:transparent;font-family:Arial}
+
+body::before{
+  content:"";position:fixed;inset:0;
+  background:linear-gradient(120deg,#3a00ff,#00e5ff,#ff00cc);
+  opacity:.12;
 }
 
-/* MARCO WEBCAM IZQUIERDA */
-#webcam-frame {
-  position: absolute; bottom: 20px; left: 20px;
-  width: 350px; height: 200px;
-  border: 6px solid #ff00ff;
-  border-radius: 20px;
-  box-shadow: 0 0 30px #ff00ff, 0 0 60px #ff00ff;
-  animation: neonPulse 2s infinite alternate;
+#webcam{
+  position:absolute;bottom:20px;left:20px;
+  width:350px;height:200px;
+  border:6px solid #00ffff;border-radius:25px;
+  animation:neon 1.2s infinite alternate,shake 6s infinite;
 }
 
-@keyframes neonPulse {
-  0% { box-shadow:0 0 30px #ff00ff,0 0 60px #ff00ff; border-color:#ff00ff; }
-  25%{ box-shadow:0 0 50px #00ffff,0 0 100px #00ffff; border-color:#00ffff;}
-  50%{ box-shadow:0 0 70px #ff00ff,0 0 140px #ff00ff; border-color:#ff00ff;}
-  75%{ box-shadow:0 0 50px #00ffff,0 0 100px #00ffff; border-color:#00ffff;}
-  100%{ box-shadow:0 0 30px #ff00ff,0 0 60px #ff00ff; border-color:#ff00ff;}
-}
+@keyframes neon{from{box-shadow:0 0 20px #00ffff}to{box-shadow:0 0 80px #ff00ff}}
+@keyframes shake{95%{transform:none}96%{transform:translate(3px,-2px)}97%{transform:translate(-3px,2px)}98%{transform:translate(2px,2px)}99%{transform:translate(-2px,-2px)}}
 
-/* ALERTAS */
-.alert-container {
-  position: absolute; top:30px; right:30px;
-  width:550px; pointer-events:none;
-}
+#alerts{position:absolute;top:30px;right:30px;width:520px}
 
-.alert {
-  color:#fff; font-size:22px; font-weight:bold;
-  text-shadow:2px 2px 6px #000; margin-bottom:10px;
+.alert{
+  color:white;font-size:22px;font-weight:bold;margin-bottom:12px;
+  text-shadow:0 0 10px black,0 0 20px #00ffff;
   opacity:0;
-  animation: slideIn 0.8s forwards, glowPulse 3s forwards, fadeOut 1s 3s forwards;
+  animation:in .5s forwards,pulse 1s infinite alternate,out 1s 4s forwards;
 }
 
-@keyframes slideIn {
-  0%{transform:translateX(600px);opacity:0;}
-  100%{transform:translateX(0);opacity:1;}
+@keyframes in{from{transform:translateX(600px) scale(.6);opacity:0}to{transform:none;opacity:1}}
+@keyframes out{to{opacity:0;transform:translateX(-200px) scale(.4)}}
+@keyframes pulse{from{filter:brightness(1)}to{filter:brightness(1.6)}}
+
+#follower{position:absolute;bottom:250px;left:20px;font-size:26px;color:gold;text-shadow:0 0 15px black}
+#viewers{position:absolute;top:20px;left:20px;font-size:28px;color:#00ffea;text-shadow:0 0 20px black}
+#count{position:absolute;top:60px;left:20px;font-size:24px;color:#ffdd00;text-shadow:0 0 15px black}
+
+#clock{
+  position:absolute;
+  top:60px; /* bajamos 2cm aprox respecto a top:20px */
+  right:30px;
+  font-size:42px;
+  font-weight:900;
+  padding:10px 18px;
+  border-radius:14px;
+  color:#00ff00; /* verde neón */
+  background:rgba(0,0,0,0.35);
+  box-shadow:
+    0 0 8px #00ff00,
+    0 0 15px #00ff00,
+    inset 0 0 5px #00ff00; /* destellos menos intensos */
+  text-shadow:
+    0 0 3px #00ff00,
+    0 0 8px #00ff00,
+    0 0 15px #00ff00;
+  letter-spacing:3px;
+  animation:clockPulse 1.5s infinite alternate;
 }
 
-@keyframes glowPulse {
-  0%{text-shadow:2px 2px 6px #000,0 0 20px #ff0;}
-  50%{text-shadow:2px 2px 6px #000,0 0 40px #0ff;}
-  100%{text-shadow:2px 2px 6px #000,0 0 20px #ff0;}
+@keyframes clockPulse{
+  from{transform:scale(1); filter:brightness(1);}
+  to{transform:scale(1.03); filter:brightness(1.2);} /* menos intensidad */
 }
 
-@keyframes fadeOut {
-  0%{opacity:1;} 100%{opacity:0;}
-}
 
-/* ÚLTIMO SEGUIDOR */
-#follower {
-  position: absolute; bottom: 250px; left: 20px;
-  font-size:26px; color:#FFD700; font-weight:bold;
-  text-shadow:2px 2px 6px #000;
-}
+
 </style>
 </head>
+
 <body>
 
-<div id="alerts" class="alert-container"></div>
+<div id="alerts"></div>
+<div id="webcam"></div>
 <div id="follower">Último seguidor: —</div>
-<div id="webcam-frame"></div>
+<div id="viewers">👀 Viewers: 124</div>
+<div id="count">⭐ Followers: 3 245</div>
+<div id="clock">00:00:00</div>
 
-<audio id="soundFollow" src="https://www.soundjay.com/button/beep-07.wav"></audio>
-<audio id="soundDonation" src="https://www.soundjay.com/button/beep-09.wav"></audio>
+<audio id="follow" src="https://www.soundjay.com/button/beep-07.wav"></audio>
+<audio id="donation" src="https://www.soundjay.com/button/beep-09.wav"></audio>
 
 <script>
-const alertsDiv = document.getElementById("alerts");
-const followerDiv = document.getElementById("follower");
-const soundFollow = document.getElementById("soundFollow");
-const soundDonation = document.getElementById("soundDonation");
+const alerts=document.getElementById("alerts");
+const followerBox=document.getElementById("follower");
+const viewersBox=document.getElementById("viewers");
+const countBox=document.getElementById("count");
+const sFollow=document.getElementById("follow");
+const sDonation=document.getElementById("donation");
 
-let firstClick = false;
-document.body.addEventListener("click", ()=>{firstClick=true;});
+let audioEnabled=false;
 
-// 50 FOLLOWERS FAKE
-const followers = ["NinjaZ","TfueX","Shroudly","Pokem0n","MythicGuy","SummitK","TimTheTat","DrDiscom","Sodap0p","Asmong0",
-"Valkyr1e","RubiusXP","AuronPL","ElXokas","IbaiLive","RevenantYT","Fextralife","xQcster","LudwigHQ","SlikerTV",
-"RanbooCraft","TommyInnitx","TechnobladeX","DreamyYT","GeorgeNotFound2","PokimaneZ","LIRIKX","NICKMERCSY",
-"CouRageJD","DrLupoYT","HasanAbiX","TrainwrecksTV2","SypherPKX","Scumpster","CourageousJD","MongraalX","BughaFan",
-"NICKMERCS2","Summit1GFX","Shroudly2","MythicalGuy2","Sodap0pX","Asmong0YT","Valkyr1e2","RubiusXP2","AuronPLX",
-"XokasLive","IbaiLive2","RevenantYT2","FextralifeX"];
-let lastFollowerIndex = 0;
+// Desbloqueo de audio
+function unlockAudio(){
+  if(audioEnabled) return;
+  audioEnabled=true;
+  sFollow.play().then(()=>sFollow.pause());
+  sDonation.play().then(()=>sDonation.pause());
+}
+document.body.addEventListener("click",unlockAudio);
+document.body.addEventListener("keydown",unlockAudio);
 
-// 50 FANS Y 50 HATERS
-const fans = ["¡Eres el mejor!","Gran jugada!","Sigue así!","Adoro tus streams!","¡Imparable!","El rey del Fortnite!","Ese movimiento fue épico!","Maestro de la construcción!","Nivel pro!","¡Increíble!","Lo nunca visto!","Qué habilidad!","¡Fan número 1!","Streamer legendario!","Eres un crack!","Me parto de risa contigo!","Tu estrategia es perfecta!","¡Qué épico momento!","Genio del teclado!","¡Bravo!","Tu squad es imbatible!","El campeón de hoy!","Eres un fenómeno!","Qué rapidez!","No hay quien te gane!","Jugada maestra!","El público te aplaude!","Eres un maestro!","Qué coordinación!","Increíble reacción!","Me encanta tu estilo!","Eres un dios del gaming!","Wow, qué movimiento!","¡Espectacular!","No pares nunca!","El favorito de Twitch!","Siempre sorprendes!","Qué puntería!","El rey de los retos!","¡Eso sí que es habilidad!","Maestro absoluto!","Eres la estrella!","Qué dominio!","Fan incondicional!","Imposible de superar!","El gamer del año!","Nunca decepcionas!","Qué épica jugada!","Siempre en lo alto!","La leyenda viva!"];
-const haters = ["Eres horrible!","Aburre este stream","Vete ya!","Qué desastre!","No sabes jugar!","Patético!","Hasta yo juego mejor!","Demasiado lento!","Ni lo intentes!","Qué vergüenza!","Fail total!","No tienes estrategia!","Eso no sirve!","Qué mal plan!","Ni divertido!","Stream aburrido!","Jugada lamentable!","Cero habilidad!","Qué desastre total!","Ni lo intentes!","Patético nivel pro!","No hagas eso!","Qué desastre épico!","Inaceptable!","Tan malo!","Ridículo!","No me hagas reír!","Demasiado mal!","Qué frustrante!","Sin talento!","Vaya cagada!","Ni para empezar!","Qué horror!","No puedo verlo!","Qué desastre de streamer!","Horrible estrategia!","Mala suerte!","Demasiado débil!","Qué error!","Ni en sueños!","Eso fue malo!","No entiendo nada!","Qué desastre de jugada!","Sin sentido!","Qué horroroso!","Tan terrible!","Patético de nuevo!","Increíblemente malo!","No hay esperanza!","Qué fracaso!"];
+// 100 seguidores falsos
+const followers=[...Array(100)].map((_,i)=>"Player"+(1000+i));
+const fans=["🔥 CRACK","💪 IMPARABLE","🏆 NIVEL PRO","😎 LEYENDA","🚀 MAQUINÓN","🎯 AIM PERFECTO"];
+const haters=["qué malo","vaya fail","esto da pena","qué desastre","patético","ni en bot lobby"];
 
-// CREAR ALERTA
-function createAlert(msg, sound){
-  const div=document.createElement("div");
-  div.className="alert";
-  div.textContent=msg;
-  alertsDiv.appendChild(div);
-  if(firstClick) sound.play();
-  setTimeout(()=>div.remove(),5000);
+let fIndex=0;
+let viewers=124;
+let followerCount=3245;
+
+function show(text,sound){
+  const d=document.createElement("div");
+  d.className="alert";
+  d.textContent=text;
+  alerts.appendChild(d);
+  if(audioEnabled) sound.play();
+  setTimeout(()=>d.remove(),5200);
 }
 
-// ALERTA NUEVO SEGUIDOR
-function newFollowerAlert(){
-  if(lastFollowerIndex>=followers.length) lastFollowerIndex=0;
-  const name=followers[lastFollowerIndex++];
-  followerDiv.textContent="Último seguidor: "+name;
-  createAlert("🎉 Nuevo seguidor: "+name+"!", soundFollow);
+function newFollower(){
+  const name=followers[fIndex++%followers.length];
+  followerBox.textContent="Último seguidor: "+name;
+  show("🎉 "+name+" se ha unido!",sFollow);
 }
 
-// DONACIONES FAKE
-function newDonationAlert(){
-  const amount=(Math.random()*(1000-1)+1).toFixed(2);
+function donation(){
+  const amount=(Math.random()*99+1).toFixed(2);
   const donor=followers[Math.floor(Math.random()*followers.length)];
-  createAlert(`💰 ${donor} ha donado €${amount}!`, soundDonation);
-  
-  // Reacción fans/haters
+  show("💰 "+donor+" donó €"+amount,sDonation);
+
   setTimeout(()=>{
-    const reaction=Math.random()<0.7?fans:haters;
-    const msg=reaction[Math.floor(Math.random()*reaction.length)];
-    createAlert(msg, soundDonation);
-  },1000);
+    const arr=Math.random()<0.7?fans:haters;
+    show(arr[Math.floor(Math.random()*arr.length)],sDonation);
+  },900);
 }
 
-// INTERVALO ALEATORIO 1-15 MINUTOS
-function randomInterval(){return Math.floor(Math.random()*(15*60*1000-60*1000)+60*1000);}
-function scheduleDonation(){setTimeout(()=>{newDonationAlert();scheduleDonation();},randomInterval());}
+// Followers realistas
+setInterval(()=>{
+  const change=Math.floor(Math.random()*5-2);
+  followerCount=Math.max(1,followerCount+change);
+  countBox.textContent="⭐ Followers: "+followerCount.toLocaleString();
+},4000);
 
-// INICIAR ALERTAS
-setInterval(newFollowerAlert,8000);
-scheduleDonation();
+// Viewers
+setInterval(()=>{
+  viewers+=Math.floor(Math.random()*15-7);
+  viewers=Math.max(1,viewers);
+  viewersBox.textContent="👀 Viewers: "+viewers;
+},3000);
+
+setInterval(newFollower,8000);
+
+// Donaciones
+function rand(){return Math.random()*90000+60000}
+(function loop(){
+  setTimeout(()=>{donation();loop();},rand());
+})();
+
+const clock=document.getElementById("clock");
+
+function updateClock(){
+  const now=new Date();
+  const h=String(now.getHours()).padStart(2,"0");
+  const m=String(now.getMinutes()).padStart(2,"0");
+  const s=String(now.getSeconds()).padStart(2,"0");
+  clock.textContent=`${h}:${m}:${s}`;
+}
+
+setInterval(updateClock,1000);
+updateClock();
+
+
+
 
 </script>
+
 </body>
 </html>
+
+
+
+
