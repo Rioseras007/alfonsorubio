@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Overlay Twitch Épico con Donaciones y Fans/Haters</title>
+<style>
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+  background: transparent;
+}
+
+/* MARCO WEBCAM IZQUIERDA */
+#webcam-frame {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 350px;
+  height: 200px;
+  border: 6px solid #ff00ff;
+  border-radius: 20px;
+  box-shadow: 0 0 30px #ff00ff, 0 0 60px #ff00ff;
+  animation: neonPulse 2s infinite alternate;
+}
+
+/* ANIMACIÓN NEÓN */
+@keyframes neonPulse {
+  0% { box-shadow: 0 0 30px #ff00ff, 0 0 60px #ff00ff; border-color: #ff00ff; }
+  50% { box-shadow: 0 0 50px #00ffff, 0 0 100px #00ffff; border-color: #00ffff; }
+  100% { box-shadow: 0 0 30px #ff00ff, 0 0 60px #ff00ff; border-color: #ff00ff; }
+}
+
+/* ALERTAS */
+#alerts {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 550px;
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  text-shadow: 2px 2px 6px #000;
+  z-index: 10;
+}
+
+/* BARRA DE ÚLTIMOS EVENTOS */
+#follower {
+  position: absolute;
+  bottom: 250px;
+  left: 20px;
+  font-size: 26px;
+  color: #FFD700;
+  font-weight: bold;
+  text-shadow: 2px 2px 6px #000;
+}
+
+/* ALERTA ANIMADA */
+.alert-show {
+  animation: slideIn 1s, fadeOut 1s 4s forwards;
+}
+
+@keyframes slideIn {
+  0% { transform: translateX(600px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<div id="alerts">✨ Última alerta: Ninguna ✨</div>
+<div id="follower">Último seguidor: —</div>
+<div id="webcam-frame"></div>
+
+<script>
+// ELEMENTOS
+const alertsDiv = document.getElementById("alerts");
+const followerDiv = document.getElementById("follower");
+
+// LISTA SIMULADA DE SEGUIDORES
+const followers = ["Antonio","Rioseras","Comandante Gergi","Bongo el Topo Murciano","AlfonsoFan"];
+let lastFollowerIndex = 0;
+
+// LISTA DE 50 FANS DIVERTIDOS
+const fans = [
+"¡Eres el mejor!", "Gran jugada!", "Sigue así!", "Adoro tus streams!", "¡Imparable!", 
+"El rey del Fortnite!", "Ese movimiento fue épico!", "Maestro de la construcción!", "Nivel pro!", "¡Increíble!", 
+"Lo nunca visto!", "Qué habilidad!", "¡Fan número 1!", "Streamer legendario!", "Eres un crack!", 
+"Me parto de risa contigo!", "Tu estrategia es perfecta!", "¡Qué épico momento!", "Genio del teclado!", "¡Bravo!", 
+"Tu squad es imbatible!", "El campeón de hoy!", "Eres un fenómeno!", "Qué rapidez!", "No hay quien te gane!", 
+"Jugada maestra!", "El público te aplaude!", "Eres un maestro!", "Qué coordinación!", "Increíble reacción!", 
+"Me encanta tu estilo!", "Eres un dios del gaming!", "Wow, qué movimiento!", "¡Espectacular!", "No pares nunca!", 
+"El favorito de Twitch!", "Siempre sorprendes!", "Qué puntería!", "El rey de los retos!", "¡Eso sí que es habilidad!", 
+"Maestro absoluto!", "Eres la estrella!", "Qué dominio!", "Fan incondicional!", "Imposible de superar!", 
+"El gamer del año!", "Nunca decepcionas!", "Qué épica jugada!", "Siempre en lo alto!", "La leyenda viva!"
+];
+
+// LISTA DE 50 HATERS DIVERTIDOS
+const haters = [
+"Eres horrible!", "Aburre este stream", "Vete ya!", "Qué desastre!", "No sabes jugar!", 
+"Patético!", "Hasta yo juego mejor!", "Demasiado lento!", "Ni lo intentes!", "Qué vergüenza!", 
+"Fail total!", "No tienes estrategia!", "Eso no sirve!", "Qué mal plan!", "Ni divertido!", 
+"Stream aburrido!", "Jugada lamentable!", "Cero habilidad!", "Qué desastre total!", "Ni lo intentes!", 
+"Patético nivel pro!", "No hagas eso!", "Qué desastre épico!", "Inaceptable!", "Tan malo!", 
+"Ridículo!", "No me hagas reír!", "Demasiado mal!", "Qué frustrante!", "Sin talento!", 
+"Vaya cagada!", "Ni para empezar!", "Qué horror!", "No puedo verlo!", "Qué desastre de streamer!", 
+"Horrible estrategia!", "Mala suerte!", "Demasiado débil!", "Qué error!", "Ni en sueños!", 
+"Eso fue malo!", "No entiendo nada!", "Qué desastre de jugada!", "Sin sentido!", "Qué horroroso!", 
+"Tan terrible!", "Patético de nuevo!", "Increíblemente malo!", "No hay esperanza!", "Qué fracaso!"
+];
+
+// ALERTA DE NUEVO SEGUIDOR
+function newFollowerAlert() {
+  if(lastFollowerIndex >= followers.length) lastFollowerIndex = 0;
+  const name = followers[lastFollowerIndex++];
+  
+  followerDiv.textContent = "Último seguidor: " + name;
+  alertsDiv.textContent = "🎉 Nuevo seguidor: " + name + "!";
+  alertsDiv.classList.add("alert-show");
+  
+  setTimeout(() => alertsDiv.classList.remove("alert-show"), 4000);
+}
+
+// DONACIONES FAKE
+function newDonationAlert() {
+  const amount = (Math.random() * (1000 - 1) + 1).toFixed(2);
+  const donors = ["Mario","Luisa","Triana","Pepe","Javi","AlfonsoFan"];
+  const donor = donors[Math.floor(Math.random() * donors.length)];
+  
+  alertsDiv.textContent = `💰 ${donor} ha donado €${amount}!`;
+  alertsDiv.classList.add("alert-show");
+  
+  setTimeout(() => alertsDiv.classList.remove("alert-show"), 4000);
+  
+  // Mensajes aleatorios de fans o haters
+  setTimeout(() => {
+    const reaction = Math.random() < 0.7 ? fans : haters;
+    const msg = reaction[Math.floor(Math.random() * reaction.length)];
+    alertsDiv.textContent = msg;
+    alertsDiv.classList.add("alert-show");
+    setTimeout(() => alertsDiv.classList.remove("alert-show"), 4000);
+  }, 4000);
+}
+
+// INTERVALO ALEATORIO ENTRE 1 Y 15 MINUTOS
+function randomInterval() {
+  return Math.floor(Math.random() * (15*60*1000 - 60*1000) + 60*1000);
+}
+
+// PROGRAMAR DONACIONES ALEATORIAS
+function scheduleDonation() {
+  const time = randomInterval();
+  setTimeout(() => {
+    newDonationAlert();
+    scheduleDonation();
+  }, time);
+}
+
+// INICIAR ALERTAS
+setInterval(newFollowerAlert, 8000);
+scheduleDonation();
+</script>
+
+</body>
+</html>
