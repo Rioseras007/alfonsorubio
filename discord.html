@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Fortnite Panel</title>
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="styles/estilos.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Canales de Discord Favoritos 💾</h1>
+    <p>Servidores conectados · Actualización automática</p>
+</header>
+
+<main>
+    <div class="widgets-multiples" id="widgets-container">
+        <!-- Aquí se generan los widgets -->
+    </div>
+</main>
+
+<footer>
+    <p>Estilo Fortnite · NAS Synology</p>
+</footer>
+
+<script>
+
+    // IDs de servidores
+    const serverIds = [
+        "1442205288190054432",
+        "443169091788734464",
+        "420320913435787265"
+        
+    ];
+
+    function cargarWidgets() {
+
+        const container = document.getElementById("widgets-container");
+        container.innerHTML = ""; // Reset antes de recargar
+
+        serverIds.forEach(id => {
+
+            const urlJSON = `https://discord.com/api/guilds/${id}/widget.json`;
+
+            fetch(urlJSON)
+                .then(response => response.json())
+                .then(data => {
+
+                    // Caja principal de servidor
+                    const widgetBox = document.createElement("div");
+                    widgetBox.className = "widget-box";
+
+                    // Título del servidor
+                    const title = document.createElement("h2");
+                    title.className = "widget-title";
+                    title.textContent = data.name;
+                    widgetBox.appendChild(title);
+
+                    // ===============================
+                    // CANALES
+                    // ===============================
+                    const channelsContainer = document.createElement("div");
+                    channelsContainer.className = "channels-container";
+
+                    const channelsTitle = document.createElement("h3");
+                    channelsTitle.textContent = "Canales";
+                    channelsContainer.appendChild(channelsTitle);
+
+                    data.channels.forEach(channel => {
+                        const p = document.createElement("p");
+
+                        if (channel.type === 0) {
+                            p.textContent = `# ${channel.name}`;
+                            p.className = "channel-text";
+                        } 
+                        else if (channel.type === 2) {
+                            p.textContent = `🔊 ${channel.name}`;
+                            p.className = "channel-voice";
+                        }
+
+                        channelsContainer.appendChild(p);
+                    });
+
+                    widgetBox.appendChild(channelsContainer);
+
+                    // ===============================
+                    // MIEMBROS CONECTADOS
+                    // ===============================
+
+                    const membersContainer = document.createElement("div");
+                    membersContainer.className = "members-container";
+
+                    const membersTitle = document.createElement("h3");
+                    membersTitle.textContent = "Miembros conectados";
+                    membersContainer.appendChild(membersTitle);
+
+                    if (data.members && data.members.length > 0) {
+
+                        data.members.forEach(member => {
+                            const memberBox = document.createElement("div");
+                            memberBox.className = "member-box";
+
+                            const img = document.createElement("img");
+                            img.src = member.avatar_url;
+                            img.className = "member-avatar";
+
+                            const name = document.createElement("span");
+                            name.textContent = member.username;
+
+                            memberBox.appendChild(img);
+                            memberBox.appendChild(name);
+
+                            membersContainer.appendChild(memberBox);
+                        });
+
+                    } else {
+                        const msg = document.createElement("p");
+                        msg.textContent = "No hay miembros conectados.";
+                        msg.className = "no-members";
+                        membersContainer.appendChild(msg);
+                    }
+
+                    widgetBox.appendChild(membersContainer);
+
+
+                    // WIDGET OFICIAL (iframe)
+                    const iframe = document.createElement("iframe");
+                    iframe.src = `https://discord.com/widget?id=${id}&theme=dark`;
+                    iframe.width = "350";
+                    iframe.height = "500";
+                    iframe.allowTransparency = true;
+                    iframe.frameBorder = "0";
+                    iframe.sandbox = "allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts";
+
+                    widgetBox.appendChild(iframe);
+
+
+                    // Añadir al contenedor global
+                    container.appendChild(widgetBox);
+
+                })
+                .catch(error => {
+                    console.error("Error cargando servidor:", id, error);
+                });
+
+        });
+
+    }
+
+    // Carga inicial
+    cargarWidgets();
+
+    // Auto-actualización cada 60 segundos
+    setInterval(cargarWidgets, 60000);
+
+</script>
+
+</body>
+</html>
