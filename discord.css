@@ -1,0 +1,125 @@
+/* ===== TIPOGRAFĂŤA FORTNITE ===== */
+@import url('https://fonts.googleapis.com/css2?family=Burbank+Big+Condensed:wght@700&display=swap');
+
+body {
+    font-family: 'Burbank Big Condensed', sans-serif;
+    background: linear-gradient(135deg, #0a0f2e, #1e0066, #00113d);
+    background-size: 400% 400%;
+    animation: fondoMove 12s ease infinite;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+/* AnimaciĂłn visual Fortnite */
+@keyframes fondoMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+header {
+    text-align: center;
+    padding: 20px;
+    color: #15cafe;
+    text-shadow: 0 0 10px #15cafe;
+}
+
+.widgets-multiples {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+/* CAJA DE CADA SERVIDOR */
+.widget-box {
+    background: rgba(0, 0, 0, 0.55);
+    border: 3px solid #15cafe;
+    border-radius: 20px;
+    padding: 20px;
+    width: 380px;
+    box-shadow: 0 0 20px #15cafe;
+    backdrop-filter: blur(6px);
+    animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 10px #15cafe; }
+    to   { box-shadow: 0 0 25px #00e1ff; }
+}
+
+.widget-title {
+    text-align: center;
+    font-size: 28px;
+    color: #15cafe;
+    text-shadow: 0 0 8px #15cafe;
+    margin-bottom: 10px;
+}
+
+/* SECCIĂ“N CANALES */
+.channels-container h3 {
+    margin-bottom: 5px;
+    color: #00aaff;
+    text-shadow: 0 0 5px #00aaff;
+}
+
+.channel-text {
+    color: #a7d8ff;
+    padding-left: 10px;
+}
+
+.channel-voice {
+    color: #ffcc66;
+    padding-left: 10px;
+}
+
+
+/* ===== MIEMBROS CONECTADOS ===== */
+
+.members-container {
+    margin-top: 15px;
+}
+
+.members-container h3 {
+    color: #49ffea;
+    text-shadow: 0 0 6px #49ffea;
+}
+
+.member-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.1);
+    padding: 6px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.member-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #15cafe;
+}
+
+.member-box span {
+    font-size: 18px;
+}
+
+.no-members {
+    opacity: 0.7;
+    color: #ccc;
+}
+
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    color: #15cafe;
+    text-shadow: 0 0 5px #15cafe;
+}
