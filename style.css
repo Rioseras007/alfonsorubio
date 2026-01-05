@@ -595,6 +595,85 @@ position: relative;
 }
 
 
+.center-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;   /* ajusta la altura si quieres */
+}
+
+
+
+
+
+.hover-zone {
+    width: 180px;
+    padding: 20px;
+    background: #69686c;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.preview-frame {
+    width: 180px;
+    height: 180px;
+    border-radius: 10px;
+
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s ease;
+}
+
+/* ✨ El truco mágico */
+.hover-zone:hover .preview-frame {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .footer-bottom {
   margin-top: 15px;
