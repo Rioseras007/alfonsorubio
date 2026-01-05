@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Visor Diant</title>
+
+<style>
+body {
+    background:#0b1020;
+    display:flex;
+    justify-content:center;
+    padding:40px;
+    font-family:system-ui;
+}
+
+#panel { width:700px; }
+
+#visor {
+    width:100%;
+    height:420px;
+    border-radius:18px;
+    box-shadow:0 0 50px rgba(0,255,255,.3);
+    overflow:hidden;
+}
+#controles{
+    display:flex;
+    justify-content:space-between;
+    margin-top:12px;
+}
+button{
+    background:#00ffff;
+    border:none;
+    padding:10px 16px;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div id="panel">
+  <div id="visor"></div>
+  <div id="controles">
+    <button id="color">🎨 Color</button>
+    <button id="auto">🔄 Auto</button>
+    <button id="foto">📸 Foto</button>
+  </div>
+</div>
+
+<script type="module">
+
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+import { STLLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/STLLoader.js";
+
+let mesh, auto = false;
+const colores = [0x00ffff,0xff0077,0xffcc00,0x00ff66,0xffffff];
+let c = 0;
+
+const container = document.getElementById("visor");
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0b1020);
+
+const camera = new THREE.PerspectiveCamera(60, container.clientWidth/container.clientHeight, 0.1, 1000);
+camera.position.set(0,40,90);
+
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(container.clientWidth,container.clientHeight);
+container.appendChild(renderer.domElement);
+
+scene.add(new THREE.AmbientLight(0xffffff,.7));
+const light = new THREE.DirectionalLight(0xffffff,.8);
+light.position.set(60,60,60);
+scene.add(light);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+
+const loader = new STLLoader();
+loader.load("Diant.stl", geo=>{
+    geo.center();
+    mesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: colores[0] }));
+    mesh.rotation.x = -Math.PI/2;
+    scene.add(mesh);
+});
+
+document.getElementById("color").onclick = ()=>{
+    c = (c+1)%colores.length;
+    mesh.material.color.setHex(colores[c]);
+};
+
+document.getElementById("auto").onclick = ()=> auto = !auto;
+
+document.getElementById("foto").onclick = ()=>{
+    const a = document.createElement("a");
+    a.href = renderer.domElement.toDataURL("image/png");
+    a.download = "diant.png";
+    a.click();
+};
+
+function animate(){
+    requestAnimationFrame(animate);
+    if(auto && mesh) mesh.rotation.z += 0.005;
+    controls.update();
+    renderer.render(scene,camera);
+}
+animate();
+
+</script>
+
+</body>
+</html>
