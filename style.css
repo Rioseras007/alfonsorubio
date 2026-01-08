@@ -350,10 +350,10 @@ text-shadow:
   display: flex;               /* Activa Flexbox */
   justify-content: center;     /* Centra horizontalmente */
   align-items: center;         /* Centra verticalmente */
-  height: 240px;               /* Altura para ver el efecto */
-  width: 1600px;            /* Ancho para ver el efecto */
-  border-radius: 50px;
-  padding: 500px;
+  height: 10%;               /* Altura para ver el efecto */
+  width: auto;            /* Ancho para ver el efecto */
+  border-radius: 10px;
+  padding: 20px;
    background: linear-gradient(135deg, #1d0476 0%, #764ba2 100%);
 
 
@@ -407,16 +407,7 @@ position: relative;
 
 
 
- .futuro{
-   
-
-   background: #ddc80a;
-    color: white;
-    border-radius: 10px;
-    padding: 5px;
-      max-width: auto;
-    max-height: auto;
-  }
+ 
 
 
   .inicio{
@@ -434,7 +425,6 @@ position: relative;
     height: auto
     
   }
-
 
 
 
@@ -745,22 +735,3 @@ position: relative;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-.footer-bottom {
-  margin-top: 15px;
-  font-size: 13px;
-  background: rgba(80, 235, 152, 0.794);
-  padding: 10px;
-} 
