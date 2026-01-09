@@ -1,5 +1,5 @@
 body {
-  background: #050a14;
+  background: #4431aa;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -7,13 +7,26 @@ body {
   font-family: Arial, sans-serif;
   padding-top: 50px;
   gap: 30px;
+ 
+   background: url("textura.jpg")  ; 
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin: 0;
+      height: 100vh;
+
+
+
+
+
+
+
 }
 
 .deck {
   display: grid;
   grid-template-columns: repeat(4, 90px);
   gap: 15px;
-  background: #02060f;
+  background: #95aadc;
   padding: 25px;
   border-radius: 20px;
   box-shadow: 0 0 30px #00aaff55;
@@ -22,7 +35,7 @@ body {
 .btn {
   width: 90px;
   height: 90px;
-  background: #0b1220;
+  background: #232524;
   border-radius: 14px;
   box-shadow: 0 0 15px #00aaff44;
   color: white;
@@ -104,6 +117,13 @@ body {
   font-size:18px;
   width: 50px;
 }
+
+
+
+hr.style1{
+	border-top: 15px solid #6330ca;
+}
+
 .hidden {
   display: none;
 }
