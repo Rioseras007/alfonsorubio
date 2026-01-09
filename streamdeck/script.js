@@ -9,7 +9,7 @@ let currentProfile = localStorage.getItem("currentProfile") || "Streaming";
 if(!profiles[currentProfile]){profiles[currentProfile]=defaultDeck(); localStorage.setItem("profiles", JSON.stringify(profiles));}
 let selected=null;
 
-const emojiList = ["😀","😎","🎮","🎵","💥","🔔","🔥","🎉","💡","📌","🖥️","⚡","🎯","🎁","🌟","🍀","🌈","⚽","🏆","🎲","🛠️","🎹","🎷","📷","📱","✈️","🚀","🚨","❤️","💛","💚","💙","💜"];
+const emojiList = ["🎹","😎","🎮","🎵","💥","🔔","🔥","🎉","💡","📌","🖥️","⚡","🎯","🎁","🌟","🍀","🌈","⚽","🏆","🎲","🛠️","🎹","🎷","📷","📱","✈️","🚀","🚨","❤️","💛","💚","💙","💜","🐶"];
 
 // --- funciones de perfiles ---
 function renderProfileList(){
@@ -125,14 +125,15 @@ function toggleEmojiPicker(){
         document.getElementById("iconInput").value = e;
         profiles[currentProfile][selected].icon = e;
         render();
-        panel.classList.add("hidden"); // cerrar al seleccionar
+        panel.emoji-picker.add("hidden"); // cerrar al seleccionar
       });
       panel.appendChild(btn);
     });
 
     // cerrar al salir del panel
     panel.addEventListener("mouseleave", ()=>{
-      panel.classList.add("hidden");
+     
+      panel.emoji-picker.add("hidden");
     });
   }
 

@@ -21,25 +21,19 @@
   <input id="iconInput" placeholder="Icono (emoji)">
   <input id="actionInput" placeholder="URL completa o nombre de mp3">
   <button onclick="saveConfig()">Guardar</button>
-
-<div class="config">
   <input type="text" id="iconInput" placeholder="Emoji/Icono">
   <button type="button" onclick="toggleEmojiPicker()">😎 Seleccionar Emoji</button>
   <div id="emojiPanel" class="hidden" style="display:flex; flex-wrap:wrap; gap:5px; margin-top:5px; position:absolute;"></div>
+  <!-- Selector de emojis -->
+  <div class="emoji-picker">
+    <button type="button" onclick="toggleEmojiPicker()">😎 Seleccionar Emoji (Windows+.) </button>
+  </div>
 </div>
 
 
 
 
 
-  <!-- Selector de emojis -->
-  <div class="emoji-picker">
-    <button type="button" onclick="toggleEmojiPicker()">😎 Seleccionar Emoji</button>
- 
-  <div id="emojiPanel" class="hidden" style="display:flex; flex-wrap:wrap; gap:5px; margin-top:5px;"></div>
-
-
-  </div>
 </div>
 
 <script src="script.js"></script>
