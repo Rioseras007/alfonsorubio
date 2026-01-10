@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Calendario Mensual Épico</title>
+<title>Calendario Mensual de Eventos Importantes</title>
 
 <style>
 body{
@@ -62,9 +62,6 @@ button{
     padding:10px;
     cursor:pointer;
     min-height:90px;
-    max-height:140px;
-    overflow-y:auto;
-    position:relative;
     transition:0.2s;
 }
 
@@ -77,60 +74,19 @@ button{
     box-shadow:0 0 10px #00e5ff;
 }
 
-.note{
-    font-size:0.75em;
-    margin-top:4px;
-    border-radius:4px;
-    padding:2px 4px;
-    opacity:0;
-    animation:fadeIn 0.4s forwards;
-    position:relative;
-}
+.note{font-size:0.75em;margin-top:4px;}
 
-@keyframes fadeIn{
-    to {opacity:1;}
-}
+.tag-birthday{color:#ffd700;}
+.tag-fortnite{color:#00ffea;}
+.tag-task{color:white;}
+.tag-make{color:#ff8c00;}
+.tag-modelo{color:#ff4500;}
 
-/* Tooltip para notas */
-.note:hover::after {
-    content: attr(data-text);
-    position: absolute;
-    background: rgba(0,0,0,0.85);
-    color: #fff;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 0.75em;
-    white-space: pre-wrap;
-    max-width: 200px;
-    z-index: 1000;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-
-.note:hover::after {
-    opacity: 1;
-}
-
-.tag-birthday{color:#ffd700; background:rgba(255,215,0,0.3);}
-.tag-fortnite{color:#00ffea; background:rgba(0,255,234,0.3);}
-.tag-task{color:white; background:rgba(255,255,255,0.2);}
-.tag-make{color:#ff8c00; background:rgba(255,140,0,0.3);}
-.tag-modelo{color:#ff4500; background:rgba(255,69,0,0.3);}
-.tag-cita{color:#32CD32; background:rgba(50,205,50,0.25);}
-.tag-itv{color:#1E90FF; background:rgba(30,144,255,0.25);}
-.tag-email{color:#9370DB; background:rgba(147,112,219,0.25);}
-.tag-reunion{color:#20B2AA; background:rgba(32,178,170,0.25);}
-.tag-gimnasio{color:#FF69B4; background:rgba(255,105,180,0.25);}
-.tag-cumple-amigos{color:#FFFF00; background:rgba(255,255,0,0.25);}
-.tag-cumple-mascota{color:#A0522D; background:rgba(160,82,45,0.25);}
-.tag-pago{color:#FF6347; background:rgba(255,99,71,0.25);}
-.tag-viaje{color:#87CEFA; background:rgba(135,206,250,0.25);}
-.tag-aniversario{color:#FF1493; background:rgba(255,20,147,0.25);}
-.tag-recordatorio{color:#B0C4DE; background:rgba(176,196,222,0.25);}
+.bg-birthday{background:rgba(255,215,0,0.25);}
+.bg-fortnite{background:rgba(0,255,234,0.25);}
+.bg-task{background:rgba(255,255,255,0.18);}
+.bg-make{background:rgba(255,140,0,0.25);}
+.bg-modelo{background:rgba(255,69,0,0.25);}
 
 .modal{
     position:fixed;
@@ -145,9 +101,9 @@ button{
     background:#1c1c1c;
     padding:20px;
     border-radius:15px;
-    width:320px;
+    width:300px;
 }
-select,textarea,input{
+select,textarea{
     width:100%;
     margin-top:10px;
     border-radius:8px;
@@ -195,14 +151,6 @@ select,textarea,input{
     cursor:pointer;
 }
 
-.more-notes{
-    font-size:0.7em;
-    color:#ccc;
-    text-align:center;
-    margin-top:2px;
-}
-
-#emailFields{display:none; margin-top:10px;}
 </style>
 </head>
 <body>
@@ -211,7 +159,7 @@ select,textarea,input{
     <h1>🏆 VICTORIA ROYALE TOMA TOMA TOMA 🏆</h1>
 </div>
 
-<h1>📅 Calendario Mensual Épico</h1>
+<h1>📅 Calendario Mensual de Eventos a Recordar</h1>
 
 <div id="stats" style="text-align:center;margin-bottom:12px;font-weight:bold;"></div>
 
@@ -234,23 +182,7 @@ select,textarea,input{
             <option value="task">📝 Tarea</option>
             <option value="make">🟧 Make publicado</option>
             <option value="modelo">🟠 Modelo publicado</option>
-            <option value="cita">🩺 Cita médica</option>
-            <option value="itv">🚗 ITV</option>
-            <option value="email">📧 Mandar email</option>
-            <option value="reunion">📅 Reunión</option>
-            <option value="gimnasio">💪 Gimnasio</option>
-            <option value="cumple-amigos">🎉 Cumpleaños amigos/familia</option>
-            <option value="cumple-mascota">🐾 Cumpleaños mascota</option>
-            <option value="pago">💸 Pago factura</option>
-            <option value="viaje">✈️ Viaje</option>
-            <option value="aniversario">❤️ Aniversario</option>
-            <option value="recordatorio">⏰ Recordatorio personal</option>
         </select>
-        <div id="emailFields">
-            <input type="email" id="emailTo" placeholder="Destinatario">
-            <input type="text" id="emailSubject" placeholder="Asunto">
-            <button style="margin-top:5px;" onclick="openEmail()">✉️ Abrir correo</button>
-        </div>
         <textarea id="text" rows="4" placeholder="Escribe tu nota..."></textarea>
         <div style="margin-top:10px; display:flex; justify-content:space-between;">
             <button onclick="saveNote()">Guardar</button>
@@ -299,22 +231,12 @@ function render(){
 
         let key=`${date.getFullYear()}-${date.getMonth()}-${i}`;
         if(notes[key]){
-            let maxPreview = 3;
-            notes[key].forEach((n,j)=>{
-                if(j<maxPreview){
-                    let tag=document.createElement("div");
-                    tag.className="note tag-"+n.type;
-                    tag.innerText=(n.type=="birthday"?"🎂":n.type=="fortnite"?"🏆":n.type=="task"?"📝":n.type=="make"?"🟧":n.type=="modelo"?"🟠":n.type=="cita"?"🩺":n.type=="itv"?"🚗":n.type=="email"?"📧":n.type=="reunion"?"📅":n.type=="gimnasio"?"💪":n.type=="cumple-amigos"?"🎉":n.type=="cumple-mascota"?"🐾":n.type=="pago"?"💸":n.type=="viaje"?"✈️":n.type=="aniversario"?"❤️":"⏰") + " " + n.text;
-                    tag.setAttribute("data-text", n.text); // Tooltip épico
-                    cell.appendChild(tag);
-                }
+            notes[key].forEach(n=>{
+                let tag=document.createElement("div");
+                tag.className="note tag-"+n.type+" bg-"+n.type;
+                tag.innerText=(n.type=="birthday"?"🎂 ":(n.type=="fortnite"?"🏆 ":"📝 ")) + n.text;
+                cell.appendChild(tag);
             });
-            if(notes[key].length>maxPreview){
-                let more=document.createElement("div");
-                more.className="more-notes";
-                more.innerText=`+${notes[key].length - maxPreview} más...`;
-                cell.appendChild(more);
-            }
         }
 
         cell.onclick=()=>openModal(i);
@@ -343,7 +265,7 @@ function openModal(day){
         notes[currentDay].forEach((n,i)=>{
             let div = document.createElement("div");
             div.className = "note-item";
-            div.innerText = (n.type=="birthday"?"🎂":n.type=="fortnite"?"🏆":n.type=="task"?"📝":n.type=="make"?"🟧":n.type=="modelo"?"🟠":n.type=="cita"?"🩺":n.type=="itv"?"🚗":n.type=="email"?"📧":n.type=="reunion"?"📅":n.type=="gimnasio"?"💪":n.type=="cumple-amigos"?"🎉":n.type=="cumple-mascota"?"🐾":n.type=="pago"?"💸":n.type=="viaje"?"✈️":n.type=="aniversario"?"❤️":"⏰") + " " + n.text;
+            div.innerText = (n.type=="birthday"?"🎂":n.type=="fortnite"?"🏆":n.type=="task"?"📝":n.type=="make"?"🟧":"🟠") + " " + n.text;
             
             let btn = document.createElement("button");
             btn.innerText = "🗑";
@@ -351,8 +273,8 @@ function openModal(day){
                 notes[currentDay].splice(i,1);
                 if(notes[currentDay].length === 0) delete notes[currentDay];
                 localStorage.setItem("calendarNotes", JSON.stringify(notes));
-                openModal(day);
-                render();
+                openModal(day); // recarga el modal para actualizar la lista
+                render(); // actualiza el calendario
             };
             
             div.appendChild(btn);
@@ -361,22 +283,12 @@ function openModal(day){
     }
 
     document.getElementById("text").value = "";
-    document.getElementById("emailTo").value = "";
-    document.getElementById("emailSubject").value = "";
-
-    document.getElementById("emailFields").style.display = document.getElementById("type").value==="email" ? "block" : "none";
-
     document.getElementById("modal").style.display = "flex";
 }
 
-document.getElementById("type").addEventListener("change", ()=>{
-    let type = document.getElementById("type").value;
-    document.getElementById("emailFields").style.display = type==="email" ? "block" : "none";
-});
-
 function saveNote(){
     let type = document.getElementById("type").value;
-    let text = document.getElementById("text").value.trim(); 
+    let text = document.getElementById("text").value.trim(); // eliminamos espacios
 
     if(!text) return alert("Debes escribir algo antes de guardar.");
 
@@ -394,13 +306,6 @@ function saveNote(){
     }
 
     render();
-}
-
-function openEmail(){
-    let to = encodeURIComponent(document.getElementById("emailTo").value);
-    let subject = encodeURIComponent(document.getElementById("emailSubject").value);
-    let body = encodeURIComponent(document.getElementById("text").value);
-    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
 }
 
 function closeModal(){

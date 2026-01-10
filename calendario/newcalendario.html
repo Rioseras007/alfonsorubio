@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -64,7 +65,6 @@ button{
     min-height:90px;
     max-height:140px;
     overflow-y:auto;
-    position:relative;
     transition:0.2s;
 }
 
@@ -84,35 +84,10 @@ button{
     padding:2px 4px;
     opacity:0;
     animation:fadeIn 0.4s forwards;
-    position:relative;
 }
 
 @keyframes fadeIn{
     to {opacity:1;}
-}
-
-/* Tooltip para notas */
-.note:hover::after {
-    content: attr(data-text);
-    position: absolute;
-    background: rgba(0,0,0,0.85);
-    color: #fff;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 0.75em;
-    white-space: pre-wrap;
-    max-width: 200px;
-    z-index: 1000;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-
-.note:hover::after {
-    opacity: 1;
 }
 
 .tag-birthday{color:#ffd700; background:rgba(255,215,0,0.3);}
@@ -147,7 +122,7 @@ button{
     border-radius:15px;
     width:320px;
 }
-select,textarea,input{
+select,textarea{
     width:100%;
     margin-top:10px;
     border-radius:8px;
@@ -202,7 +177,6 @@ select,textarea,input{
     margin-top:2px;
 }
 
-#emailFields{display:none; margin-top:10px;}
 </style>
 </head>
 <body>
@@ -246,11 +220,6 @@ select,textarea,input{
             <option value="aniversario">❤️ Aniversario</option>
             <option value="recordatorio">⏰ Recordatorio personal</option>
         </select>
-        <div id="emailFields">
-            <input type="email" id="emailTo" placeholder="Destinatario">
-            <input type="text" id="emailSubject" placeholder="Asunto">
-            <button style="margin-top:5px;" onclick="openEmail()">✉️ Abrir correo</button>
-        </div>
         <textarea id="text" rows="4" placeholder="Escribe tu nota..."></textarea>
         <div style="margin-top:10px; display:flex; justify-content:space-between;">
             <button onclick="saveNote()">Guardar</button>
@@ -305,7 +274,6 @@ function render(){
                     let tag=document.createElement("div");
                     tag.className="note tag-"+n.type;
                     tag.innerText=(n.type=="birthday"?"🎂":n.type=="fortnite"?"🏆":n.type=="task"?"📝":n.type=="make"?"🟧":n.type=="modelo"?"🟠":n.type=="cita"?"🩺":n.type=="itv"?"🚗":n.type=="email"?"📧":n.type=="reunion"?"📅":n.type=="gimnasio"?"💪":n.type=="cumple-amigos"?"🎉":n.type=="cumple-mascota"?"🐾":n.type=="pago"?"💸":n.type=="viaje"?"✈️":n.type=="aniversario"?"❤️":"⏰") + " " + n.text;
-                    tag.setAttribute("data-text", n.text); // Tooltip épico
                     cell.appendChild(tag);
                 }
             });
@@ -361,18 +329,8 @@ function openModal(day){
     }
 
     document.getElementById("text").value = "";
-    document.getElementById("emailTo").value = "";
-    document.getElementById("emailSubject").value = "";
-
-    document.getElementById("emailFields").style.display = document.getElementById("type").value==="email" ? "block" : "none";
-
     document.getElementById("modal").style.display = "flex";
 }
-
-document.getElementById("type").addEventListener("change", ()=>{
-    let type = document.getElementById("type").value;
-    document.getElementById("emailFields").style.display = type==="email" ? "block" : "none";
-});
 
 function saveNote(){
     let type = document.getElementById("type").value;
@@ -396,13 +354,6 @@ function saveNote(){
     render();
 }
 
-function openEmail(){
-    let to = encodeURIComponent(document.getElementById("emailTo").value);
-    let subject = encodeURIComponent(document.getElementById("emailSubject").value);
-    let body = encodeURIComponent(document.getElementById("text").value);
-    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-}
-
 function closeModal(){
     document.getElementById("modal").style.display = "none";
     document.getElementById("text").value = "";
@@ -422,3 +373,4 @@ render();
 
 </body>
 </html>
+

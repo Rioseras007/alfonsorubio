@@ -64,7 +64,6 @@ button{
     min-height:90px;
     max-height:140px;
     overflow-y:auto;
-    position:relative;
     transition:0.2s;
 }
 
@@ -84,35 +83,10 @@ button{
     padding:2px 4px;
     opacity:0;
     animation:fadeIn 0.4s forwards;
-    position:relative;
 }
 
 @keyframes fadeIn{
     to {opacity:1;}
-}
-
-/* Tooltip para notas */
-.note:hover::after {
-    content: attr(data-text);
-    position: absolute;
-    background: rgba(0,0,0,0.85);
-    color: #fff;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 0.75em;
-    white-space: pre-wrap;
-    max-width: 200px;
-    z-index: 1000;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-
-.note:hover::after {
-    opacity: 1;
 }
 
 .tag-birthday{color:#ffd700; background:rgba(255,215,0,0.3);}
@@ -305,7 +279,6 @@ function render(){
                     let tag=document.createElement("div");
                     tag.className="note tag-"+n.type;
                     tag.innerText=(n.type=="birthday"?"🎂":n.type=="fortnite"?"🏆":n.type=="task"?"📝":n.type=="make"?"🟧":n.type=="modelo"?"🟠":n.type=="cita"?"🩺":n.type=="itv"?"🚗":n.type=="email"?"📧":n.type=="reunion"?"📅":n.type=="gimnasio"?"💪":n.type=="cumple-amigos"?"🎉":n.type=="cumple-mascota"?"🐾":n.type=="pago"?"💸":n.type=="viaje"?"✈️":n.type=="aniversario"?"❤️":"⏰") + " " + n.text;
-                    tag.setAttribute("data-text", n.text); // Tooltip épico
                     cell.appendChild(tag);
                 }
             });
