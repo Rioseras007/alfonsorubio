@@ -264,6 +264,35 @@ let date = new Date();
 let notes = JSON.parse(localStorage.getItem("calendarNotes")) || {};
 let currentDay="";
 
+/* =========================
+   CARGAR NOTAS DESDE JSON
+========================= */
+fetch("calendarNotes.json")
+    .then(r => r.json())
+    .then(data => {
+        notes = data;
+        render();
+    })
+    .catch(() => {
+        notes = {};
+        render();
+    });
+
+/* =========================
+   GUARDAR NOTAS EN SERVIDOR
+========================= */
+function saveToServer(){
+    fetch("save.php", {
+        method: "POST",
+        body: JSON.stringify(notes)
+    });
+}
+
+
+
+
+
+
 function render(){
     const monthNames=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
     document.getElementById("month").innerText = monthNames[date.getMonth()]+" "+date.getFullYear();
