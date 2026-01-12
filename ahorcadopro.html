@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ahorcado Pro con Tiempo Ajustable</title>
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(120deg,#1f2933,#0f172a);
+    color: white;
+    text-align: center;
+    padding-top: 30px;
+    transition: background 0.5s;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+#word {
+    font-size: 2.2em;
+    letter-spacing: 12px;
+    margin: 20px;
+}
+
+#letters button {
+    margin: 5px;
+    padding: 10px 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.2s;
+}
+
+#letters button.correct {
+    background-color: #4caf50;
+    color: white;
+}
+
+#letters button.wrong {
+    background-color: #f44336;
+    color: white;
+}
+
+#letters button:hover:not(:disabled){
+    transform: scale(1.1);
+}
+
+#status {
+    margin-top: 20px;
+    font-size: 1.4em;
+    font-weight: bold;
+    animation: fadeIn 0.8s;
+}
+
+#mistakes-left, #timer {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #ffcc00;
+}
+
+#hangman {
+  border: 2px solid #333;
+  margin: 15px auto;
+  display: block;
+  background-color: #0f172a;
+}
+
+button#start, button#restart {
+    margin-top: 15px;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    transition: background 0.3s;
+}
+
+button#start:hover, button#restart:hover {
+    background-color: #1d4ed8;
+}
+
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+</style>
+</head>
+<body>
+
+<h1>🎯 Ahorcado Pro – Tiempo según dificultad</h1>
+
+<div id="difficulty">
+  <strong>Dificultad:</strong>
+  <label><input type="radio" name="level" value="8" checked> Fácil</label>
+  <label><input type="radio" name="level" value="6"> Normal</label>
+  <label><input type="radio" name="level" value="4"> Difícil</label>
+</div>
+
+<canvas id="hangman" width="200" height="250"></canvas>
+
+<div id="word"></div>
+<div id="letters"></div>
+<div id="status"></div>
+<div id="mistakes-left">Errores restantes: </div>
+<div id="timer">Tiempo restante: </div>
+
+<button id="start">▶️ Iniciar Juego</button>
+<button id="restart">🔄 Reiniciar</button>
+
+<script>
+const canvas = document.getElementById("hangman");
+const ctx = canvas.getContext("2d");
+
+const easyWords = ["GATO","PERRO","CASA","LUNA","SOL","PEZ","LIBRO","FLOR","SILLA","RANA","NUBE","MAR","ARBOLES","PAN","JUEGO"];
+const normalWords = ["PROGRAMACION","ORDENADOR","INTERNET","JAVASCRIPT","TELEFONO","ESCUELA","CIENCIA","HISTORIA","MATEMATICAS","ELECTRONICA","HUMANIDAD","INFORMACION","ALGEBRA","GEOGRAFIA","TECLADO"];
+const hardWords = ["ANDROID","MICROCONTROLADOR","ALGORITMO","CRYPTOGRAFIA","DESARROLLO","INTERFACES","COMPILADOR","SEGURIDAD","TELECOMUNICACIONES","MICROPROCESADOR","VIRTUALIZACION","SISTEMAS","BINARIO","OPTIMIZACION","VARIABLES"];
+
+let selected = "";
+let guessed = [];
+let mistakes = 0;
+let maxMistakes = 6;
+let timer = 60;
+let timerInterval;
+
+// Fondo según dificultad
+function setBackground(level){
+    if(level==8) document.body.style.background = "linear-gradient(120deg,#1e3a8a,#2563eb)";
+    if(level==6) document.body.style.background = "linear-gradient(120deg,#f97316,#fb923c)";
+    if(level==4) document.body.style.background = "linear-gradient(120deg,#b91c1c,#7f1d1d)";
+}
+
+// Dibujo base y muñeco
+function drawBase(){
+  ctx.clearRect(0,0,200,250);
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(10,240); ctx.lineTo(190,240); ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(40,240); ctx.lineTo(40,20); ctx.lineTo(120,20); ctx.lineTo(120,40); ctx.stroke();
+}
+
+function drawHangman(){
+    if(mistakes>0) { ctx.beginPath(); ctx.arc(120,60,20,0,Math.PI*2); ctx.stroke(); }
+    if(mistakes>1) { ctx.beginPath(); ctx.moveTo(120,80); ctx.lineTo(120,140); ctx.stroke(); }
+    if(mistakes>2) { ctx.beginPath(); ctx.moveTo(120,90); ctx.lineTo(90,120); ctx.stroke(); }
+    if(mistakes>3) { ctx.beginPath(); ctx.moveTo(120,90); ctx.lineTo(150,120); ctx.stroke(); }
+    if(mistakes>4) { ctx.beginPath(); ctx.moveTo(120,140); ctx.lineTo(90,180); ctx.stroke(); }
+    if(mistakes>5) { ctx.beginPath(); ctx.moveTo(120,140); ctx.lineTo(150,180); ctx.stroke(); }
+}
+
+// Selección palabra
+function selectWord(){
+    const level = parseInt(document.querySelector('input[name="level"]:checked').value);
+    setBackground(level);
+    if(level === 8) { selected = easyWords[Math.floor(Math.random()*easyWords.length)]; timer=90; }
+    else if(level === 6) { selected = normalWords[Math.floor(Math.random()*normalWords.length)]; timer=60; }
+    else { selected = hardWords[Math.floor(Math.random()*hardWords.length)]; timer=40; }
+    maxMistakes = level;
+}
+
+// Palabra y botones
+function drawWord(){
+    const wordDiv = document.getElementById("word");
+    wordDiv.innerHTML = "";
+    selected.split("").forEach(letter => {
+        const span = document.createElement("span");
+        span.textContent = guessed.includes(letter) ? letter : "_";
+        wordDiv.appendChild(span);
+    });
+}
+
+function createLetters(){
+    const lettersDiv = document.getElementById("letters");
+    lettersDiv.innerHTML = "";
+    for(let i=65;i<=90;i++){
+        const btn = document.createElement("button");
+        btn.textContent = String.fromCharCode(i);
+        btn.onclick = ()=> guess(btn.textContent, btn);
+        lettersDiv.appendChild(btn);
+    }
+}
+
+// Jugada
+function guess(letter, btn){
+    btn.disabled = true;
+    if(selected.includes(letter)){
+        guessed.push(letter);
+        btn.classList.add("correct");
+    } else {
+        mistakes++;
+        btn.classList.add("wrong");
+        drawBase();
+        drawHangman();
+    }
+    drawWord();
+    checkGame();
+    updateMistakesLeft();
+}
+
+// Contador errores
+function updateMistakesLeft(){
+    const left = Math.max(0,maxMistakes-mistakes);
+    document.getElementById("mistakes-left").textContent = "Errores restantes: "+left;
+}
+
+// Timer
+function startTimer(){
+    clearInterval(timerInterval);
+    document.getElementById("timer").textContent = "Tiempo restante: "+timer;
+    timerInterval = setInterval(()=>{
+        timer--;
+        document.getElementById("timer").textContent = "Tiempo restante: "+timer;
+        if(timer<=0){
+            clearInterval(timerInterval);
+            document.getElementById("status").textContent = "⏰ ¡Tiempo agotado! Palabra: "+selected;
+            document.querySelectorAll("#letters button").forEach(b=>b.disabled=true);
+            document.querySelectorAll('input[name="level"]').forEach(i => i.disabled=false);
+        }
+    },1000);
+}
+
+// Comprobar fin
+function checkGame(){
+    const wordDiv = document.getElementById("word");
+    if(!wordDiv.textContent.includes("_")){
+        clearInterval(timerInterval);
+        document.getElementById("status").textContent = "🎉 ¡Has ganado!";
+        document.querySelectorAll("#letters button").forEach(b=>b.disabled=true);
+        document.querySelectorAll('input[name="level"]').forEach(i => i.disabled=false);
+    }
+    if(mistakes >= maxMistakes){
+        clearInterval(timerInterval);
+        document.getElementById("status").textContent = "💀 Has perdido. Palabra: " + selected;
+        document.querySelectorAll("#letters button").forEach(b=>b.disabled=true);
+        document.querySelectorAll('input[name="level"]').forEach(i => i.disabled=false);
+    }
+}
+
+// Iniciar juego
+function startGame(){
+    guessed=[]; mistakes=0;
+    selectWord();
+    drawBase(); drawHangman();
+    drawWord(); createLetters();
+    updateMistakesLeft(); document.getElementById("status").textContent="";
+    document.querySelectorAll('input[name="level"]').forEach(i => i.disabled=true);
+    startTimer();
+}
+
+document.getElementById("start").onclick = startGame;
+document.getElementById("restart").onclick = startGame;
+
+// Base al cargar
+drawBase();
+</script>
+</body>
+</html>
