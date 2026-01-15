@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>⚠ SISTEMA COMPROMETIDO ⚠</title>
+
+<style>
+html,body{
+margin:0; padding:0;
+background:black; color:#00ff00;
+font-family:monospace;
+overflow:hidden;
+}
+
+#matrix{
+position:fixed; inset:0;
+z-index:0;
+}
+
+#ui{
+position:relative; z-index:2;
+padding:20px;
+white-space:pre-line;
+font-size:14px;
+}
+
+#cameraFrame{
+position:fixed;
+top:10px; right:10px;
+width:160px; height:220px;
+border:3px solid red;
+color:red;
+text-align:center;
+font-weight:bold;
+z-index:3;
+display:none;
+background:#111;
+}
+
+#camLabel{font-size:12px; animation:blink 0.8s infinite;}
+#fakeFace{
+width:100%; height:100%;
+background:radial-gradient(circle,#333,#000);
+display:flex; align-items:center; justify-content:center;
+font-size:28px;
+}
+
+@keyframes blink{
+0%,100%{opacity:1}50%{opacity:0}
+}
+
+#progressBox{
+width:80%; height:25px;
+border:2px solid #00ff00;
+margin:20px auto;
+}
+
+#bar{height:100%; width:0%; background:red;}
+
+#final{
+display:none;
+text-align:center;
+font-size:22px;
+color:#ff4444;
+}
+
+.shake{ animation:shake .1s infinite; }
+
+@keyframes shake{
+0%{transform:translate(0,0)}
+25%{transform:translate(4px,0)}
+50%{transform:translate(0,4px)}
+75%{transform:translate(-4px,0)}
+100%{transform:translate(0,-4px)}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div id="cameraFrame">
+<div id="camLabel">● REC</div>
+<div id="fakeFace">👁️</div>
+</div>
+
+<div id="ui"></div>
+
+<div id="progressBox"><div id="bar"></div></div>
+
+<div id="final">
+💥 TRANQUILO JUANJO 💥<br>
+Has sido **brutalmente troleado** 😂<br><br>
+— Alfonso, señor del caos digital —
+</div>
+
+<audio id="alarm" src="https://assets.mixkit.co/active_storage/sfx/221/221-preview.mp3"></audio>
+
+<script>
+// MATRIX
+const c=document.getElementById("matrix"),ctx=c.getContext("2d");
+function resize(){c.width=innerWidth;c.height=innerHeight}
+resize(); addEventListener("resize",resize);
+
+let chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split("");
+let size=16, cols=Math.floor(c.width/size), drops=Array(cols).fill(1);
+
+setInterval(()=>{
+ctx.fillStyle="rgba(0,0,0,.05)";
+ctx.fillRect(0,0,c.width,c.height);
+ctx.fillStyle="#0F0"; ctx.font=size+"px monospace";
+drops.forEach((y,i)=>{
+let txt=chars[Math.floor(Math.random()*chars.length)];
+ctx.fillText(txt,i*size,y*size);
+if(y*size>c.height && Math.random()>0.975) drops[i]=0;
+drops[i]++;
+});
+},33);
+
+// TERMINAL
+const lines=[
+"[ SYSTEM ] Accediendo al dispositivo...",
+"[ SYSTEM ] IP localizada",
+"[ SYSTEM ] WhatsApp interceptado",
+"[ SYSTEM ] Activando cámara frontal...",
+"[ WARNING ] Escaneo biométrico",
+"[ SYSTEM ] Analizando Fortnite stats...",
+"[ ALERT ] CONTROL TOTAL CONCEDIDO",
+"",
+"████████████████████████████ 100%",
+"",
+"ACCESO COMPLETO"
+];
+
+const ui=document.getElementById("ui");
+const cam=document.getElementById("cameraFrame");
+let i=0;
+
+function type(){
+if(i<lines.length){
+ui.innerHTML+=lines[i]+"\n";
+if(lines[i].includes("cámara")) cam.style.display="block";
+i++; setTimeout(type,200);
+}else startHack();
+}
+type();
+
+// HACK
+let bar=document.getElementById("bar"), w=0;
+function startHack(){
+document.body.classList.add("shake");
+document.getElementById("alarm").play();
+navigator.vibrate && navigator.vibrate([300,100,300,100,300]);
+
+let load=setInterval(()=>{
+if(w>=100){ clearInterval(load); finish(); }
+else{ w+=2; bar.style.width=w+"%"; }
+},80);
+}
+
+// FINAL
+function finish(){
+document.body.classList.remove("shake");
+ui.style.display="none";
+document.getElementById("progressBox").style.display="none";
+cam.style.display="none";
+document.getElementById("final").style.display="block";
+}
+</script>
+
+</body>
+</html>

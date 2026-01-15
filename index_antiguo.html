@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Panel personal para organizar y acceder a servicios online">
+<title>Gestión de Servicios Online</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+  <style>
+  .spotify-fondo {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+  }
+</style>
+
+
+
+<header>
+
+<!-- Banner principal -->
+<div align="center">
+  <img src="banner3.png"  alt="Banner de Redes Sociales" style="max-width: 50%; max-height: 50%; min-height: auto; min-width: auto; border-radius: 25px; box-shadow: 0 10px 10px rgba(130, 88, 237, 0.3);">
+ 
+</div>
+
+<!--Dayspedia.com widget--><div class="DPDC" cityid="1184" lang="es" id="dayspedia_widget_5279723ae43ec6d2" host="https://dayspedia.com" ampm="true" nightsign="true" sun="true" style="width: 300px; background-image: url(&quot;https://cdn.dayspedia.com/img/widgets/bg-10.png&quot;);" auto="true">
+
+	<style media="screen" id="dayspedia_widget_5279723ae43ec6d2_style">
+				/*COMMON*/
+		.DPDC{display:table;position:relative;box-sizing:border-box;font-size:100.01%;font-style:normal;font-family:Arial;background-position:50% 50%;background-repeat:no-repeat;background-size:cover;overflow:hidden;user-select:none}
+		.DPDCh,.DPDCd{width:fit-content;line-height:1.4}
+		.DPDCh{margin-bottom:1em}
+		.DPDCd{margin-top:.24em}
+		.DPDCt{line-height:1}
+		.DPDCth,.DPDCtm,.DPDCts{display:inline-block;vertical-align:text-top;white-space:nowrap}
+		.DPDCth{min-width:0.6em;text-align:right}
+		.DPDCtm,.DPDCts{min-width:1.44em}
+		.DPDCtm::before,.DPDCts::before{display:inline-block;content:':';vertical-align:middle;margin:-.34em 0 0 -.07em;width:.32em;text-align:center;opacity:.72;filter:alpha(opacity=72)}
+		.DPDCt12{display:inline-block;vertical-align:baseline;top:-0.12em;position:relative;font-size:40%}
+		.DPDCdm::after{content:' '}
+		.DPDCda::after{content:', '}
+		.DPDCdt{margin-right:.48em}
+		.DPDCtn{display:inline-block;position:relative;width:13px;height:13px;border:2px solid;border-radius:50%;overflow:hidden}
+		.DPDCtn>i{display:block;content:'';position:absolute;right:33%;top:-5%;width:85%;height:85%;border-radius:50%}
+		.DPDCs{margin:.96em 0 0 -3px;font-size:90%;line-height:1;white-space:nowrap}
+		.DPDCs sup{padding-left:.24em;font-size:65%}
+		.DPDCsl::before,.DPDCsl::after{display:inline-block;opacity:.4}
+		.DPDCsl::before{content:'~';margin:0 .12em}
+		.DPDCsl::after{content:'~';margin:0 .24em}
+		.DPDCs svg{display:inline-block;vertical-align:bottom;width:1.2em;height:1.2em;opacity:.48}
+		/*CUSTOM*/
+		
+		.DPDC{width:auto;padding:24px;background-color:#ffffff;border:1px solid #343434;border-radius:8px} /* widget width, padding, background, border, rounded corners */
+		.DPDCh{color:#007DBF;font-weight:normal} /* headline color, font-weight*/
+		.DPDCt,.DPDCd{color:#343434;font-weight:bold} /* time & date color, font-weight */
+		.DPDCtn{border-color:#343434} /* night-sign color = time & date color */
+		.DPDCtn>i{background-color:#343434} /* night-sign color = time & date color */
+		.DPDCt{font-size:48px} /* time font-size */
+		.DPDCh,.DPDCd{font-size:16px} /* headline & date font-size */
+	</style>
+
+	<a class="DPl" href="https://dayspedia.com/time/es/Valladolid/" target="_blank" style="display:block!important;text-decoration:none!important;border:none!important;cursor:pointer!important;background:transparent!important;line-height:0!important;text-shadow:none!important;position:absolute;z-index:1;top:0;right:0;bottom:0;left:0">
+		<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" style="position:absolute;right:8px;bottom:0;width:16px;height:16px">
+			<path style="fill:/*defined*/#007DBF" d="M0,0v16h1.7c-0.1-0.2-0.1-0.3-0.1-0.5c0-0.9,0.8-1.6,1.6-1.6c0.9,0,1.6,0.8,1.6,1.6c0,0.2,0,0.3-0.1,0.5h1.8 c-0.1-0.2-0.1-0.3-0.1-0.5c0-0.9,0.8-1.6,1.6-1.6s1.6,0.8,1.6,1.6c0,0.2,0,0.3-0.1,0.5h1.8c-0.1-0.2-0.1-0.3-0.1-0.5 c0-0.9,0.8-1.6,1.6-1.6c0.9,0,1.6,0.8,1.6,1.6c0,0.2,0,0.3-0.1,0.5H16V0H0z M4.2,8H2V2h2.2c2.1,0,3.3,1.3,3.3,3S6.3,8,4.2,8z M11.4,6.3h-0.8V8H9V2h2.5c1.4,0,2.4,0.8,2.4,2.1C13.9,5.6,12.9,6.3,11.4,6.3z M4.4,3.5H3.7v3h0.7C5.4,6.5,6,6,6,5 C6,4.1,5.4,3.5,4.4,3.5z M11.3,3.4h-0.8V5h0.8c0.6,0,0.9-0.3,0.9-0.8C12.2,3.7,11.9,3.4,11.3,3.4z">
+			</path>
+		</svg>
+		<span title="DaysPedia.com" style="position:absolute;right:28px;bottom:6px;height:10px;width:60px;overflow:hidden;text-align:right;font:normal 10px/10px Arial,sans-serif!important;color:/*defined*/#007DBF">Powered&nbsp;by DaysPedia.com</span>
+	</a>
+	<div class="DPDCh" style="text-align: center; margin-left: auto; margin-right: auto;">Hora Actual en Valladolid</div>
+	<div class="DPDCt" style="text-align: center; margin-left: auto; margin-right: auto;">
+		<span class="DPDCth">6</span><span class="DPDCtm">45</span><span class="DPDCts">46</span><span class="DPDCt12">pm</span>
+	</div>
+	<div class="DPDCd" style="text-align: center; margin-left: auto; margin-right: auto;">
+		<span class="DPDCdt">sáb, 27 de diciembre</span><span class="DPDCtn" style=""><i></i></span>
+	</div>
+	
+	<div class="DPDCs" style="text-align: center; margin-left: auto; margin-right: auto; display: block;">
+		<span class="DPDCsr">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M12,4L7.8,8.2l1.4,1.4c0,0,0.9-0.9,1.8-1.8V14h2c0,0,0-3.3,0-6.2l1.8,1.8l1.4-1.4L12,4z"></path><path d="M6.8,15.3L5,13.5l-1.4,1.4l1.8,1.8L6.8,15.3z M4,21H1v2h3V21z M20.5,14.9L19,13.5l-1.8,1.8l1.4,1.4L20.5,14.9z M20,21v2h3 v-2H20z M6.1,23C6,22.7,6,22.3,6,22c0-3.3,2.7-6,6-6s6,2.7,6,6c0,0.3,0,0.7-0.1,1H6.1z"></path></svg>8:44<sup style="display: inline;">am</sup>
+		</span>
+		<span class="DPDCsl">09:10</span>
+		<span class="DPDCss">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M12,14L7.8,9.8l1.4-1.4c0,0,0.9,0.9,1.8,1.8V4h2c0,0,0,3.3,0,6.2l1.8-1.8l1.4,1.4L12,14z"></path><path d="M6.8,15.3L5,13.5l-1.4,1.4l1.8,1.8L6.8,15.3z M4,21H1v2h3V21z M20.5,14.9L19,13.5l-1.8,1.8l1.4,1.4L20.5,14.9z M20,21v2h3 v-2H20z M6.1,23C6,22.7,6,22.3,6,22c0-3.3,2.7-6,6-6s6,2.7,6,6c0,0.3,0,0.7-0.1,1H6.1z"></path></svg>5:54<sup style="display: inline;">pm</sup>
+		</span>
+	</div>
+	<script>
+		var s, t; s = document.createElement("script"); s.type = "text/javascript";
+		s.src = "//cdn.dayspedia.com/js/dwidget.min.vc84b5f7d.js";
+		t = document.getElementsByTagName('script')[0]; t.parentNode.insertBefore(s, t);
+		s.onload = function() {
+			window.dwidget = new window.DigitClock();
+			window.dwidget.init("dayspedia_widget_5279723ae43ec6d2");
+		};
+	</script>
+	<!--/DPDC-->
+	</div><!--Dayspedia.com widget ENDS-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h1><i class='far fa-compass' style='font-size:px;color:rgb(42, 24, 177)'></i> Panel de Servicios Web </h1>
+  <p>Acceso rápido a mis plataformas</p>
+</header>
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Buscar servicio...">
+  <button id="toggleTheme"><i style='font-size:24px' class='fas'>&#xf002;</i></button>
+</div>
+
+<main id="services">
+
+<section>
+<h2>📧 Correo Web</h2>
+<ul>
+  <li style="margin:5px 0;"><a href="https://mail.google.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf1a0;</i> Gmail</a></li>
+  <li style="margin:5px 0;"><a href="https://es.yahoo.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf19e;</i> Yahoo</a></li>
+  <li style="margin:5px 0;"><a href="https://outlook.live.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf17a;</i>Hotmail</a></li>
+</ul>
+</section>
+
+<section>
+<h2>☁️ Almacenamiento</h2>
+<ul>
+  <li style="margin:5px 0;"><a href="https://drive.google.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf3aa;</i> Google Drive</a></li>
+  <li style="margin:5px 0;"><a href="https://mega.nz/" target="_blank"><i style='font-size:24px' class='fas'>&#xf381;</i> MEGA</a></li>
+  <li style="margin:5px 0;"><a href="https://onedrive.live.com/" target="_blank"><i style='font-size:24px' class='fab'>&#xf17a;</i> One Drive</a></li>
+</ul>
+</section>
+
+<!-- Incluimos Font Awesome para los iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-pVjF1k5a1Bv3uXkpJ6k7TtJxq5GdGnh/0D4g+Zd1TTcR1p/cUfXg2R6b5hwc3mPQPRYJ+fZ1gh0qEOZ+oxF0Zg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<section style="width:200px; font-family:Arial, sans-serif;">
+  <h2 onclick="toggleCompras()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
+    🛒 Compras <span id="arrowCompras">▼</span>
+  </h2>
+  <ul id="comprasMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
+    <li style="margin:5px 0;">
+      <a href="https://www.amazon.es/" target="_blank" style="text-decoration:none; color:#ff9900; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fab fa-amazon"></i> Amazon
+      </a>
+    </li>
+    <li style="margin:5px 0;">
+      <a href="https://www.aliexpress.com/" target="_blank" style="text-decoration:none; color:#ff5000; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fas fa-shopping-bag"></i> AliExpress
+      </a>
+    </li>
+    <li style="margin:5px 0;">
+      <a href="https://www.temu.com/" target="_blank" style="text-decoration:none; color:#ff3333; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fas fa-box-open"></i> Temu
+      </a>
+    </li>
+  </ul>
+</section>
+
+<script>
+  function toggleCompras() {
+    const menu = document.getElementById('comprasMenu');
+    const arrow = document.getElementById('arrowCompras');
+    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+      menu.style.maxHeight = '0';
+      arrow.textContent = '▼';
+    } else {
+      menu.style.maxHeight = menu.scrollHeight + 'px';
+      arrow.textContent = '▲';
+    }
+  }
+</script>
+
+
+<!-- Incluimos Font Awesome para los iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-pVjF1k5a1Bv3uXkpJ6k7TtJxq5GdGnh/0D4g+Zd1TTcR1p/cUfXg2R6b5hwc3mPQPRYJ+fZ1gh0qEOZ+oxF0Zg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<section style="width:200px; font-family:Arial, sans-serif;">
+  <h2 onclick="toggleGames()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
+    🎮 Videojuegos <span id="arrowGames">▼</span>
+  </h2>
+  <ul id="gamesMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
+    <li style="margin:5px 0;">
+      <a href="https://www.playstation.com/" target="_blank" style="text-decoration:none; color:#003791; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fab fa-playstation"></i> PlayStation
+      </a>
+    </li>
+    <li style="margin:5px 0;">
+      <a href="https://www.xbox.com/" target="_blank" style="text-decoration:none; color:#107C10; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fab fa-xbox"></i> Xbox
+      </a>
+    </li>
+    <li style="margin:5px 0;">
+      <a href="https://www.nintendo.com/" target="_blank" style="text-decoration:none; color:#e60012; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fas fa-gamepad"></i> Nintendo
+      </a>
+    </li>
+  </ul>
+</section>
+
+<script>
+  function toggleGames() {
+    const menu = document.getElementById('gamesMenu');
+    const arrow = document.getElementById('arrowGames');
+    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+      menu.style.maxHeight = '0';
+      arrow.textContent = '▼';
+    } else {
+      menu.style.maxHeight = menu.scrollHeight + 'px';
+      arrow.textContent = '▲';
+    }
+  }
+</script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-pVjF1k5a1Bv3uXkpJ6k7TtJxq5GdGnh/0D4g+Zd1TTcR1p/cUfXg2R6b5hwc3mPQPRYJ+fZ1gh0qEOZ+oxF0Zg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<section style="width:200px; font-family:Arial, sans-serif;">
+  <h2 onclick="toggleMenu()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
+    📱 Redes & Streaming <span id="arrow">▼</span>
+  </h2>
+  <ul id="redesMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
+    <li style="margin:5px 0;">
+      <a href="https://www.facebook.com/" target="_blank" style="text-decoration:none; color:#3b5998; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fab fa-facebook-f"></i> Facebook
+      </a>
+    </li>
+    <li style="margin:5px 0;">
+      <a href="https://twitter.com/" target="_blank" style="text-decoration:none; color:#1da1f2; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fab fa-twitter"></i> Twitter
+      </a>
+    </li>
+    <li style="margin:5px 0;">
+      <a href="https://www.twitch.tv/" target="_blank" style="text-decoration:none; color:#9146ff; display:flex; align-items:center; gap:8px;">
+        <i style='font-size:24px' class="fab fa-twitch"></i> Twitch
+      </a>
+    </li>
+  </ul>
+</section>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('redesMenu');
+    const arrow = document.getElementById('arrow');
+    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+      menu.style.maxHeight = '0';
+      arrow.textContent = '▼';
+    } else {
+      menu.style.maxHeight = menu.scrollHeight + 'px';
+      arrow.textContent = '▲';
+    }
+  }
+</script>
+
+
+<section  style="width: 250px; font-family:Arial, sans-serif;">
+<h2>🏦 Banca</h2>
+<ul>
+  <li style="margin:5px 0;"><a href="https://www.openbank.es/" target="_blank"><i style="font-size:24px" class="fa">&#xf19c;</i> OpenBank</a></li>
+  <li style="margin:5px 0;"><a href="https://www.paypal.com/" target="_blank"><i style='font-size:24px' class='far'>&#xf09d;</i> PayPal</a></li>
+  <li style="margin:5px 0;"><a href="https://www.bbva.es/" target="_blank"><i style='font-size:24px' class='fas'>&#xf4d3;</i> BBVA</a></li>
+</ul>
+</section>
+
+<section  style="width:260px; font-family:Arial, sans-serif;">
+<h2>💼 Empleo</h2>
+<ul>
+  <li style="margin:5px 0;"><a href="https://empleocastillayleon.jcyl.es/oficinavirtual/index.do" target="_blank"><i class='far fa-address-card' style='font-size:24px;color:rgb(45, 150, 96)'></i> ECYL</a></li>
+  <li style="margin:5px 0;"><a href="https://www.linkedin.com/" target="_blank"><i class='fab fa-linkedin' style='font-size:24px;color:rgb(81, 41, 192)'></i> LinkedIn</a></li>
+  <li style="margin:5px 0;"><a href="https://www.uva.es/" target="_blank"><i class='fas fa-university' style='font-size:24px;color:rgb(166, 64, 150)'></i>UVA</a></li>
+  <li style="margin:5px 0;"><a href="https://www.ubu.es/" target="_blank"><i class='fas fa-university' style='font-size:24px;color:red'></i>UBU</a></li>
+  <li style="margin:5px 0;"><a href="https://www.diputaciondevalladolid.es/" target="_blank"><i class='far fa-address-card' style='font-size:24px;color:rgb(125, 164, 33)'></i>Diputación Valladolid</a></li>
+</ul>
+</section>
+
+<section  style="width:270px; font-family:Arial, sans-serif;">
+<h2>🎮 Videojuegos y aficiones</h2>
+<ul>
+  <li style="margin:5px 0;"><a href="https://www.printables.com/" target="_blank">👿 Printables</a></li>
+  <li style="margin:5px 0;"><a href="https://www.youtube.com/" target="_blank">📹 YouTube</a></li>
+  <li style="margin:5px 0;"><a href="https://www.gog.com/" target="_blank">🎮 GOG</a></li>
+  <li style="margin:5px 0;"><a href="https://store.steampowered.com/" target="_blank">🎮 Steam</a></li>
+  <li style="margin:5px 0;"><a href="https://scratch.mit.edu/" target="_blank">😺Scratch</a></li>
+  <li style="margin:5px 0;"><a href="https://www.canva.com/" target="_blank">✏️Canva</a></li>
+  <li style="margin:5px 0;"><a href="musica.html" target="_blank">🎵 Músisa 007</a></li>
+  <li style="margin:5px 0;"><a href="reproductor.html" target="_blank">🎵 Músisa Julio Iglesias</a></li>
+  <li style="margin:5px 0;"><a href="https://antonio2709.synology.me/pc.html#gsc.tab=0" target="_blank">🌐 Web NAS Juanjo</a></li>
+ 
+   
+</ul>
+</section>
+
+
+<section  style="width:270px; font-family:Arial, sans-serif;">
+  <button class="media-title">📻 Radio & TV</button>
+  <ul class="media-list">
+    <li style="margin:5px 0;"><a href="https://emisora.org.es/#onda-cero" target="_blank">🎙 Onda Cero</a></li>
+    <li style="margin:5px 0;"><a href="https://emisora.org.es/#cope" target="_blank">📡 COPE</a></li>
+    <li style="margin:5px 0;"><a href="https://emisora.org.es/#40-principales" target="_blank">🎶 Los 40</a></li>
+    <li style="margin:5px 0;"><a href="https://emisora.org.es/#cadena-dial" target="_blank">📻 Cadena Dial</a></li>
+    <li style="margin: 5px 0 ;">-----------Canales TDT--------- </li>
+    <li style="margin:5px 0;"><a href="https://www.rtve.es/play/videos/directo/canales-lineales/la-1/" target="_blank">📺 La 1 TVE</a></li>
+    <li style="margin:5px 0;"><a href="https://www.rtve.es/play/videos/directo/canales-lineales/la-2/" target="_blank">📺 La 2 TVE</a></li>
+    <li style="margin:5px 0;"><a href="https://www.atresplayer.com/directos/antena3/" target="_blank">📺 Antena 3</a></li>
+    <li style="margin:5px 0;"><a href="https://www.cuatro.com/en-directo/" target="_blank">📺 Cuatro</a></li>
+    <li style="margin:5px 0;"><a href="https://www.mitele.es/directo/telecinco/" target="_blank">📺 Telecinco</a></li>
+    <li style="margin:5px 0;"><a href="https://www.atresplayer.com/directos/lasexta/" target="_blank">📺 La Sexta</a></li>
+    
+  
+  </ul>
+</section>
+
+<section  style="width:270px; font-family:Arial, sans-serif; height: 300px; overflow-y: auto;">
+  <button class="media-title">📺 Streaming</button>
+  <ul class="media-list">
+    <li style="margin:5px 0;"><a href="https://www.netflix.com/es/">🎬 Netflix</a></li>
+    <li style="margin:5px 0;"><a href="https://www.primevideo.com/">📽 Prime Video</a></li>
+    <li style="margin:5px 0;"><a href="https://www.hbomax.com/">🎞 HBO Max</a></li>
+     <li style="margin:5px 0;"><a href="https://www.disneyplus.com/es-es">🐭 Disney +</a></li>
+  </ul>
+</section>
+
+
+<section  style="width:270px; font-family:Arial, sans-serif; height: 300px; overflow-y: auto;">
+  <button class="media-title">📺 Fotografia& Diseño</button>
+  <ul class="media-list">
+    <li style="margin:5px 0;"><a href="https://photos.google.com/">🟦 Google Photos</a></li>
+    <li style="margin:5px 0;"><a href="https://www.amazon.es/b?node=12364776031&ref_=nav_em__acd_prime_0_2_4_2">🟩Amazon Photos</a></li>
+    <li style="margin:5px 0;"><a href="https://es.pinterest.com/">🟥 Pinterest</a></li>
+  </ul>
+</section>
+
+
+
+
+
+
+</main>
+<footer class="site-footer">
+  <div class="footer-content">
+    <p>© 2025 Alfonso Rubio — Todos los derechos reservados</p>
+
+    <div class="social-icons">
+      <a href="https://www.facebook.com/AlfonsoRubioRioseras" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://x.com/alfrubrio" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://www.youtube.com/@AlfonsoRubioRioseras" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.tiktok.com/@alfonsorubio007" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.linkedin.com/in/alfonsorubiorioseras/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      
+    </div>
+  </div>
+  <p>Musica by Spotify</p>
+  <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2Y96ztQ2K4246vZYMJd9Or?utm_source=generator" width="300" height="240" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+   <p>Información meteorológica</p>
+   <div id="tiempo" style="position: center">
+    <iframe
+  src="https://api.wo-cloud.com/content/widget/?geoObjectKey=15557284&language=es&region=ES&timeFormat=HH:mm&windUnit=kmh&systemOfMeasurement=metric&temperatureUnit=celsius"
+  name="CW2"
+  scrolling="no"
+  width="290"
+  height="318"
+  frameborder="0"
+  style="border: 1px solid #10658E; border-radius: 8px;">
+</iframe>
+
+<!-- Elfsight Visitor Counter | Untitled Visitor Counter -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-f0dd5049-5b47-44da-a659-2caa35193356" data-elfsight-app-lazy style="position:absolute; top:1600px; left:300px">Contador de Visitas</div>
+
+<div id="horoscopo"></div>
+<p align="center">Horóscopo Diario Gratis</p>
+<iframe style="min-width:70%; min-height: 120px;" 
+    src="https://mydailyhoroscope.org/widget.php?bc=000000&fc=FFFF33" 
+    width="100%" frameborder="0" scrolling="no"></iframe> 
+<script type="text/javascript" src="https://mydailyhoroscope.org/js/iframeResizer.js"></script>
+
+
+
+
+
+</footer>
+
+
+
+<script src="script.js"></script>
+<script>
+  const titles = document.querySelectorAll(".media-title");
+
+  titles.forEach(title => {
+    title.addEventListener("click", () => {
+      const currentList = title.nextElementSibling;
+
+      document.querySelectorAll(".media-list").forEach(list => {
+        if (list !== currentList) {
+          list.style.maxHeight = null;
+        }
+      });
+
+      if (currentList.style.maxHeight) {
+        currentList.style.maxHeight = null;
+      } else {
+        currentList.style.maxHeight = currentList.scrollHeight + "px";
+      }
+    });
+  });
+</script>
+
+
+</body>
+</html>

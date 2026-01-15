@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legend DJ Player</title>
+
+<style>
+body{margin:0;font-family:Segoe UI;background:#0c0c0c;color:white;transition:.4s}
+body.light{background:#f4f4f4;color:#111}
+header{text-align:center;padding:30px}
+#app{max-width:1000px;margin:auto;padding-bottom:140px}
+.track{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);
+margin:10px;padding:12px;border-radius:12px;cursor:pointer}
+.track:hover{background:rgba(255,255,255,.12)}
+.cover{width:60px;height:60px;border-radius:10px;object-fit:cover}
+#player{position:fixed;bottom:0;left:0;right:0;background:#181818;
+padding:15px;display:flex;align-items:center;gap:15px}
+body.light #player{background:#ddd}
+#progress{height:6px;background:#333;border-radius:5px;overflow:hidden;cursor:pointer}
+#bar{height:100%;width:0;background:linear-gradient(90deg,lime,cyan)}
+canvas{height:50px;width:220px}
+.toggle{position:fixed;top:15px;right:15px;padding:8px 12px;border-radius:8px;
+background:#333;color:white;border:none;cursor:pointer}
+body.light .toggle{background:#ddd;color:#000}
+</style>
+</head>
+
+<body>
+
+<button class="toggle" onclick="toggleTheme()">🌙 / ☀️</button>
+
+<header>
+<h1>🎧 Legend DJ Player</h1>
+<p>Reproductor inteligente con alma de DJ</p>
+</header>
+
+<div id="app"></div>
+
+<div id="player">
+<img id="currentCover" class="cover">
+<div style="flex:1">
+<div id="currentTitle">Selecciona una canción</div>
+<div id="progress"><div id="bar"></div></div>
+</div>
+<canvas id="visual"></canvas>
+<audio id="audio" controls></audio>
+</div>
+
+<script>
+const songs=[
+["A flor de piel","musica/pista1.mp3","covers/front.jpg"],
+["Vivir","musica/pista2.mp3","covers/front.jpg"],
+["Dicen","musica/pista3.mp3","covers/front.jpg"],
+["Manuela","musica/pista4.mp3","covers/front.jpg"],
+["Un adiós a media luz","musica/pista5.mp3","covers/front.jpg"],
+["Te quiero así","musica/pista6.mp3","covers/front.jpg"],
+["Por el amor de una mujer","musica/pista7.mp3","covers/front.jpg"],
+["Desde que tú te has ido","musica/pista8.mp3","covers/front.jpg"],
+["Aún me queda la esperanza","musica/pista9.mp3","covers/front.jpg"],
+["En cualquier parte","musica/pista10.mp3","covers/front.jpg"]
+];
+
+const app=document.getElementById("app");
+const audio=document.getElementById("audio");
+const bar=document.getElementById("bar");
+const title=document.getElementById("currentTitle");
+const cover=document.getElementById("currentCover");
+const progress=document.getElementById("progress");
+
+let stats=JSON.parse(localStorage.getItem("stats")||"{}");
+
+function playSong(s){
+ audio.src=s[1];
+ title.textContent=s[0];
+ cover.src=s[2];
+ audio.play();
+ localStorage.setItem("lastSong",JSON.stringify(s));
+ stats[s[0]]=(stats[s[0]]||0)+1;
+ localStorage.setItem("stats",JSON.stringify(stats));
+}
+
+songs.forEach(s=>{
+ let d=document.createElement("div");
+ d.className="track";
+ d.innerHTML=`<img src="${s[2]}" class="cover"><div>${s[0]}</div>`;
+ d.onclick=()=>playSong(s);
+ app.appendChild(d);
+});
+
+audio.ontimeupdate=()=>{
+ bar.style.width=(audio.currentTime/audio.duration*100||0)+"%";
+};
+
+progress.onclick=(e)=>{
+ audio.currentTime=(e.offsetX/progress.offsetWidth)*audio.duration;
+};
+
+audio.onended=()=>autoDJ();
+
+function autoDJ(){
+ let hour=new Date().getHours();
+ let weighted=songs.map(s=>{
+    let w=(stats[s[0]]||1);
+    if(hour<12) w*=1.2;
+    if(hour>20) w*=1.4;
+    return {s,w};
+ });
+
+ if(Math.random()<0.25){
+    playSong(songs[Math.floor(Math.random()*songs.length)]);
+    return;
+ }
+
+ let total=weighted.reduce((a,b)=>a+b.w,0);
+ let r=Math.random()*total;
+ for(let x of weighted){
+    if((r-=x.w)<=0){playSong(x.s);return;}
+ }
+}
+
+function toggleTheme(){
+ document.body.classList.toggle("light");
+ localStorage.setItem("theme",document.body.className);
+}
+if(localStorage.getItem("theme")) document.body.className=localStorage.getItem("theme");
+
+const last=localStorage.getItem("lastSong");
+if(last) playSong(JSON.parse(last));
+
+const ctx=document.getElementById("visual").getContext("2d");
+let audioCtx, analyser, src;
+
+function initAudioContext(){
+ if(!audioCtx){
+    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    src=audioCtx.createMediaElementSource(audio);
+    analyser=audioCtx.createAnalyser();
+    src.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    analyser.fftSize=64;
+ }
+}
+
+audio.addEventListener("play",initAudioContext);
+
+const data=new Uint8Array(32);
+
+function draw(){
+ requestAnimationFrame(draw);
+ if(!analyser) return;
+ analyser.getByteFrequencyData(data);
+ ctx.clearRect(0,0,220,50);
+ data.forEach((v,i)=>{
+  ctx.fillStyle="lime";
+  ctx.fillRect(i*6,50-v/3,4,v/3);
+ });
+}
+draw();
+</script>
+
+</body>
+</html>

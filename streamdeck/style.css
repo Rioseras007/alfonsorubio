@@ -1,0 +1,129 @@
+body {
+  background: #4431aa;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  padding-top: 50px;
+  gap: 30px;
+ 
+   background: url("textura.jpg")  ; 
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin: 0;
+      height: 100vh;
+
+
+
+
+
+
+
+}
+
+.deck {
+  display: grid;
+  grid-template-columns: repeat(4, 90px);
+  gap: 15px;
+  background: #95aadc;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px #00aaff55;
+}
+
+.btn {
+  width: 90px;
+  height: 90px;
+  background: #232524;
+  border-radius: 14px;
+  box-shadow: 0 0 15px #00aaff44;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.btn:hover {
+  box-shadow: 0 0 25px #00ff4ccc;
+}
+
+.btn:active {
+  transform: scale(0.92);
+  box-shadow: 0 0 10px #00aaff;
+}
+
+.btn span {
+  font-size: 11px;
+  margin-top: 6px;
+  color: #921dc5;
+}
+
+.config {
+  background: #a2b0cf;
+  padding: 20px;
+  border-radius: 15px;
+  color: white;
+  box-shadow: 0 0 20px #00aaff44;
+  width: 230px;
+}
+
+.config input, .config button {
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+}
+
+.profiles {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.profiles select, .profiles button {
+  background: #02060f;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00aaff55;
+}
+.hidden { display: none; }
+
+.emoji-picker button {
+  background:#08ad45;
+  color:white;
+  border:none;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+#emojiPanel button {
+  background:#b59bf3;
+  color:white;
+  border:none;
+  border-radius:4px;
+  cursor:pointer;
+  padding:4px;
+  font-size:18px;
+  width: 50px;
+}
+
+
+
+hr.style1{
+	border-top: 15px solid #6330ca;
+}
+
+.hidden {
+  display: none;
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karaoke - Julio Iglesias</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 30px 20px;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 24px;
+            font-size: 1.8rem;
+        }
+
+        .videos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .video-wrapper {
+            flex: 1 1 260px;
+            max-width: 280px;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        video:focus-visible {
+            outline: 3px solid #ffd166;
+            outline-offset: 3px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Julio Iglesias Karaoke</h1>
+
+        <p class="sr-only">
+            Página con varios vídeos de karaoke de Julio Iglesias con controles estándar del navegador.
+        </p>
+
+        <div class="videos">
+            <div class="video-wrapper">
+                <video controls preload="metadata">
+                    <source src="videos/video1.mp4" type="video/mp4">
+                    Tu navegador no admite la etiqueta de vídeo.
+                </video>
+            </div>
+
+            <div class="video-wrapper">
+                <video controls preload="metadata">
+                    <source src="videos/video2.mp4" type="video/mp4">
+                    Tu navegador no admite la etiqueta de vídeo.
+                </video>
+            </div>
+
+            <div class="video-wrapper">
+                <video controls preload="metadata">
+                    <source src="videos/video3.mp4" type="video/mp4">
+                    Tu navegador no admite la etiqueta de vídeo.
+                </video>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

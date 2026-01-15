@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Calendario Mensual de Eventos Importantes</title>
+
+<style>
+body{
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    font-family: 'Segoe UI',sans-serif;
+    color:white;
+    margin:0;
+    padding:20px;
+}
+
+h1{text-align:center;}
+
+.calendar{
+    max-width:900px;
+    margin:auto;
+    background: rgba(255,255,255,0.08);
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 0 30px rgba(0,0,0,0.5);
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+button{
+    background:#00c6ff;
+    border:none;
+    border-radius:8px;
+    padding:8px 14px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.month{font-size:1.5em;}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+}
+
+.name{
+    background:rgba(255,255,255,0.15);
+    border-radius:10px;
+    padding:8px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.day{
+    background:rgba(255,255,255,0.12);
+    border-radius:10px;
+    padding:10px;
+    cursor:pointer;
+    min-height:90px;
+    transition:0.2s;
+}
+
+.day:hover{background:rgba(0,198,255,0.3);}
+
+.sunday{color:#ff4d4d;font-weight:bold;}
+
+.today{
+    border:2px solid #00e5ff;
+    box-shadow:0 0 10px #00e5ff;
+}
+
+.note{font-size:0.75em;margin-top:4px;}
+
+.tag-birthday{color:#ffd700;}
+.tag-fortnite{color:#00ffea;}
+.tag-task{color:white;}
+.tag-make{color:#ff8c00;}
+.tag-modelo{color:#ff4500;}
+
+.bg-birthday{background:rgba(255,215,0,0.25);}
+.bg-fortnite{background:rgba(0,255,234,0.25);}
+.bg-task{background:rgba(255,255,255,0.18);}
+.bg-make{background:rgba(255,140,0,0.25);}
+.bg-modelo{background:rgba(255,69,0,0.25);}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.7);
+    display:none;
+    align-items:center;
+    justify-content:center;
+}
+
+.box{
+    background:#1c1c1c;
+    padding:20px;
+    border-radius:15px;
+    width:300px;
+}
+select,textarea{
+    width:100%;
+    margin-top:10px;
+    border-radius:8px;
+    padding:8px;
+    border:none;
+}
+
+.victory{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,0.7);
+    z-index:999;
+}
+
+.victory h1{
+    font-size:3em;
+    color:#00ffea;
+    animation:pulse 0.6s infinite alternate;
+}
+
+@keyframes pulse{
+    from{transform:scale(1);}
+    to{transform:scale(1.15);}
+}
+
+.note-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:5px;
+    background:rgba(255,255,255,0.1);
+    padding:4px 6px;
+    border-radius:6px;
+    font-size:0.8em;
+}
+.note-item button{
+    background:red;
+    color:white;
+    border:none;
+    border-radius:4px;
+    padding:2px 5px;
+    cursor:pointer;
+}
+
+</style>
+</head>
+<body>
+
+<div class="victory" id="victory">
+    <h1>🏆 VICTORIA ROYALE TOMA TOMA TOMA 🏆</h1>
+</div>
+
+<h1>📅 Calendario Mensual de Eventos a Recordar</h1>
+
+<div id="stats" style="text-align:center;margin-bottom:12px;font-weight:bold;"></div>
+
+<div class="calendar">
+    <div class="header">
+        <button onclick="changeMonth(-1)">◀</button>
+        <div class="month" id="month"></div>
+        <button onclick="changeMonth(1)">▶</button>
+    </div>
+    <div class="grid" id="grid"></div>
+</div>
+
+<div class="modal" id="modal">
+    <div class="box">
+        <h2 id="selectedDate"></h2>
+        <div id="existingNotes"></div>
+        <select id="type">
+            <option value="birthday">🎂 Cumpleaños</option>
+            <option value="fortnite">🏆 Victoria Fortnite</option>
+            <option value="task">📝 Tarea</option>
+            <option value="make">🟧 Make publicado</option>
+            <option value="modelo">🟠 Modelo publicado</option>
+        </select>
+        <textarea id="text" rows="4" placeholder="Escribe tu nota..."></textarea>
+        <div style="margin-top:10px; display:flex; justify-content:space-between;">
+            <button onclick="saveNote()">Guardar</button>
+            <button onclick="closeModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let date = new Date();
+let notes = JSON.parse(localStorage.getItem("calendarNotes")) || {};
+let currentDay="";
+
+function render(){
+    const monthNames=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+    document.getElementById("month").innerText = monthNames[date.getMonth()]+" "+date.getFullYear();
+
+    let grid=document.getElementById("grid");
+    grid.innerHTML="";
+
+    ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"].forEach(n=>{
+        let d=document.createElement("div");
+        d.className="name";
+        d.innerText=n;
+        grid.appendChild(d);
+    });
+
+    let first=new Date(date.getFullYear(),date.getMonth(),1).getDay();
+    first=first==0?6:first-1;
+    for(let i=0;i<first;i++) grid.appendChild(document.createElement("div"));
+
+    let days=new Date(date.getFullYear(),date.getMonth()+1,0).getDate();
+
+    for(let i=1;i<=days;i++){
+        let cell=document.createElement("div");
+        cell.className="day";
+
+        let dow=new Date(date.getFullYear(),date.getMonth(),i).getDay();
+        if(dow===0) cell.classList.add("sunday");
+
+        let today=new Date();
+        if(i===today.getDate() && date.getMonth()===today.getMonth() && date.getFullYear()===today.getFullYear())
+            cell.classList.add("today");
+
+        cell.innerHTML=i;
+
+        let key=`${date.getFullYear()}-${date.getMonth()}-${i}`;
+        if(notes[key]){
+            notes[key].forEach(n=>{
+                let tag=document.createElement("div");
+                tag.className="note tag-"+n.type+" bg-"+n.type;
+                tag.innerText=(n.type=="birthday"?"🎂 ":(n.type=="fortnite"?"🏆 ":"📝 ")) + n.text;
+                cell.appendChild(tag);
+            });
+        }
+
+        cell.onclick=()=>openModal(i);
+        grid.appendChild(cell);
+    }
+
+    let count=0;
+    for(let key in notes){
+        let [y,m]=key.split("-");
+        if(y==date.getFullYear() && m==date.getMonth()){
+            notes[key].forEach(n=>{ if(n.type=="fortnite") count++; });
+        }
+    }
+    document.getElementById("stats").innerText="🏆 Victorias Fortnite este mes: "+count;
+}
+
+function changeMonth(m){ date.setMonth(date.getMonth()+m); render(); }
+
+function openModal(day){
+    currentDay=`${date.getFullYear()}-${date.getMonth()}-${day}`;
+    document.getElementById("selectedDate").innerText=currentDay;
+    let existing = document.getElementById("existingNotes");
+    existing.innerHTML = "";
+
+    if(notes[currentDay]){
+        notes[currentDay].forEach((n,i)=>{
+            let div = document.createElement("div");
+            div.className = "note-item";
+            div.innerText = (n.type=="birthday"?"🎂":n.type=="fortnite"?"🏆":n.type=="task"?"📝":n.type=="make"?"🟧":"🟠") + " " + n.text;
+            
+            let btn = document.createElement("button");
+            btn.innerText = "🗑";
+            btn.onclick = ()=>{
+                notes[currentDay].splice(i,1);
+                if(notes[currentDay].length === 0) delete notes[currentDay];
+                localStorage.setItem("calendarNotes", JSON.stringify(notes));
+                openModal(day); // recarga el modal para actualizar la lista
+                render(); // actualiza el calendario
+            };
+            
+            div.appendChild(btn);
+            existing.appendChild(div);
+        });
+    }
+
+    document.getElementById("text").value = "";
+    document.getElementById("modal").style.display = "flex";
+}
+
+function saveNote(){
+    let type = document.getElementById("type").value;
+    let text = document.getElementById("text").value.trim(); // eliminamos espacios
+
+    if(!text) return alert("Debes escribir algo antes de guardar.");
+
+    if(!notes[currentDay]) notes[currentDay] = [];
+    notes[currentDay].push({type,text});
+    localStorage.setItem("calendarNotes", JSON.stringify(notes));
+
+    document.getElementById("modal").style.display = "none";
+    document.getElementById("text").value = "";
+
+    if(type=="fortnite"){
+        let v = document.getElementById("victory");
+        v.style.display = "flex";
+        setTimeout(()=>v.style.display="none",1500);
+    }
+
+    render();
+}
+
+function closeModal(){
+    document.getElementById("modal").style.display = "none";
+    document.getElementById("text").value = "";
+}
+
+render();
+</script>
+
+<footer style="text-align:center; margin-top:20px; font-size:0.85em; color:rgba(255,255,255,0.6);">
+    <div style="margin-bottom:8px;">
+        <button onclick="window.location.href='../index.html'" style="margin:0 5px; padding:6px 12px;">🏠 Home</button>
+        <button onclick="window.location.href='../streamdeck/index.html'" style="margin:0 5px; padding:6px 12px;">🎮 Stream Deck Virtual</button>
+        <button onclick="window.location.href='../musica.html'" style="margin:0 5px; padding:6px 12px;">🎵 Musica 007</button>
+    </div>
+    © 2026 Calendario Creativo by Alfonso Rubio & ChatGPT – Hecho con ❤️
+</footer>
+
+</body>
+</html>

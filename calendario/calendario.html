@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Calendario Mensual Online">
+<link rel="icon" href="styles/favicon.ico" type="image/x-icon"> <!-- Favicon -->
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://apis.google.com/js/platform.js"></script>
+<script async src="https://cse.google.com/cse.js?cx=123456"></script>
+<title>Calendario Mensual Épico</title>
+
+<style>
+body{
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    font-family: 'Segoe UI',sans-serif;
+    color:white;
+    margin:0;
+    padding:20px;
+}
+
+h1{text-align:center;}
+
+.calendar{
+    max-width:900px;
+    margin:auto;
+    background: rgba(255,255,255,0.08);
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 0 30px rgba(0,0,0,0.5);
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+button{
+    background:#00c6ff;
+    border:none;
+    border-radius:8px;
+    padding:8px 14px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.month{font-size:1.5em;}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+}
+
+.name{
+    background:rgba(255,255,255,0.15);
+    border-radius:10px;
+    padding:8px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.day{
+    background:rgba(255,255,255,0.12);
+    border-radius:10px;
+    padding:10px;
+    cursor:pointer;
+    min-height:90px;
+    max-height:140px;
+    overflow-y:auto;
+    position:relative;
+    transition:0.2s;
+}
+
+.day:hover{background:rgba(0,198,255,0.3);}
+
+.sunday{color:#ff4d4d;font-weight:bold;}
+
+.today{
+    border:2px solid #00e5ff;
+    box-shadow:0 0 10px #00e5ff;
+}
+
+.note{
+    font-size:0.75em;
+    margin-top:4px;
+    border-radius:4px;
+    padding:2px 4px;
+    opacity:0;
+    animation:fadeIn 0.4s forwards;
+    position:relative;
+}
+
+@keyframes fadeIn{
+    to {opacity:1;}
+}
+
+/* Tooltip para notas */
+.note:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75em;
+    white-space: pre-wrap;
+    max-width: 200px;
+    z-index: 1000;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.note:hover::after {
+    opacity: 1;
+}
+
+.tag-birthday{color:#ffd700; background:rgba(255,215,0,0.3);}
+.tag-fortnite{color:#00ffea; background:rgba(0,255,234,0.3);}
+.tag-task{color:white; background:rgba(255,255,255,0.2);}
+.tag-make{color:#ff8c00; background:rgba(255,140,0,0.3);}
+.tag-modelo{color:#ff4500; background:rgba(255,69,0,0.3);}
+.tag-cita{color:#32CD32; background:rgba(50,205,50,0.25);}
+.tag-itv{color:#1E90FF; background:rgba(30,144,255,0.25);}
+.tag-email{color:#9370DB; background:rgba(147,112,219,0.25);}
+.tag-reunion{color:#20B2AA; background:rgba(32,178,170,0.25);}
+.tag-gimnasio{color:#FF69B4; background:rgba(255,105,180,0.25);}
+.tag-cumple-amigos{color:#FFFF00; background:rgba(255,255,0,0.25);}
+.tag-cumple-mascota{color:#A0522D; background:rgba(160,82,45,0.25);}
+.tag-pago{color:#FF6347; background:rgba(255,99,71,0.25);}
+.tag-viaje{color:#87CEFA; background:rgba(135,206,250,0.25);}
+.tag-aniversario{color:#FF1493; background:rgba(255,20,147,0.25);}
+.tag-recordatorio{color:#B0C4DE; background:rgba(176,196,222,0.25);}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.7);
+    display:none;
+    align-items:center;
+    justify-content:center;
+}
+
+.box{
+    background:#1c1c1c;
+    padding:20px;
+    border-radius:15px;
+    width:320px;
+}
+select,textarea,input{
+    width:100%;
+    margin-top:10px;
+    border-radius:8px;
+    padding:8px;
+    border:none;
+}
+
+.victory{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,0.7);
+    z-index:999;
+}
+
+.victory h1{
+    font-size:3em;
+    color:#00ffea;
+    animation:pulse 0.6s infinite alternate;
+}
+
+@keyframes pulse{
+    from{transform:scale(1);}
+    to{transform:scale(1.15);}
+}
+
+.note-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:5px;
+    background:rgba(255,255,255,0.1);
+    padding:4px 6px;
+    border-radius:6px;
+    font-size:0.8em;
+}
+.note-item button{
+    background:red;
+    color:white;
+    border:none;
+    border-radius:4px;
+    padding:2px 5px;
+    cursor:pointer;
+}
+
+.more-notes{
+    font-size:0.7em;
+    color:#ccc;
+    text-align:center;
+    margin-top:2px;
+}
+
+#emailFields{display:none; margin-top:10px;}
+</style>
+</head>
+<body>
+
+<div class="victory" id="victory">
+    <h1>🏆 VICTORIA ROYALE TOMA TOMA TOMA 🏆</h1>
+</div>
+
+<h1>📅 Calendario Mensual Épico</h1>
+
+<div id="stats" style="text-align:center;margin-bottom:12px;font-weight:bold;"></div>
+
+<div class="calendar">
+    <div class="header">
+        <button onclick="changeMonth(-1)">◀</button>
+        <div class="month" id="month"></div>
+        <button onclick="changeMonth(1)">▶</button>
+    </div>
+    <div class="grid" id="grid"></div>
+</div>
+
+<div class="modal" id="modal">
+    <div class="box">
+        <h2 id="selectedDate"></h2>
+        <div id="existingNotes"></div>
+        <select id="type">
+            <option value="birthday">🎂 Cumpleaños</option>
+            <option value="fortnite">🏆 Victoria Fortnite</option>
+            <option value="task">📝 Tarea</option>
+            <option value="make">🟧 Make publicado</option>
+            <option value="modelo">🟠 Modelo publicado</option>
+            <option value="cita">🩺 Cita médica</option>
+            <option value="itv">🚗 ITV</option>
+            <option value="email">📧 Mandar email</option>
+            <option value="reunion">📅 Reunión</option>
+            <option value="gimnasio">💪 Gimnasio</option>
+            <option value="cumple-amigos">🎉 Cumpleaños amigos/familia</option>
+            <option value="cumple-mascota">🐾 Cumpleaños mascota</option>
+            <option value="pago">💸 Pago factura</option>
+            <option value="viaje">✈️ Viaje</option>
+            <option value="aniversario">❤️ Aniversario</option>
+            <option value="recordatorio">⏰ Recordatorio personal</option>
+        </select>
+        <div id="emailFields">
+            <input type="email" id="emailTo" placeholder="Destinatario">
+            <input type="text" id="emailSubject" placeholder="Asunto">
+            <button style="margin-top:5px;" onclick="openEmail()">✉️ Abrir correo</button>
+        </div>
+        <textarea id="text" rows="4" placeholder="Escribe tu nota..."></textarea>
+        <div style="margin-top:10px; display:flex; justify-content:space-between;">
+            <button onclick="saveNote()">Guardar</button>
+            <button onclick="closeModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let date = new Date();
+let notes = JSON.parse(localStorage.getItem("calendarNotes")) || {};
+let currentDay="";
+
+/* =========================
+   CARGAR NOTAS DESDE JSON
+========================= */
+fetch("calendarNotes.json")
+    .then(r => r.json())
+    .then(data => {
+        notes = data;
+        render();
+    })
+    .catch(() => {
+        notes = {};
+        render();
+    });
+
+/* =========================
+   GUARDAR NOTAS EN SERVIDOR
+========================= */
+function saveToServer(){
+    fetch("save.php", {
+        method: "POST",
+        body: JSON.stringify(notes)
+    });
+}
+
+
+
+
+
+
+function render(){
+    const monthNames=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+    document.getElementById("month").innerText = monthNames[date.getMonth()]+" "+date.getFullYear();
+
+    let grid=document.getElementById("grid");
+    grid.innerHTML="";
+
+    ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"].forEach(n=>{
+        let d=document.createElement("div");
+        d.className="name";
+        d.innerText=n;
+        grid.appendChild(d);
+    });
+
+    let first=new Date(date.getFullYear(),date.getMonth(),1).getDay();
+    first=first==0?6:first-1;
+    for(let i=0;i<first;i++) grid.appendChild(document.createElement("div"));
+
+    let days=new Date(date.getFullYear(),date.getMonth()+1,0).getDate();
+
+    for(let i=1;i<=days;i++){
+        let cell=document.createElement("div");
+        cell.className="day";
+
+        let dow=new Date(date.getFullYear(),date.getMonth(),i).getDay();
+        if(dow===0) cell.classList.add("sunday");
+
+        let today=new Date();
+        if(i===today.getDate() && date.getMonth()===today.getMonth() && date.getFullYear()===today.getFullYear())
+            cell.classList.add("today");
+
+        cell.innerHTML=i;
+
+        let key=`${date.getFullYear()}-${date.getMonth()}-${i}`;
+        if(notes[key]){
+            let maxPreview = 3;
+            notes[key].forEach((n,j)=>{
+                if(j<maxPreview){
+                    let tag=document.createElement("div");
+                    tag.className="note tag-"+n.type;
+                    tag.innerText=(n.type=="birthday"?"🎂":n.type=="fortnite"?"🏆":n.type=="task"?"📝":n.type=="make"?"🟧":n.type=="modelo"?"🟠":n.type=="cita"?"🩺":n.type=="itv"?"🚗":n.type=="email"?"📧":n.type=="reunion"?"📅":n.type=="gimnasio"?"💪":n.type=="cumple-amigos"?"🎉":n.type=="cumple-mascota"?"🐾":n.type=="pago"?"💸":n.type=="viaje"?"✈️":n.type=="aniversario"?"❤️":"⏰") + " " + n.text;
+                    tag.setAttribute("data-text", n.text); // Tooltip épico
+                    cell.appendChild(tag);
+                }
+            });
+            if(notes[key].length>maxPreview){
+                let more=document.createElement("div");
+                more.className="more-notes";
+                more.innerText=`+${notes[key].length - maxPreview} más...`;
+                cell.appendChild(more);
+            }
+        }
+
+        cell.onclick=()=>openModal(i);
+        grid.appendChild(cell);
+    }
+
+    let count=0;
+    for(let key in notes){
+        let [y,m]=key.split("-");
+        if(y==date.getFullYear() && m==date.getMonth()){
+            notes[key].forEach(n=>{ if(n.type=="fortnite") count++; });
+        }
+    }
+    document.getElementById("stats").innerText="🏆 Victorias Fortnite este mes: "+count;
+}
+
+function changeMonth(m){ date.setMonth(date.getMonth()+m); render(); }
+
+function openModal(day){
+    currentDay=`${date.getFullYear()}-${date.getMonth()}-${day}`;
+    document.getElementById("selectedDate").innerText=currentDay;
+    let existing = document.getElementById("existingNotes");
+    existing.innerHTML = "";
+
+    if(notes[currentDay]){
+        notes[currentDay].forEach((n,i)=>{
+            let div = document.createElement("div");
+            div.className = "note-item";
+            div.innerText = (n.type=="birthday"?"🎂":n.type=="fortnite"?"🏆":n.type=="task"?"📝":n.type=="make"?"🟧":n.type=="modelo"?"🟠":n.type=="cita"?"🩺":n.type=="itv"?"🚗":n.type=="email"?"📧":n.type=="reunion"?"📅":n.type=="gimnasio"?"💪":n.type=="cumple-amigos"?"🎉":n.type=="cumple-mascota"?"🐾":n.type=="pago"?"💸":n.type=="viaje"?"✈️":n.type=="aniversario"?"❤️":"⏰") + " " + n.text;
+            
+            let btn = document.createElement("button");
+            btn.innerText = "🗑";
+            btn.onclick = ()=>{
+                notes[currentDay].splice(i,1);
+                if(notes[currentDay].length === 0) delete notes[currentDay];
+                localStorage.setItem("calendarNotes", JSON.stringify(notes));
+                openModal(day);
+                render();
+            };
+            
+            div.appendChild(btn);
+            existing.appendChild(div);
+        });
+    }
+
+    document.getElementById("text").value = "";
+    document.getElementById("emailTo").value = "";
+    document.getElementById("emailSubject").value = "";
+
+    document.getElementById("emailFields").style.display = document.getElementById("type").value==="email" ? "block" : "none";
+
+    document.getElementById("modal").style.display = "flex";
+}
+
+document.getElementById("type").addEventListener("change", ()=>{
+    let type = document.getElementById("type").value;
+    document.getElementById("emailFields").style.display = type==="email" ? "block" : "none";
+});
+
+function saveNote(){
+    let type = document.getElementById("type").value;
+    let text = document.getElementById("text").value.trim(); 
+
+    if(!text) return alert("Debes escribir algo antes de guardar.");
+
+    if(!notes[currentDay]) notes[currentDay] = [];
+    notes[currentDay].push({type,text});
+    localStorage.setItem("calendarNotes", JSON.stringify(notes));
+
+    document.getElementById("modal").style.display = "none";
+    document.getElementById("text").value = "";
+
+    if(type=="fortnite"){
+        let v = document.getElementById("victory");
+        v.style.display = "flex";
+        setTimeout(()=>v.style.display="none",1500);
+    }
+
+    render();
+}
+
+function openEmail(){
+    let to = encodeURIComponent(document.getElementById("emailTo").value);
+    let subject = encodeURIComponent(document.getElementById("emailSubject").value);
+    let body = encodeURIComponent(document.getElementById("text").value);
+    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+}
+
+function closeModal(){
+    document.getElementById("modal").style.display = "none";
+    document.getElementById("text").value = "";
+}
+
+render();
+</script>
+
+<footer style="text-align:center; margin-top:20px; font-size:0.85em; color:rgba(255,255,255,0.6);">
+    <div style="margin-bottom:8px;">
+        <button onclick="window.location.href='../index.html'" style="margin:0 5px; padding:6px 12px;">🏠 Home</button>
+        <button onclick="window.location.href='../streamdeck/index.html'" style="margin:0 5px; padding:6px 12px;">🎮 Stream Deck Virtual</button>
+        <button onclick="window.location.href='../musica.html'" style="margin:0 5px; padding:6px 12px;">🎵 Musica 007</button>
+    </div>
+    © 2026 Calendario Creativo by Alfonso Rubio & ChatGPT – Hecho con ❤️
+</footer>
+
+</body>
+</html>
