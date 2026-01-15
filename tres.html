@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Tres en Raya Retro</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #1e1e1e;
+    color: #fff;
+    margin-top: 50px;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+    color: #ffcc00;
+    text-shadow: 2px 2px #000;
+  }
+
+  #tablero {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    margin-bottom: 20px;
+  }
+
+  .celda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    background-color: #333;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .celda:hover {
+    background-color: #555;
+  }
+
+  #marcador {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+  }
+
+  #reiniciar {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #ffcc00;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    transition: background 0.2s;
+  }
+
+  #reiniciar:hover {
+    background-color: #ffaa00;
+  }
+</style>
+</head>
+<body>
+
+<h1>Tres en Raya Retro</h1>
+
+<div id="marcador">
+  X: <span id="pX">0</span> | O: <span id="pO">0</span>
+</div>
+
+<div id="tablero">
+  <div class="celda" data-index="0"></div>
+  <div class="celda" data-index="1"></div>
+  <div class="celda" data-index="2"></div>
+  <div class="celda" data-index="3"></div>
+  <div class="celda" data-index="4"></div>
+  <div class="celda" data-index="5"></div>
+  <div class="celda" data-index="6"></div>
+  <div class="celda" data-index="7"></div>
+  <div class="celda" data-index="8"></div>
+</div>
+
+<button id="reiniciar">Reiniciar Juego</button>
+
+<script>
+const celdas = document.querySelectorAll('.celda');
+let turno = 'X';
+let marcadorX = 0;
+let marcadorO = 0;
+
+function revisarGanador() {
+  const combinaciones = [
+    [0,1,2],[3,4,5],[6,7,8], // filas
+    [0,3,6],[1,4,7],[2,5,8], // columnas
+    [0,4,8],[2,4,6]           // diagonales
+  ];
+
+  for (let c of combinaciones) {
+    const [a,b,c1] = c;
+    if (celdas[a].textContent && celdas[a].textContent === celdas[b].textContent && celdas[a].textContent === celdas[c1].textContent) {
+      alert(celdas[a].textContent + ' gana!');
+      if(celdas[a].textContent === 'X') marcadorX++;
+      else marcadorO++;
+      document.getElementById('pX').textContent = marcadorX;
+      document.getElementById('pO').textContent = marcadorO;
+      reiniciarTablero();
+      return true;
+    }
+  }
+
+  // Empate
+  if([...celdas].every(celda => celda.textContent)) {
+    alert('¡Empate!');
+    reiniciarTablero();
+  }
+}
+
+function reiniciarTablero() {
+  celdas.forEach(celda => celda.textContent = '');
+  turno = 'X';
+}
+
+celdas.forEach(celda => {
+  celda.addEventListener('click', () => {
+    if (celda.textContent === '') {
+      celda.textContent = turno;
+      if(!revisarGanador()) {
+        turno = turno === 'X' ? 'O' : 'X';
+      }
+    }
+  });
+});
+
+document.getElementById('reiniciar').addEventListener('click', reiniciarTablero);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Overlay Fortnite PRO MAX</title>
+
+<style>
+html,body{
+  margin:0;
+  padding:0;
+  overflow:hidden;
+  background:transparent;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(120deg,#3a00ff,#00e5ff,#ff00cc);
+  opacity:.12;
+}
+
+/* WEBCAM */
+#webcam{
+  position:absolute;
+  bottom:20px;
+  left:20px;
+  width:350px;
+  height:200px;
+  border:6px solid #00ffff;
+  border-radius:25px;
+  animation:neon 1.2s infinite alternate, shake 6s infinite;
+}
+
+@keyframes neon{
+  from{box-shadow:0 0 20px #00ffff}
+  to{box-shadow:0 0 80px #ff00ff}
+}
+
+@keyframes shake{
+  95%{transform:none}
+  96%{transform:translate(3px,-2px)}
+  97%{transform:translate(-3px,2px)}
+  98%{transform:translate(2px,2px)}
+  99%{transform:translate(-2px,-2px)}
+}
+
+/* ALERTAS */
+#alerts{
+  position:absolute;
+  top:30px;
+  right:30px;
+  width:520px;
+}
+
+.alert{
+  color:white;
+  font-size:22px;
+  font-weight:bold;
+  margin-bottom:12px;
+  text-shadow:0 0 10px black,0 0 20px #00ffff;
+  opacity:0;
+  animation:
+    alertIn .5s forwards,
+    pulse 1s infinite alternate,
+    alertOut 1s 4s forwards;
+}
+
+@keyframes alertIn{
+  from{transform:translateX(600px) scale(.6);opacity:0}
+  to{transform:none;opacity:1}
+}
+
+@keyframes alertOut{
+  to{opacity:0;transform:translateX(-200px) scale(.4)}
+}
+
+@keyframes pulse{
+  from{filter:brightness(1)}
+  to{filter:brightness(1.4)}
+}
+
+/* INFO */
+#follower{
+  position:absolute;
+  bottom:250px;
+  left:20px;
+  font-size:26px;
+  color:gold;
+  text-shadow:0 0 15px black;
+}
+
+#viewers{
+  position:absolute;
+  top:20px;
+  left:20px;
+  font-size:28px;
+  color:#00ffea;
+  text-shadow:0 0 20px black;
+}
+
+#count{
+  position:absolute;
+  top:60px;
+  left:20px;
+  font-size:24px;
+  color:#ffdd00;
+  text-shadow:0 0 15px black;
+}
+
+/* CLICK PARA AUDIO */
+#hint{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  color:white;
+  background:rgba(0,0,0,.45);
+  text-shadow:0 0 20px #00ffff;
+  cursor:pointer;
+  z-index:999;
+}
+</style>
+</head>
+
+<body>
+
+<div id="hint">🔊 CLICK PARA ACTIVAR AUDIO</div>
+
+<div id="alerts"></div>
+<div id="webcam"></div>
+
+<div id="follower">Último seguidor: —</div>
+<div id="viewers">👀 Viewers: 124</div>
+<div id="count">⭐ Followers: 3.245</div>
+
+<audio id="follow" src="follow.mp3" preload="auto"></audio>
+<audio id="donation" src="donation.mp3" preload="auto"></audio>
+
+<script>
+const alerts = document.getElementById("alerts");
+const followerBox = document.getElementById("follower");
+const viewersBox = document.getElementById("viewers");
+const countBox = document.getElementById("count");
+const hint = document.getElementById("hint");
+
+const sFollow = document.getElementById("follow");
+const sDonation = document.getElementById("donation");
+
+let audioEnabled = false;
+
+/* DESBLOQUEO AUDIO */
+function unlockAudio(){
+  if(audioEnabled) return;
+  audioEnabled = true;
+  hint.style.display = "none";
+
+  [sFollow, sDonation].forEach(a=>{
+    a.volume = 0.6;
+    a.play().then(()=>{
+      a.pause();
+      a.currentTime = 0;
+    }).catch(()=>{});
+  });
+}
+
+document.body.addEventListener("click", unlockAudio);
+document.body.addEventListener("keydown", unlockAudio);
+
+/* DATOS FALSOS */
+const followers = Array.from({length:100},(_,i)=>"Player"+(1000+i));
+const fans = ["🔥 CRACK","💪 IMPARABLE","🏆 NIVEL PRO","😎 LEYENDA","🚀 MAQUINÓN","🎯 AIM PERFECTO"];
+const haters = ["qué malo","vaya fail","esto da pena","qué desastre","patético","ni en bot lobby"];
+
+let fIndex = 0;
+let viewers = 124;
+let followerCount = 3245;
+
+/* ALERTA */
+function show(text, sound){
+  const d = document.createElement("div");
+  d.className = "alert";
+  d.textContent = text;
+  alerts.appendChild(d);
+
+  if(audioEnabled && sound){
+    sound.currentTime = 0;
+    sound.play().catch(()=>{});
+  }
+
+  setTimeout(()=>d.remove(),5200);
+}
+
+/* NUEVO FOLLOW */
+function newFollower(){
+  const name = followers[fIndex++ % followers.length];
+  followerBox.textContent = "Último seguidor: " + name;
+  show("🎉 " + name + " se ha unido!", sFollow);
+}
+
+/* DONACIÓN */
+function donation(){
+  const amount = (Math.random()*99+1).toFixed(2);
+  const donor = followers[Math.floor(Math.random()*followers.length)];
+  show("💰 " + donor + " donó €" + amount, sDonation);
+
+  setTimeout(()=>{
+    const arr = Math.random()<0.7 ? fans : haters;
+    show(arr[Math.floor(Math.random()*arr.length)], sDonation);
+  },900);
+}
+
+/* FOLLOWERS */
+setInterval(()=>{
+  followerCount = Math.max(1, followerCount + Math.floor(Math.random()*5 - 2));
+  countBox.textContent = "⭐ Followers: " + followerCount.toLocaleString("es-ES");
+},4000);
+
+/* VIEWERS */
+setInterval(()=>{
+  viewers = Math.max(1, viewers + Math.floor(Math.random()*15 - 7));
+  viewersBox.textContent = "👀 Viewers: " + viewers;
+},3000);
+
+/* EVENTOS */
+setInterval(newFollower, 8000);
+
+function rand(){ return Math.random()*90000 + 60000; }
+(function loop(){
+  setTimeout(()=>{ donation(); loop(); }, rand());
+})();
+</script>
+
+</body>
+</html>

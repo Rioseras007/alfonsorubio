@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Juego del Ahorcado</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg,#1f2933,#0f172a);
+    color: white;
+    text-align: center;
+    padding-top: 40px;
+}
+
+#word {
+    font-size: 2em;
+    letter-spacing: 10px;
+    margin: 20px;
+}
+
+#letters button {
+    margin: 5px;
+    padding: 10px 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#status {
+    margin-top: 20px;
+    font-size: 1.3em;
+}
+
+#mistakes-left {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #ffcc00;
+}
+
+#hangman {
+  border: 2px solid #333;
+  margin: 15px 0;
+}
+
+button#start, button#restart {
+    margin-top: 15px;
+    padding: 8px 14px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<h1>🎯 Juego del Ahorcado</h1>
+
+<div id="difficulty">
+  <strong>Dificultad:</strong>
+  <label><input type="radio" name="level" value="8" checked> Fácil</label>
+  <label><input type="radio" name="level" value="6"> Normal</label>
+  <label><input type="radio" name="level" value="4"> Difícil</label>
+</div>
+
+<canvas id="hangman" width="200" height="250"></canvas>
+
+<div id="word"></div>
+<div id="letters"></div>
+<div id="status"></div>
+<div id="mistakes-left">Errores restantes: </div>
+
+<button id="start">▶️ Iniciar Juego</button>
+<button id="restart">🔄 Reiniciar</button>
+
+<script>
+const canvas = document.getElementById("hangman");
+const ctx = canvas.getContext("2d");
+
+// Palabras por dificultad
+const easyWords = [
+  "GATO","PERRO","CASA","LUNA","SOL",
+  "PEZ","LIBRO","FLOR","SILLA","RANA",
+  "NUBE","MAR","ARBOLES","PAN","JUEGO"
+];
+
+const normalWords = [
+  "PROGRAMACION","ORDENADOR","INTERNET","JAVASCRIPT",
+  "TELEFONO","ESCUELA","CIENCIA","HISTORIA","MATEMATICAS",
+  "ELECTRONICA","HUMANIDAD","INFORMACION","ALGEBRA","GEOGRAFIA","TECLADO"
+];
+
+const hardWords = [
+  "ANDROID","MICROCONTROLADOR","ALGORITMO","CRYPTOGRAFIA",
+  "DESARROLLO","INTERFACES","COMPILADOR","SEGURIDAD","TELECOMUNICACIONES",
+  "MICROPROCESADOR","VIRTUALIZACION","SISTEMAS","BINARIO","OPTIMIZACION","VARIABLES"
+];
+
+let selected = "";
+let guessed = [];
+let mistakes = 0;
+let maxMistakes = 6;
+
+// DIBUJOS
+function drawBase(){
+  ctx.clearRect(0,0,200,250);
+  ctx.beginPath();
+  ctx.moveTo(10,240);
+  ctx.lineTo(190,240);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(40,240);
+  ctx.lineTo(40,20);
+  ctx.lineTo(120,20);
+  ctx.lineTo(120,40);
+  ctx.stroke();
+}
+
+function drawHangman(){
+    ctx.lineWidth = 2;
+    if(mistakes > 0) animateLine(()=> ctx.arc(120,60,20,0,Math.PI*2).stroke());
+    if(mistakes > 1) animateLine(()=> { ctx.beginPath(); ctx.moveTo(120,80); ctx.lineTo(120,140); ctx.stroke(); });
+    if(mistakes > 2) animateLine(()=> { ctx.beginPath(); ctx.moveTo(120,90); ctx.lineTo(90,120); ctx.stroke(); });
+    if(mistakes > 3) animateLine(()=> { ctx.beginPath(); ctx.moveTo(120,90); ctx.lineTo(150,120); ctx.stroke(); });
+    if(mistakes > 4) animateLine(()=> { ctx.beginPath(); ctx.moveTo(120,140); ctx.lineTo(90,180); ctx.stroke(); });
+    if(mistakes > 5) animateLine(()=> { ctx.beginPath(); ctx.moveTo(120,140); ctx.lineTo(150,180); ctx.stroke(); });
+}
+
+function animateLine(drawFunc){
+    let i=0, steps=20;
+    const interval = setInterval(()=>{
+        drawFunc();
+        i++;
+        if(i>=steps) clearInterval(interval);
+    },15);
+}
+
+// DIFICULTAD
+function getDifficulty(){
+  const level = document.querySelector('input[name="level"]:checked');
+  maxMistakes = parseInt(level.value);
+}
+
+// SELECCIONAR PALABRA SEGÚN NIVEL
+function selectWord(){
+    const level = parseInt(document.querySelector('input[name="level"]:checked').value);
+    if(level === 8){
+        selected = easyWords[Math.floor(Math.random()*easyWords.length)];
+    } else if(level === 6){
+        selected = normalWords[Math.floor(Math.random()*normalWords.length)];
+    } else {
+        selected = hardWords[Math.floor(Math.random()*hardWords.length)];
+    }
+}
+
+// CREAR PALABRA
+function drawWord(){
+    document.getElementById("word").innerHTML = selected.split("").map(l => guessed.includes(l)? l : "_").join(" ");
+}
+
+// BOTONES LETRAS
+function createLetters(){
+    const lettersDiv = document.getElementById("letters");
+    lettersDiv.innerHTML = "";
+    for(let i=65;i<=90;i++){
+        const btn = document.createElement("button");
+        btn.textContent = String.fromCharCode(i);
+        btn.onclick = ()=> guess(btn.textContent, btn);
+        lettersDiv.appendChild(btn);
+    }
+}
+
+// COMPROBAR LETRA
+function guess(letter, btn){
+    btn.disabled = true;
+    if(selected.includes(letter)){
+        guessed.push(letter);
+    } else {
+        mistakes++;
+        drawBase();
+        drawHangman();
+    }
+    drawWord();
+    checkGame();
+}
+
+// CONTADOR Y FIN DE JUEGO
+function updateMistakesLeft(){
+    const left = Math.max(0, maxMistakes - mistakes);
+    document.getElementById("mistakes-left").textContent = "Errores restantes: " + left;
+}
+
+function checkGame(){
+    updateMistakesLeft();
+    if(!document.getElementById("word").innerHTML.includes("_")){
+        document.getElementById("status").textContent = "🎉 ¡Has ganado!";
+        document.querySelectorAll("#letters button").forEach(b=>b.disabled=true);
+        document.querySelectorAll('input[name="level"]').forEach(i => i.disabled=false);
+    }
+    if(mistakes >= maxMistakes){
+        document.getElementById("status").textContent = "💀 Has perdido. Palabra: " + selected;
+        document.querySelectorAll("#letters button").forEach(b=>b.disabled=true);
+        document.querySelectorAll('input[name="level"]').forEach(i => i.disabled=false);
+    }
+}
+
+// INICIAR PARTIDA
+function startGame(){
+    guessed = [];
+    mistakes = 0;
+    getDifficulty();
+    drawBase();
+    selectWord();
+    drawWord();
+    createLetters();
+    updateMistakesLeft();
+    document.querySelectorAll('input[name="level"]').forEach(i => i.disabled=true);
+    document.getElementById("status").textContent = "";
+}
+
+// BOTONES
+document.getElementById("start").onclick = startGame;
+document.getElementById("restart").onclick = startGame;
+
+// AL CARGAR: no iniciar automáticamente, el usuario escoge dificultad primero
+drawBase();
+
+</script>
+
+</body>
+</html>

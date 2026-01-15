@@ -1,0 +1,43 @@
+<svg width="300" height="300" viewBox="0 0 300 300"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Círculo principal -->
+  <circle cx="150" cy="150" r="140" fill="#e87e15ff"/>
+
+  <!-- Borde del círculo -->
+  <circle cx="150" cy="150" r="138" fill="none" stroke="white" stroke-width="3"/>
+
+  <!-- Definición de filtros y gradientes -->
+  <defs>
+    <!-- Sombra difuminada -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="4" dy="4" stdDeviation="3" flood-color="rgba(0,0,0,0.4)" />
+    </filter>
+
+    <!-- Gradiente animado tipo LED para brillo -->
+    <linearGradient id="shine" x1="-150%" y1="0%" x2="250%" y2="0%">
+      <stop offset="0%" stop-color="white" stop-opacity="0"/>
+      <stop offset="50%" stop-color="white" stop-opacity="1"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+      <animate attributeName="x1" values="-150%;250%" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="x2" values="0%;400%" dur="3s" repeatCount="indefinite"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Letras con sombra, contorno, flotación y brillo -->
+  <g filter="url(#shadow)" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="150" text-anchor="middle" dominant-baseline="middle">
+
+    <!-- Letra A animada -->
+    <text x="100" y="150" fill="url(#shine)" stroke="white" stroke-width="2">
+      <animate attributeName="y" values="147;153;147" dur="2s" repeatCount="indefinite"/>
+      A
+    </text>
+
+    <!-- Letra R animada y ligeramente entrelazada -->
+    <text x="190" y="150" fill="url(#shine)" stroke="white" stroke-width="2">
+      <animate attributeName="y" values="153;147;153" dur="2s" repeatCount="indefinite"/>
+      R
+    </text>
+  </g>
+
+</svg>

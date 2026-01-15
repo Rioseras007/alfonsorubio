@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Tabla Periódica Interactiva - 118 Elementos</title>
+<style>
+body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+h2 { text-align: center; margin-bottom: 20px; }
+table { border-collapse: collapse; margin: auto; }
+td { border: 1px solid #444; width: 60px; height: 60px; text-align: center; vertical-align: middle; padding: 4px; position: relative; transition: 0.23s ease; cursor: pointer; }
+td:hover { transform: translateY(-3px); box-shadow: 2px 4px 11px rgba(0,0,0,0.35); }
+.symbol { font-weight:bold; display:block; }
+.mass { font-size:0.7em; color:#222; display:block; }
+.tooltip { visibility:hidden; width:200px; background:#222; color:#fff; text-align:left; border-radius:5px; padding:7px; position:absolute; z-index:10; bottom:110%; left:50%; margin-left:-100px; opacity:0; transition:opacity 0.3s; font-size:0.78em; }
+td:hover .tooltip { visibility:visible; opacity:1; }
+.tooltip a { color:#fff; text-decoration:underline; }
+
+/* Colores por grupo */
+.alkali { background:#FFCDD2; }
+.alkaline { background:#F8BBD0; }
+.transition { background:#BBDEFB; }
+.posttransition { background:#C8E6C9; }
+.metalloid { background:#FFF9C4; }
+.nonmetal { background:#DCEDC8; }
+.halogen { background:#FFECB3; }
+.noble { background:#B2DFDB; }
+.lanthanoid { background:#E1BEE7; }
+.actinoid { background:#D1C4E9; }
+
+/* Responsive */
+@media (max-width:1200px) {
+  table { display:block; overflow-x:auto; }
+  td { width:50px; height:50px; font-size:0.9em; }
+}
+</style>
+</head>
+<body>
+
+ 
+
+  <div class="footer-content">
+    <p>©️ 2025-26 Alfonso Rubio — ❤️‍🔥Todos los derechos reservados 🏴‍☠️</p>
+
+</div>
+
+
+    <div id="home" class="inicio" align="center"><p><a href="index.html">🏠 INCIO</a></div>
+    <div id="home" class="inicio" align="center"><p><a href="top50.html">➡️ Siguiente</a></div>
+    
+<br>
+
+<h2>Tabla Periódica Interactiva  Version Final</h2>
+<table>
+
+<!-- FILA 1 -->
+<tr>
+  <td class="nonmetal">
+    1<br><span class="symbol">H</span><span class="mass">1.008</span>
+    <div class="tooltip">Hidrógeno<br>Número:1<br>Masa:1.008<br>Categoría:No metal<br><a href="https://es.wikipedia.org/wiki/Hidrógeno" target="_blank">Wikipedia</a></div>
+  </td>
+  <td colspan="16"></td>
+  <td class="noble">
+    2<br><span class="symbol">He</span><span class="mass">4.003</span>
+    <div class="tooltip">Helio<br>Número:2<br>Masa:4.003<br>Categoría:Gas noble<br><a href="https://es.wikipedia.org/wiki/Helio" target="_blank">Wikipedia</a></div>
+  </td>
+</tr>
+
+<!-- FILA 2 -->
+<tr>
+  <td class="alkali">
+    3<br><span class="symbol">Li</span><span class="mass">6.941</span>
+    <div class="tooltip">Litio<br>Número:3<br>Masa:6.941<br>Categoría:Metal alcalino<br><a href="https://es.wikipedia.org/wiki/Litio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="alkaline">
+    4<br><span class="symbol">Be</span><span class="mass">9.012</span>
+    <div class="tooltip">Berilio<br>Número:4<br>Masa:9.012<br>Categoría:Metal alcalinotérreo<br><a href="https://es.wikipedia.org/wiki/Berio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td colspan="10"></td>
+  <td class="metalloid">
+    5<br><span class="symbol">B</span><span class="mass">10.81</span>
+    <div class="tooltip">Boro<br>Número:5<br>Masa:10.81<br>Categoría:Metaloide<br><a href="https://es.wikipedia.org/wiki/Boro" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="nonmetal">
+    6<br><span class="symbol">C</span><span class="mass">12.01</span>
+    <div class="tooltip">Carbono<br>Número:6<br>Masa:12.01<br>Categoría:No metal<br><a href="https://es.wikipedia.org/wiki/Carbono" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="nonmetal">
+    7<br><span class="symbol">N</span><span class="mass">14.01</span>
+    <div class="tooltip">Nitrógeno<br>Número:7<br>Masa:14.01<br>Categoría:No metal<br><a href="https://es.wikipedia.org/wiki/Nitr%C3%B3geno" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="nonmetal">
+    8<br><span class="symbol">O</span><span class="mass">16.00</span>
+    <div class="tooltip">Oxígeno<br>Número:8<br>Masa:16.00<br>Categoría:No metal<br><a href="https://es.wikipedia.org/wiki/Ox%C3%ADgeno" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="halogen">
+    9<br><span class="symbol">F</span><span class="mass">19.00</span>
+    <div class="tooltip">Flúor<br>Número:9<br>Masa:19.00<br>Categoría:Halógeno<br><a href="https://es.wikipedia.org/wiki/Fl%C3%BAor" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="noble">
+    10<br><span class="symbol">Ne</span><span class="mass">20.18</span>
+    <div class="tooltip">Neón<br>Número:10<br>Masa:20.18<br>Categoría:Gas noble<br><a href="https://es.wikipedia.org/wiki/Ne%C3%B3n" target="_blank">Wikipedia</a></div>
+  </td>
+</tr>
+
+<!-- FILA 3 -->
+<tr>
+  <td class="alkali">
+    11<br><span class="symbol">Na</span><span class="mass">22.99</span>
+    <div class="tooltip">Sodio<br>Número:11<br>Masa:22.99<br>Categoría:Metal alcalino<br><a href="https://es.wikipedia.org/wiki/Sodio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="alkaline">
+    12<br><span class="symbol">Mg</span><span class="mass">24.31</span>
+    <div class="tooltip">Magnesio<br>Número:12<br>Masa:24.31<br>Categoría:Metal alcalinotérreo<br><a href="https://es.wikipedia.org/wiki/Magnesio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td colspan="10"></td>
+  <td class="posttransition">
+    13<br><span class="symbol">Al</span><span class="mass">26.98</span>
+    <div class="tooltip">Aluminio<br>Número:13<br>Masa:26.98<br>Categoría:Metal post-transición<br><a href="https://es.wikipedia.org/wiki/Aluminio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="metalloid">
+    14<br><span class="symbol">Si</span><span class="mass">28.09</span>
+    <div class="tooltip">Silicio<br>Número:14<br>Masa:28.09<br>Categoría:Metaloide<br><a href="https://es.wikipedia.org/wiki/Silicio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="nonmetal">
+    15<br><span class="symbol">P</span><span class="mass">30.97</span>
+    <div class="tooltip">Fósforo<br>Número:15<br>Masa:30.97<br>Categoría:No metal<br><a href="https://es.wikipedia.org/wiki/F%C3%B3sforo" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="nonmetal">
+    16<br><span class="symbol">S</span><span class="mass">32.07</span>
+    <div class="tooltip">Azufre<br>Número:16<br>Masa:32.07<br>Categoría:No metal<br><a href="https://es.wikipedia.org/wiki/Azufre" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="halogen">
+    17<br><span class="symbol">Cl</span><span class="mass">35.45</span>
+    <div class="tooltip">Cloro<br>Número:17<br>Masa:35.45<br>Categoría:Halógeno<br><a href="https://es.wikipedia.org/wiki/Cloro" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="noble">
+    18<br><span class="symbol">Ar</span><span class="mass">39.95</span>
+    <div class="tooltip">Argón<br>Número:18<br>Masa:39.95<br>Categoría:Gas noble<br><a href="https://es.wikipedia.org/wiki/Arg%C3%B3n" target="_blank">Wikipedia</a></div>
+  </td>
+</tr>
+
+<!-- FILA 4 -->
+<tr>
+<!-- …continuará en el próximo mensaje… (por longitud total) -->
+<!-- FILA 4 -->
+<tr>
+  <td class="alkali">
+    19<br><span class="symbol">K</span><span class="mass">39.10</span>
+    <div class="tooltip">Potasio<br>Número:19<br>Masa:39.10<br>Categoría:Metal alcalino<br><a href="https://es.wikipedia.org/wiki/Potasio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="alkaline">
+    20<br><span class="symbol">Ca</span><span class="mass">40.08</span>
+    <div class="tooltip">Calcio<br>Número:20<br>Masa:40.08<br>Categoría:Metal alcalinotérreo<br><a href="https://es.wikipedia.org/wiki/Calcio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    21<br><span class="symbol">Sc</span><span class="mass">44.96</span>
+    <div class="tooltip">Escandio<br>Número:21<br>Masa:44.96<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Escandio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    22<br><span class="symbol">Ti</span><span class="mass">47.87</span>
+    <div class="tooltip">Titanio<br>Número:22<br>Masa:47.87<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Titanio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    23<br><span class="symbol">V</span><span class="mass">50.94</span>
+    <div class="tooltip">Vanadio<br>Número:23<br>Masa:50.94<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Vanadio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    24<br><span class="symbol">Cr</span><span class="mass">52.00</span>
+    <div class="tooltip">Cromo<br>Número:24<br>Masa:52.00<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Cromo" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    25<br><span class="symbol">Mn</span><span class="mass">54.94</span>
+    <div class="tooltip">Manganeso<br>Número:25<br>Masa:54.94<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Manganeso" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    26<br><span class="symbol">Fe</span><span class="mass">55.85</span>
+    <div class="tooltip">Hierro<br>Número:26<br>Masa:55.85<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Hierro" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    27<br><span class="symbol">Co</span><span class="mass">58.93</span>
+    <div class="tooltip">Cobalto<br>Número:27<br>Masa:58.93<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Cobalto" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    28<br><span class="symbol">Ni</span><span class="mass">58.69</span>
+    <div class="tooltip">Níquel<br>Número:28<br>Masa:58.69<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/N%C3%ADquel" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    29<br><span class="symbol">Cu</span><span class="mass">63.55</span>
+    <div class="tooltip">Cobre<br>Número:29<br>Masa:63.55<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Cobre" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    30<br><span class="symbol">Zn</span><span class="mass">65.38</span>
+    <div class="tooltip">Cinc<br>Número:30<br>Masa:65.38<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Zinc" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="posttransition">
+    31<br><span class="symbol">Ga</span><span class="mass">69.72</span>
+    <div class="tooltip">Galio<br>Número:31<br>Masa:69.72<br>Categoría:Metal post-transición<br><a href="https://es.wikipedia.org/wiki/Galio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="metalloid">
+    32<br><span class="symbol">Ge</span><span class="mass">72.63</span>
+    <div class="tooltip">Germanio<br>Número:32<br>Masa:72.63<br>Categoría:Metaloide<br><a href="https://es.wikipedia.org/wiki/Germanio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="metalloid">
+    33<br><span class="symbol">As</span><span class="mass">74.92</span>
+    <div class="tooltip">Arsénico<br>Número:33<br>Masa:74.92<br>Categoría:Metaloide<br><a href="https://es.wikipedia.org/wiki/Ars%C3%A9nico" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="nonmetal">
+    34<br><span class="symbol">Se</span><span class="mass">78.97</span>
+    <div class="tooltip">Selenio<br>Número:34<br>Masa:78.97<br>Categoría:No metal<br><a href="https://es.wikipedia.org/wiki/Selenio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="halogen">
+    35<br><span class="symbol">Br</span><span class="mass">79.90</span>
+    <div class="tooltip">Bromo<br>Número:35<br>Masa:79.90<br>Categoría:Halógeno<br><a href="https://es.wikipedia.org/wiki/Bromo" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="noble">
+    36<br><span class="symbol">Kr</span><span class="mass">83.80</span>
+    <div class="tooltip">Kriptón<br>Número:36<br>Masa:83.80<br>Categoría:Gas noble<br><a href="https://es.wikipedia.org/wiki/Kript%C3%B3n" target="_blank">Wikipedia</a></div>
+  </td>
+</tr>
+<!-- FILA 5 -->
+<tr>
+  <td class="alkali">
+    37<br><span class="symbol">Rb</span><span class="mass">85.47</span>
+    <div class="tooltip">Rubidio<br>Número:37<br>Masa:85.47<br>Categoría:Metal alcalino<br><a href="https://es.wikipedia.org/wiki/Rubidio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="alkaline">
+    38<br><span class="symbol">Sr</span><span class="mass">87.62</span>
+    <div class="tooltip">Estroncio<br>Número:38<br>Masa:87.62<br>Categoría:Metal alcalinotérreo<br><a href="https://es.wikipedia.org/wiki/Estroncio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    39<br><span class="symbol">Y</span><span class="mass">88.91</span>
+    <div class="tooltip">Itrio<br>Número:39<br>Masa:88.91<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Itrio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    40<br><span class="symbol">Zr</span><span class="mass">91.22</span>
+    <div class="tooltip">Circonio<br>Número:40<br>Masa:91.22<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Circonio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    41<br><span class="symbol">Nb</span><span class="mass">92.91</span>
+    <div class="tooltip">Niobio<br>Número:41<br>Masa:92.91<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Niobio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    42<br><span class="symbol">Mo</span><span class="mass">95.95</span>
+    <div class="tooltip">Molibdeno<br>Número:42<br>Masa:95.95<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Molibdeno" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    43<br><span class="symbol">Tc</span><span class="mass">98</span>
+    <div class="tooltip">Tecnecio<br>Número:43<br>Masa:98<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Tecnecio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    44<br><span class="symbol">Ru</span><span class="mass">101.07</span>
+    <div class="tooltip">Rutenio<br>Número:44<br>Masa:101.07<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Rutenio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    45<br><span class="symbol">Rh</span><span class="mass">102.91</span>
+    <div class="tooltip">Rodio<br>Número:45<br>Masa:102.91<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Rodio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    46<br><span class="symbol">Pd</span><span class="mass">106.42</span>
+    <div class="tooltip">Paladio<br>Número:46<br>Masa:106.42<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Paladio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    47<br><span class="symbol">Ag</span><span class="mass">107.87</span>
+    <div class="tooltip">Plata<br>Número:47<br>Masa:107.87<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Plata" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    48<br><span class="symbol">Cd</span><span class="mass">112.41</span>
+    <div class="tooltip">Cadmio<br>Número:48<br>Masa:112.41<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Cadmio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="posttransition">
+    49<br><span class="symbol">In</span><span class="mass">114.82</span>
+    <div class="tooltip">Indio<br>Número:49<br>Masa:114.82<br>Categoría:Metal post-transición<br><a href="https://es.wikipedia.org/wiki/Indio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="posttransition">
+    50<br><span class="symbol">Sn</span><span class="mass">118.71</span>
+    <div class="tooltip">Estaño<br>Número:50<br>Masa:118.71<br>Categoría:Metal post-transición<br><a href="https://es.wikipedia.org/wiki/Esta%C3%B1o" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="metalloid">
+    51<br><span class="symbol">Sb</span><span class="mass">121.76</span>
+    <div class="tooltip">Antimonio<br>Número:51<br>Masa:121.76<br>Categoría:Metaloide<br><a href="https://es.wikipedia.org/wiki/Antimonio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="metalloid">
+    52<br><span class="symbol">Te</span><span class="mass">127.60</span>
+    <div class="tooltip">Telurio<br>Número:52<br>Masa:127.60<br>Categoría:Metaloide<br><a href="https://es.wikipedia.org/wiki/Telurio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="halogen">
+    53<br><span class="symbol">I</span><span class="mass">126.90</span>
+    <div class="tooltip">Yodo<br>Número:53<br>Masa:126.90<br>Categoría:Halógeno<br><a href="https://es.wikipedia.org/wiki/Yodo" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="noble">
+    54<br><span class="symbol">Xe</span><span class="mass">131.29</span>
+    <div class="tooltip">Xenón<br>Número:54<br>Masa:131.29<br>Categoría:Gas noble<br><a href="https://es.wikipedia.org/wiki/Xen%C3%B3n" target="_blank">Wikipedia</a></div>
+  </td>
+</tr>
+<!-- FILA 6 -->
+<tr>
+  <td class="alkali">
+    55<br><span class="symbol">Cs</span><span class="mass">132.91</span>
+    <div class="tooltip">Cesio<br>Número:55<br>Masa:132.91<br>Categoría:Metal alcalino<br><a href="https://es.wikipedia.org/wiki/Cesio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="alkaline">
+    56<br><span class="symbol">Ba</span><span class="mass">137.33</span>
+    <div class="tooltip">Bario<br>Número:56<br>Masa:137.33<br>Categoría:Metal alcalinotérreo<br><a href="https://es.wikipedia.org/wiki/Bario" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="lanthanoid">*</td> <!-- Lugar para los lantánidos -->
+  <td class="transition">
+    72<br><span class="symbol">Hf</span><span class="mass">178.49</span>
+    <div class="tooltip">Hafnio<br>Número:72<br>Masa:178.49<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Hafnio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    73<br><span class="symbol">Ta</span><span class="mass">180.95</span>
+    <div class="tooltip">Tantalio<br>Número:73<br>Masa:180.95<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Tantalio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    74<br><span class="symbol">W</span><span class="mass">183.84</span>
+    <div class="tooltip">Wolframio<br>Número:74<br>Masa:183.84<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Wolframio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    75<br><span class="symbol">Re</span><span class="mass">186.21</span>
+    <div class="tooltip">Renio<br>Número:75<br>Masa:186.21<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Renio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    76<br><span class="symbol">Os</span><span class="mass">190.23</span>
+    <div class="tooltip">Osmio<br>Número:76<br>Masa:190.23<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Osmio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    77<br><span class="symbol">Ir</span><span class="mass">192.22</span>
+    <div class="tooltip">Iridio<br>Número:77<br>Masa:192.22<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Iridio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    78<br><span class="symbol">Pt</span><span class="mass">195.08</span>
+    <div class="tooltip">Platino<br>Número:78<br>Masa:195.08<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Platino" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    79<br><span class="symbol">Au</span><span class="mass">196.97</span>
+    <div class="tooltip">Oro<br>Número:79<br>Masa:196.97<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Oro" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    80<br><span class="symbol">Hg</span><span class="mass">200.59</span>
+    <div class="tooltip">Mercurio<br>Número:80<br>Masa:200.59<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Mercurio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="posttransition">
+    81<br><span class="symbol">Tl</span><span class="mass">204.38</span>
+    <div class="tooltip">Talio<br>Número:81<br>Masa:204.38<br>Categoría:Metal post-transición<br><a href="https://es.wikipedia.org/wiki/Talio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="posttransition">
+    82<br><span class="symbol">Pb</span><span class="mass">207.2</span>
+    <div class="tooltip">Plomo<br>Número:82<br>Masa:207.2<br>Categoría:Metal post-transición<br><a href="https://es.wikipedia.org/wiki/Plomo" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="posttransition">
+    83<br><span class="symbol">Bi</span><span class="mass">208.98</span>
+    <div class="tooltip">Bismuto<br>Número:83<br>Masa:208.98<br>Categoría:Metal post-transición<br><a href="https://es.wikipedia.org/wiki/Bismuto" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="posttransition">
+    84<br><span class="symbol">Po</span><span class="mass">209</span>
+    <div class="tooltip">Polonio<br>Número:84<br>Masa:209<br>Categoría:Metal post-transición<br><a href="https://es.wikipedia.org/wiki/Polonio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="halogen">
+    85<br><span class="symbol">At</span><span class="mass">210</span>
+    <div class="tooltip">Astato<br>Número:85<br>Masa:210<br>Categoría:Halógeno<br><a href="https://es.wikipedia.org/wiki/Astato" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="noble">
+    86<br><span class="symbol">Rn</span><span class="mass">222</span>
+    <div class="tooltip">Radón<br>Número:86<br>Masa:222<br>Categoría:Gas noble<br><a href="https://es.wikipedia.org/wiki/Rad%C3%B3n" target="_blank">Wikipedia</a></div>
+  </td>
+</tr>
+
+<!-- FILA 7 -->
+<tr>
+  <td class="alkali">
+    87<br><span class="symbol">Fr</span><span class="mass">223</span>
+    <div class="tooltip">Francio<br>Número:87<br>Masa:223<br>Categoría:Metal alcalino<br><a href="https://es.wikipedia.org/wiki/Francio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="alkaline">
+    88<br><span class="symbol">Ra</span><span class="mass">226</span>
+    <div class="tooltip">Radio<br>Número:88<br>Masa:226<br>Categoría:Metal alcalinotérreo<br><a href="https://es.wikipedia.org/wiki/Radio_(elemento)" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="actinoid">**</td> <!-- Lugar para actínidos -->
+  <td class="transition">
+    104<br><span class="symbol">Rf</span><span class="mass">267</span>
+    <div class="tooltip">Rutherfordio<br>Número:104<br>Masa:267<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Rutherfordio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    105<br><span class="symbol">Db</span><span class="mass">268</span>
+    <div class="tooltip">Dubnio<br>Número:105<br>Masa:268<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Dubnio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    106<br><span class="symbol">Sg</span><span class="mass">271</span>
+    <div class="tooltip">Seaborgio<br>Número:106<br>Masa:271<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Seaborgio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    107<br><span class="symbol">Bh</span><span class="mass">272</span>
+    <div class="tooltip">Bohrio<br>Número:107<br>Masa:272<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Bohrio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    108<br><span class="symbol">Hs</span><span class="mass">270</span>
+    <div class="tooltip">Hassio<br>Número:108<br>Masa:270<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Hassio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    109<br><span class="symbol">Mt</span><span class="mass">278</span>
+    <div class="tooltip">Meitnerio<br>Número:109<br>Masa:278<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Meitnerio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    110<br><span class="symbol">Ds</span><span class="mass">281</span>
+    <div class="tooltip">Darmstadtio<br>Número:110<br>Masa:281<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Darmstadtio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    111<br><span class="symbol">Rg</span><span class="mass">282</span>
+    <div class="tooltip">Roentgenio<br>Número:111<br>Masa:282<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Roentgenio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="transition">
+    112<br><span class="symbol">Cn</span><span class="mass">285</span>
+    <div class="tooltip">Copernicio<br>Número:112<br>Masa:285<br>Categoría:Metal de transición<br><a href="https://es.wikipedia.org/wiki/Copernicio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="posttransition">
+    113<br><span class="symbol">Nh</span><span class="mass">286</span>
+    <div class="tooltip">Nihonio<br>Número:113<br>Masa:286<br>Categoría:Metal post-transición<br><a href="https://es.wikipedia.org/wiki/Nihonio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="posttransition">
+    114<br><span class="symbol">Fl</span><span class="mass">289</span>
+    <div class="tooltip">Flerovio<br>Número:114<br>Masa:289<br>Categoría:Metal post-transición<br><a href="https://es.wikipedia.org/wiki/Flerovio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="posttransition">
+    115<br><span class="symbol">Mc</span><span class="mass">290</span>
+    <div class="tooltip">Moscovio<br>Número:115<br>Masa:290<br>Categoría:Metal post-transición<br><a href="https://es.wikipedia.org/wiki/Moscovio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="posttransition">
+    116<br><span class="symbol">Lv</span><span class="mass">293</span>
+    <div class="tooltip">Livermorio<br>Número:116<br>Masa:293<br>Categoría:Metal post-transición<br><a href="https://es.wikipedia.org/wiki/Livermorio" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="halogen">
+    117<br><span class="symbol">Ts</span><span class="mass">294</span>
+    <div class="tooltip">Tennessino<br>Número:117<br>Masa:294<br>Categoría:Halógeno<br><a href="https://es.wikipedia.org/wiki/Tennessino" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="noble">
+    118<br><span class="symbol">Og</span><span class="mass">294</span>
+    <div class="tooltip">Oganesón<br>Número:118<br>Masa:294<br>Categoría:Gas noble<br><a href="https://es.wikipedia.org/wiki/Oganes%C3%B3n" target="_blank">Wikipedia</a></div>
+  </td>
+</tr>
+
+<!-- LANTÁNIDOS -->
+<tr>
+  <td colspan="2"></td>
+  <td class="lanthanoid">
+    57<br><span class="symbol">La</span><span class="mass">138.91</span>
+    <div class="tooltip">Lantano<br>Número:57<br>Masa:138.91<br>Categoría:Lantánido<br><a href="https://es.wikipedia.org/wiki/Lantano" target="_blank">Wikipedia</a></div>
+  </td>
+  <td class="lanthanoid">58<br><span class="symbol">Ce</span><span class="mass">140.12</span></td>
+  <td class="lanthanoid">59<br><span class="symbol">Pr</span><span class="mass">140.91</span></td>
+  <td class="lanthanoid">60<br><span class="symbol">Nd</span><span class="mass">144.24</span></td>
+  <td class="lanthanoid">61<br><span class="symbol">Pm</span><span class="mass">145</span></td>
+  <td class="lanthanoid">62<br><span class="symbol">Sm</span><span class="mass">150.36</span></td>
+  <td class="lanthanoid">63<br><span class="symbol">Eu</span><span class="mass">151.96</span></td>
+  <td class="lanthanoid">64<br><span class="symbol">Gd</span><span class="mass">157.25</span></td>
+  <td class="lanthanoid">65<br><span class="symbol">Tb</span><span class="mass">158.93</span></td>
+  <td class="lanthanoid">66<br><span class="symbol">Dy</span><span class="mass">162.50</span></td>
+  <td class="lanthanoid">67<br><span class="symbol">Ho</span><span class="mass">164.93</span></td>
+  <td class="lanthanoid">68<br><span class="symbol">Er</span><span class="mass">167.26</span></td>
+  <td class="lanthanoid">69<br><span class="symbol">Tm</span><span class="mass">168.93</span></td>
+  <td class="lanthanoid">70<br><span class="symbol">Yb</span><span class="mass">173.05</span></td>
+  <td class="lanthanoid">71<br><span class="symbol">Lu</span><span class="mass">174.97</span></td>
+</tr>
+
+<!-- ACTÍNIDOS -->
+<tr>
+  <td colspan="2"></td>
+  <td class="actinoid">
+    89<br><span class="symbol">Ac</span><span class="mass">227</span>
+  </td>
+  <td class="actinoid">90<br><span class="symbol">Th</span><span class="mass">232.04</span></td>
+  <td class="actinoid">91<br><span class="symbol">Pa</span><span class="mass">231.04</span></td>
+  <td class="actinoid">92<br><span class="symbol">U</span><span class="mass">238.03</span></td>
+  <td class="actinoid">93<br><span class="symbol">Np</span><span class="mass">237</span></td>
+  <td class="actinoid">94<br><span class="symbol">Pu</span><span class="mass">244</span></td>
+  <td class="actinoid">95<br><span class="symbol">Am</span><span class="mass">243</span></td>
+  <td class="actinoid">96<br><span class="symbol">Cm</span><span class="mass">247</span></td>
+  <td class="actinoid">97<br><span class="symbol">Bk</span><span class
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</body>
+</html>
