@@ -1,0 +1,28 @@
+name: Deploy GitHub Pages
+
+# Se ejecuta al hacer push en gh-pages o manualmente
+on:
+  push:
+    branches:
+      - gh-pages
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Clonar el repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # 2️⃣ Desplegar en GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3.12.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./            # Publica todo desde la raíz del repo
+          user_name: 'Rioseras007'
+          user_email: 'alfonso@example.com'
