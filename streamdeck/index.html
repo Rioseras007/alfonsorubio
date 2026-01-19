@@ -1,50 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<title>Stream Deck Web</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream Deck Web</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="profiles" align="center">
-  <br>
-
-
-  <select id="profileSelect" onchange="changeProfile()"></select>
-  <button onclick="newProfile()">➕ Nuevo perfil</button>
-  <button onclick="deleteProfile()">🗑️ Borrar perfil</button>
-
-</div>
-
-
-
-
-<div class="deck" id="deck" align="center"></div>
-
-<div class="config" align="center">
-  <h3>⚙️ Configurar botón</h3>
-  <input id="labelInput" placeholder="Texto del botón">
-  <input id="iconInput" placeholder="Icono (emoji)">
-  <input id="actionInput" placeholder="URL completa o nombre de mp3">
-  <button onclick="saveConfig()">Guardar</button>
-  <input type="text" id="iconInput" placeholder="Emoji/Icono">
-  <button type="button" onclick="toggleEmojiPicker()">😎 Seleccionar Emoji</button>
-  <div id="emojiPanel" class="hidden" style="display:flex; flex-wrap:wrap; gap:5px; margin-top:5px; position:absolute;"></div>
-  <!-- Selector de emojis -->
-  <div class="emoji-picker">
-    <button type="button" onclick="toggleEmojiPicker()">😎 Seleccionar Emoji (Windows+.) </button>
+  <div class="profiles">
+    <select id="profileSelect" onchange="changeProfile()"></select>
+    <button onclick="newProfile()">➕ Nuevo perfil</button>
+    <button onclick="deleteProfile()">🗑️ Borrar perfil</button>
   </div>
-</div>
 
+  <div class="deck" id="deck"></div>
 
+  <div class="config">
+    <h3>⚙️ Configurar botón</h3>
+    <input id="labelInput" placeholder="Texto del botón">
+    <input id="iconInput" placeholder="Icono (emoji)">
+    <input id="actionInput" placeholder="URL completa o nombre de mp3">
+    <button onclick="saveConfig()">Guardar</button>
 
+    <div class="emoji-picker">
+      <button type="button" onclick="toggleEmojiPicker()">😎 Seleccionar Emoji</button>
+    </div>
+    <div id="emojiPanel" class="hidden"></div>
+  </div>
 
-
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
-
-

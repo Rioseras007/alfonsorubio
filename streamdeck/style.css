@@ -1,129 +1,252 @@
+/* Stream Deck Web - Estilos corregidos */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  background: #4431aa;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: url("textura.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100vh;
-  font-family: Arial, sans-serif;
-  padding-top: 50px;
+  padding-top: 120px;
   gap: 30px;
- 
-   background: url("textura.jpg")  ; 
-      background-size: cover;
-      background-repeat: no-repeat;
-      margin: 0;
-      height: 100vh;
-
-
-
-
-
-
-
 }
 
+/* Perfiles */
+.profiles {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+}
+
+.profiles select,
+.profiles button {
+  background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
+  color: white;
+  border: 1px solid #00aaff55;
+  padding: 10px 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 170, 255, 0.3);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.profiles select:hover,
+.profiles button:hover {
+  box-shadow: 0 6px 20px rgba(0, 170, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Deck de botones */
 .deck {
   display: grid;
-  grid-template-columns: repeat(4, 90px);
+  grid-template-columns: repeat(4, 100px);
   gap: 15px;
-  background: #95aadc;
+  background: linear-gradient(145deg, #2a2a4a, #1a1a3a);
   padding: 25px;
   border-radius: 20px;
-  box-shadow: 0 0 30px #00aaff55;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(0, 170, 255, 0.2);
+  border: 2px solid rgba(0, 170, 255, 0.3);
 }
 
 .btn {
-  width: 90px;
-  height: 90px;
-  background: #232524;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(145deg, #3a3a5a, #2a2a4a);
   border-radius: 14px;
-  box-shadow: 0 0 15px #00aaff44;
+  box-shadow: 0 4px 15px rgba(0, 170, 255, 0.3);
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: 0.15s;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+  font-size: 2em;
 }
 
 .btn:hover {
-  box-shadow: 0 0 25px #00ff4ccc;
+  box-shadow: 0 6px 25px rgba(0, 255, 76, 0.5);
+  transform: translateY(-3px);
+  border-color: #00ff4c;
 }
 
 .btn:active {
-  transform: scale(0.92);
-  box-shadow: 0 0 10px #00aaff;
+  transform: scale(0.95);
+  box-shadow: 0 2px 10px rgba(0, 170, 255, 0.5);
+}
+
+.btn.selected {
+  border-color: #fbbf24;
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
 }
 
 .btn span {
   font-size: 11px;
-  margin-top: 6px;
-  color: #921dc5;
+  margin-top: 8px;
+  color: #a0a0ff;
+  font-weight: 500;
 }
 
+/* Panel de configuración */
 .config {
-  background: #a2b0cf;
-  padding: 20px;
-  border-radius: 15px;
+  background: linear-gradient(145deg, #2a2a4a, #1a1a3a);
+  padding: 25px;
+  border-radius: 20px;
   color: white;
-  box-shadow: 0 0 20px #00aaff44;
-  width: 230px;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(0, 170, 255, 0.2);
+  width: 260px;
+  border: 2px solid rgba(0, 170, 255, 0.3);
 }
 
-.config input, .config button {
+.config h3 {
+  margin-bottom: 15px;
+  color: #fbbf24;
+  font-size: 1.1em;
+}
+
+.config input {
   width: 100%;
   margin: 8px 0;
-  padding: 8px;
-  border: none;
-  border-radius: 6px;
-}
-
-.profiles {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-}
-
-.profiles select, .profiles button {
-  background: #02060f;
-  color: white;
-  border: none;
-  padding: 8px 12px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  box-shadow: 0 0 10px #00aaff55;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 14px;
+  transition: all 0.3s;
 }
-.hidden { display: none; }
+
+.config input:focus {
+  outline: none;
+  border-color: #00aaff;
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+}
+
+.config input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.config>button {
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #00aaff, #0077cc);
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.config>button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 170, 255, 0.4);
+}
+
+.config>button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Selector de emojis */
+.emoji-picker {
+  margin-top: 15px;
+}
 
 .emoji-picker button {
-  background:#08ad45;
-  color:white;
-  border:none;
-  padding:6px 10px;
-  border-radius:6px;
-  cursor:pointer;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  transition: all 0.3s;
+}
+
+.emoji-picker button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(34, 197, 94, 0.4);
+}
+
+#emojiPanel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 #emojiPanel button {
-  background:#b59bf3;
-  color:white;
-  border:none;
-  border-radius:4px;
-  cursor:pointer;
-  padding:4px;
-  font-size:18px;
-  width: 50px;
+  background: linear-gradient(145deg, #4a4a6a, #3a3a5a);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px;
+  font-size: 20px;
+  width: 45px;
+  height: 45px;
+  transition: all 0.2s;
 }
 
-
-
-hr.style1{
-	border-top: 15px solid #6330ca;
+#emojiPanel button:hover {
+  background: linear-gradient(145deg, #5a5a7a, #4a4a6a);
+  transform: scale(1.1);
 }
 
+/* Utilidades */
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  body {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    gap: 20px;
+  }
+
+  .deck {
+    grid-template-columns: repeat(3, 90px);
+  }
+
+  .btn {
+    width: 90px;
+    height: 90px;
+  }
+
+  .config {
+    width: 90%;
+    max-width: 350px;
+  }
 }
