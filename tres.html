@@ -1,141 +1,472 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<title>Tres en Raya Retro</title>
-<style>
-  body {
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #1e1e1e;
-    color: #fff;
-    margin-top: 50px;
-  }
-
-  h1 {
-    margin-bottom: 20px;
-    color: #ffcc00;
-    text-shadow: 2px 2px #000;
-  }
-
-  #tablero {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
-    gap: 5px;
-    margin-bottom: 20px;
-  }
-
-  .celda {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5em;
-    background-color: #333;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .celda:hover {
-    background-color: #555;
-  }
-
-  #marcador {
-    margin-bottom: 20px;
-    font-size: 1.2em;
-  }
-
-  #reiniciar {
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    background-color: #ffcc00;
-    border: none;
-    color: #000;
-    font-weight: bold;
-    transition: background 0.2s;
-  }
-
-  #reiniciar:hover {
-    background-color: #ffaa00;
-  }
-</style>
-</head>
-<body>
-
-<h1>Tres en Raya Retro</h1>
-
-<div id="marcador">
-  X: <span id="pX">0</span> | O: <span id="pO">0</span>
-</div>
-
-<div id="tablero">
-  <div class="celda" data-index="0"></div>
-  <div class="celda" data-index="1"></div>
-  <div class="celda" data-index="2"></div>
-  <div class="celda" data-index="3"></div>
-  <div class="celda" data-index="4"></div>
-  <div class="celda" data-index="5"></div>
-  <div class="celda" data-index="6"></div>
-  <div class="celda" data-index="7"></div>
-  <div class="celda" data-index="8"></div>
-</div>
-
-<button id="reiniciar">Reiniciar Juego</button>
-
-<script>
-const celdas = document.querySelectorAll('.celda');
-let turno = 'X';
-let marcadorX = 0;
-let marcadorO = 0;
-
-function revisarGanador() {
-  const combinaciones = [
-    [0,1,2],[3,4,5],[6,7,8], // filas
-    [0,3,6],[1,4,7],[2,5,8], // columnas
-    [0,4,8],[2,4,6]           // diagonales
-  ];
-
-  for (let c of combinaciones) {
-    const [a,b,c1] = c;
-    if (celdas[a].textContent && celdas[a].textContent === celdas[b].textContent && celdas[a].textContent === celdas[c1].textContent) {
-      alert(celdas[a].textContent + ' gana!');
-      if(celdas[a].textContent === 'X') marcadorX++;
-      else marcadorO++;
-      document.getElementById('pX').textContent = marcadorX;
-      document.getElementById('pO').textContent = marcadorO;
-      reiniciarTablero();
-      return true;
+  <meta charset="UTF-8">
+  <title>Tres en Raya Retro</title>
+  <style>
+    * {
+      box-sizing: border-box;
     }
-  }
 
-  // Empate
-  if([...celdas].every(celda => celda.textContent)) {
-    alert('¡Empate!');
-    reiniciarTablero();
-  }
-}
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      min-height: 100vh;
+      margin: 0;
+      padding-top: 40px;
+    }
 
-function reiniciarTablero() {
-  celdas.forEach(celda => celda.textContent = '');
-  turno = 'X';
-}
+    h1 {
+      margin-bottom: 15px;
+      color: #ffcc00;
+      text-shadow: 0 0 10px #ffcc00, 2px 2px 4px #000;
+      font-size: 2.5em;
+      letter-spacing: 2px;
+    }
 
-celdas.forEach(celda => {
-  celda.addEventListener('click', () => {
-    if (celda.textContent === '') {
-      celda.textContent = turno;
-      if(!revisarGanador()) {
-        turno = turno === 'X' ? 'O' : 'X';
+    #turno-indicador {
+      font-size: 1.4em;
+      margin-bottom: 15px;
+      padding: 10px 25px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 25px;
+      border: 2px solid #ffcc00;
+      transition: all 0.3s ease;
+    }
+
+    #turno-indicador.turno-X {
+      border-color: #ff6b6b;
+      box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+    }
+
+    #turno-indicador.turno-O {
+      border-color: #4ecdc4;
+      box-shadow: 0 0 15px rgba(78, 205, 196, 0.5);
+    }
+
+    #marcador {
+      margin-bottom: 20px;
+      font-size: 1.3em;
+      display: flex;
+      gap: 30px;
+    }
+
+    .marcador-item {
+      padding: 8px 20px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .marcador-X {
+      color: #ff6b6b;
+      border: 1px solid #ff6b6b;
+    }
+
+    .marcador-O {
+      color: #4ecdc4;
+      border: 1px solid #4ecdc4;
+    }
+
+    #mensaje {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    #mensaje-texto {
+      font-size: 1.5em;
+      font-weight: bold;
+      padding: 10px 30px;
+      border-radius: 10px;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.4s ease;
+    }
+
+    #mensaje-texto.mostrar {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    #mensaje-texto.victoria {
+      background: linear-gradient(135deg, #ffcc00, #ff9500);
+      color: #000;
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+    }
+
+    #mensaje-texto.empate {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.7);
+    }
+
+    #tablero {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 8px;
+      margin-bottom: 25px;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .celda {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8em;
+      font-weight: bold;
+      background: linear-gradient(145deg, #2a2a4a, #1a1a3a);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 2px solid #444;
+      user-select: none;
+    }
+
+    .celda:hover:not(.ocupada) {
+      background: linear-gradient(145deg, #3a3a5a, #2a2a4a);
+      transform: scale(1.05);
+      border-color: #ffcc00;
+    }
+
+    .celda.ocupada {
+      cursor: not-allowed;
+    }
+
+    .celda.ficha-X {
+      color: #ff6b6b;
+      text-shadow: 0 0 10px rgba(255, 107, 107, 0.8);
+    }
+
+    .celda.ficha-O {
+      color: #4ecdc4;
+      text-shadow: 0 0 10px rgba(78, 205, 196, 0.8);
+    }
+
+    .celda.nueva-ficha {
+      animation: aparecer 0.3s ease-out;
+    }
+
+    @keyframes aparecer {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
       }
     }
-  });
-});
 
-document.getElementById('reiniciar').addEventListener('click', reiniciarTablero);
-</script>
+    .celda.ganadora {
+      animation: brillar 0.6s ease-in-out infinite alternate;
+      border-color: #ffcc00 !important;
+    }
+
+    @keyframes brillar {
+      0% {
+        box-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00;
+        background: linear-gradient(145deg, #3a3a5a, #2a2a4a);
+      }
+
+      100% {
+        box-shadow: 0 0 20px #ffcc00, 0 0 40px #ffcc00, 0 0 60px #ffcc00;
+        background: linear-gradient(145deg, #4a4a6a, #3a3a5a);
+      }
+    }
+
+    .botones {
+      display: flex;
+      gap: 15px;
+    }
+
+    .boton {
+      padding: 12px 25px;
+      font-size: 1em;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ffcc00, #ff9500);
+      border: none;
+      color: #000;
+      font-weight: bold;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
+    }
+
+    .boton:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 204, 0, 0.6);
+    }
+
+    .boton:active {
+      transform: translateY(0);
+    }
+
+    .boton-secundario {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      color: #fff;
+    }
+
+    .boton-secundario:hover {
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+
+    #sonido-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #ffcc00;
+      color: #ffcc00;
+      padding: 10px 15px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1.2em;
+      transition: all 0.3s ease;
+    }
+
+    #sonido-toggle:hover {
+      background: rgba(255, 204, 0, 0.2);
+    }
+
+    #sonido-toggle.muted {
+      border-color: #666;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+  <button id="sonido-toggle" title="Activar/Desactivar sonido">🔊</button>
+
+  <h1>Tres en Raya Retro</h1>
+
+  <div id="turno-indicador" class="turno-X">
+    Turno de: <span id="turno-actual">X</span>
+  </div>
+
+  <div id="marcador">
+    <div class="marcador-item marcador-X">X: <span id="pX">0</span></div>
+    <div class="marcador-item marcador-O">O: <span id="pO">0</span></div>
+  </div>
+
+  <div id="mensaje">
+    <div id="mensaje-texto"></div>
+  </div>
+
+  <div id="tablero">
+    <div class="celda" data-index="0"></div>
+    <div class="celda" data-index="1"></div>
+    <div class="celda" data-index="2"></div>
+    <div class="celda" data-index="3"></div>
+    <div class="celda" data-index="4"></div>
+    <div class="celda" data-index="5"></div>
+    <div class="celda" data-index="6"></div>
+    <div class="celda" data-index="7"></div>
+    <div class="celda" data-index="8"></div>
+  </div>
+
+  <div class="botones">
+    <button class="boton" id="reiniciar">Reiniciar Ronda</button>
+    <button class="boton boton-secundario" id="reiniciar-todo">Reiniciar Todo</button>
+  </div>
+
+  <script>
+    // Audio Context para sonidos
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    let sonidoActivo = true;
+
+    function inicializarAudio() {
+      if (!audioCtx) {
+        audioCtx = new AudioContext();
+      }
+    }
+
+    function reproducirSonido(tipo) {
+      if (!sonidoActivo || !audioCtx) return;
+
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+
+      switch (tipo) {
+        case 'colocar':
+          oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
+          oscillator.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.1);
+          gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+          oscillator.start(audioCtx.currentTime);
+          oscillator.stop(audioCtx.currentTime + 0.1);
+          break;
+        case 'victoria':
+          oscillator.frequency.setValueAtTime(523, audioCtx.currentTime);
+          oscillator.frequency.setValueAtTime(659, audioCtx.currentTime + 0.15);
+          oscillator.frequency.setValueAtTime(784, audioCtx.currentTime + 0.3);
+          gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+          oscillator.start(audioCtx.currentTime);
+          oscillator.stop(audioCtx.currentTime + 0.5);
+          break;
+        case 'empate':
+          oscillator.frequency.setValueAtTime(300, audioCtx.currentTime);
+          oscillator.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.3);
+          gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+          oscillator.start(audioCtx.currentTime);
+          oscillator.stop(audioCtx.currentTime + 0.3);
+          break;
+      }
+    }
+
+    // Toggle sonido
+    document.getElementById('sonido-toggle').addEventListener('click', function () {
+      inicializarAudio();
+      sonidoActivo = !sonidoActivo;
+      this.textContent = sonidoActivo ? '🔊' : '🔇';
+      this.classList.toggle('muted', !sonidoActivo);
+    });
+
+    const celdas = document.querySelectorAll('.celda');
+    const turnoIndicador = document.getElementById('turno-indicador');
+    const turnoActual = document.getElementById('turno-actual');
+    const mensajeTexto = document.getElementById('mensaje-texto');
+    let turno = 'X';
+    let marcadorX = 0;
+    let marcadorO = 0;
+    let juegoActivo = true;
+
+    function actualizarTurnoUI() {
+      turnoActual.textContent = turno;
+      turnoIndicador.className = 'turno-' + turno;
+    }
+
+    function mostrarMensaje(texto, tipo) {
+      mensajeTexto.textContent = texto;
+      mensajeTexto.className = tipo + ' mostrar';
+
+      setTimeout(() => {
+        mensajeTexto.classList.remove('mostrar');
+      }, 2500);
+    }
+
+    function revisarGanador() {
+      const combinaciones = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // filas
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // columnas
+        [0, 4, 8], [2, 4, 6]           // diagonales
+      ];
+
+      for (let c of combinaciones) {
+        const [a, b, c1] = c;
+        if (celdas[a].textContent && celdas[a].textContent === celdas[b].textContent && celdas[a].textContent === celdas[c1].textContent) {
+          const ganador = celdas[a].textContent;
+
+          // Resaltar celdas ganadoras
+          celdas[a].classList.add('ganadora');
+          celdas[b].classList.add('ganadora');
+          celdas[c1].classList.add('ganadora');
+
+          reproducirSonido('victoria');
+          mostrarMensaje('¡' + ganador + ' gana! 🎉', 'victoria');
+
+          if (ganador === 'X') marcadorX++;
+          else marcadorO++;
+          document.getElementById('pX').textContent = marcadorX;
+          document.getElementById('pO').textContent = marcadorO;
+
+          juegoActivo = false;
+
+          setTimeout(() => {
+            reiniciarTablero();
+          }, 2000);
+
+          return true;
+        }
+      }
+
+      // Empate
+      if ([...celdas].every(celda => celda.textContent)) {
+        reproducirSonido('empate');
+        mostrarMensaje('¡Empate! 🤝', 'empate');
+        juegoActivo = false;
+
+        setTimeout(() => {
+          reiniciarTablero();
+        }, 2000);
+        return true;
+      }
+
+      return false;
+    }
+
+    function reiniciarTablero() {
+      celdas.forEach(celda => {
+        celda.textContent = '';
+        celda.classList.remove('ocupada', 'ficha-X', 'ficha-O', 'nueva-ficha', 'ganadora');
+      });
+      turno = 'X';
+      juegoActivo = true;
+      actualizarTurnoUI();
+    }
+
+    function reiniciarTodo() {
+      reiniciarTablero();
+      marcadorX = 0;
+      marcadorO = 0;
+      document.getElementById('pX').textContent = '0';
+      document.getElementById('pO').textContent = '0';
+    }
+
+    celdas.forEach(celda => {
+      celda.addEventListener('click', () => {
+        inicializarAudio();
+
+        if (!juegoActivo || celda.textContent !== '') return;
+
+        celda.textContent = turno;
+        celda.classList.add('ocupada', 'ficha-' + turno, 'nueva-ficha');
+
+        reproducirSonido('colocar');
+
+        // Remover clase de animación después
+        setTimeout(() => {
+          celda.classList.remove('nueva-ficha');
+        }, 300);
+
+        if (!revisarGanador()) {
+          turno = turno === 'X' ? 'O' : 'X';
+          actualizarTurnoUI();
+        }
+      });
+    });
+
+    document.getElementById('reiniciar').addEventListener('click', reiniciarTablero);
+    document.getElementById('reiniciar-todo').addEventListener('click', reiniciarTodo);
+
+    // Inicializar UI
+    actualizarTurnoUI();
+  </script>
 
 </body>
+
 </html>
