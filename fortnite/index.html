@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Fortnite | Fan Community</title>
+    <meta name="description"
+        content="La mejor comunidad de fans de Fortnite: Noticias, Tienda del día y los mejores Gameplays de la Patrulla Canina.">
+    <link rel="stylesheet" href="index.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <div id="nexus-particles"></div>
+    <header class="glass-panel" style="position: fixed; top: 0; width: 100%; z-index: 1000; border-radius: 0;">
+        <nav class="container"
+            style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px;">
+            <div class="logo title-font"
+                style="font-size: 1.5rem; font-weight: 900; background: var(--grad-nexus); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                Nexus Fortnite
+            </div>
+            <div
+                style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); display: flex; align-items: center;">
+                <span class="status-pulse"></span> SERVIDORES: <span
+                    style="color: var(--success); margin-left: 5px;">ONLINE</span>
+            </div>
+            <ul style="display: flex; list-style: none; gap: 30px;">
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#tienda" class="nav-link">Tienda</a></li>
+                <li><a href="#videos" class="nav-link">Vídeos</a></li>
+                <li><a href="#noticias" class="nav-link">Noticias</a></li>
+                <li><a href="#guias" class="nav-link">Guías</a></li>
+                <li><a href="#stats" class="nav-link">Stats</a></li>
+                <li><a href="#musica" class="nav-link">Música</a></li>
+                <li><a href="#comandos" class="nav-link">Comandos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="inicio"
+            style="height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: radial-gradient(circle at center, #1a1b3a 0%, #0a0b1e 100%);">
+            <div
+                style="position: absolute; width: 100%; height: 100%; background: var(--grad-nexus); opacity: 0.1; filter: blur(100px);">
+            </div>
+            <div class="container animate-fade" style="text-align: center; position: relative; z-index: 1;">
+                <h1 style="font-size: 4rem; margin-bottom: 20px; text-shadow: 0 0 20px rgba(0, 210, 255, 0.5);">
+                    Bienvenido al Nexo</h1>
+                <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px;">Tu portal
+                    definitivo para las novedades de Fortnite, la mejor tienda del día y los gameplays más épicos de la
+                    Patrulla Canina.</p>
+                <div style="display: flex; gap: 20px; justify-content: center;">
+                    <a href="#tienda" class="btn-primary">Ver Tienda Hoy</a>
+                    <a href="#noticias" class="btn-primary"
+                        style="background: transparent; border: 2px solid var(--primary);">Novedades</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Creator Code Banner -->
+        <section class="container" style="position: relative;">
+            <div class="creator-section animate-fade">
+                <h3 class="title-font" style="font-size: 1.2rem; text-transform: uppercase;">Apoya a un Creador</h3>
+                <div class="code-box">
+                    <span id="creator-code">ALFONSO</span>
+                    <button onclick="copyCode()"
+                        style="background: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer !important; font-weight: bold; font-size: 0.8rem; color: #000;">COPIAR</button>
+                </div>
+                <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.8;">#Ad #FortnitePartner</p>
+            </div>
+        </section>
+
+        <!-- Countdown Section -->
+        <section id="evento" class="container" style="padding: 60px 0; text-align: center;">
+            <div class="glass-panel"
+                style="padding: 40px; border: 2px solid var(--primary); background: rgba(0, 210, 255, 0.03);">
+                <h3 class="title-font" style="margin-bottom: 25px; letter-spacing: 2px;">CUENTA ATRÁS: NUEVA TEMPORADA
+                </h3>
+
+                <!-- Season Progress Bar -->
+                <div
+                    style="width: 100%; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-bottom: 30px; overflow: hidden; position: relative;">
+                    <div id="season-progress"
+                        style="width: 85%; height: 100%; background: var(--grad-nexus); box-shadow: 0 0 15px var(--primary);">
+                    </div>
+                    <span
+                        style="position: absolute; right: 10px; top: -20px; font-size: 0.7rem; color: var(--text-muted);">85%
+                        COMPLETADO</span>
+                </div>
+
+                <div id="countdown"
+                    style="display: flex; justify-content: center; gap: 20px; font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: var(--primary); text-shadow: var(--glow-blue);">
+                    <div class="cd-item">00<span
+                            style="font-size: 0.8rem; display: block; color: var(--text-muted); font-family: 'Inter';">DÍAS</span>
+                    </div>
+                    <div class="cd-item">00<span
+                            style="font-size: 0.8rem; display: block; color: var(--text-muted); font-family: 'Inter';">HORAS</span>
+                    </div>
+                    <div class="cd-item">00<span
+                            style="font-size: 0.8rem; display: block; color: var(--text-muted); font-family: 'Inter';">MIN</span>
+                    </div>
+                    <div class="cd-item">00<span
+                            style="font-size: 0.8rem; display: block; color: var(--text-muted); font-family: 'Inter';">SEG</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section id="noticias" class="container" style="padding: 100px 0;">
+            <h2 style="margin-bottom: 50px; border-left: 5px solid var(--primary); padding-left: 20px;">Últimas Noticias
+            </h2>
+            <div id="news-container" class="grid-3">
+                <!-- Noticias inyectadas por JS -->
+            </div>
+        </section>
+
+        <!-- Shop Section -->
+        <section id="tienda" style="background: rgba(255,255,255,0.02); padding: 100px 0;">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 50px;">Tienda Destacada</h2>
+                <div id="shop-container"
+                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px;">
+                    <!-- Contenido inyectado por JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section (Hall of Fame) -->
+        <section id="stats" class="container" style="padding: 100px 0;">
+            <h2 style="margin-bottom: 30px; border-left: 5px solid var(--accent); padding-left: 20px;">Ranking de Cracks
+                (Hall of Fame)</h2>
+            <div class="glass-panel" style="padding: 20px; overflow-x: auto;">
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Rango</th>
+                            <th>Jugador</th>
+                            <th>Victorias</th>
+                            <th>K/D Ratio</th>
+                            <th>Win %</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stats-body">
+                        <!-- Stats de jugadores inyectadas por JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Guides Section -->
+        <section id="guias" style="background: var(--grad-dark); padding: 100px 0;">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 50px;">Guías de Supervivencia</h2>
+                <div id="guides-container"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 50px;">
+                    <!-- Guías inyectadas por JS -->
+                </div>
+
+                <!-- Drop Randomizer -->
+                <div class="glass-panel"
+                    style="max-width: 600px; margin: 0 auto; padding: 40px; text-align: center; border: 1px solid var(--accent); margin-bottom: 50px;">
+                    <h3 class="title-font" style="margin-bottom: 20px; color: var(--accent);">🎯 ¿DÓNDE CAEMOS HOY?</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 25px;">¿No te decides? Deja que el Nexo elija tu
+                        próximo desafío.</p>
+                    <div id="drop-zone-display"
+                        style="font-size: 1.8rem; font-weight: bold; margin-bottom: 30px; height: 50px; color: #fff; text-shadow: 0 0 10px var(--accent);">
+                        ---</div>
+                    <button onclick="pickDropZone()" class="btn-primary"
+                        style="background: var(--accent); border: none; padding: 15px 40px; border-radius: 8px; font-weight: bold; cursor: pointer !important;">¡GENERAR
+                        ATERRIZAJE!</button>
+                </div>
+
+                <!-- Interactive Map -->
+                <h3 style="text-align: center; margin-bottom: 30px; font-size: 1.5rem;">Explorador de la Isla</h3>
+                <div class="map-container">
+                    <img src="https://fortnite-api.com/images/map.png" alt="Fortnite Map"
+                        style="width: 100%; display: block;">
+                    <div id="map-pins-container">
+                        <!-- Pins inyectados por JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Weapons Meta Section -->
+        <section id="meta" class="container" style="padding: 100px 0;">
+            <h2 style="margin-bottom: 30px; border-left: 5px solid #ff4d4d; padding-left: 20px;">Meta de Armas (Tier
+                List)</h2>
+            <div class="glass-panel" style="padding: 30px; margin-bottom: 40px;">
+                <div id="tier-list-container" class="grid-3" style="margin-bottom: 30px;">
+                    <!-- Armas inyectadas por JS -->
+                </div>
+            </div>
+
+            <h2 style="margin-bottom: 30px; border-left: 5px solid var(--success); padding-left: 20px;">Curación y
+                Escudos</h2>
+            <div id="health-items-container"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <!-- Items de salud inyectados por JS -->
+            </div>
+        </section>
+
+        <!-- Videos Section -->
+        <section id="videos" style="background: rgba(0,0,0,0.3); padding: 100px 0;">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 50px;">Patrulla Canina TV</h2>
+                <div class="grid-container"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <!-- Los vídeos se cargarán aquí desde app.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Send Clips Section -->
+        <section id="clips" class="container" style="padding: 100px 0;">
+            <div class="grid-container" style="grid-template-columns: 1fr 1fr; align-items: center; gap: 60px;">
+                <div class="animate-fade">
+                    <h2 style="margin-bottom: 20px; border-left: 5px solid var(--secondary); padding-left: 20px;">¡Sal
+                        en el próximo vídeo!</h2>
+                    <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 30px;">
+                        ¿Has hecho una jugada increíble? ¿Un 360 no-scope o una victoria magistral imposible?
+                        Envíanos tu clip de YouTube o TikTok y Alfonso lo reaccionará en el canal.
+                    </p>
+                    <div style="font-size: 3rem; color: var(--secondary); opacity: 0.5;"><i
+                            class="fa-solid fa-clapperboard"></i></div>
+                </div>
+                <div class="glass-panel animate-fade" style="padding: 40px;">
+                    <form id="clip-form" onsubmit="event.preventDefault(); submitClip();">
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 10px; font-size: 0.9rem;">Tu Nick /
+                                Nombre</label>
+                            <input type="text" id="clip-nick" required placeholder="Ej: PlayerPro_99"
+                                style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 8px; color: white; outline: none;">
+                        </div>
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; margin-bottom: 10px; font-size: 0.9rem;">URL del Clip
+                                (YouTube/TikTok)</label>
+                            <input type="url" id="clip-url" required placeholder="https://youtube.com/..."
+                                style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 8px; color: white; outline: none;">
+                        </div>
+                        <button type="submit" class="btn-primary"
+                            style="width: 100%; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer !important;">ENVIAR
+                            JUGADA</button>
+                    </form>
+                    <div id="clip-success"
+                        style="display: none; text-align: center; color: var(--success); margin-top: 20px;">
+                        <i class="fa-solid fa-circle-check"></i> ¡Clip enviado con éxito! Alfonso lo revisará pronto.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Music Section (Nexo Beats) -->
+        <section id="musica" class="container" style="padding: 100px 0;">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 class="title-font"
+                    style="font-size: 2.5rem; background: linear-gradient(90deg, #ff00cc, #3333ff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                    Nexo Beats</h2>
+                <p style="color: var(--text-muted);">Escucha los temas originales creados por la Patrulla</p>
+            </div>
+            <div id="music-container" class="grid-3">
+                <!-- Canciones inyectadas por JS -->
+            </div>
+        </section>
+
+        <!-- Community Commands -->
+        <section id="comandos"
+            style="background: rgba(0,0,0,0.3); padding: 80px 0; border-top: 1px solid var(--glass-border);">
+            <div class="container" style="text-align: center;">
+                <h3 class="title-font" style="margin-bottom: 40px; color: var(--secondary);">Comandos de la Comunidad
+                </h3>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                    <div class="glass-panel"
+                        style="padding: 15px 25px; border-radius: 30px; display: flex; align-items: center; gap: 10px;">
+                        <code style="color: var(--primary); font-weight: bold;">!pc</code>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">Web de la Patrulla</span>
+                    </div>
+                    <div class="glass-panel"
+                        style="padding: 15px 25px; border-radius: 30px; display: flex; align-items: center; gap: 10px;">
+                        <code style="color: var(--primary); font-weight: bold;">!sensi</code>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">Sensibilidad de Alfonso</span>
+                    </div>
+                    <div class="glass-panel"
+                        style="padding: 15px 25px; border-radius: 30px; display: flex; align-items: center; gap: 10px;">
+                        <code style="color: var(--primary); font-weight: bold;">!tienda</code>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">Ver items de hoy</span>
+                    </div>
+                    <div class="glass-panel"
+                        style="padding: 15px 25px; border-radius: 30px; display: flex; align-items: center; gap: 10px;">
+                        <code style="color: var(--primary); font-weight: bold;">!discord</code>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">Unirse al servidor</span>
+                    </div>
+                    <div class="glass-panel"
+                        style="padding: 15px 25px; border-radius: 30px; display: flex; align-items: center; gap: 10px;">
+                        <code style="color: var(--primary); font-weight: bold;">!yt</code>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">Canal de YouTube</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer
+        style="padding: 80px 0; border-top: 1px solid var(--glass-border); text-align: center; background: #050510;">
+        <div class="container">
+            <div style="margin-bottom: 30px;">
+                <h3 class="title-font" style="margin-bottom: 25px;">Únete a la Patrulla</h3>
+                <div class="social-links" style="display: flex; gap: 30px; justify-content: center; font-size: 2rem;">
+                    <a href="https://www.youtube.com/@gameplayspatrullacanina3506" target="_blank"
+                        class="social-icon icon-yt" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://discord.com/channels/443169091788734464/443169091788734466" target="_blank"
+                        class="social-icon icon-ds" title="Discord"><i class="fa-brands fa-discord"></i></a>
+                    <a href="https://www.instagram.com/epicgames/" target="_blank" class="social-icon icon-ig"
+                        title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.twitch.tv/antonio27091" target="_blank" class="social-icon icon-twc"
+                        title="Twitch"><i class="fa-brands fa-twitch"></i></a>
+                    <a href="https://x.com/fortnite_es" target="_blank" class="social-icon icon-x"
+                        title="X (Twitter) España"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">© 2026 Nexus Fortnite - El portal definitivo para
+                fans. Creado por Alfonso.</p>
+        </div>
+    </footer>
+
+    <button id="back-to-top" title="Volver al inicio">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
