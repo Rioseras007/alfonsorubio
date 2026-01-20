@@ -1,0 +1,258 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --text-color: #333;
+    --light-text: #666;
+    --sidebar-bg: #fdfdfd;
+    --white: #ffffff;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5;
+    color: var(--text-color);
+    line-height: 1.5;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.cv-container {
+    background-color: var(--white);
+    width: 210mm;
+    /* A4 Width */
+    min-height: 297mm;
+    /* A4 Height */
+    display: flex;
+    box-shadow: var(--shadow);
+    border-radius: 4px;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    padding: 30px 20px;
+    border-right: 1px solid #eee;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+}
+
+.sidebar h1 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    line-height: 1.2;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.sidebar-section {
+    margin-bottom: 25px;
+}
+
+.sidebar-section h2 {
+    font-size: 0.95rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 3px;
+    margin-bottom: 12px;
+}
+
+.contact-info p {
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+    color: var(--light-text);
+}
+
+.skill-item {
+    margin-bottom: 10px;
+}
+
+.skill-item span {
+    font-size: 0.75rem;
+    display: block;
+    margin-bottom: 3px;
+    color: var(--secondary-color);
+}
+
+.skill-bar {
+    height: 6px;
+    background-color: #eee;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-bar .fill {
+    height: 100%;
+    background-color: var(--accent-color);
+}
+
+.tag-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tag-list li {
+    background-color: #f0f4f8;
+    color: var(--primary-color);
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Main Content Styling */
+.main-content {
+    flex: 1;
+    padding: 40px 30px;
+}
+
+.content-section {
+    margin-bottom: 25px;
+}
+
+.section-title {
+    font-size: 1.15rem;
+    color: var(--primary-color);
+    border-left: 4px solid var(--accent-color);
+    padding-left: 10px;
+    margin-bottom: 15px;
+    background: #f8f9fa;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.content-section p {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
+
+.experience-item {
+    margin-bottom: 15px;
+}
+
+.exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.exp-header h3 {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.exp-date {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.exp-location {
+    font-size: 0.8rem;
+    color: var(--light-text);
+    margin-top: 2px;
+}
+
+.course-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+}
+
+.course-list li {
+    font-size: 0.78rem;
+    padding-left: 12px;
+    position: relative;
+    color: var(--light-text);
+}
+
+.course-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+.course-list li strong {
+    color: var(--primary-color);
+}
+
+.footer-info {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+/* Download Button Styling */
+.download-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    text-align: center;
+    width: 100%;
+}
+
+.download-btn:hover {
+    background-color: var(--primary-color);
+}
+
+/* Print Optimization */
+@media print {
+    body {
+        background-color: white;
+        padding: 0;
+    }
+
+    .cv-container {
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+}
