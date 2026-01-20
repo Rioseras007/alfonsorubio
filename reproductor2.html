@@ -9,7 +9,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  background: #b30000;
+  background: #3086b9;
   color: #fff;
   min-height: 100vh;
 }
@@ -31,6 +31,31 @@ audio:focus-visible { outline:2px solid #fff; outline-offset:2px; }
 #volumeGlobal { width:100%; max-width:400px; margin:10px auto; display:block; }
 .timeDisplay { font-size:0.9rem; margin-top:4px; text-align:center; color:#ccc; }
 footer { text-align:center; padding:15px 10px; background: rgba(0,0,0,0.4); font-size:0.9rem; }
+
+
+#controlsGlobales button {
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin: 0 4px;
+  transition: 0.2s;
+}
+
+#controlsGlobales button:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.track.active {
+  background: rgba(0,0,0,0.35);
+  padding: 6px;
+  border-radius: 6px;
+}
+
+
 </style>
 </head>
 <body>
@@ -68,110 +93,219 @@ Para ver mis videos hechos con I.A visite mi canal de YouTube
 <section id="caratulas">
 <h2>Biografía del cantante</h2>
 <p>Para más información sobre el cantante, pulsa el siguiente enlace a Wikipedia:</p>
-<p><a href="https://es.wikipedia.org/wiki/Julio_Iglesias" target="_blank" rel="noopener noreferrer">Julio Iglesias - Wikipedia</a></p>
+<p><a href="https://es.wikipedia.org/wiki/Raphael" target="_blank" rel="noopener noreferrer">Raphael - Wikipedia</a></p>
 <br>
 <p>🎵 Disfruta del disco</p>
 <p>Carátulas del disco:</p>
-<img src="fronj.jpg" alt="Carátula frontal del disco" width="458" height="458">
+<img src="musica2/Folder.JPG" alt="Carátula frontal del disco" width="458" height="458">
 <p>------</p>
-<img src="covers/back.jpg" alt="Carátula trasera del disco" width="594" height="458">
+<img src="musica2/TRAS.JPG" alt="Carátula trasera del disco" width="594" height="458">
 </section>
 
 <section id="reproductor">
 <h2>Selector de canciones</h2>
+<div id="controlsGlobales" style="text-align:center; margin-bottom:20px;">
+  <button id="prevBtn">⏮️</button>
+  <button id="playPauseBtn">⏯️</button>
+  <button id="nextBtn">⏭️</button>
+  <button id="shuffleBtn">🔀</button>
+  <button id="repeatBtn">🔁</button>
+</div>
+
 
 <label for="volumeGlobal">Volumen global:</label>
 <input type="range" id="volumeGlobal" min="0" max="1" step="0.01" value="1">
 
 <div class="track">
-<p class="track-title">A flor de piel</p>
+<p class="track-title">Yo soy Aquel</p>
 <audio controls data-index="0">
-<source src="musica/pista1.mp3" type="audio/mp3">
+<source src="musica2/01 - Raphael - Yo Soy Aquel.mp3" type="audio/mp3">
 Tu navegador no soporta audio HTML5.
 </audio>
 <div class="timeDisplay">0:00 / 0:00</div>
 </div>
 
 <div class="track">
-<p class="track-title">Vivir</p>
+<p class="track-title">No puedo arrarcarte de mi</p>
 <audio controls data-index="1">
-<source src="musica/pista2.mp3" type="audio/mp3">
+<source src="musica2/02 - Raphael - No Puedo Arrancarte De MI.mp3" type="audio/mp3">
 Tu navegador no soporta audio HTML5.
 </audio>
 <div class="timeDisplay">0:00 / 0:00</div>
 </div>
 
 <div class="track">
-<p class="track-title">Dicen</p>
+<p class="track-title">Comoyo te amo</p>
 <audio controls data-index="2">
-<source src="musica/pista3.mp3" type="audio/mp3">
+<source src="musica2/03 - Raphael - Como Yo Te Amo.mp3" type="audio/mp3">
 Tu navegador no soporta audio HTML5.
 </audio>
 <div class="timeDisplay">0:00 / 0:00</div>
 </div>
 
 <div class="track">
-<p class="track-title">Manuela</p>
+<p class="track-title">Detenla ya</p>
 <audio controls data-index="3">
-<source src="musica/pista4.mp3" type="audio/mp3">
+<source src="musica2/04 - Raphael - Detenla Ya.mp3" type="audio/mp3">
 Tu navegador no soporta audio HTML5.
 </audio>
 <div class="timeDisplay">0:00 / 0:00</div>
 </div>
 
 <div class="track">
-<p class="track-title">Un adiós a media luz</p>
+<p class="track-title">Cierra mis ojos</p>
 <audio controls data-index="4">
-<source src="musica/pista5.mp3" type="audio/mp3">
+<source src="musica2/05 - Raphael - Cierro Mis Ojos.mp3" type="audio/mp3">
 Tu navegador no soporta audio HTML5.
 </audio>
 <div class="timeDisplay">0:00 / 0:00</div>
 </div>
 
 <div class="track">
-<p class="track-title">Te quiero así</p>
+<p class="track-title">Ave Maria</p>
 <audio controls data-index="5">
-<source src="musica/pista6.mp3" type="audio/mp3">
+<source src="musica2/06 - Raphael - Ave Maria.mp3" type="audio/mp3">
 Tu navegador no soporta audio HTML5.
 </audio>
 <div class="timeDisplay">0:00 / 0:00</div>
 </div>
 
 <div class="track">
-<p class="track-title">Por el amor de una mujer</p>
+<p class="track-title">Todo se derumbo dentro de mi</p>
 <audio controls data-index="6">
-<source src="musica/pista7.mp3" type="audio/mp3">
+<source src="musica2/07 - Raphael - Todo Se Derrumbo Dentro De MI.mp3" type="audio/mp3">
 Tu navegador no soporta audio HTML5.
 </audio>
 <div class="timeDisplay">0:00 / 0:00</div>
 </div>
 
 <div class="track">
-<p class="track-title">Desde que tú te has ido</p>
+<p class="track-title">Estuve enamorado</p>
 <audio controls data-index="7">
-<source src="musica/pista8.mp3" type="audio/mp3">
+<source src="musica2/08 - Raphael - Estuve Enamorado.mp3" type="audio/mp3">
 Tu navegador no soporta audio HTML5.
 </audio>
 <div class="timeDisplay">0:00 / 0:00</div>
 </div>
 
 <div class="track">
-<p class="track-title">Aún me queda la esperanza</p>
+<p class="track-title">La noche</p>
 <audio controls data-index="8">
-<source src="musica/pista9.mp3" type="audio/mp3">
+<source src="musica2/09 - Raphael - La Noche.mp3" type="audio/mp3">
 Tu navegador no soporta audio HTML5.
 </audio>
 <div class="timeDisplay">0:00 / 0:00</div>
 </div>
 
 <div class="track">
-<p class="track-title">En cualquier parte</p>
+<p class="track-title">Digan lo que digan</p>
 <audio controls data-index="9">
-<source src="musica/pista10.mp3" type="audio/mp3">
+<source src="musica2/10 - Raphael - Digan Lo Que Digan.mp3" type="audio/mp3">
 Tu navegador no soporta audio HTML5.
 </audio>
 <div class="timeDisplay">0:00 / 0:00</div>
 </div>
+
+<div class="track">
+<p class="track-title">Yo sigo siendo aquel</p>
+<audio controls data-index="10">
+<source src="musica2/11 - Raphael - Yo Sigo Siendo Aquel.mp3" type="audio/mp3">
+Tu navegador no soporta audio HTML5.
+</audio>
+<div class="timeDisplay">0:00 / 0:00</div>
+</div>
+
+
+<div class="track">
+<p class="track-title">Yo sigo siendo aquel</p>
+<audio controls data-index="11">
+<source src="musica2/12 - Raphael - A Esa.mp3" type="audio/mp3">
+Tu navegador no soporta audio HTML5.
+</audio>
+<div class="timeDisplay">0:00 / 0:00</div>
+</div>
+
+<div class="track">
+<p class="track-title">La Cancion Del Tamborilero</p>
+<audio controls data-index="12">
+<source src="musica2/13 - Raphael - La Cancion Del Tamborilero.mp3" type="audio/mp3">
+Tu navegador no soporta audio HTML5.
+</audio>
+<div class="timeDisplay">0:00 / 0:00</div>
+</div>
+
+<div class="track">
+<p class="track-title">Hablemos del amor</p>
+<audio controls data-index="13">
+<source src="musica2/14 - Raphael - Hablemos Del Amor.mp3" type="audio/mp3">
+Tu navegador no soporta audio HTML5.
+</audio>
+<div class="timeDisplay">0:00 / 0:00</div>
+</div>
+
+<div class="track">
+<p class="track-title">Cuando tu no estes</p>
+<audio controls data-index="14">
+<source src="musica2/15 - Raphael - Cuando Tu No EStas.mp3" type="audio/mp3">
+Tu navegador no soporta audio HTML5.
+</audio>
+<div class="timeDisplay">0:00 / 0:00</div>
+</div>
+
+<div class="track">
+<p class="track-title">Al Ponerse El Sol</p>
+<audio controls data-index="15">
+<source src="musica2/16 - Raphael - Al Ponerse El Sol.mp3" type="audio/mp3">
+Tu navegador no soporta audio HTML5.
+</audio>
+<div class="timeDisplay">0:00 / 0:00</div>
+</div>
+
+
+<div class="track">
+<p class="track-title">En carne viva</p>
+<audio controls data-index="16">
+<source src="musica2/17 - Raphael - En Carne Viva.mp3" type="audio/mp3">
+Tu navegador no soporta audio HTML5.
+</audio>
+<div class="timeDisplay">0:00 / 0:00</div>
+</div>
+
+<div class="track">
+<p class="track-title">Que tal te va sin mi</p>
+<audio controls data-index="17">
+<source src="musica2/18 - Raphael - Que Tal Te Va Sin Mi.mp3" type="audio/mp3">
+Tu navegador no soporta audio HTML5.
+</audio>
+<div class="timeDisplay">0:00 / 0:00</div>
+</div>
+
+<div class="track">
+<p class="track-title">Provocacion</p>
+<audio controls data-index="18">
+<source src="musica2/19 - Raphael - Provocacion.mp3" type="audio/mp3">
+Tu navegador no soporta audio HTML5.
+</audio>
+<div class="timeDisplay">0:00 / 0:00</div>
+</div>
+
+<div class="track">
+<p class="track-title">Hay Momentos De Amor</p>
+<audio controls data-index="19">
+<source src="musica2/20 - Raphael - Hay Momentos De Amor.mp3" type="audio/mp3">
+Tu navegador no soporta audio HTML5.
+</audio>
+<div class="timeDisplay">0:00 / 0:00</div>
+</div>
+
+
+
+
+
+
+
+
+
 
 </section>
 </main>
@@ -183,29 +317,117 @@ Tu navegador no soporta audio HTML5.
 <script>
 (() => {
 const audios = document.querySelectorAll("audio");
+const tracks = document.querySelectorAll(".track");
 const volumeGlobal = document.getElementById("volumeGlobal");
 
-// Función para formatear tiempo mm:ss
+// Botones globales
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const playPauseBtn = document.getElementById("playPauseBtn");
+const shuffleBtn = document.getElementById("shuffleBtn");
+const repeatBtn = document.getElementById("repeatBtn");
+
+// Estado global
+let currentIndex = 0;
+let isShuffle = false;
+let repeatMode = 0; // 0=off, 1=repeat all, 2=repeat one
+
+// Formatear tiempo mm:ss
 function formatTime(t){
   const m = Math.floor(t/60);
   const s = Math.floor(t%60).toString().padStart(2,"0");
   return `${m}:${s}`;
 }
 
-// Pausar todos los audios menos el que se está reproduciendo
-audios.forEach(audio => {
-  audio.addEventListener("play", e => {
-    audios.forEach(a => {
-      if(a !== audio) a.pause();
-    });
-    // Guardar última canción en localStorage
-    localStorage.setItem("lastTrack", audio.dataset.index);
+// Resaltar canción activa
+function marcarActiva(index){
+  tracks.forEach(t => t.classList.remove("active"));
+  tracks[index].classList.add("active");
+  tracks[index].scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+// Pausa todos menos uno
+function pararTodos(except){
+  audios.forEach(a => { if(a !== except) a.pause(); });
+}
+
+// Reproducir canción por índice
+function playTrack(i){
+  if(!audios[i]) return;
+  currentIndex = i;
+  pararTodos(audios[i]);
+  audios[i].play();
+  marcarActiva(i);
+  localStorage.setItem("lastTrack", i);
+}
+
+// Siguiente canción
+function nextTrack(){
+  if(isShuffle){
+    let r;
+    do { r = Math.floor(Math.random()*audios.length); }
+    while(r === currentIndex);
+    playTrack(r);
+  } else {
+    let next = currentIndex + 1;
+    if(next >= audios.length) {
+      if(repeatMode === 1) next = 0; else return;
+    }
+    playTrack(next);
+  }
+}
+
+// Canción anterior
+function prevTrack(){
+  let prev = currentIndex - 1;
+  if(prev < 0){
+    if(repeatMode === 1) prev = audios.length - 1; else return;
+  }
+  playTrack(prev);
+}
+
+// Controles de botones
+nextBtn.onclick = nextTrack;
+prevBtn.onclick = prevTrack;
+
+playPauseBtn.onclick = () => {
+  const a = audios[currentIndex];
+  if(a.paused) a.play(); else a.pause();
+};
+
+// Shuffle
+shuffleBtn.onclick = () => {
+  isShuffle = !isShuffle;
+  shuffleBtn.style.opacity = isShuffle ? "1" : "0.5";
+};
+
+// Repeat
+repeatBtn.onclick = () => {
+  repeatMode = (repeatMode + 1) % 3;
+  repeatBtn.textContent = repeatMode === 0 ? "🔁" :
+                          repeatMode === 1 ? "🔁 ALL" :
+                                             "🔂 ONE";
+};
+
+// Eventos en cada audio
+audios.forEach((audio, i) => {
+  const timeDisplay = tracks[i].querySelector(".timeDisplay");
+
+  audio.addEventListener("play", () => {
+    pararTodos(audio);
+    currentIndex = i;
+    marcarActiva(i);
+    localStorage.setItem("lastTrack", i);
   });
 
-  // Actualizar tiempo actual / duración
-  const timeDisplay = audio.nextElementSibling;
+  audio.addEventListener("ended", () => {
+    if(repeatMode === 2) playTrack(i);
+    else nextTrack();
+  });
+
   audio.addEventListener("timeupdate", () => {
-    timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration || 0)}`;
+    timeDisplay.textContent =
+      `${formatTime(audio.currentTime)} / ${formatTime(audio.duration || 0)}`;
   });
 });
 
@@ -214,14 +436,15 @@ volumeGlobal.addEventListener("input", () => {
   audios.forEach(a => a.volume = volumeGlobal.value);
 });
 
-// Reproducir última canción si existe
+// Cargar última canción
 const lastIndex = localStorage.getItem("lastTrack");
-if(lastIndex && audios[lastIndex]) {
-  // Solo pre-cargar, no reproducir automáticamente para no molestar
-  audios[lastIndex].currentTime = 0;
+if(lastIndex && audios[lastIndex]){
+  currentIndex = Number(lastIndex);
+  marcarActiva(currentIndex);
 }
 })();
 </script>
+
 
 </body>
 </html>
