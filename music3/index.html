@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Catalog</title>
+    <title>Music Web Mp3 player</title>
     <style>
         :root {
             --primary: #6366f1;
@@ -273,22 +273,32 @@
 
 
         .caratulas {
-        position: relative;
-        left: 600px;
-        height: 500px;
-        width: 500px;
-        background-color: rgb(101, 89, 124);
-        gap: 150px;
-        z-index:auto;
-        border-radius: 15px;
+        display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+            flex-wrap: wrap;
+       
 
-       item {
-       background-color: rgb(25, 219, 11);
-       padding: 20px;
-       margin: 10px;
-       height: 300px;
-       width: 300px;
+       .cartulas .item {
+       background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
+
+.caratulas img {
+    border-radius: 8px;
+            object-fit: cover;
+            width: 100%;
+            height: auto;
+            max-width: 240px; /* Para mantener un tamaño razonable */
+}
+
+
+
+
+
 
 
 }
@@ -301,7 +311,7 @@
 
     <header>
 
-        <h1>🎵 Music Cloud WebPlayer </h1>
+        <h1>🎵 Music Cloud - Web Player mp3</h1>
         <div class="search-container">
             <span class="search-icon">🔍</span>
             <input type="text" class="search-input" placeholder="Buscar canciones..." id="searchInput">
@@ -450,7 +460,8 @@
         renderSongs();
     </script>
 
-    <footer>©️ Patrulla Canina 2026 & Gemini</footer>
+    <footer><div align="center" style color="red">©️ Patrulla Camina 2026 & Gemini</div></footer>
+    <div align="center"><a href="../index.html" target="_blank">HOME</a></div>
 </body>
 </html>
     
