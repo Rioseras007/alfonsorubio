@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Music Cloud - Catálogo Julio Iglesias</title>
+
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --accent: #22c55e;
+      --bg-page: #020617;
+      --bg-elevated: #020617;
+      --bg-panel: #020617;
+      --bg-card: #020617;
+      --border-subtle: rgba(148, 163, 184, 0.25);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --text-soft: #6b7280;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, #1d2438 0, #020617 45%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 112px; /* espacio para el player fijo */
+    }
+
+    /* CABECERA PRINCIPAL */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to right, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.9));
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 1.25rem 2.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: conic-gradient(from 160deg, var(--primary), var(--accent), var(--primary-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.2), 0 12px 30px rgba(15, 23, 42, 0.8);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase; /* Marca tipo logo */
+    }
+
+    .brand-text h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .brand-text p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .search-container {
+      position: relative;
+      max-width: 380px;
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.7rem 1rem 0.7rem 2.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-main);
+      outline: none;
+      font-size: 0.9rem;
+      transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-soft);
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.4);
+      background: #020617;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.95rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      border: 2px solid var(--text-soft);
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6);
+    }
+
+    .search-icon::after {
+      content: "";
+      position: absolute;
+      width: 7px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--text-soft);
+      right: -3px;
+      bottom: -2px;
+      transform: rotate(45deg);
+    }
+
+    /* LAYOUT PRINCIPAL */
+    .main-shell {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 2rem 2.25rem 2.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.6fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 900px) {
+      .main-shell {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* PANEL IZQUIERDO: CARÁTULAS */
+    .album-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .album-card {
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), #020617);
+      border-radius: 1.5rem;
+      border: 1px solid var(--border-subtle);
+      padding: 1.4rem;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+    }
+
+    .album-title {
+      margin-bottom: 0.75rem;
+    }
+
+    .album-title h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .album-title p {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+    }
+
+    .caratulas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    .caratula-item {
+      background: #020617;
+      border-radius: 1rem;
+      padding: 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.85);
+    }
+
+    .caratula-item img {
+      display: block;
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .caratula-item img {
+        width: 160px;
+        height: 160px;
+      }
+    }
+
+    /* PANEL DERECHO: LISTA DE CANCIONES */
+    .songs-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .songs-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .songs-header h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .songs-header p {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .song-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .song-card {
+      background: var(--bg-card);
+      padding: 0.8rem 0.9rem;
+      border-radius: 0.9rem;
+      cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border: 1px solid transparent;
+    }
+
+    .song-card:hover {
+      transform: translateY(-2px);
+      background: #111827;
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .song-card.playing {
+      border-color: var(--primary);
+      background: rgba(99, 102, 241, 0.15);
+    }
+
+    .song-index {
+      width: 26px;
+      text-align: right;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .song-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 0.7rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .song-info {
+      overflow: hidden;
+    }
+
+    .song-title {
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 0.1rem;
+      font-size: 0.9rem;
+    }
+
+    .song-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* PLAYER FIJO INFERIOR */
+    .player-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.97);
+      backdrop-filter: blur(18px);
+      border-top: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 0.85rem 2.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      z-index: 100;
+      transform: translateY(100%);
+      transition: transform 0.3s ease-out;
+      box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .player-bar.active {
+      transform: translateY(0);
+    }
+
+    .current-track {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .cover-thumb {
+      width: 52px;
+      height: 52px;
+      border-radius: 0.9rem;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      flex-shrink: 0;
+    }
+
+    .cover-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .track-info h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .track-info p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
+      flex: 1.5;
+      max-width: 520px;
+    }
+
+    .buttons {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .btn-control {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.15s ease, transform 0.1s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .btn-control:hover {
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .btn-play {
+      width: 40px;
+      height: 40px;
+      background: #ffffff;
+      color: #000000;
+      border-radius: 999px;
+      font-size: 1.1rem;
+    }
+
+    .btn-play:hover {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .progress-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .progress-container input[type="range"] {
+      flex: 1;
+      appearance: none;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.5);
+      outline: none;
+    }
+
+    .progress-container input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.4);
+      cursor: pointer;
+    }
+
+    .player-extra {
+      min-width: 80px;
+      text-align: right;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .format-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-mark">MC</div>
+        <div class="brand-text">
+          <h1>Music Cloud</h1>
+          <p>Catálogo: Julio Iglesias – Tangos</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="search-container">
+          <span class="search-icon"></span>
+          <input
+            id="searchInput"
+            class="search-input"
+            type="text"
+            placeholder="Buscar canción..."
+            autocomplete="off"
+          />
+        </div>
+      </div>
+    </header>
+
+    <main class="main-shell">
+      <!-- Panel de carátulas -->
+      <aside class="album-panel">
+        <div class="album-card">
+          <div class="album-title">
+            <h2>Julio Iglesias - Tangos</h2>
+            <p>Carátulas del álbum</p>
+          </div>
+          <div class="caratulas">
+            <div class="caratula-item">
+              <img src="frontcover.jpg" alt="Carátula frontal" />
+            </div>
+            <div class="caratula-item">
+              <img src="trascover.jpg" alt="Carátula trasera" />
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Panel de lista de canciones -->
+      <section class="songs-panel">
+        <div class="songs-header">
+          <h2>Listado de canciones</h2>
+          <p>Julio Iglesias – Colección de tangos</p>
+        </div>
+        <div id="songList" class="song-list"></div>
+      </section>
+    </main>
+
+    <!-- Player fijo inferior -->
+    <footer id="playerBar" class="player-bar">
+      <div class="current-track">
+        <div class="cover-thumb">
+          <img src="frontcover.jpg" alt="Carátula actual" />
+        </div>
+        <div class="track-info">
+          <h3 id="currentTitle">Selecciona una canción</h3>
+          <p id="currentMeta">Julio Iglesias – Tangos</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="buttons">
+          <button id="prevBtn" class="btn-control" type="button">⏮</button>
+          <button id="playBtn" class="btn-control btn-play" type="button">▶</button>
+          <button id="nextBtn" class="btn-control" type="button">⏭</button>
+        </div>
+        <div class="progress-container">
+          <span id="currentTime">0:00</span>
+          <input id="progressBar" type="range" min="0" max="100" value="0" />
+          <span id="duration">0:00</span>
+        </div>
+      </div>
+
+      <div class="player-extra">
+        <span class="format-pill">MP3</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Tu variable de canciones integrada en el diseño robusto
+    const songs = [
+      { title: '01. JULIO IGLESIAS - La cumparsita', path: '01.%20JULIO%20IGLESIAS%20-%20La%20cumparsita.mp3', format: 'MP3' },
+      { title: '02. JULIO IGLESIAS - El día que me quieras', path: '02.%20JULIO%20IGLESIAS%20-%20El%20d%C3%ADa%20que%20me%20quieras.mp3', format: 'MP3' },
+      { title: '03. JULIO IGLESIAS - A media luz', path: '03.%20JULIO%20IGLESIAS%20-%20A%20media%20luz.mp3', format: 'MP3' },
+      { title: '04. JULIO IGLESIAS - Volver', path: '04.%20JULIO%20IGLESIAS%20-%20Volver.mp3', format: 'MP3' },
+      { title: '05. JULIO IGLESIAS - Yira, yira', path: '05.%20JULIO%20IGLESIAS%20-%20Yira%2C%20yira.mp3', format: 'MP3' },
+      { title: '06. JULIO IGLESIAS - Mano a mano', path: '06.%20JULIO%20IGLESIAS%20-%20Mano%20a%20mano.mp3', format: 'MP3' },
+      { title: '07. JULIO IGLESIAS - El choclo', path: '07.%20JULIO%20IGLESIAS%20-%20El%20choclo.mp3', format: 'MP3' },
+      { title: '08. JULIO IGLESIAS - Adiós, Pampa mía', path: '08.%20JULIO%20IGLESIAS%20-%20Adi%C3%B3s%2C%20Pampa%20m%C3%ADa.mp3', format: 'MP3' },
+      { title: '09. JULIO IGLESIAS - Cambalache', path: '09.%20JULIO%20IGLESIAS%20-%20Cambalache.mp3', format: 'MP3' },
+      { title: '10. JULIO IGLESIAS - ¡Uno!', path: '10.%20JULIO%20IGLESIAS%20-%20%C2%A1Uno%21.mp3', format: 'MP3' },
+      { title: '11. JULIO IGLESIAS - Caminito', path: '11.%20JULIO%20IGLESIAS%20-%20Caminito.mp3', format: 'MP3' },
+      { title: '12. JULIO IGLESIAS - Mi Buenos Aires querido', path: '12.%20JULIO%20IGLESIAS%20-%20Mi%20Buenos%20Aires%20querido.mp3', format: 'MP3' }
+    ];
+
+    const audio = new Audio();
+    let currentIndex = -1;
+
+    const songListEl = document.getElementById('songList');
+    const searchInput = document.getElementById('searchInput');
+    const playerBar = document.getElementById('playerBar');
+    const playBtn = document.getElementById('playBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentTitleEl = document.getElementById('currentTitle');
+    const currentMetaEl = document.getElementById('currentMeta');
+    const progressBar = document.getElementById('progressBar');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationEl = document.getElementById('duration');
+
+    function renderSongs(filter = '') {
+      const query = filter.toLowerCase().trim();
+      songListEl.innerHTML = '';
+
+      songs
+        .map((song, index) => ({ song, index }))
+        .filter(({ song }) => !query || song.title.toLowerCase().includes(query))
+        .forEach(({ song, index }) => {
+          const card = document.createElement('div');
+          card.className = 'song-card';
+          if (index === currentIndex) card.classList.add('playing');
+
+          card.innerHTML = `
+            <div class="song-index">${String(index + 1).padStart(2, '0')}.</div>
+            <div class="song-icon">♪</div>
+            <div class="song-info">
+              <div class="song-title">${song.title}</div>
+              <div class="song-meta">${song.format || 'MP3'}</div>
+            </div>
+          `;
+
+          card.addEventListener('click', () => playSong(index));
+          songListEl.appendChild(card);
+        });
+    }
+
+    function playSong(index) {
+      if (index < 0 || index >= songs.length) return;
+
+      currentIndex = index;
+      const song = songs[index];
+
+      audio.src = song.path; // Usa la ruta que ya tienes con %20
+      audio.play();
+
+      currentTitleEl.textContent = song.title;
+      currentMetaEl.textContent = song.format || 'MP3';
+      playBtn.textContent = '⏸';
+      playerBar.classList.add('active');
+      updateSongCards();
+    }
+
+    function updateSongCards() {
+      const cards = document.querySelectorAll('.song-card');
+      cards.forEach((card, idx) => {
+        card.classList.toggle('playing', idx === currentIndex);
+      });
+    }
+
+    function togglePlay() {
+      if (!audio.src) {
+        if (songs.length > 0) playSong(0);
+        return;
+      }
+
+      if (audio.paused) {
+        audio.play();
+        playBtn.textContent = '⏸';
+      } else {
+        audio.pause();
+        playBtn.textContent = '▶';
+      }
+    }
+
+    function playNext() {
+      if (!songs.length) return;
+      const nextIndex = currentIndex < songs.length - 1 ? currentIndex + 1 : 0;
+      playSong(nextIndex);
+    }
+
+    function playPrev() {
+      if (!songs.length) return;
+      const prevIndex = currentIndex > 0 ? currentIndex - 1 : songs.length - 1;
+      playSong(prevIndex);
+    }
+
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60) || 0;
+      const s = Math.floor(seconds % 60) || 0;
+      return `${m}:${String(s).padStart(2, '0')}`;
+    }
+
+    audio.addEventListener('timeupdate', () => {
+      if (!isNaN(audio.duration) && audio.duration > 0) {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressBar.value = progress || 0;
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+        durationEl.textContent = formatTime(audio.duration);
+      }
+    });
+
+    audio.addEventListener('ended', playNext);
+
+    progressBar.addEventListener('input', () => {
+      if (!isNaN(audio.duration) && audio.duration > 0) {
+        const newTime = (progressBar.value / 100) * audio.duration;
+        audio.currentTime = newTime;
+      }
+    });
+
+    playBtn.addEventListener('click', togglePlay);
+    prevBtn.addEventListener('click', playPrev);
+    nextBtn.addEventListener('click', playNext);
+
+    searchInput.addEventListener('input', (e) => {
+      renderSongs(e.target.value);
+    });
+
+    // Inicialización
+    renderSongs();
+  </script>
+</body>
+</html>
