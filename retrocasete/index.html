@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cassette Studio Pro: Fixed Edition</title>
+    <style>
+        :root { --p-color: #af7340; --bg-ui: #e7dfcf; --alert: #d93025; --accent: #1a1a1a; --led: #00ff00; }
+        body { font-family: system-ui, sans-serif; background: var(--bg-ui); margin: 0; display: flex; height: 100vh; overflow: hidden; }
+        
+        #panel { width: 420px; background: #f8f1df; border-right: 3px solid #b48b55; padding: 20px; overflow-y: auto; box-sizing: border-box; }
+        h2 { color: #764d26; margin: 0 0 20px; font-size: 1.2rem; border-bottom: 2px solid #b48b55; padding-bottom: 10px; }
+        .config-box { background: #efe4d1; padding: 12px; border-radius: 8px; margin-bottom: 12px; border: 1px solid #dccbb0; }
+        
+        #audio-preview-zone { background: var(--accent); color: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+        #visualizer { width: 100%; height: 40px; background: #000; border-radius: 4px; margin-bottom: 10px; }
+        audio { width: 100%; height: 30px; filter: invert(100%); margin-bottom: 8px; }
+        .btn-add-mixtape { background: #27ae60; color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; font-size: 11px; }
+
+        label { font-weight: bold; display: block; margin: 8px 0 4px; color: #56412c; font-size: 0.8rem; }
+        input, select { width: 100%; box-sizing: border-box; padding: 7px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; }
+        
+        .song-row { display: flex; gap: 5px; margin-bottom: 4px; align-items: center; }
+        .input-name { flex: 1; } .input-time { width: 55px; text-align: center; }
+        .btn-del { background:none; border:none; color:var(--alert); cursor:pointer; font-weight:bold; padding: 0 5px; }
+
+        h3 { font-size: 0.85rem; color: #764d26; display: flex; justify-content: space-between; align-items: center; margin: 15px 0 8px; border-left: 4px solid var(--p-color); padding-left: 8px; }
+        .btn-plus { background: var(--p-color); color: white; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 14px; line-height: 1; }
+        .total-time { font-size: 0.8rem; font-weight: bold; padding: 2px 6px; border-radius: 4px; background: #dccbb0; margin-left: auto; margin-right: 10px; }
+        .overlimit { background: var(--alert); color: white !important; }
+        
+        #canvasArea { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        #canvasArea.dragover { background: rgba(175, 115, 64, 0.15); outline: 4px dashed var(--p-color); outline-offset: -20px; }
+        .preview-wrapper { background: white; padding: 30px; box-shadow: 0 15px 50px rgba(0,0,0,0.15); }
+        #main-preview { display: flex; height: 320px; background: #fff; position: relative; }
+        .block { position: relative; background-size: cover; background-position: center; height: 100%; border-right: 1px dashed rgba(0,0,0,0.1); }
+        #p-lomo { width: 38px; } #p-portada { width: 208px; } #p-lista { width: 240px; border-right: none; }
+        #lomo-text-prev { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(90deg); white-space: nowrap; font-weight: bold; }
+        .songs-container { padding: 30px 15px; font-size: 9px; pointer-events: none; }
+        .btn-save { margin-top: 15px; width: 100%; padding: 14px; border: none; background: var(--p-color); color: white; font-weight: bold; cursor: pointer; border-radius: 6px; font-size: 15px; box-shadow: 0 4px 0 #8c5c32; }
+    </style>
+</head>
+<body>
+
+<div id="panel">
+    <h2>Cassette Studio Pro</h2>
+
+    <div id="audio-preview-zone">
+        <canvas id="visualizer"></canvas>
+        <div class="audio-controls">
+            <input type="file" id="audioLoader" accept="audio/*" style="font-size: 10px;">
+            <audio id="mainPlayer" controls crossorigin="anonymous"></audio>
+            <button class="btn-add-mixtape" id="confirmAdd">AÑADIR CANCIÓN ESCUCHADA</button>
+        </div>
+    </div>
+    
+    <div class="config-box">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <div><label>🖋️ Fuente</label>
+                <select id="fontFamily">
+                    <option value="Arial, sans-serif">Moderno</option>
+                    <option value="'Times New Roman', serif">Clásico</option>
+                    <option value="'Courier New', monospace" selected>Máquina</option>
+                    <option value="Impact">Bold Retro</option>
+                </select>
+            </div>
+            <div><label>🎨 Letra</label><input type="color" id="textColor" value="#000000" style="height:33px;"></div>
+        </div>
+    </div>
+
+    <div class="config-box">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <div><label>🎨 Fondo</label><input type="color" id="bgColor" value="#ffffff" style="height:33px;"></div>
+            <div><label>📼 Cinta</label><select id="tapeModel"><option value="15">C-30</option><option value="30">C-60</option><option value="45" selected>C-90</option></select></div>
+        </div>
+    </div>
+
+    <div class="config-box">
+        <label>📐 Borde de Corte</label>
+        <div style="display:flex; gap:10px;">
+            <select id="borderWidth" style="flex:2"><option value="1">Fino</option><option value="3" selected>Grueso</option></select>
+            <input type="color" id="borderColor" value="#000000" style="flex:1; height:33px;">
+        </div>
+    </div>
+
+    <label>Título Lomo</label>
+    <input type="text" id="lomoInput" value="MI MIXTAPE 2026">
+    
+    <label>🖼️ Imágenes</label>
+    <div style="display:flex; gap:5px;"><input type="file" id="filePortada" style="font-size:9px;"><input type="file" id="fileLista" style="font-size:9px;"></div>
+
+    <h3>LADO A <span id="totalA" class="total-time">00:00</span> <button class="btn-plus" onclick="addSongRow('a')">+</button></h3>
+    <div id="listA-inputs"></div>
+    
+    <h3>LADO B <span id="totalB" class="total-time">00:00</span> <button class="btn-plus" onclick="addSongRow('b')">+</button></h3>
+    <div id="listB-inputs"></div>
+
+    <button class="btn-save" id="saveBtn">EXPORTAR J-CARD FINAL</button>
+</div>
+
+<div id="canvasArea">
+    <div class="preview-wrapper">
+        <div id="main-preview">
+            <div id="p-lomo" class="block"><span id="lomo-text-prev"></span></div>
+            <div id="p-portada" class="block"></div>
+            <div id="p-lista" class="block">
+                <div class="songs-container" id="preview-text-box">
+                    <strong>LADO A</strong> <ul id="listA-prev" style="list-style:none; padding:0; margin:5px 0 12px 0"></ul>
+                    <strong>LADO B</strong> <ul id="listB-prev" style="list-style:none; padding:0; margin:5px 0 0 0"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const scale = 11.81, mmLomo = 12, mmPortada = 65, mmLista = 75, mmAlto = 101;
+    let tempTrack = { name: "", time: "" };
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const player = document.getElementById('mainPlayer');
+    const canvasV = document.getElementById('visualizer');
+    const ctxV = canvasV.getContext('2d');
+    let analyzer, source;
+
+    function initAnalyzer() {
+        if (!analyzer) {
+            analyzer = audioCtx.createAnalyser();
+            source = audioCtx.createMediaElementSource(player);
+            source.connect(analyzer); analyzer.connect(audioCtx.destination);
+            analyzer.fftSize = 64;
+            drawVisualizer();
+        }
+    }
+
+    function drawVisualizer() {
+        requestAnimationFrame(drawVisualizer);
+        const bufferLength = analyzer.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+        analyzer.getByteFrequencyData(dataArray);
+        ctxV.fillStyle = '#000'; ctxV.fillRect(0, 0, canvasV.width, canvasV.height);
+        const barWidth = (canvasV.width / bufferLength) * 2.5;
+        let x = 0;
+        for(let i = 0; i < bufferLength; i++) {
+            const h = dataArray[i] / 5;
+            ctxV.fillStyle = `rgb(0, ${dataArray[i] + 100}, 0)`;
+            ctxV.fillRect(x, canvasV.height - h, barWidth - 1, h);
+            x += barWidth;
+        }
+    }
+
+    const dropZone = document.getElementById('canvasArea');
+    dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('dragover'); };
+    dropZone.ondragleave = () => dropZone.classList.remove('dragover');
+    dropZone.ondrop = async (e) => {
+        e.preventDefault(); dropZone.classList.remove('dragover');
+        const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('audio/'));
+        for (const file of files) {
+            const audio = new Audio(URL.createObjectURL(file));
+            await new Promise(r => {
+                audio.onloadedmetadata = () => {
+                    const side = (calculateTotal('a') < document.getElementById('tapeModel').value * 60) ? 'a' : 'b';
+                    addSongRow(side, file.name.replace(/\.[^/.]+$/, "").replace(/_/g, " "), formatTime(Math.round(audio.duration)));
+                    r();
+                };
+            });
+        }
+    };
+
+    document.getElementById('audioLoader').onchange = (e) => {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        initAnalyzer();
+        const file = e.target.files[0];
+        if (file) {
+            player.src = URL.createObjectURL(file);
+            tempTrack.name = file.name.replace(/\.[^/.]+$/, "").replace(/_/g, " ");
+            player.onloadedmetadata = () => tempTrack.time = formatTime(Math.round(player.duration));
+        }
+    };
+
+    document.getElementById('confirmAdd').onclick = () => {
+        if (!tempTrack.name) return;
+        const side = (calculateTotal('a') < document.getElementById('tapeModel').value * 60) ? 'a' : 'b';
+        addSongRow(side, tempTrack.name, tempTrack.time);
+    };
+
+    function formatTime(s) { return `${Math.floor(s/60)}:${(s%60).toString().padStart(2,'0')}`; }
+    
+    function calculateTotal(side) {
+        return Array.from(document.querySelectorAll(`.time-input-${side}`)).reduce((acc, i) => {
+            const p = i.value.split(':');
+            return acc + (p.length < 2 ? 0 : (parseInt(p[0])*60 + parseInt(p[1])));
+        }, 0);
+    }
+
+    function addSongRow(side, name="", time="") {
+        const container = document.getElementById(`list${side.toUpperCase()}-inputs`);
+        const div = document.createElement('div');
+        div.className = 'song-row';
+        div.innerHTML = `
+            <input type="text" class="song-input-${side} input-name" value="${name}" placeholder="Título">
+            <input type="text" class="time-input-${side} input-time" value="${time}" placeholder="0:00">
+            <button class="btn-del" onclick="this.parentElement.remove(); updatePreview();">×</button>
+        `;
+        container.appendChild(div);
+        div.querySelectorAll('input').forEach(i => i.addEventListener('input', updatePreview));
+        updatePreview();
+    }
+
+    function updatePreview() {
+        const bg = document.getElementById('bgColor').value, tc = document.getElementById('textColor').value, ff = document.getElementById('fontFamily').value;
+        const bW = document.getElementById('borderWidth').value, bC = document.getElementById('borderColor').value;
+        const limit = document.getElementById('tapeModel').value * 60;
+        
+        const prev = document.getElementById('main-preview');
+        prev.style.backgroundColor = bg;
+        prev.style.outline = bW > 0 ? `${bW}px solid ${bC}` : "none";
+        
+        document.getElementById('preview-text-box').style.fontFamily = ff;
+        document.getElementById('preview-text-box').style.color = tc;
+        document.getElementById('lomo-text-prev').style.fontFamily = ff;
+        document.getElementById('lomo-text-prev').style.color = tc;
+        document.getElementById('lomo-text-prev').textContent = document.getElementById('lomoInput').value.toUpperCase();
+
+        document.querySelectorAll('.block').forEach(b => b.style.backgroundColor = bg);
+        
+        ['a', 'b'].forEach(side => {
+            const total = calculateTotal(side);
+            document.getElementById(`total${side.toUpperCase()}`).textContent = formatTime(total);
+            document.getElementById(`total${side.toUpperCase()}`).classList.toggle('overlimit', total > limit);
+            const listPrev = document.getElementById(`list${side.toUpperCase()}-prev`);
+            listPrev.innerHTML = '';
+            const names = document.querySelectorAll(`.song-input-${side}`);
+            const times = document.querySelectorAll(`.time-input-${side}`);
+            names.forEach((n, i) => {
+                if(n.value) listPrev.innerHTML += `<li style="display:flex; justify-content:space-between"><span>${i+1}. ${n.value}</span><span>${times[i].value}</span></li>`;
+            });
+        });
+    }
+
+    document.getElementById('filePortada').onchange = (e) => { if(e.target.files[0]) document.getElementById('p-portada').style.backgroundImage = `url(${URL.createObjectURL(e.target.files[0])})`; updatePreview(); };
+    document.getElementById('fileLista').onchange = (e) => { if(e.target.files[0]) document.getElementById('p-lista').style.backgroundImage = `url(${URL.createObjectURL(e.target.files[0])})`; updatePreview(); };
+    ['lomoInput', 'bgColor', 'tapeModel', 'borderWidth', 'borderColor', 'fontFamily', 'textColor'].forEach(id => document.getElementById(id).addEventListener('input', updatePreview));
+
+    document.getElementById('saveBtn').onclick = function() {
+        const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d');
+        const bW = parseInt(document.getElementById('borderWidth').value), ff = document.getElementById('fontFamily').value, tc = document.getElementById('textColor').value;
+        canvas.width = (mmLomo + mmPortada + mmLista) * scale; canvas.height = mmAlto * scale;
+        ctx.fillStyle = document.getElementById('bgColor').value; ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const drawS = (id, x, w) => {
+            const bgImg = window.getComputedStyle(document.getElementById(id)).backgroundImage;
+            if(bgImg !== 'none') { const img = new Image(); img.src = bgImg.slice(5, -2); ctx.drawImage(img, x * scale, 0, w * scale, mmAlto * scale); }
+        };
+        drawS('p-portada', mmLomo, mmPortada); drawS('p-lista', mmLomo + mmPortada, mmLista);
+
+        ctx.save(); ctx.translate((mmLomo/2)*scale, (mmAlto/2)*scale); ctx.rotate(Math.PI/2);
+        ctx.textAlign = "center"; ctx.fillStyle = tc; ctx.font = `bold ${5*scale}px ${ff}`;
+        ctx.fillText(document.getElementById('lomoInput').value.toUpperCase(), 0, 0); ctx.restore();
+
+        ctx.fillStyle = tc; const startX = (mmLomo + mmPortada) * scale;
+        ['a','b'].forEach((side, idx) => {
+            const yBase = idx === 0 ? 15 : 62; ctx.font = `bold ${3 * scale}px ${ff}`;
+            ctx.fillText(`LADO ${side.toUpperCase()}`, startX + 10*scale, yBase*scale); ctx.font = `${2.5 * scale}px ${ff}`;
+            const names = document.querySelectorAll(`.song-input-${side}`);
+            const times = document.querySelectorAll(`.time-input-${side}`);
+            names.forEach((n, i) => {
+                if(n.value) { const y = (yBase + 6 + i*4) * scale; ctx.fillText(`${i+1}. ${n.value.substring(0,22)}`, startX + 11*scale, y); ctx.textAlign = "right"; ctx.fillText(times[i].value, startX + (mmLista-8)*scale, y); ctx.textAlign = "left"; }
+            });
+        });
+        if (bW > 0) { ctx.strokeStyle = document.getElementById('borderColor').value; ctx.lineWidth = bW * 2; ctx.strokeRect(0, 0, canvas.width, canvas.height); }
+        const link = document.createElement('a'); link.download = "mixtape_fixed.png"; link.href = canvas.toDataURL(); link.click();
+    };
+
+    addSongRow('a'); addSongRow('b'); updatePreview();
+</script>
+</body>
+</html>
