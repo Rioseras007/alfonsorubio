@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Star Wars 3D Tracker – Deluxe Cinemático</title>
+<style>
+:root {
+    --bg: #0a0a16;
+    --card: #111123;
+    --accent: #7f5af0;
+    --accent2: #00eaff;
+    --accent3: #00ffcc;
+    --text: #e5e5ff;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    font-family: "Segoe UI", sans-serif;
+    color: var(--text);
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--accent2);
+    text-shadow: 0 0 15px var(--accent2);
+}
+
+h2 {
+    margin-top: 40px;
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent);
+}
+
+/* Barra de progreso con más espacio */
+.progress-container {
+    width: 100%;
+    background: #22223a;
+    border-radius: 10px;
+    height: 12px;
+    margin-bottom: 30px; /* más espacio */
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent2), var(--accent3));
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 25px; /* más espacio desde la barra */
+}
+
+.card {
+    background: var(--card);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 0 10px rgba(0,234,255,0.05);
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card.done {
+    box-shadow: 0 0 25px 5px var(--accent3);
+    filter: drop-shadow(0 0 15px var(--accent3));
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(0,234,255,0.5);
+    filter: drop-shadow(0 0 20px rgba(0,255,200,0.6));
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: #111123;
+    transition: transform 0.3s, filter 0.3s;
+}
+
+.card:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.2) drop-shadow(0 0 15px var(--accent2));
+}
+
+.card-content {
+    padding: 10px 15px;
+    text-align: center;
+}
+
+.name {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    color: var(--accent2);
+    text-shadow: 0 0 8px rgba(0,234,255,0.5);
+}
+
+.info {
+    font-size: 0.85em;
+    line-height: 1.3em;
+    opacity: 0.8;
+    margin-bottom: 8px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent3);
+}
+</style>
+</head>
+<body>
+
+<h1>Star Wars 3D Tracker – Deluxe Cinemático</h1>
+
+<h2>🌟 LADO LUMINOSO</h2>
+<div class="progress-container">
+    <div id="lum-progress" class="progress-bar"></div>
+</div>
+<div id="luminoso" class="grid"></div>
+
+<h2>🌑 LADO OSCURO</h2>
+<div class="progress-container">
+    <div id="osc-progress" class="progress-bar"></div>
+</div>
+<div id="oscuro" class="grid"></div>
+
+<script>
+const API = "https://akabab.github.io/starwars-api/api/all.json";
+
+const luminosoDeseados = [
+    "Luke Skywalker","Leia Organa","Han Solo","Obi-Wan Kenobi",
+    "Yoda","Lando Calrissian","C-3PO","R2-D2","Chewbacca",
+    "Rey","Anakin Skywalker","Ahsoka Tano"
+];
+
+const oscuroDeseados = [
+    "Darth Vader","Emperor Palpatine","Boba Fett","Jabba the Hutt",
+    "Wilhuff Tarkin","Royal Guard","Stormtrooper","Kylo Ren",
+    "Darth Maul","Count Dooku","General Grievous","Snoke"
+];
+
+function actualizarProgreso() {
+    const estado = JSON.parse(localStorage.getItem("modelados") || "{}");
+    const lumCheck = luminosoDeseados.filter(name => estado[name]).length;
+    const oscCheck = oscuroDeseados.filter(name => estado[name]).length;
+
+    document.getElementById("lum-progress").style.width = (lumCheck / 12 * 100) + "%";
+    document.getElementById("osc-progress").style.width = (oscCheck / 12 * 100) + "%";
+}
+
+function crearCard(personaje) {
+    const div = document.createElement("div");
+    div.className = "card";
+
+    const estado = JSON.parse(localStorage.getItem("modelados") || "{}");
+    const checked = estado[personaje.name] || false;
+    if (checked) div.classList.add("done");
+
+    div.innerHTML = `
+        <img src="${personaje.image}" alt="${personaje.name}" onerror="this.src='https://via.placeholder.com/300x200?text=${encodeURIComponent(personaje.name)}'">
+        <div class="card-content">
+            <div class="name">${personaje.name}</div>
+            <div class="info"><i>Altura: ${personaje.height || '-'}cm | Peso: ${personaje.mass || '-'}</i></div>
+            <label><input type="checkbox" ${checked ? "checked" : ""}> Modelado</label>
+        </div>
+    `;
+
+    const checkbox = div.querySelector("input[type=checkbox]");
+    checkbox.addEventListener("change", () => {
+        const estado = JSON.parse(localStorage.getItem("modelados") || "{}");
+        estado[personaje.name] = checkbox.checked;
+        localStorage.setItem("modelados", JSON.stringify(estado));
+        div.classList.toggle("done", checkbox.checked);
+        actualizarProgreso();
+    });
+
+    return div;
+}
+
+async function cargarPersonajes() {
+    const res = await fetch(API);
+    const data = await res.json();
+
+    const lumDiv = document.getElementById("luminoso");
+    const oscDiv = document.getElementById("oscuro");
+
+    const luminosoExistentes = data.filter(p => luminosoDeseados.includes(p.name));
+    const oscuroExistentes = data.filter(p => oscuroDeseados.includes(p.name));
+
+    const luminosoFaltantes = luminosoDeseados
+        .filter(name => !luminosoExistentes.some(p => p.name === name))
+        .map(name => ({name, image:`https://via.placeholder.com/300x200?text=${encodeURIComponent(name)}`}));
+
+    const oscuroFaltantes = oscuroDeseados
+        .filter(name => !oscuroExistentes.some(p => p.name === name))
+        .map(name => ({name, image:`https://via.placeholder.com/300x200?text=${encodeURIComponent(name)}`}));
+
+    const luminosoFinal = [...luminosoExistentes, ...luminosoFaltantes].slice(0,12);
+    const oscuroFinal = [...oscuroExistentes, ...oscuroFaltantes].slice(0,12);
+
+    luminosoFinal.forEach(p => lumDiv.appendChild(crearCard(p)));
+    oscuroFinal.forEach(p => oscDiv.appendChild(crearCard(p)));
+
+    actualizarProgreso();
+}
+
+cargarPersonajes();
+</script>
+
+</body>
+</html>
