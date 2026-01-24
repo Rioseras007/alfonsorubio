@@ -59,8 +59,12 @@
                 <select id="fontFamily">
                     <option value="Arial, sans-serif">Moderno</option>
                     <option value="'Times New Roman', serif">Clásico</option>
-                    <option value="'Courier New', monospace" selected>Máquina</option>
+                    <option value="'Courier New', monospace">Máquina</option>
                     <option value="Impact">Bold Retro</option>
+                     <option value="Verdana">Verdana</option>
+                    <option value="Lucida Console,'Courier New', monospace">Lucida Console</option>
+                    
+                
                 </select>
             </div>
             <div><label>🎨 Letra</label><input type="color" id="textColor" value="#000000" style="height:33px;"></div>
@@ -77,7 +81,7 @@
     <div class="config-box">
         <label>📐 Borde de Corte</label>
         <div style="display:flex; gap:10px;">
-            <select id="borderWidth" style="flex:2"><option value="1">Fino</option><option value="3" selected>Grueso</option></select>
+            <select id="borderWidth" style="flex:2"><option value="1">Fino</option><option value="2" selected>Normal</option><option value="3" selected>Grueso</option></select>
             <input type="color" id="borderColor" value="#000000" style="flex:1; height:33px;">
         </div>
     </div>
@@ -113,7 +117,7 @@
 </div>
 
 <script>
-    const scale = 11.81, mmLomo = 12, mmPortada = 65, mmLista = 75, mmAlto = 101;
+    const scale = 12, mmLomo = 13, mmPortada = 65, mmLista = 65, mmAlto = 101;
     let tempTrack = { name: "", time: "" };
 
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
