@@ -614,9 +614,9 @@ position: relative;
 
 
 .hover-zone {
-    width: 180px;
+    width: 260px;
     padding: 20px;
-    background: #69686c;
+    background: #7d8578;
     color: white;
     text-align: center;
     border-radius: 10px;
@@ -625,8 +625,8 @@ position: relative;
 }
 
 .preview-frame {
-    width: 180px;
-    height: 180px;
+    width: 260;
+    height: 20x;
     border-radius: 10px;
 
     position: absolute;
