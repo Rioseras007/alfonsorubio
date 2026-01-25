@@ -254,6 +254,34 @@
 
 <body>
 
+    <!-- Menú integrado mediante iframe -->
+<iframe 
+    src="menu.html" 
+    id="menu-frame"
+    scrolling="no">
+</iframe>
+
+<style>
+    /* Estilos del iframe del menú */
+    #menu-frame {
+        width: 100%;
+        height: 80px;       /* Ajusta según tu menú */
+        border: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+    }
+
+    /* Bajar un poco el contenido para que no se oculte detrás */
+    body {
+        padding-top: 120px !important; 
+    }
+</style>
+
+
+
+
   <button id="sonido-toggle" title="Activar/Desactivar sonido">🔊</button>
 
   <h1>Tres en Raya Retro</h1>
