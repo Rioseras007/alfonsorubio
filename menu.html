@@ -1,96 +1,258 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Navegación Gradient Moderno</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Navegación Gradient + Dropdowns (Música y Juegos)</title>
 
-<style>
+  <style>
+    :root {
+      --clr-primary-1: #6366f1;
+      --clr-primary-2: #a855f7;
+      --clr-primary-3: #ec4899;
+      --clr-primary-4: #f43f5e;
+      --bg-dark: #0f172a;
+      --text: #f1f5f9;
+      --glass-bg: rgba(255, 255, 255, 0.07);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --shadow: 0 8px 32px rgba(0,0,0,0.37);
+      --transition: all 0.28s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-        margin: 0;
-        font-family: system-ui, sans-serif;
-        background: #0f172a;
-        color: #fff;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      min-height: 100dvh;
+      line-height: 1.6;
     }
 
-    /* Barra de navegación moderna con degradado animado */
-    nav {
-        width: 100%;
-        padding: 15px 0;
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(
+        90deg,
+        var(--clr-primary-1),
+        var(--clr-primary-2),
+        var(--clr-primary-3),
+        var(--clr-primary-4)
+      );
+      background-size: 300% 300%;
+      animation: gradientFlow 14s ease infinite;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    @keyframes gradientFlow {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .nav-list {
+      display: flex;
+      list-style: none;
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      transition: var(--transition);
+      display: block;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Dropdown */
+    .dropdown-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 220px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      padding: 0.8rem 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    }
+
+    .nav-item:hover .dropdown-content,
+    .nav-item:focus-within .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-link {
+      padding: 0.9rem 1.4rem;
+      font-size: 1.05rem;
+      color: white;
+      text-decoration: none;
+      display: block;
+      transition: var(--transition);
+    }
+
+    .dropdown-link:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* Hamburguesa móvil */
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    #menu-check {
+      display: none;
+    }
+
+    @media (max-width: 850px) {
+      .menu-toggle { display: block; }
+      .nav-list {
         position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 999;
-
-        background: linear-gradient(90deg,
-            #6366f1,
-            #a855f7,
-            #ec4899,
-            #f43f5e
-        );
-        background-size: 400% 400%;
-        animation: gradientMove 12s ease infinite;
-
-        box-shadow: 0 2px 15px rgba(0,0,0,0.35);
-    }
-
-    /* Animación del degradado */
-    @keyframes gradientMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    nav ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        display: flex;
+        inset: 0 0 0 35%;
+        flex-direction: column;
         justify-content: center;
-        flex-wrap: wrap;
-        gap: 25px;
+        align-items: center;
+        background: var(--glass-bg);
+        backdrop-filter: blur(16px);
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        gap: 2.5rem;
+        padding: 5rem 2rem 2rem;
+      }
+
+      #menu-check:checked ~ .nav-list {
+        transform: translateX(0);
+      }
+
+      .nav-link { font-size: 1.4rem; padding: 1rem 2rem; }
+
+      .dropdown-content {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        background: transparent;
+        border: none;
+        padding: 0.5rem 0 0.5rem 2rem;
+      }
+
+      .menu-toggle::before { content: "☰"; }
+      #menu-check:checked + .menu-toggle::before { content: "✕"; }
     }
 
-    nav a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 1.1rem;
-        padding: 6px 10px;
-        font-weight: 500;
-        transition: 0.25s;
-    }
-
-    nav a:hover {
-        transform: translateY(-2px);
-        text-shadow: 0 0 10px rgba(255,255,255,0.9);
-    }
-
-    /* Espacio para que el contenido no quede debajo del menú */
     main {
-        padding-top: 100px;
+      padding: 9rem 1.5rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
     }
-</style>
-</head>
 
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      margin-bottom: 1.5rem;
+      background: linear-gradient(90deg, #c084fc, #f472b6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  </style>
+</head>
 <body>
 
-<nav>
-    <ul>
-        <li><a href="index.html" target="_blank">HOME</a></li>
-        <li><a href="tablaperiodica.html" target="_blank">Tabla periodica</a></li>
-        <li><a href="musica.html" target="_blank">Temas Peliculas 007</a></li>
-        <li><a href="reproductor.html" target="_blank">Musica Julio Iglesias</a></li>
-        <li><a href="reproductor2.html" target="_blank">Musica Raphael</a></li>
-        <li><a href="streamdeck/index.html" target="_blank">streamdeck</a></li>
-        <li><a href="tres.html" target="_blank">Juego 3 en Raya</a></li>
-        <li><a href="discord.html" target="_blank">Discord</a></li>
-         <li><a href="https://antonio2709.synology.me/pc.html" target="_blank">Web Nas Juamjo</a></li>
+<nav class="navbar" aria-label="Navegación principal">
+  <div class="nav-container">
+    <a href="#" class="nav-brand">Mi Web</a>
+
+    <input type="checkbox" id="menu-check" hidden />
+    <label for="menu-check" class="menu-toggle" aria-label="Abrir/cerrar menú"></label>
+
+    <ul class="nav-list">
+      <li><a href="index.html" class="nav-link" target="_blank">Home</a></li>
+      <li><a href="tablaperiodica.html" class="nav-link" target="_blank">Tabla Periódica</a></li>
+
+      <!-- Dropdown Música Favorita -->
+      <li class="nav-item">
+        <a href="#" class="nav-link">Música Favorita ▼</a>
+        <div class="dropdown-content">
+          <a href="musica.html"         class="dropdown-link" target="_blank">Temas Películas 007</a>
+          <a href="reproductor.html"    class="dropdown-link" target="_blank">Julio Iglesias</a>
+            <a href="musica4/index.html"    class="dropdown-link"target="_blank">Julio Iglesias Tango</a>
+          <a href="reproductor2.html"   class="dropdown-link" target="_blank">Raphael</a>
+        </div>
+      </li>
+
+      <!-- Nuevo Dropdown Juegos -->
+      <li class="nav-item">
+        <a href="#" class="nav-link">Juegos ▼</a>
+        <div class="dropdown-content">
+          <a href="tres.html"           class="dropdown-link" target="_blank">3 en Raya</a>
+          <a href="ahorcadopro.html"       class="dropdown-link" target="_blank">Ahorcado</a>
+        </div>
+      </li>
+
+      <li><a href="streamdeck/index.html" class="nav-link" target="_blank">Stream Deck</a></li>
+      <li><a href="discord.html"        class="nav-link" target="_blank">Discord</a></li>
+      <li><a href="https://antonio2709.synology.me/pc.html" class="nav-link" target="_blank" rel="noopener noreferrer">NAS Juamjo</a></li>
     </ul>
+  </div>
 </nav>
 
 <main>
-    <h1>Navegación estilo Gradient Moderno</h1>
-    <p>Cambia los nombres de las páginas cuando quieras.</p>
+  <br>
+
 </main>
 
 </body>
