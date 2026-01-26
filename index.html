@@ -1,838 +1,493 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Panel personal para organizar y acceder a servicios online">
-
-<link rel="icon" href="styles/favicon.ico" type="image/x-icon"> <!-- Favicon -->
-<title>Alfonso Rubio Rioseras Home Page</title>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="data:,">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script src="https://apis.google.com/js/platform.js"></script>
-<script async src="https://cse.google.com/cse.js?cx=123456"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Nebula</title>
+    <!-- Load modern font for vanguardist look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ffea; /* Neon cyan */
+            --primary-dark: #00b8a3;
+            --accent: #ff00ff; /* Neon magenta */
+            --bg-dark: #0a0a1f; /* Deep space blue */
+            --bg-card: rgba(26, 26, 51, 0.8); /* Semi-transparent glass */
+            --text-main: #e0e0ff;
+            --text-muted: #a0a0ff;
+            --glow: 0 0 10px var(--primary), 0 0 20px var(--accent);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif; /* Futuristic font */
+        }
+        body {
+            background: linear-gradient(135deg, var(--bg-dark), #1a1a3a);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 140px; /* Space for enhanced player */
+            overflow-x: hidden;
+        }
+        /* Header with neon glow */
+        header {
+            background: rgba(10, 10, 31, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem 3rem;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            border-bottom: 1px solid rgba(0, 255, 234, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--glow);
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: neon-flicker 1.5s infinite alternate;
+        }
+        @keyframes neon-flicker {
+            to {
+                text-shadow: var(--glow);
+            }
+        }
+        /* Search with holographic effect */
+        .search-container {
+            position: relative;
+            max-width: 450px;
+            width: 100%;
+        }
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1.2rem 0.8rem 3rem;
+            border-radius: 50px;
+            border: 2px solid transparent;
+            background: rgba(26, 26, 51, 0.5);
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 5px var(--primary);
+        }
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary);
+        }
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+        /* Song List with grid and hover animations */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        .song-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .song-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            border: 1px solid rgba(0, 255, 234, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        .song-card:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: var(--glow);
+            background: rgba(26, 26, 51, 0.9);
+        }
+        .song-card.playing {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent);
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .song-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: var(--glow);
+        }
+        .song-info {
+            overflow: hidden;
+        }
+        .song-title {
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+        .song-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-family: 'Roboto Mono', monospace;
+        }
+        /* Player Footer with wave visualization */
+        .player-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(10, 10, 31, 0.9), rgba(26, 26, 51, 0.8));
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(0, 255, 234, 0.3);
+            padding: 1.5rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            box-shadow: 0 -10px 30px rgba(0, 255, 234, 0.2);
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .player-bar.active {
+            transform: translateY(0);
+        }
+        .current-track {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            width: 35%;
+        }
+        .track-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: var(--text-main);
+        }
+        .track-info p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-family: 'Roboto Mono', monospace;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+            gap: 0.8rem;
+        }
+        .buttons {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .btn-control {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.5rem;
+        }
+        .btn-control:hover {
+            color: var(--primary);
+            text-shadow: var(--glow);
+        }
+        .btn-play {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--bg-dark);
+            border-radius: 50%;
+            font-size: 1.5rem;
+            box-shadow: var(--glow);
+        }
+        .btn-play:hover {
+            transform: scale(1.1);
+        }
+        /* Progress Bar with neon fill */
+        .progress-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-family: 'Roboto Mono', monospace;
+        }
+        .progress-bar {
+            flex-grow: 1;
+            height: 6px;
+            background: rgba(160, 160, 255, 0.2);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 3px;
+            width: 0%;
+            box-shadow: var(--glow);
+        }
+        .volume-control {
+            width: 35%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+        }
+        input[type="range"] {
+            accent-color: var(--accent);
+            width: 120px;
+            cursor: pointer;
+        }
+        /* Caratulas with 3D flip effect */
+        .caratulas {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            padding: 3rem;
+            flex-wrap: wrap;
+            perspective: 1000px;
+        }
+        .caratulas .item {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .caratulas .item:hover {
+            transform: rotateY(180deg);
+        }
+        .caratulas img {
+            border-radius: 10px;
+            object-fit: cover;
+            width: 100%;
+            height: auto;
+            max-width: 280px;
+            backface-visibility: hidden;
+        }
+        /* Back side for flip (placeholder) */
+        .caratulas .item::after {
+            content: 'Nebula View';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateY(180deg);
+            color: var(--primary);
+            font-size: 1.2rem;
+            backface-visibility: hidden;
+        }
+    </style>
 </head>
 <body>
-
-
-
-<header>
-
-<!-- Banner principal -->
-
-<div class="news-marquee">
-  <div class="news-track">
-    <span>🧠 Comunicación independiente</span>
-    <span>📊 Análisis político y social</span>
-    <span>🔥 Opinión sin filtros</span>
-    <span>🌍 Actualidad • Tecnología • Sociedad</span>
-    <span>🎙️ Alfonso Rubio Rioseras</span>
-  </div>
-</div>
-
-
-
-
-<section class="hero">
-  <div class="hero-overlay"></div>
-
-  <div class="hero-content">
-    <h1>Alfonso Rubio Rioseras</h1>
-    <p>Friki desde joven · Tio de Martina  · Gamer sin punteria</p>
-    <a href="#contenido" class="hero-btn">Ver contenido</a>
-  </div>
-</section>
-
-<!-- marquesina principal -->
-
-<div class="marquee-container">
-  <div class="marquee">
-    <span>🚀 Bienvenido a mi web oficial</span>
-    <span>🎮 Fortnite • Tecnología • Diseño</span>
-    <span>🖨️ Impresión 3D • Proyectos creativos en https://www.printables.com/@Rioseras007</span>
-    <span>🌐 Sígueme en redes sociales</span>
-     <span>📹 Youtube  https://www.youtube.com/@AlfonsoRubioRioseras</span>
-      <span>🎮 Twitch  https://www.twitch.tv/ps3rioseras007</span>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- enlaces patrocinados -->
-<section id="linkelin" style="width: 320px; height:auto; align-items: left;" > 
-<ul>
-  <li style="margin:5px 0;">
-
-      <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=alfonsorubiorioseras" target="_blank" style="text-decoration:none; color:#3784ea;"">Sígueme en LinkedIn</a> 
-    </li>
-
-<li style="margin:5px 0;">
-
-  <a href="https://www.youtube.com/@AlfonsoRubioRioseras?sub_confirmation=1" target="_blank" style="text-decoration:none; color:#ae1a06; " >Suscríbete a mi canal de Youtube</a>
-
-  </li>
-
-
-<li style="margin:5px 0;">
-
-  <a href="discord.html" target="_blank" style="text-decoration:none; color:#4c13d1; " >Canales de Discord</a>
-
-  </li>
-
-
-
-
-</ul>
-</section>
-
-<section id="tiempo"  class="tiempo" > <div id="relojroto"   z-index="9" style="margin-bottom: 100px; padding: 10px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-
-<div style="text-align:center;padding:1em 0;"> <h3><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/es/city/3106672"><span style="color:rgb(128, 128, 128);">Hora actual en</span><br />Valladolid, España</a></h3> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=medium&timezone=Europe%2FMadrid" width="100%" height="115" frameborder="2" seamless></iframe> </div>
-
-</div>
-
-</ul>
-</section>
-
-
-
-<div id="juanjo" class="webjuanjo" z-index="10"><button class="boton-epico" title="Website de Juanjo" onclick="window.open('https://antonio2709.synology.me/pc.html#gsc.tab=0', '_blank')"><img src="logo.png" alt="Juanjo" width="30" height="30">  
-</button>
-</div>
-
-
-
-<!-- BUSCADOR WEB google-->
-<div class="search-box" id="contenido">
-  <input type="text" placeholder="Buscar con Google en la web..." id="searchInput" border style="background-color: #acbeef; border:4px solid #b95f71;">
-  <button onclick="buscar()">
-    🧭
-  </button>
-</div>
-
-<!-- aqui -->
-
-
-
-<script>
-function buscar() {
-  const q = document.getElementById("searchInput").value.trim();
-  if(q !== "") {
-    window.open("https://www.google.com/search?q=" + encodeURIComponent(q), "_blank");
-  }
-}
-</script>
-
-
-
-
-  <h1 id="inicio"><i class='far fa-compass' style='font-size:px;color:rgb(42, 24, 177)'></i> Panel de Servicios Web </h1>
-  <p>Acceso rápido a mis plataformas</p>
-</header>
-
-<div class="controls">
-  <input type="text" id="search" placeholder="Buscar servicio...">
-  <button id="toggleTheme"><i style='font-size:24px' class='fas'>&#xf002;</i></button>
-
-
-
-</div>
-
- 
-
-
-
-<main id="services">
-
-
-<!-- seccion correo web-->
-
-<section style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-
-<h2 onclick="toggleCorreo()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">📧 Correo Web<span id="arrowCorreo">▼</span>
-
-</h2>
-
-<ul id="correoMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
-
-  <li style="margin:5px 0;">
-    <a href="https://mail.google.com/" target="_blank" style="text-decoration:none; color:#ef640e; display:flex; align-items:center; gap:8px;">
-
-      <i style='font-size:24px' class='fab'>&#xf1a0;</i> Gmail
-    
-    </a>
-
-  </li>
-
-  <li style="margin:5px 0;"><a href="https://es.yahoo.com/" target="_blank" style="text-decoration:none; color:#8b66d4; display:flex; align-items:center; gap:8px;">
-    
-    <i style='font-size:24px' class='fab'>&#xf19e;</i> Yahoo</a>
-  
-  </li>
-
-
-  <li style="margin:5px 0;"><a href="https://outlook.live.com/" target="_blank" style="text-decoration:none; color:#108d65; display:flex; align-items:center; gap:8px;">
-
-    <i style='font-size:24px' class='fab'>&#xf17a;</i>Hotmail</a>
-  
-  </li>
-
-</ul>
-
-</section>
-
-<script>
-  function toggleCorreo() {
-    const menu = document.getElementById('correoMenu');
-    const arrow = document.getElementById('arrowCorreo');
-    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
-      menu.style.maxHeight = '0';
-      arrow.textContent = '▼';
-    } else {
-      menu.style.maxHeight = menu.scrollHeight + 'px';
-      arrow.textContent = '▲';
-    }
-  }
-</script>
-
-
-<!-- seccion almacenamiento en la nube-->
-
-<section style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-<h2 onclick="toggleNube()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">☁️ Almacenamiento<span id="arrowNube">▼</span></h2>
-
-<ul id="nubeMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
-
-<li style="margin:5px 0;">
-      <a href="https://drive.google.com/" target="_blank" style="text-decoration:none; color:#ef640e; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class='fab' >&#xf3aa;</i> Google Drive
-      </a>
-    </li>
-
-<li style="margin:5px 0;">
-      <a href="https://mega.nz/" target="_blank" style="text-decoration:none; color:#e8c436; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class='fas' >&#xf381;</i> MEGA
-      </a>
-    </li>
-
- <li style="margin:5px 0;">
-      <a href="https://onedrive.live.com/" target="_blank" style="text-decoration:none; color:#2115c8; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class='fab'>&#xf17a;</i> OneDrive
-      </a>
-    </li>
-
-  <li style="margin:5px 0;">
-      <a href="https://https://www.dropbox.com/" target="_blank" style="text-decoration:none; color:#12b448; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fab fa-dropbox"></i> DropBox
-      </a>
-    </li>
-
-</ul>
-</section>
-
-<script>
-  function toggleNube() {
-    const menu = document.getElementById('nubeMenu');
-    const arrow = document.getElementById('arrowNube');
-    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
-      menu.style.maxHeight = '0';
-      arrow.textContent = '▼';
-    } else {
-      menu.style.maxHeight = menu.scrollHeight + 'px';
-      arrow.textContent = '▲';
-    }
-  }
-</script>
-
-
-
-
-
-
-<!-- Incluimos Font Awesome para los iconos -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-pVjF1k5a1Bv3uXkpJ6k7TtJxq5GdGnh/0D4g+Zd1TTcR1p/cUfXg2R6b5hwc3mPQPRYJ+fZ1gh0qEOZ+oxF0Zg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<section style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-  <h2 onclick="toggleCompras()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
-    🛒 Compras <span id="arrowCompras">▼</span>
-  </h2>
-  <ul id="comprasMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
-    <li style="margin:5px 0;">
-      <a href="https://www.amazon.es/" target="_blank" style="text-decoration:none; color:#ff9900; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fab fa-amazon"></i> Amazon
-      </a>
-    </li>
-    <li style="margin:5px 0;">
-      <a href="https://www.aliexpress.com/" target="_blank" style="text-decoration:none; color:#ff5000; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fas fa-shopping-bag"></i> AliExpress
-      </a>
-    </li>
-    <li style="margin:5px 0;">
-      <a href="https://www.temu.com/" target="_blank" style="text-decoration:none; color:#ff3333; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fas fa-box-open"></i> Temu
-      </a>
-    </li>
-      <li style="margin:5px 0;">
-      <a href="https://www.ebay.com/" target="_blank" style="text-decoration:none; color:#7d5fb9; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fas fa-box-open"></i> Ebay
-      </a>
-        <li style="margin:5px 0;">
-      <a href="https://www.elcorteingles.es/" target="_blank" style="text-decoration:none; color:#0f9648; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fas fa-box-open"></i> El Corte Inglés
-      </a>
-    </li>
-    </li>
-  </ul>
-</section>
-
-<script>
-  function toggleCompras() {
-    const menu = document.getElementById('comprasMenu');
-    const arrow = document.getElementById('arrowCompras');
-    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
-      menu.style.maxHeight = '0';
-      arrow.textContent = '▼';
-    } else {
-      menu.style.maxHeight = menu.scrollHeight + 'px';
-      arrow.textContent = '▲';
-    }
-  }
-</script>
-
-
-<!-- Incluimos Font Awesome para los iconos -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-pVjF1k5a1Bv3uXkpJ6k7TtJxq5GdGnh/0D4g+Zd1TTcR1p/cUfXg2R6b5hwc3mPQPRYJ+fZ1gh0qEOZ+oxF0Zg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<section style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-  <h2 onclick="toggleGames()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
-    🎮 Videojuegos <span id="arrowGames">▼</span>
-  </h2>
-  <ul id="gamesMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
-    <li style="margin:5px 0;">
-      <a href="https://www.playstation.com/" target="_blank" style="text-decoration:none; color:#003791; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fab fa-playstation"></i> PlayStation
-      </a>
-    </li>
-    <li style="margin:5px 0;">
-      <a href="https://www.xbox.com/" target="_blank" style="text-decoration:none; color:#107C10; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fab fa-xbox"></i> Xbox
-      </a>
-    </li>
-    <li style="margin:5px 0;">
-      <a href="https://www.nintendo.com/" target="_blank" style="text-decoration:none; color:#e60012; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fas fa-gamepad"></i> Nintendo
-      </a>
-    </li>
-     <li style="margin:5px 0;">
-      <a href="https://luna.amazon.es/" target="_blank" style="text-decoration:none; color:#ad3089; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fas fa-gamepad"></i> Amazon Luna
-      </a>
-    </li>
-     </li>
-     <li style="margin:5px 0;">
-      <a href="https://store.epicgames.com/es-ES/" target="_blank" style="text-decoration:none; color:#c39019; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fas fa-gamepad"></i> Epic Store Games
-      </a>
-    </li>
-  </ul>
-</section>
-
-<script>
-  function toggleGames() {
-    const menu = document.getElementById('gamesMenu');
-    const arrow = document.getElementById('arrowGames');
-    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
-      menu.style.maxHeight = '0';
-      arrow.textContent = '▼';
-    } else {
-      menu.style.maxHeight = menu.scrollHeight + 'px';
-      arrow.textContent = '▲';
-    }
-  }
-</script>
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-pVjF1k5a1Bv3uXkpJ6k7TtJxq5GdGnh/0D4g+Zd1TTcR1p/cUfXg2R6b5hwc3mPQPRYJ+fZ1gh0qEOZ+oxF0Zg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<section style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-  <h2 onclick="toggleMenu()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
-    📱 Redes & Streaming <span id="arrow">▼</span>
-  </h2>
-  <ul id="redesMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
-    <li style="margin:5px 0;">
-      <a href="https://www.facebook.com/" target="_blank" style="text-decoration:none; color:#3b5998; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fab fa-facebook-f"></i> Facebook
-      </a>
-    </li>
-    <li style="margin:5px 0;">
-      <a href="https://twitter.com/" target="_blank" style="text-decoration:none; color:#1da1f2; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fab fa-twitter"></i> Twitter
-      </a>
-    </li>
-    <li style="margin:5px 0;">
-      <a href="https://www.twitch.tv/" target="_blank" style="text-decoration:none; color:#43266d; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fab fa-twitch"></i> Twitch
-      </a>
-    </li>
-    <li style="margin:5px 0;">
-      <a href="https://www.instagram.com/" target="_blank" style="text-decoration:none; color:#e1306c; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fab fa-instagram"></i> Instagram
-      </a>
-       <li style="margin:5px 0;">
-      <a href="https://www.snapchat.com/" target="_blank" style="text-decoration:none; color:#f6f21b; display:flex; align-items:center; gap:8px;">
-        <i style='font-size:24px' class="fab fa-instagram"></i> Snapchat
-      </a>
-  </ul>
-</section>
-
-
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById('redesMenu');
-    const arrow = document.getElementById('arrow');
-    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
-      menu.style.maxHeight = '0';
-      arrow.textContent = '▼';
-    } else {
-      menu.style.maxHeight = menu.scrollHeight + 'px';
-      arrow.textContent = '▲';
-    }
-  }
-</script>
-
-
-
-
-
-<!-- seccion bancos -->
-
-
-<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-
-<h2 onclick="toggleBanks()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">
-
-  🏦 Bancos <span id="arrowBanks">▼</span></h2>
-
-<ul id="banksMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
-
-  <li style="margin:5px 0;">
-
-
-    <a href="https://www.openbank.es/" target="_blank"><i style='font-size:24px;color:rgb(239, 239, 32)' class="fa">&#xf19c;</i> OpenBank</a>
-  
-  </li>
-
-
-  <li style="margin:5px 0;"><a href="https://www.paypal.com/" target="_blank"><i style='font-size:24px;color:rgb(237, 21, 118)' class='far'>&#xf09d;</i> PayPal</a>
-  
-  </li>
-
-  <li style="margin:5px 0;"><a href="https://www.bbva.es/" target="_blank"><i style='font-size:24px;color:rgb(7, 199, 164)' class='fas'>&#xf4d3;</i> BBVA</a>
-
-  </li>
-
-  <li style="margin:5px 0;"><a href="https://www.ing.es/" target="_blank"><i style='font-size:24px;color:rgba(209, 155, 7, 0.505)' class='fas'>&#xf4d3;</i> ING</a>
-  
-  </li>
-
-  <li style="margin:5px 0;"><a href="https://www.revolut.com/" target="_blank"><i style='font-size:24px;color:rgb(25, 9, 247)' class='fas'>&#xf4d3;</i> Revolut</a>
-  
-
-  
-  </li>
-
-</ul>
-
-
-</section>
-
-<script>
-  function toggleBanks() {
-    const menu = document.getElementById('banksMenu');
-    const arrow = document.getElementById('arrowBanks');
-    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
-      menu.style.maxHeight = '0';
-      arrow.textContent = '▼';
-    } else {
-      menu.style.maxHeight = menu.scrollHeight + 'px';
-      arrow.textContent = '▲';
-    }
-  }
-</script>
-
-
-
-
-
-<!-- contenido segunda fila -->
-
-
-<!-- seccion empleo -->
-
-
-
-<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-<h2  onclick="toggleEmpleo()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">💼 Empleo<span id="arrowEmpleo">▼</span></h2>
-<ul id="empleoMenu" style="list-style:none; padding:0; margin:0; overflow:hidden; max-height:0; transition:max-height 0.3s ease;">
-
-  <li style="margin:5px 0;"><a href="https://empleocastillayleon.jcyl.es/oficinavirtual/index.do" target="_blank"><i class='far fa-address-card' style='font-size:24px;color:rgb(45, 150, 96)'></i> ECYL</a></li>
-
-  <li style="margin:5px 0;"><a href="https://www.linkedin.com/" target="_blank"><i class='fab fa-linkedin' style='font-size:24px;color:rgb(81, 41, 192)'></i> LinkedIn</a></li>
-
-  <li style="margin:5px 0;"><a href="https://www.uva.es/" target="_blank"><i class='fas fa-university' style='font-size:24px;color:rgb(166, 64, 150)'></i>UVA</a></li>
-
-  <li style="margin:5px 0;"><a href="https://www.ubu.es/" target="_blank"><i class='fas fa-university' style='font-size:24px;color:red'></i>UBU</a></li>
-
-  <li style="margin:5px 0;"><a href="https://www.diputaciondevalladolid.es/" target="_blank"><i class='far fa-address-card' style='font-size:24px;color:rgb(125, 164, 33)'></i>Diputación Valladolid</a></li>
-  
-  <li style="margin:5px 0;"><a href="https://www.infojobs.net/" target="_blank"><i class='far fa-address-card' style='font-size:24px;color:rgb(104, 64, 221)'></i>Infojobs</a></li>
-</ul>
-</section>
-
-
-<script>
-  function toggleEmpleo() {
-    const menu = document.getElementById('empleoMenu');
-    const arrow = document.getElementById('arrowEmpleo');
-    if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
-      menu.style.maxHeight = '0';
-      arrow.textContent = '▼';
-    } else {
-      menu.style.maxHeight = menu.scrollHeight + 'px';
-      arrow.textContent = '▲';
-    }
-  }
-</script>
-
-
-
-
-<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
- <button class="media-title">🎮 Frikismos</button>
-<ul class="media-list">
-  <li style="margin:5px 0;"><a href="https://www.printables.com/" target="_blank">👿 Printables</a></li>
-   <li style="margin:5px 0;"><a href="https://studio.tripo3d.ai/" target="_blank">🐶 Crear modelos 3d</a></li>
-  <li style="margin:5px 0;"><a href="https://www.youtube.com/" target="_blank">📹 YouTube</a></li>
-  <li style="margin:5px 0;"><a href="https://www.gog.com/" target="_blank">🎮 GOG</a></li>
-  <li style="margin:5px 0;"><a href="https://store.steampowered.com/" target="_blank">🎮 Steam</a></li>
-  <li style="margin:5px 0;"><a href="https://scratch.mit.edu/" target="_blank">😺Scratch</a></li>
-  <li style="margin:5px 0;"><a href="https://www.canva.com/" target="_blank">✏️Canva</a></li>
-  <li style="margin:5px 0;"><a href="musica.html" target="_blank">🎵 Músisa 007</a></li>
-  <li style="margin:5px 0;"><a href="reproductor.html" target="_blank">🎵 Músisa Julio Iglesias</a></li>
-  <li style="margin:5px 0;"><a href="https://ps3rioseras007.wixsite.com/alfonso" target="_blank">🎵 Wix personal web</a></li>
-  <li style="margin:5px 0;"><a href="https://antonio2709.synology.me/pc.html#gsc.tab=0" target="_blank">🌐 Web NAS Juanjo</a></li>
-  <li style="margin:5px 0;"><a href="https://suno.com/@rioseras007" target="_blank">👨‍🎤 Suno</a></li>
-   <li style="margin:5px 0;"><a href="calendario/calendario.html" target="_blank" >📆Calendario Mensual</a></li>
-   <li style="margin:5px 0;"><a href="topvisitados.html" target="_blank" >🔝Top 50 Web más visitadas 2025</a></li>
-   <li style="margin:5px 0;"><a href="streamdeck/index.html" target="_blank">🕒 Steam Deck Virtual</a></li>
-    <li style="margin:5px 0;"><a href="tablaperiodica.html" target="_blank">👨‍🔬 Tabla Periodica Interactiva</a></li>
-  <li style="margin:5px 0;"><a href="ahorcadopro.html" target="_blank">🎮 Juego del Ahorcado</a></li>
-   <li style="margin:5px 0;"><a href="peliculas/video.html" target="_blank">🎥 Cine</a></li>
-   <li style="margin:5px 0;"><a href="Regalo Rocio.html" target="_blank">💓 Regalo Rocio</a></li>
-  <li style="margin:5px 0;"><a href="https://es.kiosko.net/" target="_blank">📰 Busca titurales de Prensa</a></li>
- 
-</ul>
-</section>
-
-
-<!-- seccion radio y tv -->
-
-
-<section style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-  <button class="media-title">📻 Radio & TV</button>
-  <ul class="media-list">
-    <li style="margin:5px 0;"><a href="https://emisora.org.es/#onda-cero" target="_blank">🎙 Onda Cero</a></li>
-    <li style="margin:5px 0;"><a href="https://emisora.org.es/#cope" target="_blank">📡 COPE</a></li>
-    <li style="margin:5px 0;"><a href="https://emisora.org.es/#40-principales" target="_blank">🎶 Los 40</a></li>
-    <li style="margin:5px 0;"><a href="https://emisora.org.es/#cadena-dial" target="_blank">📻 Cadena Dial</a></li>
-    <li style="margin: 5px 0 ;">-----------Canales TDT--------- </li>
-    <li style="margin:5px 0;"><a href="https://www.rtve.es/play/videos/directo/canales-lineales/la-1/" target="_blank">📺 La 1 TVE</a></li>
-    <li style="margin:5px 0;"><a href="https://www.rtve.es/play/videos/directo/canales-lineales/la-2/" target="_blank">📺 La 2 TVE</a></li>
-    <li style="margin:5px 0;"><a href="https://www.atresplayer.com/directos/antena3/" target="_blank">📺 Antena 3</a></li>
-    <li style="margin:5px 0;"><a href="https://www.cuatro.com/en-directo/" target="_blank">📺 Cuatro</a></li>
-    <li style="margin:5px 0;"><a href="https://www.mitele.es/directo/telecinco/" target="_blank">📺 Telecinco</a></li>
-    <li style="margin:5px 0;"><a href="https://www.atresplayer.com/directos/lasexta/" target="_blank">📺 La Sexta</a></li>
-    
-  
-  </ul>
-</section>
-
-
-<!-- seccion Streaming -->
-
-<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-  <button class="media-title">📺 Streaming</button>
-  <ul class="media-list">
-    <li style="margin:5px 0;"><a href="https://www.netflix.com/es/">🎬 Netflix</a></li>
-    <li style="margin:5px 0;"><a href="https://www.primevideo.com/">📽 Prime Video</a></li>
-    <li style="margin:5px 0;"><a href="https://www.hbomax.com/">🎞 HBO Max</a></li>
-    <li style="margin:5px 0;"><a href="https://www.disneyplus.com/es-es">🐭 Disney +</a></li>
-    <li style="margin:5px 0;"><a href="https://www.pluto.tv/">🪐 Pluto TV</a></li>
-    <li style="margin:5px 0;"><a href="https://play.tdtchannels.com/">📺 TDT gratis Online</a></li>
-  </ul>
-</section>
-
-
-
-<!-- fotografia y diseño -->
-
-<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-  <button class="media-title">📺 Fotografia& Diseño</button>
-  <ul class="media-list">
-    <li style="margin:5px 0;"><a href="https://photos.google.com/">🟦 Google Photos</a></li>
-    <li style="margin:5px 0;"><a href="https://www.amazon.es/b?node=12364776031&ref_=nav_em__acd_prime_0_2_4_2">🟩Amazon Photos</a></li>
-    <li style="margin:5px 0;"><a href="https://es.pinterest.com/">🟥 Pinterest</a></li>
-    <li style="margin:5px 0;"><a href="https://www.tinkercad.com/">🟪 Tinkercad</a></li>
-  </ul>
-</section>
-
-
-
-<!-- seccion prensa y noticias -->
-
-<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-  <button class="media-title">📺 Prensa & Noticias</button>
-  <ul class="media-list">
-    <li style="margin:5px 0;"><a href="https://www.marca.com/">📰 El Marca</a></li>
-    <li style="margin:5px 0;"><a href="https://www.as.com/">📰 Diario deportivo As</a></li>
-    <li style="margin:5px 0;"><a href="https://www.elmundo.com/">📰 El mundo</a></li>
-    <li style="margin:5px 0;"><a href="https://www.elpais.com/">📰 El País</a></li>
-    <li style="margin:5px 0;"><a href="https://www.abc.es/">📰 ABC</a></li>
-    <li style="margin:5px 0;"><a href="https://www.20minutos.es/">📰 20 Minutos</a></li>
-    <li style="margin:5px 0;"><a href="https://www.larazon.es/">📰 La Razón</a></li>
-  </ul>
-</section>
-
-
-<!-- seccion informatica y electronica -->
-
-<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-  <button class="media-title">🖥️ Informatica & Electronico</button>
-  <ul class="media-list">
-    <li style="margin:5px 0;"><a href="https://www.mediamark.es/">🔴 MediaMark España</a></li>
-    <li style="margin:5px 0;"><a href="https://www.pccomponentes.com/">🟡 PC Componentes</a></li>
-    <li style="margin:5px 0;"><a href="https://www.fnac.es">🟣 Fnac España</a></li>
-    <li style="margin:5px 0;"><a href="https://www.coolmod.com">🔵 Coolmod</a></li>
-    <li style="margin:5px 0;"><a href="https://www.computertparts.es">🟢 ComputertParts</a></li>
-    <li style="margin:5px 0;"><a href="https://www.appinformatico.es/">🟤 APP</a></li>
-    <li style="margin:5px 0;"><a href="https://www.pcbox.es/">🟢 PCBox</a></li>
-  </ul>
-</section>
-
-
-<!-- seccion descargas -->
-
-<section  style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-  <button class="media-title">🏴‍☠️ Descargas</button>
-  <ul class="media-list">
-    <li style="margin:5px 0;"><a href="https://www.gamestorrents.app/">🎮 Gametorrents</a></li>
-    <li style="margin:5px 0;"><a href="https://archive.org/">🏠 Archive.org</a></li>
-    <li style="margin:5px 0;"><a href="https://marcianotorrent.net/">🎥 Marcianotorrent</a></li>
-    <li style="margin:5px 0;"><a href="https://www.covercaratulas.com/">📔 Cover Caratulas</a></li>
-    <li style="margin:5px 0;"><a href="https://www.dafont.com/es/">🖋️ Dafont</a></li>
-    <li style="margin:5px 0;"><a href="https://thepiratebay.org/index.html">🚢 thepiratebay.org</a></li>
-    <li style="margin:5px 0;"><a href="https://artlist.io/">🆓 Artlist</a></li>
-  </ul>
-</section>
-
-
-</main>
-<footer class="site-footer">
-
-
-  <div id="horoscopo" class="futuro" >
-
-    <iframe style="min-width:70%; min-height: 120px;" 
-    src="https://mydailyhoroscope.org/widget.php?bc=000000&fc=43266d" 
-    width="80%"   frameborder="1" scrolling="no"></iframe> 
-<script type="text/javascript" src="https://mydailyhoroscope.org/js/iframeResizer.js"></script>
-
-</div>
-
-
-<!-- seccion reproductor musica spoty sonso -->
-
-<div id="musica" style="margin-top: 20px; text-align: center;" class="spoty">
-  <p>Reproductor Audio  by Sonso Spotify </p>
- <iframe src="musica/musica.html" width="500px" height="900px" scrolling="no" style="border: 2px solid #0c9d5e; border-radius: 15px;"></iframe>
-</div>
-
-
-
-
-  <p>Información meteorológica</p>
-   <div id="tiempo" style="position: center">
-    <iframe
-  src="https://api.wo-cloud.com/content/widget/?geoObjectKey=15557284&language=es&region=ES&timeFormat=HH:mm&windUnit=kmh&systemOfMeasurement=metric&temperatureUnit=celsius"
-  name="CW2"
-  scrolling="no"
-  width="290"
-  height="318"
-  frameborder="0"
-  style="border: 1px solid #b69de8; border-radius: 8px;">
-</iframe>
-
-
- <!-- Visitor Counter -->
-
-  <div id="visitas" class="viwers" > <p>Contador de Visitas</p>
-   
-<a href="https://websmultimedia.com/contador-de-visitas-gratis" title="Contador De Visitas Gratis" ><img style="border: 0px solid; display: inline;" alt="contador de visitas" src="https://websmultimedia.com/contador-de-visitas.php?id=23719"></a>
-
-  </div>
-  
-
-  <div class="footer-content">
-    <p>©️ 2025-26 Alfonso Rubio — ❤️‍🔥Todos los derechos reservados 🏴‍☠️</p>
-
-    <div class="social-icons">
-
-      <a href="https://www.facebook.com/AlfonsoRubioRioseras" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://x.com/alfrubrio" target="_blank"><i class="fab fa-x-twitter"></i></a>
-      <a href="https://www.youtube.com/@AlfonsoRubioRioseras" target="_blank"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.tiktok.com/@alfonsorubio007" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="https://discord.com/" target="_blank"><i class="fab fa-discord"></i></a>
-      <a href="https://web.whatsapp.com/" target="_blank"><i class="fab fa-whatsapp"></i></a>
-      <a href="https://www.linkedin.com/in/alfonsorubiorioseras/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-      <a href="https://github.com/Rioseras007" target="_blank"><i class="fab fa-github"></i></a>
-
-      
-      
+    <header>
+        <h1>🎵 Pink Floid The wall  2026 archivos cedidos por Antonio</h1>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Explora el cosmos musical..." id="searchInput">
+        </div>
+    </header>
+    <div class="caratulas">
+        <div class="item"><img src="frontcover.jpg" alt="Caratula frontal" width="200" height="200" loading="lazy"></div>
+        <div class="item"><img src="trascover.jpg" alt="Caratula trasera" width="240" height="198" loading="lazy"></div>
     </div>
-<br>
-<br>
-<br>
-<br>
-
-<iframe src="https://suno.com/embed/5655e8f9-525b-4663-91ef-f181fb84a797" width="760" height="240" frameborder="2" allow="autoplay; encrypted-media; fullscreen" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"><a href="https://suno.com/song/5655e8f9-525b-4663-91ef-f181fb84a797">Listen on Suno</a></iframe>
-<br>
-<br>
-<br>
-<iframe src="https://suno.com/embed/ec9bcaae-89a2-4426-9823-22efd2262f01" width="760" height="240" frameborder="2" allow="autoplay; encrypted-media; fullscreen" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"><a href="https://suno.com/song/ec9bcaae-89a2-4426-9823-22efd2262f01" >Listen on Suno</a></iframe>
-<br>
-<br>
-<div class="center-wrapper">
-
-    <div class="hover-zone"  align="center">
-
-    📊 Ver calculadora prusa
-<div class="center-wrapper">
-    <div id="PRUSA" class="preview-frame" align="center">
-        <iframe 
-            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQhGQ6VLx0MECgldEdRB-maYP54nA9b2S4g1ACL6yrVVlyWu66GHDU1vUkywBCsAv7SnhazLG8zMfCy/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"
-            width="750"
-            height="100"
-            frameborder="1">
-        </iframe>
+    <div class="container">
+        <div class="song-list" id="songList">
+            <!-- Items injected by JS -->
+        </div>
     </div>
+    <div class="player-bar" id="playerBar">
+        <div class="current-track">
+            <div class="song-icon">🎵</div>
+            <div class="track-info">
+                <h3 id="currentTitle">Selecciona una canción</h3>
+                <p id="currentArtist">Cosmic Library</p>
+            </div>
+        </div>
+        <div class="controls">
+            <div class="buttons">
+                <button class="btn-control" onclick="prevSong()">⏮</button>
+                <button class="btn-control btn-play" onclick="togglePlay()" id="playBtn">▶</button>
+                <button class="btn-control" onclick="nextSong()">⏭</button>
+            </div>
+            <div class="progress-container">
+                <span id="currentTime">0:00</span>
+                <div class="progress-bar" id="progressBar" onclick="seek(event)">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span id="duration">0:00</span>
+            </div>
+        </div>
+        <div class="volume-control">
+            <span>🔊</span>
+            <input type="range" min="0" max="1" step="0.01" value="1" onchange="setVolume(this.value)">
+        </div>
+    </div>
+    <audio id="audioPlayer"></audio>
+    <script>
+        // ===== SONG DATA WITH REAL TRACK NAMES =====
+        const songs = [
+            // Disc 1
+            { title: 'In the Flesh?', path: '01%20-%20In%20the%20Flesh.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 1, duration: '3:19' },
+            { title: 'The Thin Ice', path: '02%20-%20The%20Thin%20Ice.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 2, duration: '2:27' },
+            { title: 'Another Brick in the Wall (Part 1)', path: '03%20-%20Another%20Brick%20in%20the%20Wall%20Part%201.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 3, duration: '3:11' },
+            { title: 'The Happiest Days of Our Lives', path: '05%20-%20The%20Happiest%20Days%20of%20Our%20Lives.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 5, duration: '1:46' },
+            { title: 'Mother', path: '06%20-%20Mother.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 6, duration: '5:32' },
+            { title: 'Goodbye Blue Sky', path: '07%20-%20Goodbye%20Blue%20Sky.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 7, duration: '2:45' },
+            { title: 'Empty Spaces', path: '08%20-%20Empty%20Spaces.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 8, duration: '2:10' },
+            { title: 'Young Lust', path: '09%20-%20Young%20Lust.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 9, duration: '3:25' },
+            { title: 'One of My Turns', path: '10%20-%20One%20of%20My%20Turns.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 10, duration: '3:35' },
+            { title: "Don't Leave Me Now", path: '11%20-%20Don\'t%20Leave%20Me%20Now.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 11, duration: '4:08' },
+            { title: 'Another Brick in the Wall (Part 2)', path: '12%20-%20Another%20Brick%20in%20the%20Wall%20Part%202.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 12, duration: '3:59' },
+            { title: 'Goodbye Cruel World', path: '13%20-%20Goodbye%20Cruel%20World.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 13, duration: '1:13' },
 
-</div>
-</div>
-</div>
+            // Disc 2
+            { title: 'Hey You', path: '14%20-%20Hey%20You.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 1, duration: '4:40' },
+            { title: 'Is There Anybody Out There?', path: '15%20-%20Is%20There%20Anybody%20Out%20There.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 2, duration: '2:44' },
+            { title: 'Nobody Home', path: '16%20-%20Nobody%20Home.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 3, duration: '3:26' },
+            { title: 'Vera', path: '17%20-%20Vera.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 4, duration: '1:35' },
+            { title: 'Bring the Boys Back Home', path: '18%20-%20Bring%20the%20Boys%20Back%20Home.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 5, duration: '1:21' },
+            { title: 'Comfortably Numb', path: '19%20-%20Comfortably%20Numb.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 6, duration: '6:23' },
+            { title: 'The Show Must Go On', path: '20%20-%20The%20Show%20Must%20Go%20On.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 7, duration: '1:36' },
+            { title: 'In the Flesh', path: '21%20-%20In%20the%20Flesh.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 8, duration: '4:15' },
+            { title: 'Run Like Hell', path: '22%20-%20Run%20Like%20Hell.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 9, duration: '4:19' },
+            { title: 'Waiting for the Worms', path: '23%20-%20Waiting%20for%20the%20Worms.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 10, duration: '4:04' },
+            { title: 'Stop', path: '24%20-%20Stop.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 11, duration: '0:30' },
 
-
-    <div id="home" class="inicio" align="center"><p><a href="#inicio">🏠 INCIO</a></div>
-    <div id="home" class="inicio" align="center"><p><a href="topvisitados.html">➡️ Siguiente</a></div>
-    
-<br>
-<br>
-
-   <div  style="position:absolute; left:45%; width: 300px; height: 100px;"><a href="https://wa.me/34676589037" target="_blank" style="background:#057643; color:rgb(20, 156, 70); padding:10px 20px; border-radius:5px; text-decoration:none; font-family:sans-serif;">💬 Chatea conmigo  en WhatsApp </a>
- 
-  
-
-  </div>
-
-
-
-</footer>
-
-
-
-<script src="script.js"></script>
-<script>
-  const titles = document.querySelectorAll(".media-title");
-
-  titles.forEach(title => {
-    title.addEventListener("click", () => {
-      const currentList = title.nextElementSibling;
-
-      document.querySelectorAll(".media-list").forEach(list => {
-        if (list !== currentList) {
-          list.style.maxHeight = null;
+            // Bonus tracks
+            { title: 'Another Brick in the Wall (Part 2) - Extended', path: 'Bonus%20-%20Another%20Brick%20Extended.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 0, track: 0, duration: '3:59' },
+            { title: 'Comfortably Numb - Live', path: 'Bonus%20-%20Comfortably%20Numb%20Live.mp3', artist: 'Pink Floyd', album: 'The Wall (Live)', year: 1980, disc: 0, track: 0, duration: '8:21' },
+            { title: 'Run Like Hell - Live', path: 'Bonus%20-%20Run%20Like%20Hell%20Live.mp3', artist: 'Pink Floyd', album: 'The Wall (Live)', year: 1980, disc: 0, track: 0, duration: '5:12' }
+        ];
+        let currentIndex = -1;
+        const audio = document.getElementById('audioPlayer');
+        const searchInput = document.getElementById('searchInput');
+        // Render Songs
+        function renderSongs(filter = "") {
+            const container = document.getElementById('songList');
+            container.innerHTML = "";
+           
+            songs.forEach((song, index) => {
+                if(song.title.toLowerCase().includes(filter.toLowerCase())) {
+                    const el = document.createElement('div');
+                    el.className = `song-card ${index === currentIndex ? 'playing' : ''}`;
+                    el.onclick = () => playSong(index);
+                    el.innerHTML = `
+                        <div class="song-icon">♫</div>
+                        <div class="song-info">
+                            <div class="song-title">${song.title}</div>
+                            <div class="song-meta">${song.format}</div>
+                        </div>
+                    `;
+                    container.appendChild(el);
+                }
+            });
         }
-      });
-
-      if (currentList.style.maxHeight) {
-        currentList.style.maxHeight = null;
-      } else {
-        currentList.style.maxHeight = currentList.scrollHeight + "px";
-      }
-    });
-  });
-</script>
-
-
-
-
-
-  <!-- Moment.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
-  <script>
-    moment.locale('es');
-
-    function actualizar() {
-      document.getElementById("fecha").innerText =
-        moment().format('dddd DD/MM/YYYY').toUpperCase();
-      document.getElementById("hora").innerText =
-        moment().format('HH:mm:ss');
-    }
-
-    actualizar();
-    setInterval(actualizar, 1000);
-  </script>
-
-
-  <!-- Cambia el color de la página según el día de la semana -->
-
-<script>
-const dias = [
-    { nombre: "Domingo",    fondo: "linear-gradient(135deg, #2c3e50, #000000)" },
-    { nombre: "Lunes",      fondo: "linear-gradient(135deg, #e74c3c, #c0392b)" },
-    { nombre: "Martes",     fondo: "linear-gradient(135deg, #f39c12, #e67e22)" },
-    { nombre: "Miércoles",  fondo: "linear-gradient(135deg, #27ae60, #16a085)" },
-    { nombre: "Jueves",     fondo: "linear-gradient(135deg, #2980b9, #34495e)" },
-    { nombre: "Viernes",    fondo: "linear-gradient(135deg, #8e44ad, #2c3e50)" },
-    { nombre: "Sábado",     fondo: "linear-gradient(135deg, #1abc9c, #2ecc71)" }
-];
-
-const hoy = new Date().getDay();
-document.body.style.background = dias[hoy].fondo;
-document.getElementById("mensaje").textContent =
-    "Hoy es " + dias[hoy].nombre;
-</script>
-
-
-
-
-
-
-
-
-
+        // Search Listener
+        searchInput.addEventListener('input', (e) => renderSongs(e.target.value));
+        // Player Logic
+        function playSong(index) {
+            if (index < 0 || index >= songs.length) return;
+           
+            currentIndex = index;
+            const song = songs[index];
+           
+            audio.src = song.path;
+            audio.play().catch(error => {
+                console.error('Error playing audio:', error);
+            });
+           
+            document.getElementById('currentTitle').innerText = song.title;
+            document.getElementById('playBtn').innerText = "⏸";
+            document.getElementById('playerBar').classList.add('active');
+           
+            renderSongs(searchInput.value);
+        }
+        function togglePlay() {
+            if (songs.length === 0) return;
+            if (audio.paused) {
+                if(currentIndex === -1) playSong(0);
+                else audio.play();
+                document.getElementById('playBtn').innerText = "⏸";
+            } else {
+                audio.pause();
+                document.getElementById('playBtn').innerText = "▶";
+            }
+        }
+        function nextSong() {
+            let next = currentIndex + 1;
+            if (next >= songs.length) next = 0;
+            playSong(next);
+        }
+        function prevSong() {
+            let prev = currentIndex - 1;
+            if (prev < 0) prev = songs.length - 1;
+            playSong(prev);
+        }
+        function setVolume(val) {
+            audio.volume = val;
+        }
+        function seek(e) {
+            const bar = document.getElementById('progressBar');
+            const rect = bar.getBoundingClientRect();
+            const offsetX = e.clientX - rect.left;
+            const percent = offsetX / bar.offsetWidth;
+            if (!isNaN(audio.duration)) {
+                audio.currentTime = percent * audio.duration;
+            }
+        }
+        audio.addEventListener('timeupdate', () => {
+            if (!isNaN(audio.duration)) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                document.getElementById('progressFill').style.width = percent + "%";
+                document.getElementById('currentTime').innerText = formatTime(audio.currentTime);
+                document.getElementById('duration').innerText = formatTime(audio.duration);
+            }
+        });
+        audio.addEventListener('ended', nextSong);
+        audio.addEventListener('error', (e) => {
+            console.error('Audio error:', e);
+        });
+        audio.addEventListener('loadedmetadata', () => {
+            document.getElementById('duration').innerText = formatTime(audio.duration);
+        });
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return `${m}:${s < 10 ? '0' : ''}${s}`;
+        }
+        // Init
+        renderSongs();
+    </script>
 </body>
 </html>
