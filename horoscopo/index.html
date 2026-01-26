@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link type="image/png" sizes="120x120" rel="icon" href="horoscopo.png">
+  <title>Horóscopo Diario Gratis</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #0f0f1a;
+      color: #e0e0ff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 { color: #ffdd57; }
+    select, button {
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      margin: 10px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+    select { background: #2a2a4a; color: white; }
+    button { background: #ff6b6b; color: white; }
+    #resultado {
+      max-width: 600px;
+      margin: 30px auto;
+      background: #1a1a3a;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      line-height: 1.6;
+    }
+    .etiqueta { color: #a78bfa; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h1>Tu Horóscopo Diario</h1>
+
+  <select id="signo">
+    <option value="">Elige tu signo</option>
+    <option value="aries">♈ Aries</option>
+    <option value="taurus">♉ Tauro</option>
+    <option value="gemini">♊ Géminis</option>
+    <option value="cancer">♋ Cáncer</option>
+    <option value="leo">♌ Leo</option>
+    <option value="virgo">♍ Virgo</option>
+    <option value="libra">♎ Libra</option>
+    <option value="scorpio">♏ Escorpio</option>
+    <option value="sagittarius">♐ Sagitario</option>
+    <option value="capricorn">♑ Capricornio</option>
+    <option value="aquarius">♒ Acuario</option>
+    <option value="pisces">♓ Piscis</option>
+  </select>
+
+  <button onclick="obtenerHoroscopo()">Ver Horóscopo</button>
+
+  <div id="resultado"></div>
+
+<script>
+  const signos = {
+    aries: "Aries", taurus: "Tauro", gemini: "Géminis", cancer: "Cáncer",
+    leo: "Leo", virgo: "Virgo", libra: "Libra", scorpio: "Escorpio",
+    sagittarius: "Sagitario", capricorn: "Capricornio", aquarius: "Acuario", pisces: "Piscis"
+  };
+
+  async function obtenerHoroscopo() {
+    const signoSelect = document.getElementById("signo").value.trim().toLowerCase();
+    if (!signoSelect || !signos[signoSelect]) {
+      alert("Elige un signo válido");
+      return;
+    }
+
+    const signoApi = signoSelect; // API Ninjas usa minúsculas
+
+    const resultadoDiv = document.getElementById("resultado");
+    resultadoDiv.innerHTML = "<p>Cargando tu horóscopo...</p>";
+
+    try {
+      const response = await fetch(`https://api.api-ninjas.com/v1/horoscopesign=${signoApi}`, {
+        headers: {
+          'X-Api-Key': 'sJZn4l7fkYrAjWo0HgzvsNc5rnzpItEsZKf6BinR'  // ← Pon tu clave real
+        }
+      });
+
+      if (!response.ok) throw new Error(`Error: ${response.status}`);
+
+      const data = await response.json();
+
+      resultadoDiv.innerHTML = `
+        <h2>${signos[signoSelect]} - Hoy</h2>
+        <p style="font-size: 1.1rem; line-height: 1.7;">${data.horoscope || 'No disponible'}</p>
+        <p><strong>Humor:</strong> ${data.mood}</p>
+        <p><strong>Número de la suerte:</strong> ${data.lucky_number}</p>
+        <p><strong>Día de la suerte:</strong> ${data.lucky_day}</p>
+        <small>Fuente: API Ninjas Horoscope</small>
+      `;
+    } catch (error) {
+      console.error(error);
+      resultadoDiv.innerHTML = `
+        <p style="color:#ff6b6b">¡Ups! Error al cargar: ${error.message}</p>
+        <p>Verifica tu clave API o conexión. Prueba abrir con Live Server.</p>
+      `;
+    }
+  }
+</script>
+
+</body>
+</html>
