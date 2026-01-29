@@ -566,24 +566,43 @@
 <!-- musica favorita -->
 
      <section style="width: auto; font-family:Arial, sans-serif; height: auto; overflow-y: auto;">
-      <button class="media-title">🎵 Musica </button>
-      <ul class="media-list">
+        <h2 onclick="toggleMusica()"
+        style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:5px 0;">🎵
+        Musica<span id="arrowMusica">▼</span></h2>
+     
+      <ul class="media-list" id="musicaMenu">
        
         <li style="margin:5px 0;"><a href="retrocasete/index.html" target="_blank">🎹 Generador Caratulas Cassete</a></li>
          <li style="margin:5px 0;"><a href="rozalen/index.html" target="_blank">🎵 Club de Fan Rozalen</a></li>
         <li style="margin:5px 0;"><a href="musica.html" target="_blank">🎵 Músisa 007</a></li>
         <li style="margin:5px 0;"><a href="misdiscos/index.html" target="_blank">🎵 Mis discos en Mp3</a></li>
-        <li style="margin:5px 0;"><a href="reproductor.html" target="_blank">🎵 Músisa Julio Iglesias</a></li>
-        <li style="margin:5px 0;"><a href="music3/index.html" target="_blank">🎵 Músisa Julio Iglesias 2</a></li>
-        <li style="margin:5px 0;"><a href="musica4/index.html" target="_blank">💃 Músisa Julio Iglesias (Tango)</a></li>
+        <li style="margin:5px 0;"><a href="reproductor.html" target="_blank">🎵 Músisca Julio Iglesias</a></li>
+        <li style="margin:5px 0;"><a href="music3/index.html" target="_blank">🎵 Múscica Julio Iglesias 2</a></li>
+         <li style="margin:5px 0;"><a href="https://antonio2709.synology.me/JULIO_catedrales/index.html" target="_blank">🎵 Múscica Julio Iglesias 3</a></li>
+        <li style="margin:5px 0;"><a href="musica4/index.html" target="_blank">🎵 Música Julio Iglesias (Tango)</a></li>
         <li style="margin:5px 0;"><a href="musica6/index.html" target="_blank">🎵 Sergio Dalma</a></li>
-        <li style="margin:5px 0;"><a href="reproductor2.html" target="_blank">🎵 Músisa Raphael</a></li>
+        <li style="margin:5px 0;"><a href="reproductor2.html" target="_blank">🎵 Música Raphael</a></li>
         <li style="margin:5px 0;"><a href="https://suno.com/@rioseras007" target="_blank">👨‍🎤 Suno</a></li>
         
        
 
       </ul>
     </section>
+
+<script>
+      function toggleMusica() {
+        const menu = document.getElementById('musicaMenu');
+        const arrow = document.getElementById('arrowMusica');
+        if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+          menu.style.maxHeight = '0';
+          arrow.textContent = '▼';
+        } else {
+          menu.style.maxHeight = menu.scrollHeight + 'px';
+          arrow.textContent = '▲';
+        }
+      }
+    </script>
+
 
 
 
