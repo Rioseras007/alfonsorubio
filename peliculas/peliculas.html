@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>007 Forever | The Ultimate James Bond Collection</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">007 <span>FOREVER</span></a>
+            <nav id="mainNav">
+                <a href="index.html" data-i18n="nav_home">Inicio</a>
+                <a href="peliculas.html" class="active" data-i18n="nav_movies">Misiones</a>
+                <a href="moneypenny.html" data-i18n="nav_moneypenny">Moneypenny</a>
+                <a href="q.html" data-i18n="nav_q">Rama Q</a>
+                <a href="m.html" data-i18n="nav_m">Jefe MI6</a>
+                <a href="villanos.html" data-i18n="nav_villains">Villanos</a>
+                <a href="coches.html" data-i18n="nav_cars">Vehículos</a>
+                <a href="mujeres.html" data-i18n="nav_girls">Chicas Bond</a>
+                <div class="lang-switcher">
+                    <span id="lang-es" class="active">ES</span> | <span id="lang-en">EN</span>
+                </div>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1 data-i18n="cat_hero_title">Dossier Clasificado</h1>
+            <p data-i18n="cat_hero_desc">Bienvenido al archivo digital definitivo del agente más selecto de Su Majestad.
+                Explora la colección completa de misiones de 007, optimizadas para tu placer visual.</p>
+
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all" data-i18n="filter_all">Todas las Misiones</button>
+                <button class="filter-btn" data-filter="classic" data-i18n="filter_classic">Era Clásica</button>
+                <button class="filter-btn" data-filter="modern" data-i18n="filter_modern">Era Moderna</button>
+                <button class="filter-btn" data-filter="mkv" data-i18n="filter_mkv">Calidad MKV</button>
+                <button class="filter-btn" data-filter="mp4" data-i18n="filter_mp4">Móvil MP4</button>
+            </div>
+        </section>
+
+        <main class="movie-grid" id="movieGrid">
+            <!-- Movies injected via JavaScript -->
+        </main>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <video id="mainPlayer" controls></video>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

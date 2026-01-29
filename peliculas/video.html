@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mini Cine Virtual PSP</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+.contenedor {
+    max-width: 1280px;
+    width: 100%;
+    margin: 20px auto;
+    text-align: center;
+    position: relative;
+}
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 40px rgba(255,255,255,0.2);
+}
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+.controls {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+.controls button {
+    background: #111;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.2s;
+}
+.controls button:hover {
+    background: #333;
+    transform: scale(1.05);
+}
+.playlist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    transition: opacity 0.5s;
+}
+.playlist div {
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s;
+}
+.playlist img {
+    width: 120px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid transparent;
+}
+.playlist div:hover img {
+    border-color: #fff;
+    transform: scale(1.05);
+}
+.playlist p {
+    margin: 5px 0 0 0;
+    font-size: 0.85rem;
+}
+body.cine .controls,
+body.cine .playlist {
+    opacity: 0;
+    pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<div class="contenedor">
+    <div class="video-wrapper">
+        <video id="reproductor" controls autoplay muted playsinline>
+            <source id="video-source" src="dr-no.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="controls">
+        <button onclick="anterior()">⏮ Anterior</button>
+        <button onclick="siguiente()">Siguiente ⏭</button>
+    </div>
+
+    <div class="playlist" id="playlist"></div>
+</div>
+
+<script>
+const videos = [
+{
+"src": "MKV/Agente 007 contra el Dr. No (1962).mkv",
+"title": "Agente 007 contra el Dr. No (1962)",
+"thumb": "miniaturas/Agente 007 contra el Dr. No (1962).jpg"
+},
+{
+"src": "MP4/Agente 007 contra el Dr. No (1962).mp4",
+"title": "Agente 007 contra el Dr. No (1962)",
+"thumb": "miniaturas/Agente 007 contra el Dr. No (1962).jpg"
+},
+{
+"src": "MKV/Al Servicio Secreto de su Majestad (1969).mkv",
+"title": "Al Servicio Secreto de su Majestad (1969)",
+"thumb": "miniaturas/Al Servicio Secreto de su Majestad (1969).jpg"
+},
+{
+"src": "MP4/Al servicio secreto de su Majestad (1969).mp4",
+"title": "Al servicio secreto de su Majestad (1969)",
+"thumb": "miniaturas/Al servicio secreto de su Majestad (1969).jpg"
+},
+{
+"src": "MKV/Alta tension (1987).mkv",
+"title": "Alta tension (1987)",
+"thumb": "miniaturas/Alta tension (1987).jpg"
+},
+{
+"src": "MKV/Casino Royale (1967).mkv",
+"title": "Casino Royale (1967)",
+"thumb": "miniaturas/Casino Royale (1967).jpg"
+},
+{
+"src": "MKV/Casino Royale (2006).mkv",
+"title": "Casino Royale (2006)",
+"thumb": "miniaturas/Casino Royale (2006).jpg"
+},
+{
+"src": "MP4/Desde Rusia con amor (1963).mp4",
+"title": "Desde Rusia con amor (1963)",
+"thumb": "miniaturas/Desde Rusia con amor (1963).jpg"
+},
+{
+"src": "MKV/Diamantes para La Eternidad (1971).mkv",
+"title": "Diamantes para La Eternidad (1971)",
+"thumb": "miniaturas/Diamantes para La Eternidad (1971).jpg"
+},
+{
+"src": "MKV/El Mañana nunca Muere (1997).mkv",
+"title": "El Mañana nunca Muere (1997)",
+"thumb": "miniaturas/El Mañana nunca Muere (1997).jpg"
+},
+{
+"src": "MKV/El Mundo nunca es Suficiente (1999).mkv",
+"title": "El Mundo nunca es Suficiente (1999)",
+"thumb": "miniaturas/El Mundo nunca es Suficiente (1999).jpg"
+},
+{
+"src": "MKV/El hombre de la pistola de oro (1974).mkv",
+"title": "El hombre de la pistola de oro (1974)",
+"thumb": "miniaturas/El hombre de la pistola de oro (1974).jpg"
+},
+{
+"src": "MKV/Goldeneye (1995).mkv",
+"title": "Goldeneye (1995)",
+"thumb": "miniaturas/Goldeneye (1995).jpg"
+},
+{
+"src": "MKV/James Bond Contra Goldfinger (1964).mkv",
+"title": "James Bond Contra Goldfinger (1964)",
+"thumb": "miniaturas/James Bond Contra Goldfinger (1964).jpg"
+},
+{
+"src": "MKV/La Espia Que Me Amo (1977).mkv",
+"title": "La Espia Que Me Amo (1977)",
+"thumb": "miniaturas/La Espia Que Me Amo (1977).jpg"
+},
+{
+"src": "MKV/Licencia para Matar (1985).mkv",
+"title": "Licencia para Matar (1985)",
+"thumb": "miniaturas/Licencia para Matar (1985).jpg"
+},
+{
+"src": "MKV/Moonraker (1979).mkv",
+"title": "Moonraker (1979)",
+"thumb": "miniaturas/Moonraker (1979).jpg"
+},
+{
+"src": "MP4/Muere Otro Dia (2002).mp4",
+"title": "Muere Otro Dia (2002)",
+"thumb": "miniaturas/Muere Otro Dia (2002).jpg"
+},
+{
+"src": "MKV/Muere otro Dia (2002).mkv",
+"title": "Muere otro Dia (2002)",
+"thumb": "miniaturas/Muere otro Dia (2002).jpg"
+},
+{
+"src": "MKV/Nunca digas nunca Jamas (1983).mkv",
+"title": "Nunca digas nunca Jamas (1983)",
+"thumb": "miniaturas/Nunca digas nunca Jamas (1983).jpg"
+},
+{
+"src": "MKV/Octopussy (1983).mkv",
+"title": "Octopussy (1983)",
+"thumb": "miniaturas/Octopussy (1983).jpg"
+},
+{
+"src": "MKV/Operacion Trueno (1965).mkv",
+"title": "Operacion Trueno (1965)",
+"thumb": "miniaturas/Operacion Trueno (1965).jpg"
+},
+{
+"src": "MKV/Panorama para Matar (1985).mkv",
+"title": "Panorama para Matar (1985)",
+"thumb": "miniaturas/Panorama para Matar (1985).jpg"
+},
+{
+"src": "MKV/Quantum Of Solace (2008).mkv",
+"title": "Quantum Of Solace (2008)",
+"thumb": "miniaturas/Quantum Of Solace (2008).jpg"
+},
+{
+"src": "MKV/Skyfall (2012).mkv",
+"title": "Skyfall (2012)",
+"thumb": "miniaturas/Skyfall (2012).jpg"
+},
+{
+"src": "MKV/Solo Se Vive Dos Veces (1967).mkv",
+"title": "Solo Se Vive Dos Veces (1967)",
+"thumb": "miniaturas/Solo Se Vive Dos Veces (1967).jpg"
+},
+{
+"src": "MKV/Solo para sus Ojos (1981).mkv",
+"title": "Solo para sus Ojos (1981)",
+"thumb": "miniaturas/Solo para sus Ojos (1981).jpg"
+},
+{
+"src": "MKV/Spectre (2015).mkv",
+"title": "Spectre (2015)",
+"thumb": "miniaturas/Spectre (2015).jpg"
+},
+{
+"src": "MP4/Vive Y Deja Morir (1973).mp4",
+"title": "Vive Y Deja Morir (1973)",
+"thumb": "miniaturas/Vive Y Deja Morir (1973).jpg"
+},
+{
+"src": "MKV/Vive y deja Morir (1973).mkv",
+"title": "Vive y deja Morir (1973)",
+"thumb": "miniaturas/Vive y deja Morir (1973).jpg"
+}
+];
+
+let indiceActual = 0;
+const reproductor = document.getElementById("reproductor");
+const fuente = document.getElementById("video-source");
+const playlistDiv = document.getElementById("playlist");
+
+reproductor.volume = 0.8;
+
+function cargarVideo(i){
+    indiceActual = i;
+    fuente.src = videos[i].src;
+    reproductor.load();
+    reproductor.play();
+}
+
+function siguiente(){
+    cargarVideo((indiceActual + 1) % videos.length);
+}
+
+function anterior(){
+    cargarVideo((indiceActual - 1 + videos.length) % videos.length);
+}
+
+videos.forEach((video, i) => {
+    const div = document.createElement("div");
+    div.onclick = () => cargarVideo(i);
+    const img = document.createElement("img");
+    img.src = video.thumb;
+    const p = document.createElement("p");
+    p.textContent = video.title;
+    div.appendChild(img);
+    div.appendChild(p);
+    playlistDiv.appendChild(div);
+});
+
+reproductor.addEventListener('play', () => document.body.classList.add('cine'));
+reproductor.addEventListener('pause', () => document.body.classList.remove('cine'));
+reproductor.addEventListener('ended', () => document.body.classList.remove('cine'));
+</script>
+
+</body>
+</html>

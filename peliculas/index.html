@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>007 Forever | Welcome to the Archive</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">007 <span>FOREVER</span></a>
+            <nav id="mainNav">
+                <a href="index.html" class="active" data-i18n="nav_home">Inicio</a>
+                <a href="peliculas.html" data-i18n="nav_movies">Misiones</a>
+                <a href="moneypenny.html" data-i18n="nav_moneypenny">Moneypenny</a>
+                <a href="q.html" data-i18n="nav_q">Rama Q</a>
+                <a href="m.html" data-i18n="nav_m">Jefe MI6</a>
+                <a href="villanos.html" data-i18n="nav_villains">Villanos</a>
+                <a href="coches.html" data-i18n="nav_cars">Vehículos</a>
+                <a href="mujeres.html" data-i18n="nav_girls">Chicas Bond</a>
+                <div class="lang-switcher">
+                    <span id="lang-es" class="active">ES</span> | <span id="lang-en">EN</span>
+                </div>
+            </nav>
+        </header>
+
+        <section class="landing-hero">
+            <h1 id="hero-title" data-i18n="hero_title">Mi nombre es Bond.</h1>
+            <p id="hero-desc" data-i18n="hero_desc"
+                style="max-width: 700px; font-weight: 500; text-shadow: 0 2px 15px rgba(0,0,0,0.8);">Entra en un mundo
+                de elegancia, peligro y espionaje de alto nivel. Explora el legado cinematográfico completo de 007.</p>
+
+            <div class="cta-box">
+                <a href="peliculas.html" class="btn-primary" data-i18n="cta_enter">Entrar al Archivo</a>
+            </div>
+        </section>
+
+        <section class="section-story" id="legacy">
+            <div class="story-content">
+                <h2 data-i18n="story_title">Un Legado de Sesenta Años</h2>
+                <p data-i18n="story_p1">Desde las playas bañadas por el sol de Jamaica en 'Dr. No' hasta los paisajes
+                    inquietantes de 'Skyfall', James Bond ha definido la excelencia cinematográfica durante
+                    generaciones.</p>
+                <p data-i18n="story_p2">Descubre los actores, los coches y los gadgets que lo convirtieron en el agente
+                    secreto más famoso del mundo.</p>
+                <a href="actores.html" class="filter-btn" style="display: inline-block; margin-top: 20px;"
+                    data-i18n="learn_more">Saber más</a>
+            </div>
+            <div class="actors-preview">
+                <div class="actor-card">
+                    <a href="https://es.wikipedia.org/wiki/Sean_Connery" target="_blank">
+                        <img src="actores/sean_connery.jpg" alt="Sean Connery" onerror="this.src='james-bond-6-1.jpg'">
+                        <div class="actor-name">CONNERY</div>
+                    </a>
+                </div>
+                <div class="actor-card">
+                    <a href="https://es.wikipedia.org/wiki/George_Lazenby" target="_blank">
+                        <img src="actores/george_lazenby.png" alt="George Lazenby"
+                            onerror="this.src='james-bond-6-1.jpg'">
+                        <div class="actor-name">LAZENBY</div>
+                    </a>
+                </div>
+                <div class="actor-card">
+                    <a href="https://es.wikipedia.org/wiki/Roger_Moore" target="_blank">
+                        <img src="actores/Roger_Moore.jpg" alt="Roger Moore" onerror="this.src='james-bond-6-1.jpg'">
+                        <div class="actor-name">MOORE</div>
+                    </a>
+                </div>
+                <div class="actor-card">
+                    <a href="https://es.wikipedia.org/wiki/Timothy_Dalton" target="_blank">
+                        <img src="actores/Timothy-Dalton.jpg" alt="Timothy Dalton"
+                            onerror="this.src='james-bond-6-1.jpg'">
+                        <div class="actor-name">DALTON</div>
+                    </a>
+                </div>
+                <div class="actor-card">
+                    <a href="https://es.wikipedia.org/wiki/Pierce_Brosnan" target="_blank">
+                        <img src="actores/Pierce Brosman.png" alt="Pierce Brosnan"
+                            onerror="this.src='james-bond-6-1.jpg'">
+                        <div class="actor-name">BROSNAN</div>
+                    </a>
+                </div>
+                <div class="actor-card">
+                    <a href="https://es.wikipedia.org/wiki/Daniel_Craig" target="_blank">
+                        <img src="actores/Daniel_Craig.jpg" alt="Daniel Craig" onerror="this.src='james-bond-6-1.jpg'">
+                        <div class="actor-name">CRAIG</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer
+        style="text-align: center; padding: 60px 0; color: var(--text-dim); border-top: 1px solid var(--glass-border);">
+        <p data-i18n="footer_text">© 2026 Proyecto Fan 007 Forever. Solo para fines educativos.</p>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
