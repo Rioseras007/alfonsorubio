@@ -1,493 +1,1493 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Nebula</title>
-    <!-- Load modern font for vanguardist look -->
+    <title>Vaultify | Bóveda Segura</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
         :root {
-            --primary: #00ffea; /* Neon cyan */
-            --primary-dark: #00b8a3;
-            --accent: #ff00ff; /* Neon magenta */
-            --bg-dark: #0a0a1f; /* Deep space blue */
-            --bg-card: rgba(26, 26, 51, 0.8); /* Semi-transparent glass */
-            --text-main: #e0e0ff;
-            --text-muted: #a0a0ff;
-            --glow: 0 0 10px var(--primary), 0 0 20px var(--accent);
+            /* Default: Dark Blue Theme */
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.5);
+            --bg-dark: #0a0a0b;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: #94a3b8;
+            --accent: #60a5fa;
+            --error: #ef4444;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --delete-red: #dc2626;
+            --orange-vibrant: #f97316;
         }
+
+        body.light-mode {
+            --primary: #2563eb;
+            --primary-glow: rgba(37, 99, 235, 0.2);
+            --bg-dark: #f8fafc;
+            --bg-card: #ffffff;
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --text-main: #1e293b;
+            --text-dim: #64748b;
+            --accent: #3b82f6;
+        }
+
+        body.emerald-mode {
+            --primary: #10b981;
+            --primary-glow: rgba(16, 185, 129, 0.4);
+            --bg-dark: #061712;
+            --bg-card: rgba(16, 185, 129, 0.05);
+            --glass-border: rgba(16, 185, 129, 0.2);
+            --text-main: #ecfdf5;
+            --text-dim: #6ee7b7;
+        }
+
+        body.cyber-mode {
+            --primary: #f0abfc;
+            --primary-glow: rgba(240, 171, 252, 0.6);
+            --bg-dark: #0f172a;
+            --bg-card: rgba(240, 171, 252, 0.05);
+            --glass-border: rgba(240, 171, 252, 0.3);
+            --text-main: #fdf4ff;
+            --text-dim: #d8b4fe;
+            --accent: #c084fc;
+        }
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Orbitron', sans-serif; /* Futuristic font */
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
         }
+
         body {
-            background: linear-gradient(135deg, var(--bg-dark), #1a1a3a);
+            background: radial-gradient(circle at top right, #1e1b4b, #030712);
             color: var(--text-main);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            padding-bottom: 140px; /* Space for enhanced player */
             overflow-x: hidden;
+            line-height: 1.6;
         }
-        /* Header with neon glow */
-        header {
-            background: rgba(10, 10, 31, 0.7);
-            backdrop-filter: blur(15px);
-            padding: 1.5rem 3rem;
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            border-bottom: 1px solid rgba(0, 255, 234, 0.2);
-            display: flex;
-            justify-content: space-between;
+
+        /* --- SCREENS --- */
+        .screen {
+            display: none;
+            width: 100%;
+            min-height: 100vh;
+            padding: 2rem;
+            flex-direction: column;
             align-items: center;
-            box-shadow: var(--glow);
+            animation: fadeIn 0.4s ease-out;
         }
-        h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: neon-flicker 1.5s infinite alternate;
+
+        .screen.active {
+            display: flex;
         }
-        @keyframes neon-flicker {
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
             to {
-                text-shadow: var(--glow);
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-        /* Search with holographic effect */
-        .search-container {
-            position: relative;
-            max-width: 450px;
-            width: 100%;
-        }
-        .search-input {
-            width: 100%;
-            padding: 0.8rem 1.2rem 0.8rem 3rem;
-            border-radius: 50px;
-            border: 2px solid transparent;
-            background: rgba(26, 26, 51, 0.5);
-            color: var(--text-main);
-            outline: none;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 0 5px var(--primary);
-        }
-        .search-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 15px var(--primary);
-        }
-        .search-icon {
-            position: absolute;
-            left: 1.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 1.2rem;
-        }
-        /* Song List with grid and hover animations */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-        .song-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        .song-card {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            border: 1px solid rgba(0, 255, 234, 0.1);
-            backdrop-filter: blur(5px);
-        }
-        .song-card:hover {
-            transform: scale(1.05) rotate(1deg);
-            box-shadow: var(--glow);
-            background: rgba(26, 26, 51, 0.9);
-        }
-        .song-card.playing {
-            border-color: var(--accent);
-            box-shadow: 0 0 20px var(--accent);
-            animation: pulse 1s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
-        .song-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
+
+        /* --- PROFILES SCREEN --- */
+        #profiles-screen {
             justify-content: center;
-            flex-shrink: 0;
-            box-shadow: var(--glow);
+            background: radial-gradient(circle at bottom left, #1e1b4b, #030712);
         }
-        .song-info {
-            overflow: hidden;
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 3rem;
         }
-        .song-title {
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin-bottom: 0.3rem;
-            font-size: 1.1rem;
-        }
-        .song-meta {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-family: 'Roboto Mono', monospace;
-        }
-        /* Player Footer with wave visualization */
-        .player-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(180deg, rgba(10, 10, 31, 0.9), rgba(26, 26, 51, 0.8));
-            backdrop-filter: blur(20px);
-            border-top: 2px solid rgba(0, 255, 234, 0.3);
-            padding: 1.5rem 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 100;
-            box-shadow: 0 -10px 30px rgba(0, 255, 234, 0.2);
-            transform: translateY(100%);
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-        .player-bar.active {
-            transform: translateY(0);
-        }
-        .current-track {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            width: 35%;
-        }
-        .track-info h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
-            color: var(--text-main);
-        }
-        .track-info p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-family: 'Roboto Mono', monospace;
-        }
-        .controls {
+
+        .profile-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 30%;
-            gap: 0.8rem;
+            gap: 1rem;
         }
-        .buttons {
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .profile-actions {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            display: flex;
+            gap: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .profile-card:hover .profile-actions {
+            opacity: 1;
+        }
+
+        .p-action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 0.75rem;
             display: flex;
             align-items: center;
-            gap: 2rem;
-        }
-        .btn-control {
-            background: none;
-            border: none;
-            color: var(--text-muted);
+            justify-content: center;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-dim);
+            transition: all 0.2s ease;
             cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1.5rem;
         }
-        .btn-control:hover {
-            color: var(--primary);
-            text-shadow: var(--glow);
-        }
-        .btn-play {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: var(--bg-dark);
-            border-radius: 50%;
-            font-size: 1.5rem;
-            box-shadow: var(--glow);
-        }
-        .btn-play:hover {
+
+        .p-action-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
             transform: scale(1.1);
         }
-        /* Progress Bar with neon fill */
-        .progress-container {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 13px;
-            color: var(--text-muted);
-            font-family: 'Roboto Mono', monospace;
+
+        .p-action-btn.delete:hover {
+            background: var(--error);
+            border-color: var(--error);
         }
-        .progress-bar {
-            flex-grow: 1;
-            height: 6px;
-            background: rgba(160, 160, 255, 0.2);
-            border-radius: 3px;
-            cursor: pointer;
-            position: relative;
-            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 3px;
-            width: 0%;
-            box-shadow: var(--glow);
-        }
-        .volume-control {
-            width: 35%;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 12px;
-        }
-        input[type="range"] {
-            accent-color: var(--accent);
-            width: 120px;
-            cursor: pointer;
-        }
-        /* Caratulas with 3D flip effect */
-        .caratulas {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            padding: 3rem;
-            flex-wrap: wrap;
-            perspective: 1000px;
-        }
-        .caratulas .item {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-        .caratulas .item:hover {
-            transform: rotateY(180deg);
-        }
-        .caratulas img {
-            border-radius: 10px;
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
             object-fit: cover;
-            width: 100%;
-            height: auto;
-            max-width: 280px;
-            backface-visibility: hidden;
+            border: 3px solid var(--glass-border);
+            transition: border-color 0.3s ease;
+            background: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        /* Back side for flip (placeholder) */
-        .caratulas .item::after {
-            content: 'Nebula View';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotateY(180deg);
+
+        .profile-card:hover .profile-avatar {
+            border-color: var(--primary);
+        }
+
+        .profile-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .btn-add-profile {
+            border: 2px dashed var(--glass-border);
+            background: none;
+            color: var(--text-dim);
+            justify-content: center;
+        }
+
+        .btn-add-profile:hover {
+            border-color: var(--primary);
             color: var(--primary);
+        }
+
+        /* --- WEBCAM STYLES --- */
+        .webcam-container {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #000;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--glass-border);
+        }
+
+        #webcam-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .webcam-overlay {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* --- AUTH SCREEN --- */
+        #auth-screen {
+            justify-content: center;
+        }
+
+        .theme-btn.active {
+            box-shadow: 0 0 20px var(--primary-glow);
+            transform: scale(1.05);
+            border-color: var(--primary) !important;
+        }
+
+        /* --- SETTINGS TABS (Segmented Control) --- */
+        .settings-nav {
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.4rem;
+            border-radius: 1.25rem;
+            display: flex;
+            gap: 0.25rem;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .settings-tab {
+            flex: 1;
+            padding: 0.9rem;
+            border: none;
+            background: transparent;
+            color: var(--text-dim);
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .settings-tab i {
+            width: 18px;
+            opacity: 0.7;
+        }
+
+        .settings-tab:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .settings-tab.active {
+            background: var(--primary) !important;
+            color: white !important;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .settings-tab.active i {
+            opacity: 1;
+        }
+
+        .settings-group {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .settings-group.active {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 450px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 2.5rem;
+            padding: 4rem 3rem;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            color: var(--primary);
+            filter: drop-shadow(0 0 20px var(--primary-glow));
+        }
+
+        .vaultify-title {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to bottom right, #fff, #64748b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+            margin-left: 0.5rem;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.25rem;
+            padding: 1rem 1.25rem;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+        }
+
+        .primary-btn {
+            width: 100%;
+            padding: 1.1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 1.25rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            box-shadow: 0 10px 20px -5px var(--primary-glow);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            background: #7c3aed;
+            box-shadow: 0 15px 25px -5px var(--primary-glow);
+        }
+
+        .btn-setup {
+            background: #f97316;
+            box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.4);
+        }
+
+        .btn-setup:hover {
+            background: #ea580c;
+            box-shadow: 0 15px 25px -5px rgba(249, 115, 22, 0.5);
+        }
+
+        /* --- DASHBOARD SCREEN --- */
+        #dashboard-screen {
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: stretch;
+            padding-top: 3rem;
+        }
+
+        .db-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        #current-user-display {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-left: 1.5rem;
+            border-left: 1px solid var(--glass-border);
+            margin-left: 1rem;
+        }
+
+        .active-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            object-fit: cover;
+            background: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .active-user-name {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .btn-vibrant {
+            background: var(--orange-vibrant);
+            padding: 0.8rem 1.5rem;
+            border-radius: 1rem;
+            color: white;
+            border: none;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .btn-vibrant:hover {
+            transform: scale(1.05);
+            background: #ea580c;
+        }
+
+        .icon-btn-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .icon-btn-circle:hover {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--error);
+            border-color: rgba(239, 68, 68, 0.3);
+            transform: rotate(90deg);
+        }
+
+        /* --- SEARCH & FILTERS --- */
+        .controls-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            position: relative;
+            min-width: 300px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+        }
+
+        .search-box input {
+            padding-left: 3.5rem;
+            background: var(--card-bg);
+            border-radius: 1.5rem;
+        }
+
+        /* --- GRID & CARDS --- */
+        .credentials-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 50px 1.8fr 1.2fr 1.8fr 1.8fr 120px 220px;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            align-items: center;
+        }
+
+        .cred-row {
+            display: grid;
+            grid-template-columns: 50px 1.8fr 1.2fr 1.8fr 1.8fr 120px 220px;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .cred-row:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .favicon-container {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .favicon-container img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .col-site {
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .col-user {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .col-pass {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .col-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+
+        .pass-mask {
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        .btn-visit {
+            background: rgba(14, 165, 233, 0.1);
+            color: #0ea5e9;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-visit:hover {
+            background: #0ea5e9;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .btn-sm-action {
+            padding: 0.4rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        @media (max-width: 1100px) {
+            .table-header {
+                display: none;
+            }
+
+            .cred-row {
+                grid-template-columns: 50px 1fr 1fr;
+                grid-template-areas:
+                    "icon site actions"
+                    "user user user"
+                    "pass pass pass";
+            }
+
+            /* We will handle mobile layout in JS or more CSS if needed */
+        }
+
+        .cred-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 2rem;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cred-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .cred-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            opacity: 0.5;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .site-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.9rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            font-weight: 800;
+            cursor: pointer;
+            color: white;
+            text-transform: uppercase;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            flex: 1;
+            justify-content: center;
+        }
+
+        .btn-edit {
+            background: #2563eb;
+        }
+
+        .btn-edit:hover {
+            background: #1d4ed8;
+            transform: scale(1.05);
+            border-color: white;
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-delete {
+            background: #dc2626;
+        }
+
+        .btn-delete:hover {
+            background: #b91c1c;
+            transform: scale(1.05);
+            border-color: white;
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
+        }
+
+        .cred-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        .info-value {
+            font-family: inherit;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 0.2rem;
+            opacity: 0.6;
+        }
+
+        .copy-btn:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        /* --- MODAL --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 500px;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 2.5rem;
+            padding: 3rem;
+            position: relative;
+            animation: modalIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalIn {
+            from {
+                transform: scale(0.9) translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .modal-btns {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .cancel-btn {
+            flex: 1;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1.25rem;
+            border: none;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 700;
+            z-index: 2000;
+            animation: slideUp 0.3s ease;
+            max-width: 90vw;
+            text-align: center;
+        }
+
+        .toast.error {
+            background: var(--error);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translate(-50%, 100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+        }
+
+        /* --- MIGRATION BANNER --- */
+        .migration-banner {
+            background: linear-gradient(90deg, #f97316, #ca8a04);
+            border-radius: 1.5rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #030712;
+            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2);
+        }
+
+        .migration-banner span {
+            font-weight: 800;
+        }
+
+        .btn-white {
+            background: white;
+            color: #030712;
+            border: none;
+            padding: 0.6rem 1.25rem;
+            border-radius: 0.8rem;
+            font-weight: 900;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* --- CATEGORIES & BADGES --- */
+        .filter-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            overflow-x: auto;
+            padding: 0.5rem 1.5rem 1.5rem 0.5rem;
+            margin-bottom: 2rem;
+            scrollbar-width: none;
+        }
+
+        .filter-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-chip {
+            padding: 0.6rem 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .filter-chip:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-chip.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-correo {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .badge-compras {
+            background: rgba(236, 72, 153, 0.2);
+            color: #f472b6;
+            border: 1px solid rgba(236, 72, 153, 0.3);
+        }
+
+        .badge-video {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .badge-juego {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-social {
+            background: rgba(139, 92, 246, 0.2);
+            color: #a78bfa;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .badge-banca {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .badge-otros {
+            background: rgba(148, 163, 184, 0.2);
+            color: #cbd5e1;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+        }
+
+        .badge-personal {
+            background: rgba(14, 165, 233, 0.2);
+            color: #7dd3fc;
+            border: 1px solid rgba(14, 165, 233, 0.3);
+        }
+
+        .badge-trabajo {
+            background: rgba(234, 179, 8, 0.2);
+            color: #fde047;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        .empty-state {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 5rem;
+            color: var(--text-dim);
             font-size: 1.2rem;
-            backface-visibility: hidden;
+        }
+
+        .empty-state i {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            opacity: 0.3;
+        }
+
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
+
 <body>
-    <header>
-        <h1>🎵 Pink Floid The wall  2026 archivos cedidos por Antonio</h1>
-        <div class="search-container">
-            <span class="search-icon">🔍</span>
-            <input type="text" class="search-input" placeholder="Explora el cosmos musical..." id="searchInput">
+    <!-- PROFILES SCREEN -->
+    <div id="profiles-screen" class="screen active">
+        <div class="logo">
+            <i data-lucide="shield-check" class="logo-icon"></i>
+            <h1 class="vaultify-title">Vaultify Familia</h1>
+            <p style="color: var(--text-dim); font-weight: 500;">¿Quién va a usar la bóveda hoy?</p>
         </div>
-    </header>
-    <div class="caratulas">
-        <div class="item"><img src="frontcover.jpg" alt="Caratula frontal" width="200" height="200" loading="lazy"></div>
-        <div class="item"><img src="trascover.jpg" alt="Caratula trasera" width="240" height="198" loading="lazy"></div>
-    </div>
-    <div class="container">
-        <div class="song-list" id="songList">
-            <!-- Items injected by JS -->
+        <div id="profiles-list" class="profiles-grid">
+            <!-- Profiles injected here -->
         </div>
     </div>
-    <div class="player-bar" id="playerBar">
-        <div class="current-track">
-            <div class="song-icon">🎵</div>
-            <div class="track-info">
-                <h3 id="currentTitle">Selecciona una canción</h3>
-                <p id="currentArtist">Cosmic Library</p>
+
+    <!-- AUTH SCREEN -->
+    <div id="auth-screen" class="screen">
+        <button id="back-to-profiles" class="icon-btn-circle"
+            style="position: absolute; top: 2rem; left: 2rem; transform: none; border-radius: 1rem;">
+            <i data-lucide="arrow-left"></i>
+        </button>
+        <div class="auth-card">
+            <div id="active-user-avatar" class="profile-avatar"
+                style="width: 120px; height: 120px; margin: 0 auto 2rem; border-color: var(--primary);"></div>
+            <div class="logo">
+                <h1 class="vaultify-title" id="auth-user-name" style="font-size: 2rem;">Nombre</h1>
             </div>
-        </div>
-        <div class="controls">
-            <div class="buttons">
-                <button class="btn-control" onclick="prevSong()">⏮</button>
-                <button class="btn-control btn-play" onclick="togglePlay()" id="playBtn">▶</button>
-                <button class="btn-control" onclick="nextSong()">⏭</button>
-            </div>
-            <div class="progress-container">
-                <span id="currentTime">0:00</span>
-                <div class="progress-bar" id="progressBar" onclick="seek(event)">
-                    <div class="progress-fill" id="progressFill"></div>
+            <p id="auth-subtitle" style="color: var(--text-dim); margin-bottom: 2rem; font-weight: 500;">Protección Web
+                Crypto Nivel Bitwarden</p>
+
+            <form id="auth-form">
+                <div class="input-group">
+                    <label id="pass-label">Llave Maestra</label>
+                    <input type="password" id="master-pass" placeholder="Ingresa tu contraseña" required>
                 </div>
-                <span id="duration">0:00</span>
-            </div>
-        </div>
-        <div class="volume-control">
-            <span>🔊</span>
-            <input type="range" min="0" max="1" step="0.01" value="1" onchange="setVolume(this.value)">
+                <button type="submit" id="auth-submit-btn" class="primary-btn">
+                    <i data-lucide="unlock"></i> <span id="auth-submit-text">DESBLOQUEAR BÓVEDA</span>
+                </button>
+            </form>
+            <div id="auth-error" class="error" style="margin-top: 1rem; display: none;">Contraseña Incorrecta</div>
         </div>
     </div>
-    <audio id="audioPlayer"></audio>
-    <script>
-        // ===== SONG DATA WITH REAL TRACK NAMES =====
-        const songs = [
-            // Disc 1
-            { title: 'In the Flesh?', path: '01%20-%20In%20the%20Flesh.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 1, duration: '3:19' },
-            { title: 'The Thin Ice', path: '02%20-%20The%20Thin%20Ice.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 2, duration: '2:27' },
-            { title: 'Another Brick in the Wall (Part 1)', path: '03%20-%20Another%20Brick%20in%20the%20Wall%20Part%201.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 3, duration: '3:11' },
-            { title: 'The Happiest Days of Our Lives', path: '05%20-%20The%20Happiest%20Days%20of%20Our%20Lives.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 5, duration: '1:46' },
-            { title: 'Mother', path: '06%20-%20Mother.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 6, duration: '5:32' },
-            { title: 'Goodbye Blue Sky', path: '07%20-%20Goodbye%20Blue%20Sky.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 7, duration: '2:45' },
-            { title: 'Empty Spaces', path: '08%20-%20Empty%20Spaces.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 8, duration: '2:10' },
-            { title: 'Young Lust', path: '09%20-%20Young%20Lust.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 9, duration: '3:25' },
-            { title: 'One of My Turns', path: '10%20-%20One%20of%20My%20Turns.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 10, duration: '3:35' },
-            { title: "Don't Leave Me Now", path: '11%20-%20Don\'t%20Leave%20Me%20Now.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 11, duration: '4:08' },
-            { title: 'Another Brick in the Wall (Part 2)', path: '12%20-%20Another%20Brick%20in%20the%20Wall%20Part%202.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 12, duration: '3:59' },
-            { title: 'Goodbye Cruel World', path: '13%20-%20Goodbye%20Cruel%20World.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 13, duration: '1:13' },
 
-            // Disc 2
-            { title: 'Hey You', path: '14%20-%20Hey%20You.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 1, duration: '4:40' },
-            { title: 'Is There Anybody Out There?', path: '15%20-%20Is%20There%20Anybody%20Out%20There.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 2, duration: '2:44' },
-            { title: 'Nobody Home', path: '16%20-%20Nobody%20Home.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 3, duration: '3:26' },
-            { title: 'Vera', path: '17%20-%20Vera.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 4, duration: '1:35' },
-            { title: 'Bring the Boys Back Home', path: '18%20-%20Bring%20the%20Boys%20Back%20Home.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 5, duration: '1:21' },
-            { title: 'Comfortably Numb', path: '19%20-%20Comfortably%20Numb.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 6, duration: '6:23' },
-            { title: 'The Show Must Go On', path: '20%20-%20The%20Show%20Must%20Go%20On.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 7, duration: '1:36' },
-            { title: 'In the Flesh', path: '21%20-%20In%20the%20Flesh.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 8, duration: '4:15' },
-            { title: 'Run Like Hell', path: '22%20-%20Run%20Like%20Hell.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 9, duration: '4:19' },
-            { title: 'Waiting for the Worms', path: '23%20-%20Waiting%20for%20the%20Worms.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 10, duration: '4:04' },
-            { title: 'Stop', path: '24%20-%20Stop.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 11, duration: '0:30' },
+    <!-- DASHBOARD SCREEN -->
+    <div id="dashboard-screen" class="screen">
+        <header class="db-header">
+            <div class="header-left">
+                <i data-lucide="shield-check" style="color: var(--primary); width: 40px; height: 40px;"></i>
+                <h2 style="font-size: 1.8rem; font-weight: 800;">Bóveda Segura</h2>
+                <div id="current-user-display">
+                    <div id="header-avatar" class="active-avatar"></div>
+                    <span id="header-user-name" class="active-user-name">Usuario</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="add-btn" class="btn-vibrant">
+                    <i data-lucide="plus-circle"></i> NUEVA CUENTA
+                </button>
+                <button id="export-excel-btn" class="btn-vibrant" title="Exportar a Excel (.xlsx)"
+                    style="background: #10b981; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
+                    <i data-lucide="file-spreadsheet"></i>
+                    <span>EXCEL</span>
+                </button>
+                <button id="export-pdf-btn" class="btn-vibrant" title="Exportar a PDF (Para Imprimir)"
+                    style="background: #ef4444; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);">
+                    <i data-lucide="file-text"></i>
+                    <span>PDF</span>
+                </button>
+                <button id="open-migrate-btn" class="icon-btn-circle" title="Importar Datos Recuperados"
+                    style="background: rgba(249, 115, 22, 0.1); color: #f97316;">
+                    <i data-lucide="import"></i>
+                </button>
+                <button id="lock-btn" class="icon-btn-circle" title="Cerrar Sesión" style="margin-left: 0.5rem;">
+                    <i data-lucide="power"></i>
+                </button>
+                <button id="settings-btn" class="icon-btn-circle" title="Ajustes de Bóveda">
+                    <i data-lucide="settings"></i>
+                </button>
+            </div>
+        </header>
 
-            // Bonus tracks
-            { title: 'Another Brick in the Wall (Part 2) - Extended', path: 'Bonus%20-%20Another%20Brick%20Extended.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 0, track: 0, duration: '3:59' },
-            { title: 'Comfortably Numb - Live', path: 'Bonus%20-%20Comfortably%20Numb%20Live.mp3', artist: 'Pink Floyd', album: 'The Wall (Live)', year: 1980, disc: 0, track: 0, duration: '8:21' },
-            { title: 'Run Like Hell - Live', path: 'Bonus%20-%20Run%20Like%20Hell%20Live.mp3', artist: 'Pink Floyd', album: 'The Wall (Live)', year: 1980, disc: 0, track: 0, duration: '5:12' }
-        ];
-        let currentIndex = -1;
-        const audio = document.getElementById('audioPlayer');
-        const searchInput = document.getElementById('searchInput');
-        // Render Songs
-        function renderSongs(filter = "") {
-            const container = document.getElementById('songList');
-            container.innerHTML = "";
-           
-            songs.forEach((song, index) => {
-                if(song.title.toLowerCase().includes(filter.toLowerCase())) {
-                    const el = document.createElement('div');
-                    el.className = `song-card ${index === currentIndex ? 'playing' : ''}`;
-                    el.onclick = () => playSong(index);
-                    el.innerHTML = `
-                        <div class="song-icon">♫</div>
-                        <div class="song-info">
-                            <div class="song-title">${song.title}</div>
-                            <div class="song-meta">${song.format}</div>
+        <div id="migration-banner" class="migration-banner hidden">
+            <span>🚀 ¡Detectamos datos antiguos! Pulsa aquí para importar todo al instante.</span>
+            <div style="display: flex; gap: 1rem;">
+                <button id="migrate-btn" class="btn-white">Importar Todo</button>
+            </div>
+        </div>
+        <input type="file" id="legacy-migrator-input" style="display: none;" accept=".json">
+
+        <div class="controls-row">
+            <div class="search-box">
+                <i data-lucide="search"></i>
+                <input type="text" id="search-input" placeholder="Buscar sitio o usuario...">
+            </div>
+        </div>
+
+        <div class="filter-row" id="category-filters">
+            <div class="filter-chip active" data-category="all">Todos</div>
+            <div class="filter-chip" data-category="Personal">Personal</div>
+            <div class="filter-chip" data-category="Trabajo">Trabajo</div>
+            <div class="filter-chip" data-category="Correo">Correo</div>
+            <div class="filter-chip" data-category="Compras">Compras</div>
+            <div class="filter-chip" data-category="Video">Video</div>
+            <div class="filter-chip" data-category="Juego">Juego</div>
+            <div class="filter-chip" data-category="Social">Social</div>
+            <div class="filter-chip" data-category="Banca">Banca</div>
+            <button class="filter-chip" data-category="otros">Otros</button>
+            <div style="width: 2px; height: 1.5rem; background: rgba(255,255,255,0.1); margin: 0 0.5rem;"></div>
+            <button class="filter-chip" data-category="weak"
+                style="border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">
+                <i data-lucide="shield-alert" style="width: 14px; height: 14px; margin-right: 0.25rem;"></i> Auditoría
+            </button>
+        </div>
+
+        <div id="credentials-list" class="credentials-list">
+            <div class="table-header">
+                <div></div>
+                <div>Servicio</div>
+                <div>Categoría</div>
+                <div>Usuario</div>
+                <div>Contraseña</div>
+                <div>Estado</div>
+                <div style="text-align: right;">Acciones</div>
+            </div>
+            <div id="credentials-rows">
+                <!-- Rows go here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SETTINGS SCREEN -->
+    <div id="settings-screen" class="screen">
+        <header class="db-header">
+            <div class="header-left">
+                <button id="back-to-vault" class="icon-btn-circle" title="Volver a la Bóveda"
+                    style="margin-right: 1.5rem;">
+                    <i data-lucide="arrow-left"></i>
+                </button>
+                <h2 style="font-size: 1.8rem; font-weight: 800;">Ajustes de Bóveda</h2>
+            </div>
+        </header>
+
+        <!-- Settings Tabs (Segmented Control) -->
+        <div class="settings-nav">
+            <button type="button" class="settings-tab active" data-tab="security">
+                <i data-lucide="shield-check"></i> SEGURIDAD
+            </button>
+            <button type="button" class="settings-tab" data-tab="appearance">
+                <i data-lucide="palette"></i> APARIENCIA
+            </button>
+        </div>
+
+        <div class="credentials-grid" style="grid-template-columns: 1fr; max-width: 800px; margin: 0 auto;">
+            <!-- Tab: Security -->
+            <div id="tab-security" class="settings-group active">
+                <div class="cred-card">
+                    <div class="card-header">
+                        <span class="site-name">Seguridad de la Llave Maestra</span>
+                    </div>
+                    <p style="color: var(--text-dim); margin-top: -1rem; font-size: 0.9rem;">Cambia tu llave maestra
+                        actual. Se recifrarán todas tus cuentas automáticamente.</p>
+                    <form id="change-master-form" class="cred-info">
+                        <div class="input-group">
+                            <label>Llave Maestra Actual</label>
+                            <input type="password" id="old-master" required>
                         </div>
-                    `;
-                    container.appendChild(el);
-                }
-            });
-        }
-        // Search Listener
-        searchInput.addEventListener('input', (e) => renderSongs(e.target.value));
-        // Player Logic
-        function playSong(index) {
-            if (index < 0 || index >= songs.length) return;
-           
-            currentIndex = index;
-            const song = songs[index];
-           
-            audio.src = song.path;
-            audio.play().catch(error => {
-                console.error('Error playing audio:', error);
-            });
-           
-            document.getElementById('currentTitle').innerText = song.title;
-            document.getElementById('playBtn').innerText = "⏸";
-            document.getElementById('playerBar').classList.add('active');
-           
-            renderSongs(searchInput.value);
-        }
-        function togglePlay() {
-            if (songs.length === 0) return;
-            if (audio.paused) {
-                if(currentIndex === -1) playSong(0);
-                else audio.play();
-                document.getElementById('playBtn').innerText = "⏸";
-            } else {
-                audio.pause();
-                document.getElementById('playBtn').innerText = "▶";
-            }
-        }
-        function nextSong() {
-            let next = currentIndex + 1;
-            if (next >= songs.length) next = 0;
-            playSong(next);
-        }
-        function prevSong() {
-            let prev = currentIndex - 1;
-            if (prev < 0) prev = songs.length - 1;
-            playSong(prev);
-        }
-        function setVolume(val) {
-            audio.volume = val;
-        }
-        function seek(e) {
-            const bar = document.getElementById('progressBar');
-            const rect = bar.getBoundingClientRect();
-            const offsetX = e.clientX - rect.left;
-            const percent = offsetX / bar.offsetWidth;
-            if (!isNaN(audio.duration)) {
-                audio.currentTime = percent * audio.duration;
-            }
-        }
-        audio.addEventListener('timeupdate', () => {
-            if (!isNaN(audio.duration)) {
-                const percent = (audio.currentTime / audio.duration) * 100;
-                document.getElementById('progressFill').style.width = percent + "%";
-                document.getElementById('currentTime').innerText = formatTime(audio.currentTime);
-                document.getElementById('duration').innerText = formatTime(audio.duration);
-            }
-        });
-        audio.addEventListener('ended', nextSong);
-        audio.addEventListener('error', (e) => {
-            console.error('Audio error:', e);
-        });
-        audio.addEventListener('loadedmetadata', () => {
-            document.getElementById('duration').innerText = formatTime(audio.duration);
-        });
-        function formatTime(seconds) {
-            const m = Math.floor(seconds / 60);
-            const s = Math.floor(seconds % 60);
-            return `${m}:${s < 10 ? '0' : ''}${s}`;
-        }
-        // Init
-        renderSongs();
-    </script>
+                        <div class="input-group">
+                            <label>Nueva Llave Maestra</label>
+                            <input type="password" id="new-master" required>
+                        </div>
+                        <button type="submit" class="primary-btn" style="margin-top: 1rem;">ACTUALIZAR LLAVE
+                            MAESTRA</button>
+                    </form>
+                </div>
+
+                <div class="cred-card">
+                    <div class="card-header">
+                        <span class="site-name">Sesión y Auto-Bloqueo</span>
+                    </div>
+                    <div class="cred-info">
+                        <div class="detail-row"
+                            style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 1rem;">
+                            <span class="info-label">Bloqueo automático</span>
+                            <select id="autolock-timer"
+                                style="width: auto; background: var(--bg-dark); color: white; border: 1px solid var(--glass-border); padding: 0.5rem; border-radius: 0.5rem;">
+                                <option value="0">Nunca</option>
+                                <option value="1">1 minuto</option>
+                                <option value="5" selected>5 minutos</option>
+                                <option value="15">15 minutos</option>
+                                <option value="30">30 minutos</option>
+                                <option value="60">1 hora</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cred-card" style="border-color: var(--error); background: rgba(220, 38, 38, 0.05);">
+                    <div class="card-header">
+                        <span class="site-name" style="color: var(--error);">Zona Peligrosa</span>
+                    </div>
+                    <p style="color: var(--text-dim); margin-top: -1rem; font-size: 0.9rem;">Acciones destructivas.
+                        Procede con extrema cautela.</p>
+                    <div class="card-actions" style="margin-top: 1rem;">
+                        <button type="button" id="reset-vault-btn" class="btn-delete"
+                            style="padding: 1rem; border-radius: 1.25rem; font-weight: 800; border: none; width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+                            <i data-lucide="alert-triangle"></i> BORRAR TODA LA BÓVEDA
+                        </button>
+                    </div>
+                </div>
+            </div> <!-- CIERRE tab-security -->
+
+            <!-- Tab: Appearance -->
+            <div id="tab-appearance" class="settings-group">
+                <!-- Theme Selection First -->
+                <div class="cred-card">
+                    <div class="card-header">
+                        <span class="site-name">Personalización Visual</span>
+                    </div>
+                    <div class="cred-info">
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1rem;">
+                            <button type="button" class="theme-btn" data-theme="default"
+                                style="padding: 1rem; background: #0a0a0b; border: 2px solid #3b82f6; border-radius: 1rem; cursor: pointer; transition: all 0.3s;">
+                                <span style="color: white; font-weight: 700;">Dark Blue</span>
+                            </button>
+                            <button type="button" class="theme-btn" data-theme="light"
+                                style="padding: 1rem; background: #ffffff; border: 2px solid #cbd5e1; border-radius: 1rem; cursor: pointer; transition: all 0.3s;">
+                                <span style="color: #1e293b; font-weight: 700;">Light Mode</span>
+                            </button>
+                            <button type="button" class="theme-btn" data-theme="emerald"
+                                style="padding: 1rem; background: #061712; border: 2px solid #10b981; border-radius: 1rem; cursor: pointer; transition: all 0.3s;">
+                                <span style="color: #10b981; font-weight: 700;">Emerald</span>
+                            </button>
+                            <button type="button" class="theme-btn" data-theme="cyber"
+                                style="padding: 1rem; background: #0f172a; border: 2px solid #f0abfc; border-radius: 1rem; cursor: pointer; transition: all 0.3s;">
+                                <span style="color: #f0abfc; font-weight: 700;">Cyberpunk</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audio Section -->
+                <div class="cred-card">
+                    <div class="card-header">
+                        <span class="site-name">Sonido y Efectos</span>
+                    </div>
+                    <div class="cred-info">
+                        <div class="detail-row"
+                            style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 1rem;">
+                            <span class="info-label">Efectos de sonido</span>
+                            <div class="toggle-container"
+                                style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;"
+                                onclick="toggleSoundFromUI()">
+                                <span id="sound-status-text"
+                                    style="font-size: 0.8rem; font-weight: 700; color: var(--primary);">Activado</span>
+                                <div id="sound-toggle-btn"
+                                    style="width: 44px; height: 24px; background: var(--primary); border-radius: 12px; position: relative; transition: all 0.3s;">
+                                    <div id="sound-toggle-thumb"
+                                        style="width: 18px; height: 18px; background: white; border-radius: 50%; position: absolute; top: 3px; left: 23px; transition: all 0.3s;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- CIERRE tab-appearance -->
+        </div> <!-- CIERRE credentials-grid -->
+    </div> <!-- CIERRE settings-screen -->
+
+    <!-- ADD PROFILE MODAL -->
+    <div id="profile-modal" class="modal">
+        <div class="modal-content" style="max-width: 450px;">
+            <h3 class="modal-title" id="p-modal-title">Nuevo Miembro</h3>
+
+            <div class="webcam-container">
+                <video id="webcam-video" autoplay playsinline></video>
+                <img id="webcam-preview" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+                <canvas id="webcam-canvas" style="display: none;"></canvas>
+                <div class="webcam-overlay">
+                    <button type="button" id="capture-photo-btn" class="btn-white"
+                        style="border-radius: 50%; width: 50px; height: 50px; padding: 0;">
+                        <i data-lucide="camera" style="margin: 0 auto;"></i>
+                    </button>
+                    <button type="button" id="retake-photo-btn" class="btn-white hidden"
+                        style="border-radius: 50%; width: 50px; height: 50px; padding: 0; background: var(--error); border: none; color: white;">
+                        <i data-lucide="refresh-ccw" style="margin: 0 auto;"></i>
+                    </button>
+                    <button type="button" id="upload-photo-btn" class="btn-white"
+                        style="border-radius: 50%; width: 50px; height: 50px; padding: 0;">
+                        <i data-lucide="image" style="margin: 0 auto;"></i>
+                        <input type="file" id="avatar-upload" hidden accept="image/*">
+                    </button>
+                </div>
+            </div>
+
+            <form id="profile-form">
+                <input type="hidden" id="p-id">
+                <div class="input-group">
+                    <label>Nombre del miembro</label>
+                    <input type="text" id="profile-name" required placeholder="ej. Alfonso, María...">
+                </div>
+                <div class="modal-btns">
+                    <button type="button" class="cancel-btn" id="close-profile-modal">CANCELAR</button>
+                    <button type="submit" class="primary-btn" style="flex: 2;" id="p-submit-btn">AÑADIR A LA
+                        FAMILIA</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CREDENTIAL MODAL -->
+    <div id="cred-modal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title" id="modal-title">Nueva Cuenta</h3>
+            <form id="cred-form">
+                <input type="hidden" id="cred-id">
+                <div class="input-group">
+                    <label>Sitio / Aplicación</label>
+                    <input type="text" id="cred-site" required placeholder="ej. Netflix, Google, Temu">
+                </div>
+                <div class="input-group">
+                    <label>URL del Servicio (Opcional)</label>
+                    <input type="url" id="cred-url" placeholder="https://www.temu.com">
+                </div>
+                <div class="input-group">
+                    <label>Usuario / Email</label>
+                    <input type="text" id="cred-user" required placeholder="ej. alfonso@gmail.com">
+                </div>
+                <div class="input-group">
+                    <label>Categoría</label>
+                    <select id="cred-category">
+                        <option value="Correo">Correo</option>
+                        <option value="Compras">Compras</option>
+                        <option value="Video">Video</option>
+                        <option value="Juego">Juego</option>
+                        <option value="Social">Social</option>
+                        <option value="Banca">Banca</option>
+                        <option value="Otros" selected>Otros</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <div style="position: relative;">
+                        <input type="password" id="cred-pass" required style="padding-right: 3.5rem;">
+                        <button type="button" class="icon-btn-circle" id="toggle-modal-pass"
+                            style="position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); width: 2.5rem; height: 2.5rem;">
+                            <i data-lucide="eye"></i>
+                        </button>
+                    </div>
+                    <!-- Strength Meter -->
+                    <div id="strength-meter-container" style="margin-top: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <span id="strength-label"
+                                style="font-size: 0.75rem; color: var(--text-dim);">Fortaleza</span>
+                            <span id="strength-text" style="font-size: 0.75rem; font-weight: 700;">---</span>
+                        </div>
+                        <div
+                            style="height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden;">
+                            <div id="strength-bar" style="height: 100%; width: 0%; transition: all 0.3s ease;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Gen Options -->
+                <div id="gen-options"
+                    style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 0.75rem; margin: 1rem 0;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <span style="font-size: 0.9rem; font-weight: 600;">Longitud: <span
+                                id="gen-length-val">18</span></span>
+                        <input type="range" id="gen-length" min="8" max="64" value="18" style="width: 60%;">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.85rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem;"><input type="checkbox"
+                                id="gen-sym" checked> Símbolos</label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;"><input type="checkbox"
+                                id="gen-num" checked> Números</label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;"><input type="checkbox"
+                                id="gen-upper" checked> Mayúsculas</label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;"><input type="checkbox"
+                                id="gen-lower" checked> Minúsculas</label>
+                    </div>
+                    <button type="button" class="primary-btn" id="gen-pass-btn"
+                        style="margin-top: 1rem; height: 3rem; font-size: 0.9rem;">
+                        <i data-lucide="refresh-cw"></i> RE-GENERAR
+                    </button>
+                </div>
+
+                <div class="input-group" style="margin-top: 1rem;">
+                    <label>Notas Privadas (Cifradas)</label>
+                    <textarea id="cred-notes" placeholder="PINs, preguntas de seguridad o info extra..."
+                        style="width: 100%; min-height: 80px; padding: 1rem; background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); border-radius: 0.75rem; color: white; font-family: inherit; resize: vertical;"></textarea>
+                </div>
+
+                <div class="modal-btns">
+                    <button type="button" class="cancel-btn" id="close-modal">CANCELAR</button>
+                    <button type="submit" class="primary-btn" style="flex: 2;">GUARDAR CUENTA</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
