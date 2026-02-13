@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vaultify-cache-v1';
+const CACHE_NAME = 'vaultify-cache-v2';
 const ASSETS = [
     './',
     './index.html',

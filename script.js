@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update Auth View
         const container = $('active-user-avatar');
         if (container) {
-            container.innerHTML = user.avatar ? `<img src="${user.avatar}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">` :
+            container.innerHTML = user.avatar ? `<img src="${user.avatar}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">` :
                 `<i data-lucide="user" style="width:60px; height:60px;"></i>`;
         }
 
@@ -279,11 +279,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const hAvatar = $('header-avatar');
         if (hAvatar) {
-            hAvatar.innerHTML = user.avatar ? `<img src="${user.avatar}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">` :
+            hAvatar.innerHTML = user.avatar ? `<img src="${user.avatar}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">` :
                 `<i data-lucide="user" style="width:20px; height:20px;"></i>`;
         }
 
         checkSetup();
+        updateBackupUI();
         if (typeof lucide !== 'undefined') lucide.createIcons();
     };
 
@@ -482,6 +483,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveData = () => {
         localStorage.setItem(getStoreKey('data'), JSON.stringify(credentials));
         updateBanner();
+        triggerAutoBackup();
+    };
+
+    const triggerAutoBackup = () => {
+        if (!activeUser || credentials.length === 0) return;
+        const backupKey = getStoreKey('backup');
+        localStorage.setItem(backupKey, JSON.stringify({
+            timestamp: new Date().toISOString(),
+            data: credentials
+        }));
+        updateBackupUI();
+    };
+
+    const updateBackupUI = () => {
+        const status = $('backup-status');
+        const btn = $('restore-backup-btn');
+        if (!status) return;
+
+        const backupKey = getStoreKey('backup');
+        const raw = localStorage.getItem(backupKey);
+
+        if (raw) {
+            const backup = JSON.parse(raw);
+            const date = new Date(backup.timestamp).toLocaleString();
+            status.innerHTML = `<i data-lucide="check-circle" style="width:14px; color:var(--success);"></i> Copia disponible: <b>${date}</b> (${backup.data.length} cuentas)`;
+            if (btn) btn.style.display = 'flex';
+        } else {
+            status.textContent = "No hay copias de seguridad disponibles todavía.";
+            if (btn) btn.style.display = 'none';
+        }
+        if (typeof lucide !== 'undefined') lucide.createIcons();
     };
 
     const updateBanner = () => {
@@ -522,7 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Audit Mode: Show all but sort by strength (weakest first)
             filtered.sort((a, b) => a.score - b.score);
         } else if (currentFilter !== 'all') {
-            filtered = filtered.filter(c => c.category === currentFilter);
+            filtered = filtered.filter(c => (c.category || 'Otros').toLowerCase() === currentFilter.toLowerCase());
         }
 
         if (filtered.length === 0) {
@@ -843,6 +875,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (input) input.click();
     });
 
+    onClick('import-btn-ui', () => {
+        const input = $('import-excel-input');
+        if (input) input.click();
+    });
+
     // Export to Excel (.xlsx)
     onClick('export-excel-btn', async () => {
         if (credentials.length === 0) {
@@ -879,8 +916,12 @@ document.addEventListener('DOMContentLoaded', () => {
             ];
             ws['!cols'] = wscols;
 
-            XLSX.writeFile(wb, `vaultify_backup_${new Date().toISOString().split('T')[0]}.xlsx`);
-            showToast("Archivo Excel (.xlsx) generado con éxito.");
+            let filename = prompt("Nombre del archivo Excel:", `vaultify_backup_${new Date().toISOString().split('T')[0]}`);
+            if (!filename) return;
+            if (!filename.endsWith('.xlsx')) filename += '.xlsx';
+
+            XLSX.writeFile(wb, filename);
+            showToast("Archivo Excel generado con éxito.");
         } catch (err) {
             console.error("Excel Export Error:", err);
             showToast("Error al exportar a Excel.", true);
@@ -936,13 +977,119 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            doc.save(`vaultify_reporte_${new Date().toISOString().split('T')[0]}.pdf`);
+            let filename = prompt("Nombre del archivo PDF:", `vaultify_reporte_${new Date().toISOString().split('T')[0]}`);
+            if (!filename) return;
+            if (!filename.endsWith('.pdf')) filename += '.pdf';
+
+            doc.save(filename);
             showToast("Reporte PDF generado con éxito.");
         } catch (err) {
             console.error("PDF Export Error:", err);
             showToast("Error al exportar a PDF.", true);
         }
     });
+
+    const importFromExcel = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const data = new Uint8Array(event.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+                const json = XLSX.utils.sheet_to_json(worksheet);
+
+                if (json.length === 0) {
+                    showToast("El archivo está vacío o no tiene el formato correcto.", true);
+                    return;
+                }
+
+                // Map Excel/CSV columns to our format (Support for Chrome/Edge/Custom)
+                const newCreds = json.map(row => {
+                    // Browser Mapping (Chrome/Edge typically use: name, url, username, password)
+                    const site = row['Servicio/Sitio'] || row['Sitio'] || row['Site'] || row['name'] || row['nombre'] || row['URL'] || 'Sin nombre';
+                    const user = row['Usuario/Email'] || row['Usuario'] || row['User'] || row['username'] || row['usuario'] || '';
+                    const pass = row['Contraseña'] || row['Pass'] || row['Password'] || row['password'] || '';
+                    const url = row['URL'] || row['url'] || '';
+                    const notes = row['Notas'] || row['Notes'] || row['notes'] || '';
+                    const category = row['Categoría'] || row['Category'] || 'Otros';
+
+                    return {
+                        id: 'r-' + Date.now() + '-' + Math.floor(Math.random() * 10000),
+                        category: category,
+                        site: site,
+                        user: user,
+                        pass: '', // Will be encrypted below
+                        _rawPass: pass, // Temporary to encrypt
+                        notes: notes,
+                        url: url,
+                        score: getScore(pass),
+                        date: new Date().toISOString()
+                    };
+                });
+
+                const count = newCreds.length;
+                if (confirm(`Se han encontrado ${count} cuentas en el archivo. ¿Deseas importarlas al perfil actual?\n(Se creará una copia de seguridad automática antes de proceder)`)) {
+                    triggerAutoBackup(); // Backup current state
+
+                    // Encrypt all passwords before adding
+                    const finalizeImport = async () => {
+                        showToast("Verificando duplicados...");
+                        const finalToImport = [];
+                        let skipped = 0;
+
+                        // Pre-decrypt existing data for faster comparison
+                        const existingList = [];
+                        for (const c of credentials) {
+                            existingList.push({
+                                site: (c.site || '').toLowerCase(),
+                                user: (c.user || '').toLowerCase(),
+                                pass: await decrypt(c.pass, sessionKey)
+                            });
+                        }
+
+                        for (const c of newCreds) {
+                            const isDup = existingList.some(existing =>
+                                existing.site === c.site.toLowerCase() &&
+                                existing.user === c.user.toLowerCase() &&
+                                existing.pass === c._rawPass
+                            );
+
+                            if (isDup) {
+                                skipped++;
+                            } else {
+                                const encPass = await encrypt(c._rawPass, sessionKey);
+                                const encNotes = c.notes ? await encrypt(c.notes, sessionKey) : '';
+                                delete c._rawPass;
+                                finalToImport.push({ ...c, pass: encPass, notes: encNotes });
+                            }
+                        }
+
+                        if (finalToImport.length > 0) {
+                            credentials = [...credentials, ...finalToImport];
+                            saveData();
+                            render();
+                            let msg = `¡Importación exitosa! ${finalToImport.length} nuevas.`;
+                            if (skipped > 0) msg += ` (${skipped} omitidas por ser duplicadas)`;
+                            showToast(msg);
+                            playSound('success');
+                        } else {
+                            showToast(`No se añadieron cuentas. ${skipped} ya existían.`, true);
+                        }
+                    };
+                    finalizeImport();
+                }
+                e.target.value = ''; // Reset input
+            } catch (err) {
+                console.error("Excel Import Error:", err);
+                showToast("Error al procesar el archivo Excel.", true);
+            }
+        };
+        reader.readAsArrayBuffer(file);
+    };
 
     // Migration logic
     const performMigration = async (data) => {
@@ -993,6 +1140,11 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             reader.readAsText(file);
         };
+    }
+
+    const excelInput = $('import-excel-input');
+    if (excelInput) {
+        excelInput.onchange = importFromExcel;
     }
 
     onClick('migrate-btn', async () => {
@@ -1113,7 +1265,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    onClick('reset-vault-btn', () => {
+    const resetVault = () => {
         if (confirm("¡ATENCIÓN! Esto borrará TODA tu base de datos y tu llave maestra. Esta acción es irreversible. ¿Proceder?")) {
             const mKey = getStoreKey('master');
             const sKey = getStoreKey('salt');
@@ -1125,6 +1277,24 @@ document.addEventListener('DOMContentLoaded', () => {
             showToast("Bóveda eliminada por completo", true);
             playSound('error');
         }
+    };
+
+    onClick('reset-vault-btn', resetVault);
+    onClick('reset-vault-btn-legacy', resetVault);
+
+    onClick('restore-backup-btn', () => {
+        const backupKey = getStoreKey('backup');
+        const raw = localStorage.getItem(backupKey);
+        if (!raw) return;
+
+        const backup = JSON.parse(raw);
+        if (confirm(`¿Estás seguro de restaurar la copia del ${new Date(backup.timestamp).toLocaleString()}? Esto reemplazará tus datos actuales.`)) {
+            credentials = backup.data;
+            saveData();
+            render();
+            showToast("Copia de seguridad restaurada correctamente.");
+            playSound('success');
+        }
     });
 
     // --- INITIALIZE ---
@@ -1133,6 +1303,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkSetup();
     updateSoundUI();
     setTheme(currentTheme);
+    updateBackupUI();
 
     document.querySelectorAll('.theme-btn').forEach(btn => {
         btn.onclick = () => setTheme(btn.dataset.theme);
@@ -1160,6 +1331,108 @@ document.addEventListener('DOMContentLoaded', () => {
             playSound('click');
         };
     });
+
+    // --- DIAGNOSTICS & RECOVERY ---
+    window.vaultifyDiagnostic = () => {
+        showToast("Escaneando almacenamiento interno...");
+        console.log("--- Vaultify Diagnostic Report ---");
+        const report = [];
+        const profilesRaw = localStorage.getItem('v2_profiles');
+        const profilesList = profilesRaw ? JSON.parse(profilesRaw) : [];
+
+        Object.keys(localStorage).filter(k => k.startsWith('v2_')).forEach(k => {
+            try {
+                const val = JSON.parse(localStorage[k]);
+                const isData = k.endsWith('_data');
+                const parts = k.split('_');
+                const profileId = parts[1];
+                const profileExists = profileId === 'default' || profilesList.some(p => p.id === profileId);
+
+                report.push({
+                    key: k,
+                    type: isData ? 'Datos de Cuentas' : 'Metadatos/Config',
+                    count: Array.isArray(val) ? val.length : 'N/A',
+                    orphan: !profileExists ? 'SÍ (Huérfano)' : 'No',
+                    size: (localStorage[k].length / 1024).toFixed(2) + ' KB'
+                });
+            } catch (e) { /* ignore non-json */ }
+        });
+
+        if (report.length === 0) {
+            showToast("No se encontró ningún rastro de datos de Vaultify.", true);
+            return;
+        }
+
+        console.table(report);
+        const orphanData = report.filter(r => r.orphan === 'SÍ (Huérfano)' && r.type === 'Datos de Cuentas' && r.count > 0);
+
+        if (orphanData.length > 0) {
+            showToast(`¡Atención! Se han encontrado ${orphanData.length} bloques de datos perdidos. Revisa la consola (F12).`, false);
+            console.log("%c¡DATOS ENCONTRADOS!", "color: orange; font-size: 20px; font-weight: bold;");
+            console.log("Se han detectado datos que no pertenecen a ningún perfil activo.");
+            console.log("Para recuperar uno de estos bloques, copia y pega esto:");
+            orphanData.forEach(d => {
+                console.log(`%cvaultifyRecoverData('${d.key}')`, "background: #222; color: #bada55; padding: 5px; font-family: monospace;");
+            });
+        } else {
+            showToast("Análisis completado: No se encontraron datos huérfanos.");
+            console.log("No se han detectado datos huérfanos con registros.");
+        }
+    };
+
+    window.vaultifyRecoverData = async (sourceKey) => {
+        if (!activeUser || !sessionKey) {
+            showToast("Debes desbloquear un perfil primero.", true);
+            return;
+        }
+
+        const raw = localStorage.getItem(sourceKey);
+        if (!raw) return;
+
+        try {
+            const data = JSON.parse(raw);
+            if (!Array.isArray(data)) throw new Error("No es una lista de registros.");
+
+            if (confirm(`¿Quieres importar ${data.length} registros de '${sourceKey}' al perfil actual (${activeUser.name})?`)) {
+                // Since data from another profile is encrypted with ANOTHER key, we can't just move it.
+                // UNLESS they use the same master password.
+                // If the master password changed, this won't work easily without the old key.
+
+                // For now, let's assume they might be using the same password but a different profile ID,
+                // or it's legacy 'v2_default_data' which used the same key.
+
+                let successCount = 0;
+                let failCount = 0;
+
+                for (const item of data) {
+                    // Try to decrypt with current session key.
+                    const dec = await decrypt(item.pass, sessionKey);
+                    if (dec === "ERROR") {
+                        failCount++;
+                        continue;
+                    }
+
+                    // Re-encrypt (to ensure it matches current metadata if needed, though salt is session-based here)
+                    const newEnc = await encrypt(dec, sessionKey);
+                    const newNotes = item.notes ? await encrypt(await decrypt(item.notes, sessionKey), sessionKey) : null;
+
+                    credentials.push({
+                        ...item,
+                        id: 'r-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+                        pass: newEnc,
+                        notes: newNotes
+                    });
+                    successCount++;
+                }
+
+                saveData();
+                render();
+                showToast(`Recuperación: ${successCount} exitosos, ${failCount} fallidos (clave incorrecta).`);
+            }
+        } catch (e) {
+            showToast("Error en recuperación: " + e.message, true);
+        }
+    };
 
     // PWA Support: Register Service Worker
     if ('serviceWorker' in navigator) {
