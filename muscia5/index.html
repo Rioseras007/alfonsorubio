@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Nebula</title>
+    <!-- Load modern font for vanguardist look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ffea; /* Neon cyan */
+            --primary-dark: #00b8a3;
+            --accent: #ff00ff; /* Neon magenta */
+            --bg-dark: #0a0a1f; /* Deep space blue */
+            --bg-card: rgba(26, 26, 51, 0.8); /* Semi-transparent glass */
+            --text-main: #e0e0ff;
+            --text-muted: #a0a0ff;
+            --glow: 0 0 10px var(--primary), 0 0 20px var(--accent);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif; /* Futuristic font */
+        }
+        body {
+            background: linear-gradient(135deg, var(--bg-dark), #1a1a3a);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 140px; /* Space for enhanced player */
+            overflow-x: hidden;
+        }
+        /* Header with neon glow */
+        header {
+            background: rgba(10, 10, 31, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem 3rem;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            border-bottom: 1px solid rgba(0, 255, 234, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--glow);
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: neon-flicker 1.5s infinite alternate;
+        }
+        @keyframes neon-flicker {
+            to {
+                text-shadow: var(--glow);
+            }
+        }
+        /* Search with holographic effect */
+        .search-container {
+            position: relative;
+            max-width: 450px;
+            width: 100%;
+        }
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1.2rem 0.8rem 3rem;
+            border-radius: 50px;
+            border: 2px solid transparent;
+            background: rgba(26, 26, 51, 0.5);
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 5px var(--primary);
+        }
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary);
+        }
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+        /* Song List with grid and hover animations */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        .song-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .song-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            border: 1px solid rgba(0, 255, 234, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        .song-card:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: var(--glow);
+            background: rgba(26, 26, 51, 0.9);
+        }
+        .song-card.playing {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent);
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .song-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: var(--glow);
+        }
+        .song-info {
+            overflow: hidden;
+        }
+        .song-title {
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+        .song-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-family: 'Roboto Mono', monospace;
+        }
+        /* Player Footer with wave visualization */
+        .player-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(10, 10, 31, 0.9), rgba(26, 26, 51, 0.8));
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(0, 255, 234, 0.3);
+            padding: 1.5rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            box-shadow: 0 -10px 30px rgba(0, 255, 234, 0.2);
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .player-bar.active {
+            transform: translateY(0);
+        }
+        .current-track {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            width: 35%;
+        }
+        .track-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: var(--text-main);
+        }
+        .track-info p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-family: 'Roboto Mono', monospace;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+            gap: 0.8rem;
+        }
+        .buttons {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .btn-control {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.5rem;
+        }
+        .btn-control:hover {
+            color: var(--primary);
+            text-shadow: var(--glow);
+        }
+        .btn-play {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--bg-dark);
+            border-radius: 50%;
+            font-size: 1.5rem;
+            box-shadow: var(--glow);
+        }
+        .btn-play:hover {
+            transform: scale(1.1);
+        }
+        /* Progress Bar with neon fill */
+        .progress-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-family: 'Roboto Mono', monospace;
+        }
+        .progress-bar {
+            flex-grow: 1;
+            height: 6px;
+            background: rgba(160, 160, 255, 0.2);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 3px;
+            width: 0%;
+            box-shadow: var(--glow);
+        }
+        .volume-control {
+            width: 35%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+        }
+        input[type="range"] {
+            accent-color: var(--accent);
+            width: 120px;
+            cursor: pointer;
+        }
+        /* Caratulas with 3D flip effect */
+        .caratulas {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            padding: 3rem;
+            flex-wrap: wrap;
+            perspective: 1000px;
+        }
+        .caratulas .item {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .caratulas .item:hover {
+            transform: rotateY(180deg);
+        }
+        .caratulas img {
+            border-radius: 10px;
+            object-fit: cover;
+            width: 100%;
+            height: auto;
+            max-width: 280px;
+            backface-visibility: hidden;
+        }
+        /* Back side for flip (placeholder) */
+        .caratulas .item::after {
+            content: 'Nebula View';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateY(180deg);
+            color: var(--primary);
+            font-size: 1.2rem;
+            backface-visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎵 Pink Floid The wall  2026 archivos cedidos por Antonio</h1>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Explora el cosmos musical..." id="searchInput">
+        </div>
+    </header>
+    <div class="caratulas">
+        <div class="item"><img src="frontcover.jpg" alt="Caratula frontal" width="200" height="200" loading="lazy"></div>
+        <div class="item"><img src="trascover.jpg" alt="Caratula trasera" width="240" height="198" loading="lazy"></div>
+    </div>
+    <div class="container">
+        <div class="song-list" id="songList">
+            <!-- Items injected by JS -->
+        </div>
+    </div>
+    <div class="player-bar" id="playerBar">
+        <div class="current-track">
+            <div class="song-icon">🎵</div>
+            <div class="track-info">
+                <h3 id="currentTitle">Selecciona una canción</h3>
+                <p id="currentArtist">Cosmic Library</p>
+            </div>
+        </div>
+        <div class="controls">
+            <div class="buttons">
+                <button class="btn-control" onclick="prevSong()">⏮</button>
+                <button class="btn-control btn-play" onclick="togglePlay()" id="playBtn">▶</button>
+                <button class="btn-control" onclick="nextSong()">⏭</button>
+            </div>
+            <div class="progress-container">
+                <span id="currentTime">0:00</span>
+                <div class="progress-bar" id="progressBar" onclick="seek(event)">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span id="duration">0:00</span>
+            </div>
+        </div>
+        <div class="volume-control">
+            <span>🔊</span>
+            <input type="range" min="0" max="1" step="0.01" value="1" onchange="setVolume(this.value)">
+        </div>
+    </div>
+    <audio id="audioPlayer"></audio>
+    <script>
+        // ===== SONG DATA WITH REAL TRACK NAMES =====
+        const songs = [
+            // Disc 1
+            { title: 'In the Flesh?', path: '01%20-%20In%20the%20Flesh.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 1, duration: '3:19' },
+            { title: 'The Thin Ice', path: '02%20-%20The%20Thin%20Ice.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 2, duration: '2:27' },
+            { title: 'Another Brick in the Wall (Part 1)', path: '03%20-%20Another%20Brick%20in%20the%20Wall%20Part%201.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 3, duration: '3:11' },
+            { title: 'The Happiest Days of Our Lives', path: '05%20-%20The%20Happiest%20Days%20of%20Our%20Lives.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 5, duration: '1:46' },
+            { title: 'Mother', path: '06%20-%20Mother.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 6, duration: '5:32' },
+            { title: 'Goodbye Blue Sky', path: '07%20-%20Goodbye%20Blue%20Sky.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 7, duration: '2:45' },
+            { title: 'Empty Spaces', path: '08%20-%20Empty%20Spaces.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 8, duration: '2:10' },
+            { title: 'Young Lust', path: '09%20-%20Young%20Lust.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 9, duration: '3:25' },
+            { title: 'One of My Turns', path: '10%20-%20One%20of%20My%20Turns.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 10, duration: '3:35' },
+            { title: "Don't Leave Me Now", path: '11%20-%20Don\'t%20Leave%20Me%20Now.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 11, duration: '4:08' },
+            { title: 'Another Brick in the Wall (Part 2)', path: '12%20-%20Another%20Brick%20in%20the%20Wall%20Part%202.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 12, duration: '3:59' },
+            { title: 'Goodbye Cruel World', path: '13%20-%20Goodbye%20Cruel%20World.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 1, track: 13, duration: '1:13' },
+
+            // Disc 2
+            { title: 'Hey You', path: '14%20-%20Hey%20You.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 1, duration: '4:40' },
+            { title: 'Is There Anybody Out There?', path: '15%20-%20Is%20There%20Anybody%20Out%20There.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 2, duration: '2:44' },
+            { title: 'Nobody Home', path: '16%20-%20Nobody%20Home.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 3, duration: '3:26' },
+            { title: 'Vera', path: '17%20-%20Vera.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 4, duration: '1:35' },
+            { title: 'Bring the Boys Back Home', path: '18%20-%20Bring%20the%20Boys%20Back%20Home.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 5, duration: '1:21' },
+            { title: 'Comfortably Numb', path: '19%20-%20Comfortably%20Numb.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 6, duration: '6:23' },
+            { title: 'The Show Must Go On', path: '20%20-%20The%20Show%20Must%20Go%20On.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 7, duration: '1:36' },
+            { title: 'In the Flesh', path: '21%20-%20In%20the%20Flesh.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 8, duration: '4:15' },
+            { title: 'Run Like Hell', path: '22%20-%20Run%20Like%20Hell.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 9, duration: '4:19' },
+            { title: 'Waiting for the Worms', path: '23%20-%20Waiting%20for%20the%20Worms.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 10, duration: '4:04' },
+            { title: 'Stop', path: '24%20-%20Stop.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 2, track: 11, duration: '0:30' },
+
+            // Bonus tracks
+            { title: 'Another Brick in the Wall (Part 2) - Extended', path: 'Bonus%20-%20Another%20Brick%20Extended.mp3', artist: 'Pink Floyd', album: 'The Wall', year: 1979, disc: 0, track: 0, duration: '3:59' },
+            { title: 'Comfortably Numb - Live', path: 'Bonus%20-%20Comfortably%20Numb%20Live.mp3', artist: 'Pink Floyd', album: 'The Wall (Live)', year: 1980, disc: 0, track: 0, duration: '8:21' },
+            { title: 'Run Like Hell - Live', path: 'Bonus%20-%20Run%20Like%20Hell%20Live.mp3', artist: 'Pink Floyd', album: 'The Wall (Live)', year: 1980, disc: 0, track: 0, duration: '5:12' }
+        ];
+        let currentIndex = -1;
+        const audio = document.getElementById('audioPlayer');
+        const searchInput = document.getElementById('searchInput');
+        // Render Songs
+        function renderSongs(filter = "") {
+            const container = document.getElementById('songList');
+            container.innerHTML = "";
+           
+            songs.forEach((song, index) => {
+                if(song.title.toLowerCase().includes(filter.toLowerCase())) {
+                    const el = document.createElement('div');
+                    el.className = `song-card ${index === currentIndex ? 'playing' : ''}`;
+                    el.onclick = () => playSong(index);
+                    el.innerHTML = `
+                        <div class="song-icon">♫</div>
+                        <div class="song-info">
+                            <div class="song-title">${song.title}</div>
+                            <div class="song-meta">${song.format}</div>
+                        </div>
+                    `;
+                    container.appendChild(el);
+                }
+            });
+        }
+        // Search Listener
+        searchInput.addEventListener('input', (e) => renderSongs(e.target.value));
+        // Player Logic
+        function playSong(index) {
+            if (index < 0 || index >= songs.length) return;
+           
+            currentIndex = index;
+            const song = songs[index];
+           
+            audio.src = song.path;
+            audio.play().catch(error => {
+                console.error('Error playing audio:', error);
+            });
+           
+            document.getElementById('currentTitle').innerText = song.title;
+            document.getElementById('playBtn').innerText = "⏸";
+            document.getElementById('playerBar').classList.add('active');
+           
+            renderSongs(searchInput.value);
+        }
+        function togglePlay() {
+            if (songs.length === 0) return;
+            if (audio.paused) {
+                if(currentIndex === -1) playSong(0);
+                else audio.play();
+                document.getElementById('playBtn').innerText = "⏸";
+            } else {
+                audio.pause();
+                document.getElementById('playBtn').innerText = "▶";
+            }
+        }
+        function nextSong() {
+            let next = currentIndex + 1;
+            if (next >= songs.length) next = 0;
+            playSong(next);
+        }
+        function prevSong() {
+            let prev = currentIndex - 1;
+            if (prev < 0) prev = songs.length - 1;
+            playSong(prev);
+        }
+        function setVolume(val) {
+            audio.volume = val;
+        }
+        function seek(e) {
+            const bar = document.getElementById('progressBar');
+            const rect = bar.getBoundingClientRect();
+            const offsetX = e.clientX - rect.left;
+            const percent = offsetX / bar.offsetWidth;
+            if (!isNaN(audio.duration)) {
+                audio.currentTime = percent * audio.duration;
+            }
+        }
+        audio.addEventListener('timeupdate', () => {
+            if (!isNaN(audio.duration)) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                document.getElementById('progressFill').style.width = percent + "%";
+                document.getElementById('currentTime').innerText = formatTime(audio.currentTime);
+                document.getElementById('duration').innerText = formatTime(audio.duration);
+            }
+        });
+        audio.addEventListener('ended', nextSong);
+        audio.addEventListener('error', (e) => {
+            console.error('Audio error:', e);
+        });
+        audio.addEventListener('loadedmetadata', () => {
+            document.getElementById('duration').innerText = formatTime(audio.duration);
+        });
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return `${m}:${s < 10 ? '0' : ''}${s}`;
+        }
+        // Init
+        renderSongs();
+    </script>
+</body>
+</html>
