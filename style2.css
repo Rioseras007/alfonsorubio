@@ -1,0 +1,184 @@
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f172a;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      margin-bottom: 40px;
+    }
+
+    /* BOTÓN 1: MODERNO */
+    .btn-moderno {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 55px;
+      padding: 10px 20px;
+      background: linear-gradient(45deg, #e50417, #af0715);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 1.2;
+      transition: 0.3s;
+      box-sizing: border-box;
+    }
+
+    .btn-moderno:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    /* BOTÓN 2: NEÓN */
+    .btn-neon {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 55px;
+      padding: 10px 20px;
+      color: #0ff;
+      border: 2px solid #0ff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 14px;
+      line-height: 1.2;
+      text-shadow: 0 0 5px #0ff;
+      box-shadow: 0 0 10px #0ff inset;
+      transition: 0.3s;
+      box-sizing: border-box;
+    }
+
+    .btn-neon:hover {
+      background: rgb(26, 188, 96);
+      color: black;
+      box-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+    }
+
+    /* BOTÓN 3: MINIMALISTA */
+    .btn-minimal {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 55px;
+      padding: 10px 20px;
+      border: 2px solid #333;
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+      line-height: 1.2;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .btn-minimal::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 0;
+      top: 0;
+      left: 0;
+      background: #333;
+      z-index: -1;
+      transition: 0.3s;
+    }
+
+    .btn-minimal:hover {
+      color: white;
+    }
+
+    .btn-minimal:hover::after {
+      height: 100%;
+    }
+
+    .contenedor {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    /* BOTÓN 4: GRADIENTE ANIMADO */
+.btn-gradient {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 55px;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.2;
+  border-radius: 8px;
+  background: linear-gradient(270deg, #ff6a00, #ee0979, #00c9ff, #92fe9d);
+  background-size: 600% 600%;
+  transition: 0.3s;
+  animation: gradientMove 6s ease infinite;
+  box-sizing: border-box;
+}
+
+.btn-gradient:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+
+/* Animación */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+ /* BOTÓN MUSICAL */
+.btn-music {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 55px;
+  gap: 10px;
+  padding: 10px 20px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.2;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+/* Barras ecualizador */
+.equalizer {
+  display: flex;
+  gap: 3px;
+}
+
+.equalizer span {
+  display: block;
+  width: 4px;
+  height: 10px;
+  background: #1db954;
+  animation: bounce 1s infinite ease-in-out;
+}
+
+.equalizer span:nth-child(2) { animation-delay: 0.2s; }
+.equalizer span:nth-child(3) { animation-delay: 0.4s; }
+.equalizer span:nth-child(4) { animation-delay: 0.6s; }
+
+@keyframes bounce {
+  0%, 100% { height: 5px; }
+  50% { height: 15px; }
+}
+
+.btn-music:hover {
+  background: #1db954;
+  color: #000;
+  transform: scale(1.1);
+}
+

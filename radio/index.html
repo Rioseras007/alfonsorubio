@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="estilo.css">
+<title>Reproductor Emisoras de Radio</title>
+
+</head>
+<body>
+
+<h2>ELIGE UNA EMISORA DE RADIO DE VALLADOLID </h2>
+
+
+
+<div class="cancion">
+    <button class="btn-fijo" data-url="https://playerservices.streamtheworld.com/api/livestream-redirect/CADENADIAL.mp3"><img src="logos/cadenadial.webp" alt="Play" width="100" height="100"></button>
+    <span>CADENA DIAL 100.4</span>
+</div>
+
+<div class="cancion">
+    <button class="btn-fijo" data-url="https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40.mp3"><img src="logos/los40.png" alt="Play" width="100" height="100"></button>
+    <span>LOS 40 PRINCIPALES 90.9</span>
+</div>
+
+<div class="cancion">
+    <button class="btn-fijo" data-url="https://playerservices.streamtheworld.com/api/livestream-redirect/COPE.mp3"><img src="logos/copevalladolid.webp" alt="Play" width="100" height="100"></button>
+    <span>COPE 98.5</span>
+</div>
+
+<div class="cancion">
+    <button class="btn-fijo" data-url="https://playerservices.streamtheworld.com/api/livestream-redirect/MELODIA.mp3"><img src="logos/melodiaFM.jpg" alt="Play" width="100" height="100"></button>
+    <span>MELODÍA FM 97.2</span>
+
+</div>
+
+
+<div class="cancion">
+    <button class="btn-fijo" data-url="https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40CLASICOS.mp3"><img src="logos/KissFM.webp" alt="Play" width="100" height="100"></button>
+    <span>KISS FM 99.4</span>            
+</div>
+
+<div class="cancion">
+    <button class="btn-fijo" data-url="https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40CLASICOS.mp3"><img src="logos/esradio.jpg" alt="Play" width="100" height="100"></button>
+    <span>ESRADIO VALLADOLID 102.8</span>            
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="reproductor-contenedor"><img src="radio.png" onerror="this.style.display='none';" width="220"/></div>
+
+
+
+
+
+<script>
+// ─── Función principal ───────────────────────────────────────
+function crearAudio(url) {
+    const audio = document.createElement('audio');
+    audio.controls = true;
+    audio.autoplay = true;
+    
+    const source = document.createElement('source');
+    source.src = url;
+    source.type = url.endsWith('.ogg') ? 'audio/ogg' : 'audio/mpeg';
+    
+    audio.appendChild(source);
+    audio.innerHTML += 'Tu navegador no soporta el elemento audio.';
+    
+    return audio;
+}
+
+// ─── Manejo de todos los botones ─────────────────────────────
+document.querySelectorAll('button[data-url]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Quitar reproductor anterior si existe
+        const contenedor = document.getElementById('reproductor-contenedor');
+        contenedor.innerHTML = '';
+
+        const url = btn.dataset.url;
+        const nuevoAudio = crearAudio(url);
+        
+        contenedor.appendChild(nuevoAudio);
+        
+        // Resaltar botón activo (opcional)
+        document.querySelectorAll('button[data-url]').forEach(b => b.classList.remove('activo'));
+        btn.classList.add('activo');
+    });
+});
+</script>
+
+<style>
+    button.activo {
+        background: rgb(82, 3, 18);
+        color: white;
+    }
+</style>
+
+</body>
+</html>

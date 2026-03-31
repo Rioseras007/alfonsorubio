@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Alfonso Rubio Rioseras">
+  <title>Image Map Helper | Herramienta Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --bg: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --text: #f8fafc;
+      --text-dim: #94a3b8;
+      --accent: #10b981;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    header {
+      padding: 1.5rem 2rem;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      background: linear-gradient(to right, #818cf8, #c084fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 300px 1fr 300px;
+      gap: 1px;
+      background: rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+    }
+
+    .sidebar {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .workspace {
+      position: relative;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+      padding: 2rem;
+    }
+
+    .canvas-container {
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      line-height: 0;
+    }
+
+    #target-image {
+      max-width: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      transition: all 0.3s ease;
+    }
+
+    #target-image.fit {
+      max-width: 100%;
+      max-height: calc(100vh - 12rem);
+      /* Ajuste para que quepa en el viewport */
+      height: auto;
+      width: auto;
+    }
+
+    .canvas-container.fit {
+      max-width: 100%;
+    }
+
+    #drawing-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: crosshair;
+    }
+
+    .panel-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+
+    .tool-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    button {
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    button:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+    }
+
+    button.active {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .areas-list {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .area-item {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .area-item:hover {
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .code-panel {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    textarea {
+      width: 100%;
+      flex: 1;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #10b981;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 1rem;
+      resize: none;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .status-bar {
+      padding: 0.5rem 2rem;
+      background: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Modal Styles */
+    #preview-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    #preview-modal.active {
+      display: flex;
+    }
+
+    .modal-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .preview-container {
+      position: relative;
+      background: #000;
+      line-height: 0;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+      max-width: 90vw;
+      max-height: 75vh;
+      overflow: auto;
+    }
+
+    #preview-img {
+      max-width: none;
+      height: auto;
+    }
+
+    .hitbox-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      display: none;
+    }
+
+    .hitbox-overlay.visible {
+      display: block;
+    }
+
+    .btn-close {
+      background: var(--danger) !important;
+      font-weight: 600;
+    }
+
+    .toggle-active {
+      background: var(--accent) !important;
+    }
+
+    /* Toast Notifications */
+    #toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .toast {
+      background: rgba(30, 41, 59, 0.9);
+      backdrop-filter: blur(12px);
+      border-left: 4px solid var(--primary);
+      color: var(--text);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 300px;
+      animation: slideIn 0.3s ease forwards;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-left-width: 4px;
+    }
+
+    .toast.info {
+      border-left-color: var(--primary);
+    }
+
+    .toast.success {
+      border-left-color: var(--accent);
+    }
+
+    .toast.warning {
+      border-left-color: #f59e0b;
+    }
+
+    .toast.error {
+      border-left-color: var(--danger);
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Mapeador de Imágenes <small style="font-size: 0.6em; opacity: 0.7;">PRO</small></h1>
+    <div class="actions">
+      <button onclick="testPreview()" style="background: #f59e0b; border: none; font-weight: 600;">🚀 Probar
+        Resultado</button>
+      <button onclick="downloadPreview()" style="background: #0ea5e9; border: none; font-weight: 600;">💾 Guardar
+        Probador</button>
+      <button onclick="exportCode()" style="background: var(--accent); border: none;">Copiar Código</button>
+      <button onclick="clearAll()" style="color: var(--danger);">Limpiar Todo</button>
+    </div>
+  </header>
+
+  <main>
+    <aside class="sidebar">
+      <div class="tools">
+        <p class="panel-title">Imagen</p>
+        <div class="file-loader" style="margin-bottom: 1rem;">
+          <input type="file" id="file-input" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
+          <button onclick="document.getElementById('file-input').click()"
+            style="width: 100%; background: var(--primary-hover); border: none; margin-bottom: 0.5rem;">
+            📁 Cargar Imagen
+          </button>
+          <button id="btn-fit" onclick="toggleFit()"
+            style="width: 100%; font-size: 0.8rem; background: rgba(255,255,255,0.05);">
+            ↔️ Ajustar ventana
+          </button>
+        </div>
+
+        <p class="panel-title">Herramientas</p>
+        <div class="tool-group">
+          <button id="btn-rect" class="active" onclick="setShape('rect')">Rectángulo</button>
+          <button id="btn-circle" onclick="setShape('circle')">Círculo</button>
+          <button id="btn-poly" onclick="setShape('poly')">Polígono</button>
+          <button id="btn-undo" onclick="undo()">Deshacer</button>
+        </div>
+      </div>
+
+      <div class="layers">
+        <p class="panel-title">Áreas Creadas</p>
+        <div id="areas-list" class="areas-list">
+          <!-- Las áreas se añadirán aquí -->
+        </div>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <div class="canvas-container" id="container">
+        <img src="imagendeprueba.jpg" id="target-image" alt="Mapeo">
+        <canvas id="drawing-canvas"></canvas>
+      </div>
+    </section>
+
+    <aside class="code-panel">
+      <p class="panel-title">Código Generado</p>
+      <textarea id="output-code" readonly placeholder='<map name="image-map">...'></textarea>
+      <div class="instruction-box" style="font-size: 0.8rem; color: var(--text-dim);">
+        <p>1. Selecciona una forma.</p>
+        <p>2. Haz clic en la imagen para marcar puntos.</p>
+        <p>3. El código se genera automáticamente.</p>
+      </div>
+    </aside>
+  </main>
+
+  <div class="status-bar">
+    <span id="coord-display">X: 0, Y: 0</span>
+    <span>Mapeador v1.0 | Desarrollado por Alfonso Rubio</span>
+  </div>
+
+  <!-- Modal de Previsualización -->
+  <div id="preview-modal">
+    <div class="modal-controls">
+      <h2 style="margin-right: 2rem;">🚀 Modo de Prueba</h2>
+      <button onclick="toggleHitboxes()" id="btn-hitboxes">👁️ Mostrar Áreas</button>
+      <button onclick="closePreview()" class="btn-close">❌ Cerrar y Volver</button>
+    </div>
+    <div class="preview-container">
+      <img id="preview-img" src="" usemap="#modal-map">
+      <canvas id="preview-hitboxes" class="hitbox-overlay"></canvas>
+      <map name="modal-map" id="modal-map-el"></map>
+    </div>
+    <p style="margin-top: 1rem; color: var(--text-dim); font-size: 0.8rem;">Pulsa ESC para volver al editor</p>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script>
+    const canvas = document.getElementById('drawing-canvas');
+    const ctx = canvas.getContext('2d');
+    const img = document.getElementById('target-image');
+    const areasList = document.getElementById('areas-list');
+    const outputCode = document.getElementById('output-code');
+    const coordDisplay = document.getElementById('coord-display');
+
+    let currentShape = 'rect';
+    let areas = [];
+    let currentPoints = [];
+    let currentFileName = "imagendeprueba.jpg";
+    let isFit = false;
+
+    // Inicializar canvas al cargar la imagen
+    img.onload = () => {
+      updateCanvasSize();
+      draw();
+      generateCode();
+    };
+
+    function updateCanvasSize() {
+      canvas.width = img.clientWidth;
+      canvas.height = img.clientHeight;
+    }
+
+    function toggleFit() {
+      isFit = !isFit;
+      const btn = document.getElementById('btn-fit');
+      const container = document.getElementById('container');
+
+      if (isFit) {
+        img.classList.add('fit');
+        container.classList.add('fit');
+        btn.classList.add('active');
+        btn.innerHTML = "🔍 Tamaño Original";
+      } else {
+        img.classList.remove('fit');
+        container.classList.remove('fit');
+        btn.classList.remove('active');
+        btn.innerHTML = "↔️ Ajustar ventana";
+      }
+      // Esperar a que termine la transición o el reflow
+      setTimeout(() => {
+        updateCanvasSize();
+        draw();
+      }, 300); // Dar un poco más de tiempo para la transición
+    }
+
+    // Si la imagen ya está cargada
+    if (img.complete) img.onload();
+
+    function handleFileSelect(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (areas.length > 0 && !confirm("Se borrarán las áreas actuales. ¿Continuar?")) {
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        img.src = e.target.result;
+        currentFileName = file.name;
+        areas = [];
+        currentPoints = [];
+        updateUI();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function setShape(shape) {
+      currentShape = shape;
+      currentPoints = [];
+      document.querySelectorAll('.tool-group button').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`btn-${shape}`).classList.add('active');
+      draw();
+    }
+
+    // Obtener coordenadas reales (naturales) a partir de las visuales
+    function getCoords(e) {
+      const rect = canvas.getBoundingClientRect();
+      const visualX = e.clientX - rect.left;
+      const visualY = e.clientY - rect.top;
+
+      const scaleX = img.naturalWidth / img.clientWidth;
+      const scaleY = img.naturalHeight / img.clientHeight;
+
+      return {
+        visualX: Math.round(visualX),
+        visualY: Math.round(visualY),
+        naturalX: Math.round(visualX * scaleX),
+        naturalY: Math.round(visualY * scaleY)
+      };
+    }
+
+    canvas.addEventListener('mousemove', (e) => {
+      const coords = getCoords(e);
+      coordDisplay.innerText = `Visual: ${coords.visualX},${coords.visualY} | Real: ${coords.naturalX},${coords.naturalY}`;
+
+      if (currentPoints.length > 0) draw(coords.visualX, coords.visualY);
+    });
+
+    canvas.addEventListener('click', (e) => {
+      const coords = getCoords(e);
+
+      // Guardamos ambos para facilitar el dibujo y la exportación
+      currentPoints.push({
+        x: coords.visualX,
+        y: coords.visualY,
+        nx: coords.naturalX,
+        ny: coords.naturalY
+      });
+
+      if (currentShape === 'rect' && currentPoints.length === 2) {
+        saveArea();
+      } else if (currentShape === 'circle' && currentPoints.length === 2) {
+        saveArea();
+      } else if (currentShape === 'poly') {
+        draw(coords.visualX, coords.visualY);
+      }
+    });
+
+    canvas.addEventListener('dblclick', (e) => {
+      if (currentShape === 'poly' && currentPoints.length > 2) {
+        saveArea();
+      }
+    });
+
+    function saveArea() {
+      const name = prompt("Nombre del área (alt):", `Área ${areas.length + 1}`) || `Área ${areas.length + 1}`;
+      const href = prompt("Enlace (href):", "https://") || "#";
+
+      areas.push({
+        shape: currentShape,
+        points: [...currentPoints],
+        name: name,
+        href: href
+      });
+
+      currentPoints = [];
+      updateUI();
+      draw();
+    }
+
+    function undo() {
+      if (currentPoints.length > 0) {
+        currentPoints.pop();
+      } else {
+        areas.pop();
+      }
+      updateUI();
+      draw();
+    }
+
+    function clearAll() {
+      if (confirm("¿Estás seguro de que quieres borrar todo?")) {
+        areas = [];
+        currentPoints = [];
+        updateUI();
+        draw();
+      }
+    }
+
+    function draw(mouseX, mouseY) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Dibujar áreas guardadas
+      areas.forEach(area => {
+        ctx.fillStyle = 'rgba(99, 102, 241, 0.3)';
+        ctx.strokeStyle = '#6366f1';
+        ctx.lineWidth = 2;
+        renderShape(ctx, area.shape, area.points);
+      });
+
+      // Dibujar área actual en progreso
+      if (currentPoints.length > 0) {
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.3)';
+        ctx.strokeStyle = '#10b981';
+        ctx.setLineDash([5, 5]);
+
+        let tempPoints = [...currentPoints];
+        if (mouseX !== undefined && mouseY !== undefined) {
+          if (currentShape !== 'poly' || currentPoints.length > 0) {
+            tempPoints.push({ x: mouseX, y: mouseY });
+          }
+        }
+
+        renderShape(ctx, currentShape, tempPoints);
+        ctx.setLineDash([]);
+      }
+    }
+
+    function renderShape(context, shape, points) {
+      if (points.length === 0) return;
+
+      context.beginPath();
+      if (shape === 'rect' && points.length >= 2) {
+        const w = points[1].x - points[0].x;
+        const h = points[1].y - points[0].y;
+        context.rect(points[0].x, points[0].y, w, h);
+      } else if (shape === 'circle' && points.length >= 2) {
+        const radius = Math.sqrt(Math.pow(points[1].x - points[0].x, 2) + Math.pow(points[1].y - points[0].y, 2));
+        context.arc(points[0].x, points[0].y, radius, 0, Math.PI * 2);
+      } else if (shape === 'poly') {
+        context.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+          context.lineTo(points[i].x, points[i].y);
+        }
+        if (points.length > 2 && currentPoints.length === 0) context.closePath();
+      }
+      context.fill();
+      context.stroke();
+    }
+
+    function updateUI() {
+      // Actualizar lista
+      areasList.innerHTML = '';
+      areas.forEach((area, index) => {
+        const div = document.createElement('div');
+        div.className = 'area-item';
+        div.innerHTML = `
+                    <span>${area.name} (${area.shape})</span>
+                    <button onclick="removeArea(${index})" style="padding: 2px 8px; font-size: 10px; color: var(--danger);">X</button>
+                `;
+        areasList.appendChild(div);
+      });
+
+      // Actualizar código
+      generateCode();
+    }
+
+    function removeArea(index) {
+      areas.splice(index, 1);
+      updateUI();
+      draw();
+    }
+
+    function generateCode() {
+      let code = `<img src="${currentFileName}" usemap="#image-map">\n\n`;
+      code += `<map name="image-map">\n`;
+
+      areas.forEach(area => {
+        let coords = "";
+        if (area.shape === 'rect') {
+          coords = `${area.points[0].nx},${area.points[0].ny},${area.points[1].nx},${area.points[1].ny}`;
+        } else if (area.shape === 'circle') {
+          const radius = Math.round(Math.sqrt(Math.pow(area.points[1].nx - area.points[0].nx, 2) + Math.pow(area.points[1].ny - area.points[0].ny, 2)));
+          coords = `${area.points[0].nx},${area.points[0].ny},${radius}`;
+        } else if (area.shape === 'poly') {
+          coords = area.points.map(p => `${p.nx},${p.ny}`).join(',');
+        }
+
+        code += `    <area target="_blank" alt="${area.name}" title="${area.name}" href="${area.href}" coords="${coords}" shape="${area.shape}">\n`;
+      });
+
+      code += `</map>`;
+      outputCode.value = code;
+    }
+
+    function exportCode() {
+      outputCode.select();
+      document.execCommand('copy');
+      alert("¡Código copiado al portapapeles!");
+    }
+
+    function testPreview() {
+      if (areas.length === 0) {
+        alert("Primero crea al menos un área para probar.");
+        return;
+      }
+
+      const modal = document.getElementById('preview-modal');
+      const pImg = document.getElementById('preview-img');
+      const pMap = document.getElementById('modal-map-el');
+      const pHitboxes = document.getElementById('preview-hitboxes');
+
+      pImg.src = img.src;
+
+      // Esperar a que la imagen cargue para dimensionar el canvas de hitboxes
+      pImg.onload = () => {
+        pHitboxes.width = pImg.clientWidth;
+        pHitboxes.height = pImg.clientHeight;
+        drawHitboxes(pHitboxes);
+      };
+
+      // Generar áreas en el map del modal
+      let mapHtml = "";
+      areas.forEach(area => {
+        let coords = "";
+        const sX = pImg.clientWidth / img.naturalWidth;
+        const sY = pImg.clientHeight / img.naturalHeight;
+
+        if (area.shape === 'rect') {
+          coords = `${area.points[0].nx},${area.points[0].ny},${area.points[1].nx},${area.points[1].ny}`;
+        } else if (area.shape === 'circle') {
+          const radius = Math.round(Math.sqrt(Math.pow(area.points[1].nx - area.points[0].nx, 2) + Math.pow(area.points[1].ny - area.points[0].ny, 2)));
+          coords = `${area.points[0].nx},${area.points[0].ny},${radius}`;
+        } else if (area.shape === 'poly') {
+          coords = area.points.map(p => `${p.nx},${p.ny}`).join(',');
+        }
+        mapHtml += `<area target="_blank" alt="${area.name}" title="${area.name}" href="${area.href}" coords="${coords}" shape="${area.shape}">`;
+      });
+      pMap.innerHTML = mapHtml;
+
+      modal.classList.add('active');
+    }
+
+    function closePreview() {
+      document.getElementById('preview-modal').classList.remove('active');
+    }
+
+    function toggleHitboxes() {
+      const overlay = document.getElementById('preview-hitboxes');
+      const btn = document.getElementById('btn-hitboxes');
+      overlay.classList.toggle('visible');
+      btn.classList.toggle('toggle-active');
+    }
+
+    function drawHitboxes(canvasEl) {
+      const pCtx = canvasEl.getContext('2d');
+      const pImg = document.getElementById('preview-img');
+      pCtx.clearRect(0, 0, canvasEl.width, canvasEl.height);
+
+      const scaleX = pImg.clientWidth / img.naturalWidth;
+      const scaleY = pImg.clientHeight / img.naturalHeight;
+
+      areas.forEach(area => {
+        pCtx.fillStyle = 'rgba(16, 185, 129, 0.2)';
+        pCtx.strokeStyle = '#10b981';
+        pCtx.lineWidth = 2;
+
+        pCtx.beginPath();
+        const scaledPoints = area.points.map(p => ({
+          x: p.nx * scaleX,
+          y: p.ny * scaleY
+        }));
+
+        if (area.shape === 'rect') {
+          const w = scaledPoints[1].x - scaledPoints[0].x;
+          const h = scaledPoints[1].y - scaledPoints[0].y;
+          pCtx.rect(scaledPoints[0].x, scaledPoints[0].y, w, h);
+        } else if (area.shape === 'circle') {
+          const r = Math.sqrt(Math.pow(scaledPoints[1].x - scaledPoints[0].x, 2) + Math.pow(scaledPoints[1].y - scaledPoints[0].y, 2));
+          pCtx.arc(scaledPoints[0].x, scaledPoints[0].y, r, 0, Math.PI * 2);
+        } else if (area.shape === 'poly') {
+          pCtx.moveTo(scaledPoints[0].x, scaledPoints[0].y);
+          for (let i = 1; i < scaledPoints.length; i++) {
+            pCtx.lineTo(scaledPoints[i].x, scaledPoints[i].y);
+          }
+          pCtx.closePath();
+        }
+        pCtx.fill();
+        pCtx.stroke();
+      });
+    }
+
+    // Cerrar con Esc
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePreview();
+    });
+
+    function showToast(message, type = 'info', duration = 4000) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+
+      const icons = {
+        info: 'ℹ️',
+        success: '✅',
+        warning: '⚠️',
+        error: '❌'
+      };
+
+      toast.innerHTML = `<span>${icons[type] || '🔔'}</span> <span>${message}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.animation = 'fadeOut 0.3s ease forwards';
+        setTimeout(() => toast.remove(), 300);
+      }, duration);
+    }
+
+    async function downloadPreview() {
+      if (areas.length === 0) {
+        showToast("Primero crea al menos un área para guardar.", "warning");
+        return;
+      }
+
+      const htmlCode = `
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Probador Generado - ${currentFileName}</title>
+    <style>
+        body { 
+            background: #0f172a; 
+            color: white; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .container { position: relative; }
+        img { max-width: 90vw; max-height: 80vh; border: 2px solid #334155; }
+        .info { margin-bottom: 20px; text-align: center; }
+        h2 { color: #818cf8; margin-bottom: 5px; }
+        p { color: #94a3b8; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <h2>Probador de Imagen: ${currentFileName}</h2>
+        <p>Asegúrate de que este HTML y la imagen están en la misma carpeta.</p>
+    </div>
+    <div class="container">
+        <img src="${currentFileName}" usemap="#preview-map">
+        <map name="preview-map">
+            ${areas.map(area => {
+        let coords = "";
+        if (area.shape === 'rect') {
+          coords = `${area.points[0].nx},${area.points[0].ny},${area.points[1].nx},${area.points[1].ny}`;
+        } else if (area.shape === 'circle') {
+          const radius = Math.round(Math.sqrt(Math.pow(area.points[1].nx - area.points[0].nx, 2) + Math.pow(area.points[1].ny - area.points[0].ny, 2)));
+          coords = `${area.points[0].nx},${area.points[0].ny},${radius}`;
+        } else if (area.shape === 'poly') {
+          coords = area.points.map(p => `${p.nx},${p.ny}`).join(',');
+        }
+        return `<area target="_blank" alt="${area.name}" title="${area.name}" href="${area.href}" coords="${coords}" shape="${area.shape}">`;
+      }).join('\n')}
+        </map>
+    </div>
+</body>
+</html>`;
+
+      const htmlFileName = `probador_${currentFileName.split('.')[0]}.html`;
+
+      try {
+        // PASO 1: Guardar el HTML
+        if ('showSaveFilePicker' in window) {
+          showToast("Paso 1: Guardando archivo HTML...", "info");
+          const htmlHandle = await window.showSaveFilePicker({
+            suggestedName: htmlFileName,
+            types: [{ description: 'Archivo HTML', accept: { 'text/html': ['.html'] } }],
+          });
+          const htmlWritable = await htmlHandle.createWritable();
+          await htmlWritable.write(htmlCode);
+          await htmlWritable.close();
+
+          // PASO 2: Guardar la Imagen al lado
+          showToast("Paso 1 completado. Ahora guarda la Imagen en la misma carpeta.", "success", 6000);
+
+          const imgResponse = await fetch(img.src);
+          const imgBlob = await imgResponse.blob();
+
+          const imgHandle = await window.showSaveFilePicker({
+            suggestedName: currentFileName,
+            types: [{ description: 'Imagen', accept: { [imgBlob.type]: ['.' + currentFileName.split('.').pop()] } }],
+          });
+          const imgWritable = await imgHandle.createWritable();
+          await imgWritable.write(imgBlob);
+          await imgWritable.close();
+
+          showToast("¡Proceso finalizado! HTML e Imagen listos.", "success");
+        } else {
+          // Fallback corregido para descarga tradicional (solo HTML por limitaciones técnicas)
+          showToast("Iniciando descarga de solo HTML...", "info");
+          const blob = new Blob([htmlCode], { type: 'text/html' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = htmlFileName;
+          a.click();
+          URL.revokeObjectURL(url);
+          showToast("Descarga completada (Solo HTML).", "info");
+        }
+      } catch (err) {
+        if (err.name === 'AbortError') {
+          showToast("Guardado cancelado.", "warning");
+          return;
+        }
+        console.error("Error al guardar:", err);
+        showToast("Error al intentar guardar los archivos.", "error");
+      }
+    }
+  </script>
+</body>
+
+</html>

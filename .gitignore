@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Compiled source #
 ###################
 *.com
@@ -35,3 +36,45 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+=======
+.vs/
+*.log
+*.tmp
+*.zip
+*.7z
+*.rar
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Carpetas de medios (Videos y Música) para evitar copyright y exceso de tamaño
+peliculas/
+musica/
+musica2/
+music3/
+musica4/
+muscia5/
+musica6/
+covers/
+beeps/
+assests/
+Starwars/
+proyectoAmazon/
+retrocasete/
+
+# Extensiones de medios pesados
+*.mp4
+*.mkv
+*.avi
+*.mp3
+*.wav
+*.m4a
+*.flac
+*.jpg
+*.jpeg
+*.png
+*.svg
+!favicon.ico
+!logo.svg
+!styles/
+>>>>>>> 9e2a5e1 (Modernización completa: SEO, tipografía y sonidos (excluyendo archivos pesados))

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA PATRULLA CANINA | VICTORIA MAGISTRAL (MÓVIL)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Bebas+Neue&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #854CE6;
+            --secondary: #00F2FF;
+            --gold: #FFD700;
+            --bg-dark: #050709;
+            --bg-card: #0f1219;
+            --glass-bg: rgba(15, 18, 25, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #FFFFFF;
+            --text-muted: #70757a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image:
+                radial-gradient(at 0% 0%, rgba(133, 76, 230, 0.3) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(0, 242, 255, 0.2) 0px, transparent 50%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            padding-bottom: 140px;
+            /* More padding for mobile player */
+        }
+
+        /* Hero */
+        .promo-hero {
+            padding: 4rem 1.5rem 2rem;
+            text-align: center;
+        }
+
+        .promo-hero h1 {
+            font-family: 'Bebas Neue';
+            font-size: 3.5rem;
+            color: var(--gold);
+            line-height: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .promo-subtitle {
+            color: var(--secondary);
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* List */
+        .container {
+            padding: 1rem;
+        }
+
+        .song-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            /* Mobile: Single Column */
+            gap: 1.5rem;
+        }
+
+        .song-card {
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            /* Row layout for mobile cards? Or keeping stacking */
+            flex-direction: row;
+            /* Let's try row for mobile efficiency */
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .song-card.playing {
+            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .song-art-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: none;
+            margin-bottom: 0;
+            /* Override desktop */
+        }
+
+        .song-art-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* No hover B&W effect on mobile */
+
+        .song-info-row {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            margin-bottom: 0;
+            gap: 0.5rem;
+        }
+
+        .song-text {
+            width: 100%;
+        }
+
+        .song-title {
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 0.2rem;
+            line-height: 1.2;
+        }
+
+        .song-artist {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        footer {
+            padding: 4rem;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .modern-social {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            border: 1px solid var(--glass-border);
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: var(--gold);
+            color: black;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+            border-color: var(--gold);
+        }
+
+        .btn-download {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            color: var(--gold);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 700;
+            align-self: flex-start;
+        }
+
+        /* Player Bar */
+        .player-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            /* Stacked controls */
+            z-index: 2000;
+            border-top: 1px solid var(--primary);
+            padding-bottom: 1.5rem;
+            /* Safe area */
+            transform: translateY(110%);
+            transition: transform 0.3s;
+        }
+
+        .player-bar.active {
+            transform: translateY(0);
+        }
+
+        .player-top-row {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .player-art-mini {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+
+        .player-info-mini {
+            flex: 1;
+        }
+
+        .player-info-mini h3 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .player-info-mini p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .player-controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .control-btns {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .btn-ctrl {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .btn-play-big {
+            width: 56px;
+            height: 56px;
+            background: white;
+            color: black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .progress-wrapper {
+            width: 100%;
+            margin-top: 1rem;
+            display: flex;
+            gap: 10px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            align-items: center;
+        }
+
+        .progress-area {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            position: relative;
+        }
+
+        .progress-handle {
+            height: 100%;
+            width: 0;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        header {
+            padding: 1rem;
+            text-align: center;
+            background: var(--bg-dark);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .switch-desktop {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-decoration: underline;
+            display: block;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div style="font-family: 'Bebas Neue'; font-size: 1.8rem; color: var(--gold); letter-spacing: 2px;">
+            <span style="color:white">PATRULLA</span> CANINA
+        </div>
+    </header>
+
+    <section class="promo-hero">
+        <h1>EDICIÓN MÓVIL</h1>
+        <p class="promo-subtitle">MÚSICA EN EL BOLSILLO</p>
+    </section>
+
+    <div class="container">
+        <div class="song-list" id="songList"></div>
+    </div>
+
+    <!-- Switch to Desktop -->
+    <a href="index.html?desktop=1" class="switch-desktop">Ver versión de escritorio</a>
+
+    <footer>
+        <div class="modern-social">
+            <a href="https://www.facebook.com/AlfonsoRubioRioseras" target="_blank" class="social-link facebook"
+                title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank" class="social-link instagram" title="Instagram"><i
+                    class="fab fa-instagram"></i></a>
+            <a href="https://x.com/alfrubrio" target="_blank" class="social-link x-twitter" title="X (Twitter)"><i
+                    class="fab fa-x-twitter"></i></a>
+            <a href="https://www.youtube.com/@AlfonsoRubioRioseras" target="_blank" class="social-link youtube"
+                title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.tiktok.com/@alfonsorubio007" target="_blank" class="social-link tiktok"
+                title="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://discord.com/" target="_blank" class="social-link discord" title="Discord"><i
+                    class="fab fa-discord"></i></a>
+            <a href="https://web.whatsapp.com/" target="_blank" class="social-link whatsapp" title="WhatsApp"><i
+                    class="fab fa-whatsapp"></i></a>
+            <a href="https://www.linkedin.com/in/alfonsorubiorioseras/" target="_blank" class="social-link linkedin"
+                title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/Rioseras007" target="_blank" class="social-link github" title="GitHub"><i
+                    class="fab fa-github"></i></a>
+        </div>
+        <p>© 2026 LA PATRULLA CANINA | SQUAD RECORDS PRO</p>
+    </footer>
+
+    <div class="player-bar" id="playerBar">
+        <div class="player-top-row">
+            <img src="" class="player-art-mini" id="pArt">
+            <div class="player-info-mini">
+                <h3 id="pTitle">Título</h3>
+                <p>PATRULLA CANINA</p>
+            </div>
+        </div>
+
+        <div class="progress-wrapper">
+            <span id="curT">0:00</span>
+            <div class="progress-area" onclick="seek(event)">
+                <div class="progress-handle" id="pHandle"></div>
+            </div>
+            <span id="dur">0:00</span>
+        </div>
+
+        <div class="player-controls-row" style="margin-top: 1rem; justify-content: center;">
+            <div class="control-btns">
+                <button class="btn-ctrl" onclick="prev()">⏮</button>
+                <button class="btn-ctrl btn-play-big" onclick="toggle()" id="playBtn">▶</button>
+                <button class="btn-ctrl" onclick="next()">⏭</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audioElement"></audio>
+
+    <script>
+        const tracks = [
+            { "id": 1, "t": "La Patrulla Canina", "file": "assets/01_La_Patrulla_Canina.mp3", "art": "assets/cover1.jpg" },
+            { "id": 2, "t": "Antonio: El Rey del Loot", "file": "assets/02_Antonio_Rey_Loot.mp3", "art": "assets/cover2.jpg" },
+            { "id": 3, "t": "Rioseras: Pánico en la Tormenta", "file": "assets/03_Rioseras_Tormenta.mp3", "art": "assets/cover3.jpg" },
+            { "id": 4, "t": "El Murciano: Máquina de Kills", "file": "assets/04_Murciano_Pro_Kills.mp3", "art": "assets/cover4.jpg" },
+            { "id": 5, "t": "Gerbi: El Comandante Loco", "file": "assets/05_Gerbi_Loco.mp3", "art": "assets/cover5.jpg" },
+            { "id": 6, "t": "Amigos en el Battle Bus", "file": "assets/06_Battle_Bus.mp3", "art": "assets/cover6.jpg" },
+            { "id": 7, "t": "Descenso en Pisos Picados", "file": "assets/07_Pisos_Picados.mp3", "art": "assets/cover7.jpg" },
+            { "id": 8, "t": "El Baile de la Victoria", "file": "assets/08_Baile_Victoria.mp3", "art": "assets/cover8.jpg" },
+            { "id": 9, "t": "Medikit para el Alma", "file": "assets/09_Medikit_Alma.mp3", "art": "assets/cover9.jpg" },
+            { "id": 10, "t": "El Salto del Comandante", "file": "assets/10_Salto_Gerbi.mp3", "art": "assets/cover10.jpg" },
+            { "id": 11, "t": "Victoria Magistral", "file": "assets/11_Victoria_Magistral.mp3", "art": "assets/cover11.jpg" },
+            { "id": 12, "t": "GG Patrulla", "file": "assets/12_GG_Patrulla.mp3", "art": "assets/cover12.jpg" }
+        ];
+
+        let index = -1;
+        const audio = document.getElementById('audioElement');
+
+        function render() {
+            const list = document.getElementById('songList');
+            list.innerHTML = "";
+            tracks.forEach((track, i) => {
+                const card = document.createElement('div');
+                card.className = `song-card ${i === index ? 'playing' : ''}`;
+                card.innerHTML = `
+                    <div class="song-art-box">
+                        <img src="${track.art}" alt="">
+                    </div>
+                    <div class="song-info-row">
+                        <div class="song-text">
+                            <div class="song-title">${track.t}</div>
+                            <div class="song-artist">TRACK #${track.id}</div>
+                        </div>
+                        <button class="btn-download" onclick="event.stopPropagation(); downloadTrack('${track.file}', '${track.t}.mp3')">DESCARGAR</button>
+                    </div>
+                `;
+                card.onclick = () => play(i);
+                list.appendChild(card);
+            });
+        }
+
+        async function downloadTrack(url, filename) {
+            // Mobile usually handles <a download> fine, or new tab. FileSystemAccess is desktop mainly.
+            console.log("Downloading", filename);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function play(i) {
+            index = i;
+            const song = tracks[i];
+            audio.src = song.file;
+            document.getElementById('pTitle').innerText = song.t;
+            document.getElementById('pArt').src = song.art;
+            document.getElementById('playerBar').classList.add('active');
+            document.getElementById('playBtn').innerText = '⏸';
+            audio.play();
+            render();
+        }
+
+        function toggle() {
+            if (audio.paused) { audio.play(); document.getElementById('playBtn').innerText = '⏸'; }
+            else { audio.pause(); document.getElementById('playBtn').innerText = '▶'; }
+        }
+
+        function next() { play((index + 1) % tracks.length); }
+        function prev() { play((index - 1 + tracks.length) % tracks.length); }
+        function seek(e) { const pct = e.offsetX / e.currentTarget.offsetWidth; audio.currentTime = pct * audio.duration; }
+
+        audio.ontimeupdate = () => {
+            const pct = (audio.currentTime / audio.duration) * 100;
+            document.getElementById('pHandle').style.width = pct + "%";
+            document.getElementById('curT').innerText = fmt(audio.currentTime);
+            if (audio.duration) document.getElementById('dur').innerText = fmt(audio.duration);
+        };
+
+        function fmt(s) {
+            const m = Math.floor(s / 60);
+            const sec = Math.floor(s % 60);
+            return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        render();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div id="results">Calculating...</div>
+    <script>
+        const files = [
+            "assets/01_La_Patrulla_Canina.mp3",
+            "assets/02_Antonio_Rey_Loot.mp3",
+            "assets/03_Rioseras_Tormenta.mp3",
+            "assets/04_Murciano_Pro_Kills.mp3",
+            "assets/05_Gerbi_Loco.mp3",
+            "assets/06_Battle_Bus.mp3",
+            "assets/07_Pisos_Picados.mp3",
+            "assets/08_Baile_Victoria.mp3",
+            "assets/09_Medikit_Alma.mp3",
+            "assets/10_Salto_Gerbi.mp3",
+            "assets/11_Victoria_Magistral.mp3",
+            "assets/12_GG_Patrulla.mp3"
+        ];
+
+        const results = [];
+        let loaded = 0;
+
+        function fmt(s) {
+            const m = Math.floor(s / 60);
+            const sec = Math.floor(s % 60);
+            return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        files.forEach(file => {
+            const audio = new Audio(file);
+            audio.addEventListener('loadedmetadata', () => {
+                results.push(`${file}: ${fmt(audio.duration)}`);
+                loaded++;
+                checkDone();
+            });
+            audio.addEventListener('error', () => {
+                results.push(`${file}: Error`);
+                loaded++;
+                checkDone();
+            });
+        });
+
+        function checkDone() {
+            if (loaded === files.length) {
+                // Sort to maintain order
+                const sorted = files.map(f => {
+                    const res = results.find(r => r.startsWith(f));
+                    return res || `${f}: Not Found`;
+                });
+                document.getElementById('results').innerText = sorted.join('\n');
+            }
+        }
+    </script>
+</body>
+
+</html>

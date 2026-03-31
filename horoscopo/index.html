@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zodiaco Neon con Iconos</title>
+
+<style>
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: radial-gradient(circle at center, #534d85, #4e45a9, #0d0d1b);
+        color: #fff;
+        margin: 0;
+        padding: 40px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #a78bfa;
+        text-shadow: 0 0 20px #7c3aed;
+        font-size: 2.5em;
+        letter-spacing: 2px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+        max-width: 900px;
+        margin: auto;
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(167, 139, 250, 0.4);
+        padding: 25px;
+        border-radius: 14px;
+        text-align: center;
+        transition: 0.35s;
+        backdrop-filter: blur(6px);
+        box-shadow: 0 0 12px rgba(167, 139, 250, 0.2);
+    }
+
+    .card:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 0 25px rgba(167, 139, 250, 0.7), 0 0 40px rgba(99, 102, 241, 0.4);
+        border-color: #c4b5fd;
+    }
+
+    a {
+        color: #c4b5fd;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-decoration: none;
+        text-shadow: 0 0 10px #7c3aed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    a:hover {
+        color: #ffffff;
+    }
+
+    .emoji {
+        font-size: 1.5em;
+    }
+</style>
+</head>
+<body>
+
+<h1>Signos del Zodiaco</h1>
+
+<div class="grid">
+    <div class="card"><a href="https://horoscopo-diario.es/aries" target="_blank"><span class="emoji">♈</span> Aries</a></div>
+    <div class="card"><a href="https://horoscopo-diario.es/tauro" target="_blank"><span class="emoji">♉</span> Tauro</a></div>
+    <div class="card"><a href="https://horoscopo-diario.es/geminis" target="_blank"><span class="emoji">♊</span> Géminis</a></div>
+    <div class="card"><a href="https://horoscopo-diario.es/cancer" target="_blank"><span class="emoji">♋</span> Cáncer</a></div>
+    <div class="card"><a href="https://horoscopo-diario.es/leo" target="_blank"><span class="emoji">♌</span> Leo</a></div>
+    <div class="card"><a href="https://horoscopo-diario.es/virgo" target="_blank"><span class="emoji">♍</span> Virgo</a></div>
+    <div class="card"><a href="https://horoscopo-diario.es/libra" target="_blank"><span class="emoji">♎</span> Libra</a></div>
+    <div class="card"><a href="https://horoscopo-diario.es/escorpio" target="_blank"><span class="emoji">♏</span> Escorpio</a></div>
+    <div class="card"><a href="https://horoscopo-diario.es/sagitario" target="_blank"><span class="emoji">♐</span> Sagitario</a></div>
+    <div class="card"><a href="https://horoscopo-diario.es/capricornio" target="_blank"><span class="emoji">♑</span> Capricornio</a></div>
+    <div class="card"><a href="https://horoscopo-diario.es/acuario" target="_blank"><span class="emoji">♒</span> Acuario</a></div>
+    <div class="card"><a href="https://horoscopo-diario.es/piscis" target="_blank"><span class="emoji">♓</span> Piscis</a></div>
+</div>
+
+</body>
+</html>
+

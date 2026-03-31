@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Canciones con Suno API</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+        form { display: flex; flex-direction: column; }
+        input, textarea, button { margin-bottom: 10px; padding: 8px; }
+        #status { margin-top: 20px; color: blue; }
+        #audioPlayer { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Crear una Canción con Suno API</h1>
+    <p>Esta página usa la API no oficial de Suno (gcui-art/suno-api) para generar música. Asegúrate de que la API esté corriendo localmente en <code>C:\sunoapi\suno-api</code> o ajusta la URL en el código. Necesitas tu cookie de Suno.ai.<grok-card data-id="49c951" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card></p>
+    
+    <form id="songForm">
+        <label for="cookie">Cookie de Suno.ai:</label>
+        <input type="text" id="cookie" required placeholder="Pega tu cookie aquí">
+        
+        <label for="prompt">Descripción de la canción (prompt):</label>
+        <textarea id="prompt" required placeholder="Ej: Una canción pop alegre sobre el verano"></textarea>
+        
+        <label for="instrumental">
+            <input type="checkbox" id="instrumental"> Generar versión instrumental
+        </label>
+        
+        <button type="submit">Generar Canción</button>
+    </form>
+    
+    <div id="status"></div>
+    <div id="audioPlayer"></div>
+
+    <script>
+        const API_BASE = 'C:\sunoapi\suno-api'; // Cambia si la API está en otro host
+        
+        const form = document.getElementById('songForm');
+        const statusDiv = document.getElementById('status');
+        const audioPlayerDiv = document.getElementById('audioPlayer');
+        
+        let songIds = [];
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            statusDiv.textContent = 'Generando...';
+            audioPlayerDiv.innerHTML = '';
+            
+            const cookie = document.getElementById('cookie').value;
+            const prompt = document.getElementById('prompt').value;
+            const instrumental = document.getElementById('instrumental').checked;
+            
+            try {
+                // Generar la canción
+                const generateResponse = await fetch(`${API_BASE}/generate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Cookie': cookie
+                    },
+                    body: JSON.stringify({
+                        prompt: prompt,
+                        make_instrumental: instrumental,
+                        wait_audio: false // No esperar para no bloquear, polling en su lugar
+                    })
+                });
+                
+                if (!generateResponse.ok) {
+                    throw new Error('Error al generar: ' + generateResponse.statusText);
+                }
+                
+                const data = await generateResponse.json();
+                songIds = data.map(clip => clip.id); // Asume que devuelve array de clips con IDs
+                statusDiv.textContent = 'Canción generada. Esperando audio... IDs: ' + songIds.join(', ');
+                
+                // Iniciar polling para verificar estado
+                checkStatus(cookie);
+            } catch (error) {
+                statusDiv.textContent = 'Error: ' + error.message;
+            }
+        });
+        
+        async function checkStatus(cookie) {
+            const idsParam = songIds.join(',');
+            try {
+                const getResponse = await fetch(`${API_BASE}/get?ids=${idsParam}`, {
+                    headers: {
+                        'Cookie': cookie
+                    }
+                });
+                
+                if (!getResponse.ok) {
+                    throw new Error('Error al obtener estado');
+                }
+                
+                const songs = await getResponse.json();
+                const allReady = songs.every(song => song.status === 'complete' && song.audio_url);
+                
+                if (allReady) {
+                    statusDiv.textContent = '¡Canción lista!';
+                    songs.forEach((song, index) => {
+                        const audio = document.createElement('audio');
+                        audio.controls = true;
+                        audio.src = song.audio_url;
+                        audioPlayerDiv.appendChild(audio);
+                        const p = document.createElement('p');
+                        p.textContent = `Clip ${index + 1}: ${song.title}`;
+                        audioPlayerDiv.appendChild(p);
+                    });
+                } else {
+                    statusDiv.textContent = 'Aún procesando...';
+                    setTimeout(() => checkStatus(cookie), 5000); // Verificar cada 5 segundos
+                }
+            } catch (error) {
+                statusDiv.textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

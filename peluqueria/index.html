@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peluquería Rocío Salcedo | El cariño de siempre</title>
+    <meta name="description"
+        content="Peluquería Rocío Salcedo en Tudela de Duero: Ven a vernos y siéntete como en casa. Trato familiar y cercano en nuestro barrio.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+
+<body>
+
+    <nav>
+        <a href="#inicio" class="logo">
+            <img src="logo.png" alt="Peluquería Rocío Salcedo Logo">
+        </a>
+        <div class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#sobre-mi">Sobre Rocío</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#galeria">Galería</a>
+            <a href="#consejos">Consejos</a>
+            <a href="https://rioseras007.github.io/Amazon/topbelleza.html" target="_blank">Productos de belleza para mujer</a>
+            <a href="#ubicacion">Dónde estamos</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </nav>
+
+    <section id="inicio" class="hero-section">
+        <h1 style="font-size: 3.5rem; margin-bottom: 25px;">Bienvenido a tu <span class="highlight">Casa</span></h1>
+        <p
+            style="font-size: 1.3rem; max-width: 750px; margin: 0 auto 40px; color: var(--text-muted); font-weight: 400;">
+            En la peluquería de <strong>Rocío Salcedo</strong>, nos importa más que solo tu pelo. Nos importa que te
+            sientas escuchado, cuidado y, sobre todo, en familia.
+        </p>
+        <div>
+            <a href="#contacto" class="btn btn-primary">Pásate a vernos</a>
+        </div>
+    </section>
+
+    <section id="sobre-mi" style="background: #fff;">
+        <div class="bio-container">
+            <div class="bio-image">
+                <img src="salon_tools_hero_1772421554593.png" alt="Herramientas de Peluquería">
+            </div>
+            <div class="bio-text">
+                <h2 style="margin-bottom: 25px;">La <span class="highlight">Esencia</span> de nuestro trabajo</h2>
+                <p style="margin-bottom: 20px; font-size: 1.1rem;">"Llevo toda una vida entre tijeras y peines, pero lo
+                    que realmente me apasiona es la gente de mi barrio. Para mí, cada persona que entra por esa puerta
+                    no es solo un cliente, es un vecino y un amigo."</p>
+                <p style="margin-bottom: 20px;">En **Peluquería Rocío Salcedo**, creemos que el corazón de nuestro salón
+                    no son las paredes, sino el trato y la dedicación en cada corte. Por eso, preferimos que nos
+                    conozcas por nuestro trabajo y nuestra sonrisa en persona.</p>
+                <p style="font-style: italic; color: var(--primary); font-weight: 500;">— Rocío Salcedo</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios">
+        <h2 class="section-title">Lo que hacemos <span class="highlight">por ti</span></h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+            <div class="card">
+                <h3 style="margin-bottom: 15px; color: var(--primary);">Corte Amigo</h3>
+                <p style="color: var(--text-muted);">Un corte que te haga sentir tú mismo, charlando tranquilamente y
+                    sin prisas.</p>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom: 15px; color: var(--primary);">Color con Alma</h3>
+                <p style="color: var(--text-muted);">Técnicas suaves para que tu cabello brille con su luz natural.</p>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom: 15px; color: var(--primary);">Peinados Especiales</h3>
+                <p style="color: var(--text-muted);">Para ese bautizo, boda o simplemente porque hoy te apetece verte
+                    mejor.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria" style="background: #fff;">
+        <h2 class="section-title">Inspiración y <span class="highlight">Tendencias 2024/25</span></h2>
+        <p style="text-align: center; max-width: 800px; margin: -30px auto 50px; color: var(--text-muted);">
+            Nos mantenemos al día con las últimas corrientes para que luzcas radiante en tus momentos más especiales.
+            Aquí tienes la estructura de lo que podemos crear para ti.
+        </p>
+
+        <div class="gallery-filters">
+            <button class="filter-btn active" onclick="filterGallery('todos')">Todos</button>
+            <button class="filter-btn" onclick="filterGallery('mujer')">Mujer</button>
+            <button class="filter-btn" onclick="filterGallery('hombre')">Hombre</button>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- MUJER -->
+            <div class="gallery-item mujer">
+                <img src="hair_braid_detail_1772421926757.png" alt="Trenza Boho para Eventos">
+                <div class="gallery-caption">Trenza Boho (Tendencia Boda/Comunión)</div>
+            </div>
+            <div class="gallery-item mujer">
+                <div
+                    style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #faf5f0; color: var(--primary); padding: 40px; text-align: center;">
+                    <span style="font-size: 0.9rem; font-weight: 600;">Ondas Naturales & Semirrecogidos</span>
+                </div>
+                <div class="gallery-caption">Naturalidad y Movimiento</div>
+            </div>
+            <div class="gallery-item mujer">
+                <div
+                    style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #faf5f0; color: var(--primary); padding: 40px; text-align: center;">
+                    <span style="font-size: 0.9rem; font-weight: 600;">Moños Bajos y Nudos Sofisticados</span>
+                </div>
+                <div class="gallery-caption">Elegancia Clásica</div>
+            </div>
+
+            <!-- HOMBRE -->
+            <div class="gallery-item hombre">
+                <div
+                    style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #f0f4fa; color: #4a6fa5; padding: 40px; text-align: center;">
+                    <span style="font-size: 0.9rem; font-weight: 600;">Side Part & Pompadour Moderno</span>
+                </div>
+                <div class="gallery-caption">Corte Pulido para Eventos</div>
+            </div>
+            <div class="gallery-item hombre">
+                <div
+                    style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #f0f4fa; color: #4a6fa5; padding: 40px; text-align: center;">
+                    <span style="font-size: 0.9rem; font-weight: 600;">Taper Fade & Texturas Naturales</span>
+                </div>
+                <div class="gallery-caption">Estilo Moderno y Versátil</div>
+            </div>
+        </div>
+        <p
+            style="text-align: center; margin-top: 50px; color: var(--text-muted); font-size: 0.9rem; font-style: italic;">
+            "Preparamos esta galería para que Rocío pueda añadir aquí las fotos reales de sus clientes, mostrando su
+            auténtico talento sin necesidad de modelos de catálogo."
+        </p>
+    </section>
+
+    <section id="testimonios">
+        <h2 class="section-title">El Rincón del <span class="highlight">Vecino</span></h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div class="card testimonial-card">
+                "Ir a lo de Rocío es como tomarse un café con una hermana. Te deja guapísima y te vas con el corazón
+                contento."
+                <span class="testimonial-author">— María G., vecina de toda la vida</span>
+            </div>
+            <div class="card testimonial-card">
+                "La única persona a la que le confío mi pelo. Sabe exactamente lo que quiero sin que tenga que decirle
+                nada."
+                <span class="testimonial-author">— Juan P., cliente fiel</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" style="background: #fff;">
+        <h2 class="section-title">Dudas <span class="highlight">Frecuentes</span></h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">¿Necesito pedir cita previa?</div>
+                <div class="faq-answer">Es recomendable para asegurarnos de que tenemos todo el tiempo del mundo para
+                    ti, ¡pero siempre puedes asomarte a saludar!</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">¿Qué productos utilizáis?</div>
+                <div class="faq-answer">Solo usamos productos que cuidan la salud de tu cabello. Marcas de confianza y
+                    respetuosas con el medio ambiente.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="consejos" style="background: var(--secondary);">
+        <h2 class="section-title">Consejos para un <span class="highlight">Cabello Sano</span></h2>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <div class="tip-icon">✨</div>
+                <h3>Hidratación Profunda</h3>
+                <p>Usa mascarillas con aceites de coco o argán una vez por semana. Para un extra de brillo, enjuaga
+                    siempre con agua fría al final.</p>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">💆‍♀️</div>
+                <h3>Cuida tu Cuero Cabelludo</h3>
+                <p>Un pelo sano nace de una raíz sana. Masajea suavemente al lavar para activar la circulación y
+                    eliminar impurezas.</p>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">🔥</div>
+                <h3>Protección Térmica</h3>
+                <p>Nunca uses planchas o secadores sin protector térmico. El calor excesivo deshidrata la fibra capilar
+                    y le quita vida.</p>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">🍏</div>
+                <h3>Nutrición Interna</h3>
+                <p>Lo que comes se nota en tu pelo. Incluye aguacates, nueces y verduras verdes para aportar las
+                    vitaminas que tu cabello necesita.</p>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">✂️</div>
+                <h3>Cortes Regulares</h3>
+                <p>Corta las puntas cada 6-8 semanas. Previene que se abran y mantiene la fuerza y el movimiento de tu
+                    melena.</p>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">💤</div>
+                <h3>Cepillado Consciente</h3>
+                <p>Cepilla tu pelo antes de dormir para eliminar restos de polución y distribuir los aceites naturales
+                    de la raíz a las puntas.</p>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">🚿</div>
+                <h3>El Agua a su Temperatura</h3>
+                <p>Evita el agua muy caliente. El agua tibia limpia mejor sin resecar, y un chorro de agua fría al final
+                    regala un brillo espectacular.</p>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">🪮</div>
+                <h3>Desenredado Suave</h3>
+                <p>Con el pelo mojado, usa siempre peines de púas anchas. Empieza por las puntas y sube hacia la raíz
+                    para evitar tirones y roturas.</p>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">🕰️</div>
+                <h3>Espacia el Lavado</h3>
+                <p>No satures tu pelo. Lavarlo un día sí y otro no (o incluso menos) ayuda a que los aceites naturales
+                    mantengan su hidratación.</p>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">☀️</div>
+                <h3>Escudo contra el Sol</h3>
+                <p>Los rayos UV también dañan el cabello. Usa sombreros o productos con filtro solar cuando vayas a
+                    pasar mucho tiempo al aire libre.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="ubicacion">
+        <h2 class="section-title">Encuentra <span class="highlight">tu rincón de confianza</span></h2>
+        <div class="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1490.1585472251346!2d-4.584457476239126!3d41.5866588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd47170067183515%3A0x90f5e7134cc04ffe!2sPeluquer%C3%ADa%20Roc%C3%ADo%20Salcedo!5e0!3m2!1ses!2ses!4v1710000000000!5m2!1ses!2ses"
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        <p style="text-align: center; margin-top: 25px; font-size: 1.1rem; color: var(--text-muted);">Estamos en Calle
+            Calvario 8, Tudela de Duero. ¡Pásate a vernos!</p>
+    </section>
+
+    <section id="contacto" style="text-align: center;">
+        <h2 style="margin-bottom: 30px;">¿Vienes a <span class="highlight">unirte a la familia?</span></h2>
+        <div class="card" style="max-width: 600px; margin: 0 auto;">
+            <p style="margin-bottom: 10px; font-weight: 600; color: var(--primary);">📍 Dónde estamos:</p>
+            <p style="margin-bottom: 20px;">Calle Calvario, 8<br>47320 Tudela de Duero, Valladolid</p>
+
+            <p style="margin-bottom: 10px; font-weight: 600; color: var(--primary);">⏰ Nuestro horario:</p>
+            <ul
+                style="list-style: none; padding: 0; margin-bottom: 30px; color: var(--text-muted); font-size: 0.95rem;">
+                <li>Lunes a Viernes: 10:00 - 20:00</li>
+                <li style="color: var(--primary); font-weight: 600;">(Miércoles cerramos a las 14:00)</li>
+                <li>Sábados: 10:00 - 13:30</li>
+                <li>Domingos: Cerrado</li>
+            </ul>
+
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="https://www.google.com/maps/place/Peluquer%C3%ADa+Roc%C3%ADo+Salcedo/@41.5866588,-4.5831677,17z"
+                    target="_blank" class="btn btn-primary">Ver en el Mapa</a>
+                <a href="tel:+34678325427" class="btn" style="background: #eee; color: var(--text-dark);">Llamar</a>
+            </div>
+        </div>
+    </section>
+
+    <footer
+        style="padding: 50px; text-align: center; font-size: 0.95rem; color: var(--text-muted); border-top: 1px solid rgba(0,0,0,0.05);">
+        <img src="logo.png" alt="Logo" style="height: 40px; margin-bottom: 20px; opacity: 0.8;"><br>
+        &copy; 2026 Peluquería Rocío Salcedo. Hecho con ❤️ para Tudela de Duero.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

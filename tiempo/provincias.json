@@ -1,0 +1,360 @@
+{
+  "pais": "España",
+  "comunidades": [
+    {
+      "nombre": "Galicia",
+      "provincias": [
+        {
+          "nombre": "La Coruña",
+          "latitude": 43.37135,
+          "longitude": -8.396
+        },
+        {
+          "nombre": "Lugo",
+          "latitude": 43.00992,
+          "longitude": -7.55602
+        },
+        {
+          "nombre": "Orense",
+          "latitude": 42.3408,
+          "longitude": -7.8641
+        },
+        {
+          "nombre": "Pontevedra",
+          "latitude": 42.431,
+          "longitude": -8.64435
+        }
+      ]
+    },
+    {
+      "nombre": "Principado de Asturias",
+      "provincias": [
+        {
+          "nombre": "Asturias",
+          "latitude": 43.3614,
+          "longitude": -5.8593
+        }
+      ]
+    },
+    {
+      "nombre": "Cantabria",
+      "provincias": [
+        {
+          "nombre": "Cantabria",
+          "latitude": 43.1828,
+          "longitude": -3.9878
+        }
+      ]
+    },
+    {
+      "nombre": "País Vasco",
+      "provincias": [
+        {
+          "nombre": "Vizcaya",
+          "latitude": 43.2627,
+          "longitude": -2.9253
+        },
+        {
+          "nombre": "Guipúzcoa",
+          "latitude": 43.3183,
+          "longitude": -1.9812
+        },
+        {
+          "nombre": "Álava",
+          "latitude": 42.8467,
+          "longitude": -2.6716
+        }
+      ]
+    },
+    {
+      "nombre": "Comunidad Foral de Navarra",
+      "provincias": [
+        {
+          "nombre": "Navarra",
+          "latitude": 42.8125,
+          "longitude": -1.6458
+        }
+      ]
+    },
+    {
+      "nombre": "La Rioja",
+      "provincias": [
+        {
+          "nombre": "La Rioja",
+          "latitude": 42.2871,
+          "longitude": -2.5396
+        }
+      ]
+    },
+    {
+      "nombre": "Aragón",
+      "provincias": [
+        {
+          "nombre": "Huesca",
+          "latitude": 42.13615,
+          "longitude": -0.4087
+        },
+        {
+          "nombre": "Zaragoza",
+          "latitude": 41.65606,
+          "longitude": -0.87734
+        },
+        {
+          "nombre": "Teruel",
+          "latitude": 40.3456,
+          "longitude": -1.10646
+        }
+      ]
+    },
+    {
+      "nombre": "Cataluña",
+      "provincias": [
+        {
+          "nombre": "Lérida",
+          "latitude": 4.86242,
+          "longitude": -74.90977
+        },
+        {
+          "nombre": "Gerona",
+          "latitude": 15.6065,
+          "longitude": 120.5978
+        },
+        {
+          "nombre": "Barcelona",
+          "latitude": 41.38879,
+          "longitude": 2.15899
+        },
+        {
+          "nombre": "Tarragona",
+          "latitude": 41.11905,
+          "longitude": 1.24544
+        }
+      ]
+    },
+    {
+      "nombre": "Comunidad Valenciana",
+      "provincias": [
+        {
+          "nombre": "Castellón",
+          "latitude": 39.98567,
+          "longitude": -0.04935
+        },
+        {
+          "nombre": "Valencia",
+          "latitude": 39.47391,
+          "longitude": -0.37966
+        },
+        {
+          "nombre": "Alicante",
+          "latitude": 38.34517,
+          "longitude": -0.48149
+        }
+      ]
+    },
+    {
+      "nombre": "Región de Murcia",
+      "provincias": [
+        {
+          "nombre": "Murcia",
+          "latitude": 37.9922,
+          "longitude": -1.1307
+        }
+      ]
+    },
+    {
+      "nombre": "Islas Baleares",
+      "provincias": [
+        {
+          "nombre": "Baleares",
+          "latitude": 39.6953,
+          "longitude": 3.0176
+        }
+      ]
+    },
+    {
+      "nombre": "Castilla y León",
+      "provincias": [
+        {
+          "nombre": "León",
+          "latitude": 42.60003,
+          "longitude": -5.57032
+        },
+        {
+          "nombre": "Palencia",
+          "latitude": 42.00955,
+          "longitude": -4.52406
+        },
+        {
+          "nombre": "Burgos",
+          "latitude": 42.34106,
+          "longitude": -3.70184
+        },
+        {
+          "nombre": "Zamora",
+          "latitude": 41.50633,
+          "longitude": -5.74456
+        },
+        {
+          "nombre": "Valladolid",
+          "latitude": 41.65518,
+          "longitude": -4.72372
+        },
+        {
+          "nombre": "Soria",
+          "latitude": 41.76401,
+          "longitude": -2.46883
+        },
+        {
+          "nombre": "Salamanca",
+          "latitude": 40.96882,
+          "longitude": -5.66388
+        },
+        {
+          "nombre": "Ávila",
+          "latitude": 40.65724,
+          "longitude": -4.69951
+        },
+        {
+          "nombre": "Segovia",
+          "latitude": 40.94808,
+          "longitude": -4.11839
+        }
+      ]
+    },
+    {
+      "nombre": "Comunidad de Madrid",
+      "provincias": [
+        {
+          "nombre": "Madrid",
+          "latitude": 40.4165,
+          "longitude": -3.70256
+        }
+      ]
+    },
+    {
+      "nombre": "Castilla-La Mancha",
+      "provincias": [
+        {
+          "nombre": "Guadalajara",
+          "latitude": 40.62862,
+          "longitude": -3.16185
+        },
+        {
+          "nombre": "Cuenca",
+          "latitude": 40.06667,
+          "longitude": -2.13333
+        },
+        {
+          "nombre": "Toledo",
+          "latitude": 39.8581,
+          "longitude": -4.02263
+        },
+        {
+          "nombre": "Ciudad Real",
+          "latitude": 38.98626,
+          "longitude": -3.92907
+        },
+        {
+          "nombre": "Albacete",
+          "latitude": 38.99424,
+          "longitude": -1.85643
+        }
+      ]
+    },
+    {
+      "nombre": "Extremadura",
+      "provincias": [
+        {
+          "nombre": "Cáceres",
+          "latitude": 39.47649,
+          "longitude": -6.37224
+        },
+        {
+          "nombre": "Badajoz",
+          "latitude": 38.87789,
+          "longitude": -6.97061
+        }
+      ]
+    },
+    {
+      "nombre": "Andalucía",
+      "provincias": [
+        {
+          "nombre": "Huelva",
+          "latitude": 37.26638,
+          "longitude": -6.94004
+        },
+        {
+          "nombre": "Sevilla",
+          "latitude": 37.38283,
+          "longitude": -5.97317
+        },
+        {
+          "nombre": "Córdoba",
+          "latitude": 37.89155,
+          "longitude": -4.77275
+        },
+        {
+          "nombre": "Jaén",
+          "latitude": 37.76922,
+          "longitude": -3.79028
+        },
+        {
+          "nombre": "Cádiz",
+          "latitude": 36.52672,
+          "longitude": -6.2891
+        },
+        {
+          "nombre": "Málaga",
+          "latitude": 36.72016,
+          "longitude": -4.42034
+        },
+        {
+          "nombre": "Granada",
+          "latitude": 37.18817,
+          "longitude": -3.60667
+        },
+        {
+          "nombre": "Almería",
+          "latitude": 36.83814,
+          "longitude": -2.45974
+        }
+      ]
+    },
+    {
+      "nombre": "Ciudad Autónoma de Ceuta",
+      "provincias": [
+        {
+          "nombre": "Ceuta",
+          "latitude": 35.88919,
+          "longitude": -5.32042
+        }
+      ]
+    },
+    {
+      "nombre": "Ciudad Autónoma de Melilla",
+      "provincias": [
+        {
+          "nombre": "Melilla",
+          "latitude": 35.29369,
+          "longitude": -2.93833
+        }
+      ]
+    },
+    {
+      "nombre": "Canarias",
+      "provincias": [
+        {
+          "nombre": "Santa Cruz de Tenerife",
+          "latitude": 28.46824,
+          "longitude": -16.25462
+        },
+        {
+          "nombre": "Las Palmas",
+          "latitude": 8.13623,
+          "longitude": -81.4541
+        }
+      ]
+    }
+  ]
+}

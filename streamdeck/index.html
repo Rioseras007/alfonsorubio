@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream Deck Web</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Menú integrado mediante iframe -->
+<iframe 
+    src="../menu2.html" 
+    id="menu-frame"
+    scrolling="no">
+</iframe>
+
+<style>
+    /* Estilos del iframe del menú */
+    #menu-frame {
+        width: 100%;
+        height: 80px;       /* Ajusta según tu menú */
+        border: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+    }
+
+    /* Bajar un poco el contenido para que no se oculte detrás */
+    body {
+        padding-top: 120px !important; 
+    }
+</style>
+
+
+  <div class="profiles">
+    <select id="profileSelect" onchange="changeProfile()"></select>
+    <button onclick="newProfile()"><i class="bi bi-plus-circle"></i> Nuevo perfil</button>
+    <button onclick="deleteProfile()"><i class="bi bi-trash"></i> Borrar perfil</button>
+  </div>
+
+  <div class="deck" id="deck"></div>
+
+  <div class="config">
+    <h3><i class="bi bi-gear"></i> Configurar botón</h3>
+    <input id="labelInput" placeholder="Texto del botón">
+    <input id="iconInput" placeholder="Icono (ej. <i class='bi bi-music-note'></i> o emoji)">
+    <input id="actionInput" placeholder="URL completa o nombre de mp3">
+    <button onclick="saveConfig()">Guardar</button>
+
+    <div class="emoji-picker">
+      <button type="button" onclick="toggleEmojiPicker()"><i class="bi bi-emoji-sunglasses"></i> Seleccionar Icono</button>
+    </div>
+    <div id="emojiPanel" class="hidden"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

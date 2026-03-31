@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Reproductor de música web estilo Winamp clásico con visualizador de espectro y playlist">
+    <title>Winamp Web Player</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="winamp" class="winamp-container">
+        <!-- ===== MAIN WINDOW ===== -->
+        <div id="main-window" class="main-window">
+            <!-- Title Bar -->
+            <div class="titlebar" id="titlebar">
+                <div class="titlebar-grip"></div>
+                <span class="titlebar-text">WINAMP</span>
+                <div class="titlebar-buttons">
+                    <button id="btn-minimize" class="titlebar-btn" title="Minimize">_</button>
+                    <button id="btn-close" class="titlebar-btn" title="Close">×</button>
+                </div>
+            </div>
+
+            <!-- Visualizer + Track Timer area -->
+            <div class="display-area">
+                <!-- Left section: play state + bitrate info -->
+                <div class="display-left">
+                    <div class="play-state" id="play-state">
+                        <canvas id="play-state-icon" width="20" height="18"></canvas>
+                    </div>
+                    <div class="timer" id="timer">
+                        <span class="timer-digit" id="timer-min1">0</span>
+                        <span class="timer-digit" id="timer-min2">0</span>
+                        <span class="timer-colon">:</span>
+                        <span class="timer-digit" id="timer-sec1">0</span>
+                        <span class="timer-digit" id="timer-sec2">0</span>
+                    </div>
+                </div>
+
+                <!-- Visualizer -->
+                <div class="visualizer-container">
+                    <canvas id="visualizer" width="152" height="32"></canvas>
+                </div>
+
+                <!-- Track info marquee -->
+                <div class="track-info-area">
+                    <div class="track-marquee" id="track-marquee">
+                        <span id="track-title">*** WINAMP WEB PLAYER ***</span>
+                    </div>
+                </div>
+
+                <!-- Bitrate / Frequency / Channels -->
+                <div class="tech-info">
+                    <div class="tech-item">
+                        <span class="tech-value" id="info-kbps">---</span>
+                        <span class="tech-label">kbps</span>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-value" id="info-khz">--</span>
+                        <span class="tech-label">kHz</span>
+                    </div>
+                    <div class="channels-info">
+                        <span id="info-mono" class="channel-label dim">mono</span>
+                        <span id="info-stereo" class="channel-label dim">stereo</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seek Bar -->
+            <div class="seekbar-container">
+                <input type="range" id="seekbar" class="seekbar" min="0" max="1000" value="0" step="1">
+            </div>
+
+            <!-- Volume & Balance -->
+            <div class="controls-row">
+                <div class="volume-container">
+                    <label class="slider-label" for="volume">Vol</label>
+                    <input type="range" id="volume" class="volume-slider" min="0" max="100" value="75">
+                </div>
+                <div class="balance-container">
+                    <label class="slider-label" for="balance">Bal</label>
+                    <input type="range" id="balance" class="balance-slider" min="-50" max="50" value="0">
+                </div>
+            </div>
+
+            <!-- Transport Controls -->
+            <div class="transport-controls">
+                <button id="btn-prev" class="transport-btn" title="Previous">
+                    <svg viewBox="0 0 24 24" width="16" height="16">
+                        <polygon points="4,4 4,20 6,20 6,4" />
+                        <polygon points="6,12 18,4 18,20" />
+                    </svg>
+                </button>
+                <button id="btn-play" class="transport-btn" title="Play">
+                    <svg viewBox="0 0 24 24" width="16" height="16">
+                        <polygon points="6,4 6,20 20,12" />
+                    </svg>
+                </button>
+                <button id="btn-pause" class="transport-btn" title="Pause">
+                    <svg viewBox="0 0 24 24" width="16" height="16">
+                        <rect x="5" y="4" width="5" height="16" />
+                        <rect x="14" y="4" width="5" height="16" />
+                    </svg>
+                </button>
+                <button id="btn-stop" class="transport-btn" title="Stop">
+                    <svg viewBox="0 0 24 24" width="16" height="16">
+                        <rect x="5" y="5" width="14" height="14" />
+                    </svg>
+                </button>
+                <button id="btn-next" class="transport-btn" title="Next">
+                    <svg viewBox="0 0 24 24" width="16" height="16">
+                        <polygon points="6,4 6,20 18,12" />
+                        <polygon points="18,4 18,20 20,20 20,4" />
+                    </svg>
+                </button>
+                <button id="btn-eject" class="transport-btn eject-btn" title="Open file">
+                    <svg viewBox="0 0 24 24" width="14" height="14">
+                        <polygon points="12,4 4,14 20,14" />
+                        <rect x="4" y="17" width="16" height="3" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Extra buttons -->
+            <div class="extra-controls">
+                <button id="btn-shuffle" class="extra-btn" title="Shuffle">SHUFFLE</button>
+                <button id="btn-repeat" class="extra-btn" title="Repeat">REPEAT</button>
+                <button id="btn-eq" class="extra-btn" title="Equalizer">EQ</button>
+                <button id="btn-pl" class="extra-btn active" title="Playlist">PL</button>
+            </div>
+        </div>
+
+        <!-- ===== PLAYLIST WINDOW ===== -->
+        <div id="playlist-window" class="playlist-window">
+            <div class="playlist-titlebar">
+                <span class="playlist-title-text">WINAMP PLAYLIST</span>
+                <button id="btn-pl-close" class="titlebar-btn" title="Close Playlist">×</button>
+            </div>
+            <ul id="playlist" class="playlist-list">
+                <!-- Populated by JS -->
+            </ul>
+            <div class="playlist-footer">
+                <span id="playlist-info">0 tracks</span>
+                <span id="playlist-total-time">0:00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden audio element -->
+    <audio id="audio-player" preload="auto"></audio>
+    <!-- Hidden file input for loading files -->
+    <input type="file" id="file-input" accept="audio/*" multiple style="display:none">
+
+    <script src="app.js"></script>
+</body>
+
+</html>

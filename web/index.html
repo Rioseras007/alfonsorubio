@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA PATRULLA CANINA | VICTORIA MAGISTRAL</title>
+    <script>
+        // Redirect to mobile version if on mobile device, unless desktop mode is requested
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            if (!window.location.search.includes('desktop=1')) {
+                window.location.href = "mobile.html";
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Bebas+Neue&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #854CE6;
+            /* Fortnite Purple */
+            --secondary: #00F2FF;
+            /* Cyan */
+            --gold: #FFD700;
+            --bg-dark: #050709;
+            --bg-card: #0f1219;
+            --glass-bg: rgba(15, 18, 25, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #FFFFFF;
+            --text-muted: #70757a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image:
+                radial-gradient(at 0% 0%, rgba(133, 76, 230, 0.3) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(0, 242, 255, 0.2) 0px, transparent 50%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            padding-bottom: 100px;
+        }
+
+        /* Splash Screen */
+        #splashScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        #splashScreen h1 {
+            font-family: 'Bebas Neue';
+            font-size: clamp(3rem, 10vw, 8rem);
+            color: var(--gold);
+            text-shadow: 0 0 50px var(--primary);
+            margin-bottom: 2rem;
+            letter-spacing: 10px;
+        }
+
+        .btn-start {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 4rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 1.5rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(133, 76, 230, 0.5);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-start:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 242, 255, 0.6);
+        }
+
+        /* Main Content Ready State */
+        .content-wrapped {
+            opacity: 0;
+            filter: blur(20px);
+            transition: 1.2s ease-out;
+        }
+
+        .content-wrapped.ready {
+            opacity: 1;
+            filter: blur(0);
+        }
+
+        /* Hero & Squad */
+        .promo-hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .promo-hero h1 {
+            font-family: 'Bebas Neue';
+            font-size: 5rem;
+            color: var(--gold);
+            line-height: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .promo-subtitle {
+            color: var(--secondary);
+            letter-spacing: 5px;
+            font-weight: 700;
+            margin-bottom: 4rem;
+        }
+
+        .squad-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+
+        .squad-member {
+            background: var(--glass-bg);
+            padding: 2.5rem 1.5rem;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .squad-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary);
+        }
+
+        .squad-member:nth-child(even)::before {
+            background: var(--secondary);
+        }
+
+        .squad-member h3 {
+            color: var(--gold);
+            font-family: 'Bebas Neue';
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .squad-member p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Music Hub */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .song-list {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 2rem;
+        }
+
+        .song-card {
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .song-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            background: #1a1e26;
+            z-index: 10;
+        }
+
+        .song-card.playing {
+            border-color: var(--gold);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            background: rgba(255, 215, 0, 0.03);
+        }
+
+        /* Fixed Cover Art */
+        .song-art-box {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .song-art-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Ensures the whole image is visible without cropping */
+            display: block;
+            transition: filter 0.4s ease;
+        }
+
+        .song-card:hover .song-art-box img {
+            filter: grayscale(100%);
+        }
+
+        .song-art-box i {
+            font-size: 4rem;
+            opacity: 0.2;
+            color: var(--gold);
+        }
+
+        .song-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .song-text {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .song-title {
+            font-weight: 900;
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 0.2rem;
+            line-height: 1.2;
+        }
+
+        .song-artist {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Download Button */
+        /* Download Button */
+        .btn-download {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            color: var(--gold);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .btn-download:hover {
+            background: var(--gold);
+            color: black;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Merch Section */
+        .merch-hero {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(133, 76, 230, 0.1) 100%);
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 4rem;
+        }
+
+        .merch-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            padding: 3rem;
+            border-radius: 40px;
+            border: 1px solid var(--gold);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .merch-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .merch-title {
+            font-family: 'Bebas Neue';
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            position: relative;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .merch-desc {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .btn-buy {
+            background: var(--gold);
+            color: black;
+            padding: 1.2rem 3rem;
+            font-family: 'Bebas Neue';
+            font-size: 1.8rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-buy:hover {
+            transform: scale(1.05);
+            background: white;
+            box-shadow: 0 10px 50px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Premium Player Bar */
+        .player-bar {
+            position: fixed;
+            top: 110px;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 90;
+            /* Below header (z-index 100) */
+            border-bottom: 1px solid var(--primary);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-20px);
+            transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .player-bar.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .player-track {
+            width: 350px;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .player-art {
+            width: 56px;
+            height: 56px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid var(--glass-border);
+        }
+
+        .player-info h3 {
+            font-size: 1rem;
+            font-weight: 900;
+        }
+
+        .player-info p {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .player-controls {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-btns {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .btn-ctrl {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.8rem;
+            transition: 0.2s;
+        }
+
+        .btn-ctrl:hover {
+            color: var(--secondary);
+            transform: scale(1.2);
+        }
+
+        .btn-play-big {
+            width: 48px;
+            height: 48px;
+            background: white;
+            color: black;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-wrapper {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .progress-area {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-handle {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* Visualizer Canvas */
+        .vfx-container {
+            position: absolute;
+            top: 100%;
+            /* Position right below the player bar */
+            left: 0;
+            width: 100%;
+            height: 80px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        #vfxCanvas {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 10px var(--primary));
+            opacity: 0.6;
+        }
+
+        header {
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: var(--bg-dark);
+            z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .search-input {
+            background: #111;
+            border: 1px solid var(--glass-border);
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            color: white;
+            width: 300px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
+
+        .btn-vfx {
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: 0.3s;
+            filter: grayscale(1) blur(1px);
+        }
+
+        .btn-vfx.active {
+            opacity: 1;
+            filter: grayscale(0) blur(0);
+            transform: scale(1.2);
+            text-shadow: 0 0 20px var(--gold);
+        }
+
+        .volume-wrapper {
+            width: 350px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px;
+        }
+
+        footer {
+            padding: 4rem;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .modern-social {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            border: 1px solid var(--glass-border);
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: var(--gold);
+            color: black;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+            border-color: var(--gold);
+        }
+
+        @media (max-width: 900px) {
+
+            .player-track,
+            .volume-wrapper {
+                display: none;
+            }
+
+            .player-controls {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="splashScreen">
+        <h1 id="splashTitle">VICTORIA MAGISTRAL</h1>
+        <button class="btn-start" onclick="initExperience()">INICIAR MISIÓN</button>
+    </div>
+
+    <div class="content-wrapped" id="mainContent">
+        <header>
+            <div style="font-family: 'Bebas Neue'; font-size: 2rem; color: var(--gold); letter-spacing: 3px;">
+                <span style="color:white">PATRULLA</span> CANINA
+            </div>
+            <input type="text" class="search-input" placeholder="BUSCAR ARCHIVOS DE AUDIO..." id="searchInput">
+        </header>
+
+        <section class="promo-hero">
+            <h1>EL ÁLBUM DEFINITIVO</h1>
+            <p class="promo-subtitle">LOS 4 DEL SQUAD • TEMPORADA 2026</p>
+            <div class="squad-grid">
+                <div class="squad-member">
+                    <h3>ANTONIO</h3>
+                    <p>El Rey del Loot. Especialista en suministros legendarios y puntería de oro.</p>
+                </div>
+                <div class="squad-member">
+                    <h3>RIOSERAS</h3>
+                    <p>El estratega táctico. Nadie corre más rápido cuando la tormenta acecha.</p>
+                </div>
+                <div class="squad-member">
+                    <h3>MURCIANO</h3>
+                    <p>La máquina de kills. Frío y letal. El terror de Pisos Picados.</p>
+                </div>
+                <div class="squad-member">
+                    <h3>GERBI</h3>
+                    <p>El Comandante Loco. Tácticas impredecibles para victorias magistrales.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="song-list" id="songList"></div>
+        </div>
+
+        <section class="merch-hero">
+            <div class="merch-content">
+                <h2 class="merch-title">EDICIÓN COLECCIONISTA</h2>
+                <p class="merch-desc">Consigue el disco físico en CD + DVD con las mejores partidas en HD. Incluye
+                    póster exclusivo y
+                    pegatinas del squad.</p>
+                <a href="coming_soon.html" class="btn-buy">COMPRAR AHORA • 29.99€</a>
+            </div>
+        </section>
+
+        <footer>
+            <div class="modern-social">
+                <a href="https://www.facebook.com/AlfonsoRubioRioseras" target="_blank" class="social-link facebook"
+                    title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com" target="_blank" class="social-link instagram" title="Instagram"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://x.com/alfrubrio" target="_blank" class="social-link x-twitter" title="X (Twitter)"><i
+                        class="fab fa-x-twitter"></i></a>
+                <a href="https://www.youtube.com/@AlfonsoRubioRioseras" target="_blank" class="social-link youtube"
+                    title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@alfonsorubio007" target="_blank" class="social-link tiktok"
+                    title="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://discord.com/" target="_blank" class="social-link discord" title="Discord"><i
+                        class="fab fa-discord"></i></a>
+                <a href="https://web.whatsapp.com/" target="_blank" class="social-link whatsapp" title="WhatsApp"><i
+                        class="fab fa-whatsapp"></i></a>
+                <a href="https://www.linkedin.com/in/alfonsorubiorioseras/" target="_blank" class="social-link linkedin"
+                    title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/Rioseras007" target="_blank" class="social-link github" title="GitHub"><i
+                        class="fab fa-github"></i></a>
+            </div>
+            <p>© 2026 LA PATRULLA CANINA | SQUAD RECORDS PRO</p>
+        </footer>
+
+        <div class="player-bar" id="playerBar">
+            <div class="vfx-container">
+                <canvas id="vfxCanvas"></canvas>
+            </div>
+            <div class="player-track">
+                <img src="" alt="" class="player-art" id="playerArt">
+                <div class="player-info">
+                    <h3 id="pTitle">NOMBRE DE LA MISIÓN</h3>
+                    <p id="pArtist">SQUAD ID</p>
+                </div>
+            </div>
+            <div class="player-controls">
+                <div class="control-btns">
+                    <button class="btn-ctrl" onclick="prev()">⏮</button>
+                    <button class="btn-ctrl btn-play-big" onclick="toggle()" id="playBtn">▶</button>
+                    <button class="btn-ctrl" onclick="next()">⏭</button>
+                </div>
+                <div class="progress-wrapper">
+                    <span id="curT">0:00</span>
+                    <div class="progress-area" onclick="seek(event)">
+                        <div class="progress-handle" id="pHandle"></div>
+                    </div>
+                    <span id="dur">0:00</span>
+                </div>
+            </div>
+            <div class="volume-wrapper">
+                <div id="vfxBtn" class="btn-vfx active" onclick="toggleVfx()" title="ACTIVAR ECUALIZADOR">⚡</div>
+                <span style="font-size: 0.8rem; color: var(--gold); font-weight: 900;">VOL</span>
+                <input type="range" min="0" max="1" step="0.05" value="1" oninput="audio.volume = this.value"
+                    style="accent-color: var(--secondary); cursor: pointer;">
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <audio id="audioElement"></audio>
+
+    <script>
+        // TRACKLIST - Updated to manual covers in assets (e.g. 01.jpg, 02.jpg)
+        const tracks = [
+            { "id": 1, "t": "La Patrulla Canina", "file": "assets/01_La_Patrulla_Canina.mp3", "art": "assets/cover1.jpg" },
+            { "id": 2, "t": "Antonio: El Rey del Loot", "file": "assets/02_Antonio_Rey_Loot.mp3", "art": "assets/cover2.jpg" },
+            { "id": 3, "t": "Rioseras: Pánico en la Tormenta", "file": "assets/03_Rioseras_Tormenta.mp3", "art": "assets/cover3.jpg" },
+            { "id": 4, "t": "El Murciano: Máquina de Kills", "file": "assets/04_Murciano_Pro_Kills.mp3", "art": "assets/cover4.jpg" },
+            { "id": 5, "t": "Gerbi: El Comandante Loco", "file": "assets/05_Gerbi_Loco.mp3", "art": "assets/cover5.jpg" },
+            { "id": 6, "t": "Amigos en el Battle Bus", "file": "assets/06_Battle_Bus.mp3", "art": "assets/cover6.jpg" },
+            { "id": 7, "t": "Descenso en Pisos Picados", "file": "assets/07_Pisos_Picados.mp3", "art": "assets/cover7.jpg" },
+            { "id": 8, "t": "El Baile de la Victoria", "file": "assets/08_Baile_Victoria.mp3", "art": "assets/cover8.jpg" },
+            { "id": 9, "t": "Medikit para el Alma", "file": "assets/09_Medikit_Alma.mp3", "art": "assets/cover9.jpg" },
+            { "id": 10, "t": "El Salto del Comandante", "file": "assets/10_Salto_Gerbi.mp3", "art": "assets/cover10.jpg" },
+            { "id": 11, "t": "Victoria Magistral", "file": "assets/11_Victoria_Magistral.mp3", "art": "assets/cover11.jpg" },
+            { "id": 12, "t": "GG Patrulla", "file": "assets/12_GG_Patrulla.mp3", "art": "assets/cover12.jpg" }
+        ];
+
+        let index = -1;
+        let vfxEnabled = true;
+        const audio = document.getElementById('audioElement');
+        const vCanvas = document.getElementById('vfxCanvas');
+        const vCtx = vCanvas.getContext('2d');
+        const main = document.getElementById('mainContent');
+        const splash = document.getElementById('splashScreen');
+
+        function initExperience() {
+            splash.style.opacity = '0';
+            setTimeout(() => {
+                splash.style.display = 'none';
+                main.classList.add('ready');
+            }, 800);
+
+            // Global VFX Loop
+            resize();
+            window.addEventListener('resize', resize);
+            requestAnimationFrame(renderVFX);
+        }
+
+        function render() {
+            const list = document.getElementById('songList');
+            list.innerHTML = "";
+            tracks.forEach((track, i) => {
+                const card = document.createElement('div');
+                card.className = `song-card ${i === index ? 'playing' : ''}`;
+                // Layout: Image on top, then row with text and download button
+                card.innerHTML = `
+                    <div class="song-art-box">
+                        <img src="${track.art}" onerror="this.style.display='none'; this.nextElementSibling.style.opacity='0.2'" alt="">
+                      
+                    </div>
+                    <div class="song-info-row">
+                        <div class="song-text">
+                            <div class="song-title">${track.t}</div>
+                            <div class="song-artist">TRACK #${track.id}</div>
+                        </div>
+                        <button class="btn-download" title="Descargar" onclick="event.stopPropagation(); downloadTrack('${track.file}', '${track.t}.mp3')">DESCARGAR</button>
+                    </div>
+                `;
+                card.onclick = () => play(i);
+                list.appendChild(card);
+            });
+        }
+
+        async function downloadTrack(url, filename) {
+            try {
+                const response = await fetch(url);
+                const blob = await response.blob();
+
+                if (window.showSaveFilePicker) {
+                    try {
+                        const handle = await window.showSaveFilePicker({
+                            suggestedName: filename,
+                            types: [{
+                                description: 'Audio File',
+                                accept: {
+                                    'audio/mpeg': ['.mp3']
+                                }
+                            }],
+                        });
+                        const writable = await handle.createWritable();
+                        await writable.write(blob);
+                        await writable.close();
+                    } catch (err) {
+                        if (err.name === 'AbortError') {
+                            return; // User cancelled
+                        }
+                        throw err; // Re-throw to fallback
+                    }
+                } else {
+                    throw new Error('FileSystemAccess API not supported');
+                }
+            } catch (err) {
+                console.warn('Native save failed, using fallback:', err);
+                // Fallback: classic anchor tag method
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+        }
+
+        function play(i) {
+            index = i;
+            const song = tracks[i];
+            audio.src = song.file;
+            document.getElementById('pTitle').innerText = song.t;
+            document.getElementById('pArtist').innerText = "PATRULLA CANINA OFFICIAL";
+            document.getElementById('playerArt').src = song.art;
+            document.getElementById('playerBar').classList.add('active');
+            document.getElementById('playBtn').innerText = '⏸';
+
+            audio.play().catch(e => console.log("Unlock needed"));
+            render();
+            // Focus on player
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggle() {
+            if (audio.paused) { audio.play(); document.getElementById('playBtn').innerText = '⏸'; }
+            else { audio.pause(); document.getElementById('playBtn').innerText = '▶'; }
+        }
+
+        function next() { play((index + 1) % tracks.length); }
+        function prev() { play((index - 1 + tracks.length) % tracks.length); }
+        function seek(e) { const pct = e.offsetX / e.currentTarget.offsetWidth; audio.currentTime = pct * audio.duration; }
+
+        function toggleVfx() {
+            vfxEnabled = !vfxEnabled;
+            document.getElementById('vfxBtn').classList.toggle('active', vfxEnabled);
+        }
+
+        function resize() {
+            vCanvas.width = vCanvas.offsetWidth;
+            vCanvas.height = vCanvas.offsetHeight;
+        }
+
+        function renderVFX() {
+            requestAnimationFrame(renderVFX);
+            vCtx.clearRect(0, 0, vCanvas.width, vCanvas.height);
+            if (!vfxEnabled) return;
+
+            const bars = 60;
+            const barW = vCanvas.width / bars;
+            const time = Date.now() / 1000;
+
+            for (let i = 0; i < bars; i++) {
+                let h = 0;
+                if (!audio.paused) {
+                    // Premium Wave Visualizer (Simulated logic but highly attractive)
+                    h = (Math.sin(time * 12 + i * 0.4) + 1) * 0.5 * vCanvas.height * 0.9;
+                    h += Math.sin(time * 5 + i * 0.8) * 10;
+                    h += Math.random() * 5;
+                } else {
+                    h = (Math.sin(time * 3 + i * 0.2) + 1) * 3 + 2;
+                }
+
+                const grad = vCtx.createLinearGradient(0, vCanvas.height, 0, 0);
+                grad.addColorStop(0, 'rgba(133, 76, 230, 0.1)');
+                grad.addColorStop(1, i % 2 === 0 ? 'var(--primary)' : 'var(--secondary)');
+
+                vCtx.fillStyle = grad;
+                vCtx.beginPath();
+                vCtx.roundRect(i * barW, vCanvas.height - h, barW - 3, h, [5, 5, 0, 0]);
+                vCtx.fill();
+            }
+        }
+
+        audio.ontimeupdate = () => {
+            const pct = (audio.currentTime / audio.duration) * 100;
+            document.getElementById('pHandle').style.width = pct + "%";
+            document.getElementById('curT').innerText = fmt(audio.currentTime);
+            if (audio.duration) document.getElementById('dur').innerText = fmt(audio.duration);
+        };
+
+        function fmt(s) {
+            const m = Math.floor(s / 60);
+            const sec = Math.floor(s % 60);
+            return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        // Initial render
+        render();
+
+        // Search Logic
+        document.getElementById('searchInput').oninput = (e) => {
+            const val = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.song-card');
+            cards.forEach((card, i) => {
+                const title = tracks[i].t.toLowerCase();
+                card.style.display = title.includes(val) ? 'block' : 'none';
+            });
+        };
+    </script>
+</body>
+
+</html>
