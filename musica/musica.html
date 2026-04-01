@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Reproductor Sonso Spotify</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  background:linear-gradient(120deg,#121212,#000);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  margin:0;
+  font-family:Arial;
+}
+.festival-lights{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:linear-gradient(120deg,rgba(255,0,150,.15),rgba(0,255,255,.15),rgba(0,255,0,.15));
+  animation:lights 8s linear infinite;
+  mix-blend-mode:screen;
+  pointer-events:none;
+}
+@keyframes lights{from{filter:hue-rotate(0)}to{filter:hue-rotate(360deg)}}
+.spotify-player{
+  width:320px;
+  background:#181818;
+  border-radius:20px;
+  padding:20px;
+  color:white;
+  z-index:2;
+  box-shadow:0 0 30px #1db954;
+}
+.cover img{width:100%;border-radius:15px}
+.controls{display:flex;justify-content:space-around;margin:10px 0}
+.controls button{
+  width:50px;height:50px;border-radius:50%;
+  background:#1db954;border:none;font-size:18px;cursor:pointer;
+}
+input[type=range]{width:100%}
+.playlist div{padding:6px;border-bottom:1px solid #333;cursor:pointer}
+.equalizer{display:flex;justify-content:center;margin-top:8px}
+.equalizer span{
+  width:6px;height:20px;background:#1db954;margin:0 3px;
+  animation:bounce 1s infinite ease-in-out
+}
+@keyframes bounce{0%,100%{height:10px}50%{height:30px}}
+</style>
+</head>
+<body>
+
+<div class="festival-lights"></div>
+
+<div class="spotify-player">
+  <div class="cover"><img id="coverImg" src="cover1.jpg"></div>
+  <h3 id="songTitle">Selecciona una canción</h3>
+  <audio id="audio"></audio>
+  <div class="controls">
+    <button onclick="prev()">⏮</button>
+    <button onclick="togglePlay()">▶️</button>
+    <button onclick="next()">⏭</button>
+  </div>
+  <input type="range" id="progress" value="0">
+  <div class="playlist" id="playlist"></div>
+  <div class="equalizer"><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+
+<script>
+const tracks=[
+  {title:"Tema 1",file:"tema1.mp3",cover:"cover1.jpg"},
+  {title:"Tema 2",file:"tema2.mp3",cover:"cover2.jpg"},
+  {title:"Tema 3",file:"tema3.mp3",cover:"cover3.jpg"},
+  {title:"Tema 4",file:"tema4.mp3",cover:"cover4.jpg"},
+  {title:"Tema 5",file:"tema5.mp3",cover:"cover5.jpg"},
+  {title:"Tema 6",file:"tema6.mp3",cover:"cover6.jpg"},
+  {title:"Tema 7",file:"tema7.mp3",cover:"cover7.jpg"},
+  {title:"Tema 8",file:"tema8.mp3",cover:"cover8.jpg"},
+  {title:"Tema 9",file:"tema9.mp3",cover:"cover9.jpg"},
+  {title:"Tema 10",file:"tema10.mp3",cover:"cover10.jpg"},
+ 
+];
+let current=0;
+const audio=document.getElementById("audio");
+const progress=document.getElementById("progress");
+const playlist=document.getElementById("playlist");
+
+tracks.forEach((t,i)=>{
+  const d=document.createElement("div");
+  d.textContent="🎵 "+t.title;
+  d.onclick=()=>playTrack(i);
+  playlist.appendChild(d);
+});
+
+function playTrack(i){
+  current=i;
+  audio.src=tracks[i].file;
+  document.getElementById("songTitle").innerText=tracks[i].title;
+  document.getElementById("coverImg").src=tracks[i].cover;
+  audio.play();
+}
+function togglePlay(){audio.paused?audio.play():audio.pause()}
+function next(){current=(current+1)%tracks.length;playTrack(current)}
+function prev(){current=(current-1+tracks.length)%tracks.length;playTrack(current)}
+audio.ontimeupdate=()=>progress.value=(audio.currentTime/audio.duration)*100||0;
+progress.oninput=()=>audio.currentTime=(progress.value/100)*audio.duration;
+</script>
+
+</body>
+</html>
