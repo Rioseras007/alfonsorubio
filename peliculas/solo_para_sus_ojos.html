@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solo para sus Ojos (1981) - Dossier Clasificado | 007 Forever</title>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="index.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --paper-bg: #1a1a1a;
+            --paper-text: #d4d4d4;
+            --stamp-red: #d32f2f;
+            --accent-gold: #d4af37;
+            --typewriter-font: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            font-family: var(--typewriter-font);
+            background: linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.95)),
+                url('https://www.transparenttextures.com/patterns/aged-paper.png');
+        }
+
+        .dossier-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 60px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-left: 20px solid #1a1a1a;
+            /* Folder spine */
+            box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.9);
+            position: relative;
+        }
+
+        .classified-header {
+            text-align: left;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .classified-stamp {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--stamp-red);
+            border: 4px solid var(--stamp-red);
+            padding: 10px 30px;
+            transform: rotate(5deg);
+            opacity: 0.8;
+            letter-spacing: 5px;
+            text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .mission-number {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .movie-title {
+            font-size: 4rem;
+            color: #fff;
+            margin: 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-gold);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin: 50px 0;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .section-title {
+            color: var(--accent-gold);
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .info-item {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #333;
+        }
+
+        .info-label {
+            color: var(--accent-gold);
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            color: var(--paper-text);
+            font-size: 1rem;
+        }
+
+        .cast-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 10px 40px;
+        }
+
+        .cast-list li {
+            padding: 10px 0;
+            border-bottom: 1px dashed #444;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .character {
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .actor {
+            color: var(--paper-text);
+        }
+
+        .trivia-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .trivia-list li {
+            padding: 15px;
+            margin: 15px 0;
+            background: rgba(212, 175, 55, 0.03);
+            border-left: 3px solid var(--accent-gold);
+            position: relative;
+            padding-left: 40px;
+            line-height: 1.6;
+        }
+
+        .trivia-list li:before {
+            content: "•";
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            position: absolute;
+            left: 15px;
+            top: 10px;
+        }
+
+        .plot-text {
+            line-height: 2;
+            color: var(--paper-text);
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: var(--accent-gold);
+            color: #000;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 2px;
+            font-weight: 800;
+            margin-top: 40px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .back-button:hover {
+            background: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .poster-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .poster-container img {
+            max-width: 450px;
+            width: 100%;
+            border: 10px solid #fff;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            filter: sepia(0.1) contrast(1.05);
+            transform: rotate(-1deg);
+        }
+    
+        .mission-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .nav-link {
+            text-decoration: none;
+            color: var(--accent-gold);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        .nav-link:hover {
+            color: #fff;
+            transform: translateX(10px);
+        }
+        .nav-link.prev:hover {
+            transform: translateX(-10px);
+        }
+    
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">007 <span>FOREVER</span></a>
+            <nav id="mainNav">
+                <a href="index.html">Inicio</a>
+                <a href="peliculas.html" class="active">Misiones</a>
+                <a href="Ian Fleming.html">Archivo Fleming</a>
+                <a href="moneypenny.html">Moneypenny</a>
+                <a href="q.html">Rama Q</a>
+                <a href="m.html">Jefe MI6</a>
+                <a href="villanos.html">Villanos</a>
+                <a href="coches.html">Vehículos</a>
+                <a href="mujeres.html">Chicas Bond</a>
+                <a href="musica.html">Música</a>
+                <a href="video.html" data-i18n="nav_video">Videoteca</a>
+                <div class="lang-switcher">
+                    <span id="lang-es" class="active">ES</span> | <span id="lang-en">EN</span>
+                </div>
+            </nav>
+        </header>
+
+        <div class="dossier-container">
+            <div class="breadcrumb">
+                <a href="peliculas.html">← Volver al Catálogo de Misiones</a>
+            </div>
+
+            <div class="classified-header">
+                <div class="classified-stamp">TOP SECRET</div>
+                <div class="mission-number">MISIÓN 013 • 1981</div>
+                <h1 class="movie-title">Solo para sus Ojos (1981)</h1>
+                <div class="subtitle">Agente Roger Moore</div>
+            </div>
+
+            <!-- Poster -->
+            <div class="poster-container">
+                <img src="miniaturas/Solo para sus Ojos (1981).jpg" alt="Solo para sus Ojos (1981) Poster">
+            </div>
+
+            <!-- Technical Specifications -->
+            <div class="section">
+                <h2 class="section-title">📋 Especificaciones Técnicas</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">CATEGORÍA</div>
+                        <div class="info-value">HISTORICAL ARCHIVE</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">DIRECTOR</div>
+                        <div class="info-value">John Glen</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">AÑO</div>
+                        <div class="info-value">1981</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">DURACIÓN</div>
+                        <div class="info-value">127 min</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">TAQUILLA</div>
+                        <div class="info-value">$195.3M</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">MÚSICA</div>
+                        <div class="info-value">Bill Conti / Sheena Easton</div>
+                    </div>
+                    <div class="info-item" style="border-right: 4px solid var(--accent-gold);">
+                        <div class="info-label">PREMIOS</div>
+                        <div class="info-value">Oscar/Golden Globe Nominee (Song)</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">IMDb Dossier</div>
+                        <div class="info-value">
+                            <a href="https://www.imdb.com/title/tt0082398/" target="_blank"
+                                style="color: var(--accent-gold); text-decoration: none; font-weight: bold;">
+                                [ VER FICHA EXTERNA ]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission Briefing (Plot) -->
+            <div class="section">
+                <h2 class="section-title">🎯 Informe de Misión</h2>
+                <div class="plot-text">Bond intenta recuperar un sistema de comunicación de submarinos antes de que caiga en manos rusas.</div>
+            </div>
+
+            <!-- Cast -->
+            <div class="section">
+                <h2 class="section-title">🎭 Equipo de Operación</h2>
+                <ul class="cast-list">
+                    <li><span class="character">James Bond</span> <span class="actor">Roger Moore</span></li><li><span class="character">Melina</span> <span class="actor">Carole Bouquet</span></li><li><span class="character">Columbo</span> <span class="actor">Chaim Topol</span></li>
+                </ul>
+            </div>
+
+            <!-- Trivia -->
+            <div class="section">
+                <h2 class="section-title">💎 Información Clasificada</h2>
+                <ul class="trivia-list">
+                    <li>Estilo más serio tras los excesos de Moonraker.</li><li>El coche Citroën 2CV tuvo que ser reforzado para la persecución.</li>
+                </ul>
+            </div>
+
+            
+            <div class="mission-navigation">
+                <a href="moonraker.html" class="nav-link prev">← MISIÓN ANTERIOR</a>
+                <a href="octopussy.html" class="nav-link next">SIGUIENTE MISIÓN →</a>
+            </div>
+        
+            <a href="peliculas.html" class="back-button">← Volver al Catálogo</a>
+        </div>
+    </div>
+
+    <footer
+        style="text-align: center; padding: 60px 0; color: var(--text-dim); border-top: 1px solid var(--glass-border);">
+        <p>© 2026 Proyecto Fan 007 Forever. Solo para fines educativos.</p>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

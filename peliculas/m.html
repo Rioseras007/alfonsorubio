@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>007 Forever | M Directorate Dossier</title>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        :root {
+            --m-navy: #0a192f;
+            --m-gold: #c5a059;
+            --m-red: #8b0000;
+        }
+
+        body {
+            background-color: #111;
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                url('https://www.transparenttextures.com/patterns/dark-leather.png');
+        }
+
+        .hero h1 {
+            color: var(--m-gold);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* Dossier Folder Style */
+        .section-story {
+            background: var(--m-navy) !important;
+            border-left: 15px solid #071223 !important;
+            padding: 60px !important;
+            border-radius: 0 20px 20px 0 !important;
+            box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.6) !important;
+            border: 1px solid rgba(197, 160, 89, 0.2) !important;
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto 50px !important;
+        }
+
+        /* Top Secret Stamp */
+        .top-secret-stamp {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            border: 5px solid var(--m-red);
+            color: var(--m-red);
+            padding: 10px 20px;
+            font-family: 'Special Elite', monospace;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 1.8rem;
+            transform: rotate(15deg);
+            opacity: 0.8;
+            border-radius: 10px;
+            z-index: 10;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .story-content h2 {
+            color: var(--m-gold);
+            border-bottom: 1px solid var(--m-gold);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+        }
+
+        .story-content h3 {
+            color: #eee;
+            margin-top: 20px;
+        }
+
+        .story-content p,
+        .story-content li {
+            color: #bdc3c7 !important;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .story-content ul li strong {
+            color: var(--m-gold);
+        }
+
+        blockquote {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid var(--m-gold) !important;
+            padding: 20px !important;
+            margin: 30px 0 !important;
+            color: #fff !important;
+            font-style: italic;
+        }
+
+        .btn-primary {
+            background: var(--m-gold) !important;
+            color: var(--m-navy) !important;
+            font-weight: 900 !important;
+            border: none !important;
+        }
+
+        .btn-primary:hover {
+            background: #fff !important;
+            color: var(--m-navy) !important;
+        }
+
+        /* Classifier Label */
+        .classifier {
+            display: inline-block;
+            background: var(--m-red);
+            color: #fff;
+            padding: 2px 10px;
+            font-size: 0.8rem;
+            border-radius: 3px;
+            margin-bottom: 5px;
+            font-family: monospace;
+        }
+
+        .photo-frame {
+            position: relative;
+            display: inline-block;
+            padding: 15px;
+            background: #222;
+            border: 1px solid var(--m-gold);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">007 <span>FOREVER</span></a>
+            <nav id="mainNav">
+                <a href="index.html" data-i18n="nav_home">Inicio</a>
+                <a href="peliculas.html" data-i18n="nav_movies">Misiones</a>
+                <a href="sean_connery.html" data-i18n="nav_agents">Agentes</a>
+                <a href="criticas.html" data-i18n="nav_reviews">Críticas</a>
+                <a href="Ian Fleming.html" data-i18n="nav_fleming">Archivo Fleming</a>
+                <a href="moneypenny.html" data-i18n="nav_moneypenny">Moneypenny</a>
+                <a href="q.html" data-i18n="nav_q">Rama Q</a>
+                <a href="m.html" class="active" data-i18n="nav_m">Jefe MI6</a>
+                <a href="villanos.html" data-i18n="nav_villains">Villanos</a>
+                <a href="coches.html" data-i18n="nav_cars">Vehículos</a>
+                <a href="mujeres.html" data-i18n="nav_girls">Chicas Bond</a>
+                <a href="musica.html" data-i18n="nav_music">Música</a>
+                <a href="video.html" data-i18n="nav_video">Videoteca</a>
+                <div class="lang-switcher">
+                    <span id="lang-es" class="active">ES</span> | <span id="lang-en">EN</span>
+                </div>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1 data-i18n="m_title">Directorio del Jefe del Servicio</h1>
+            <div class="photo-frame">
+                <img src="actores/M.jpg" alt="M" style="width: 250px; filter: contrast(1.1) grayscale(0.2);">
+            </div>
+        </section>
+
+        <main class="section-story">
+            <div class="top-secret-stamp">Top Secret</div>
+
+            <div class="story-content">
+                <div class="classifier">DIRECTORATE ONLY</div>
+                <h2 data-i18n="m_general">Ficha del Jefe del Servicio</h2>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 10px;"><strong>Designación:</strong> M</li>
+                    <li style="margin-bottom: 10px;"><strong>Rango:</strong> Almirante / Jefe de Inteligencia</li>
+                    <li style="margin-bottom: 10px;"><strong>Intérpretes destacados:</strong>
+                        <span>Bernard Lee, Judi Dench, Ralph Fiennes</span>
+                    </li>
+                </ul>
+
+                <h2 data-i18n="m_real_names">Nombres Reales Revelados</h2>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 10px;"><strong>Olivia Mansfield</strong> (Era Daniel Craig / Judi Dench)
+                    </li>
+                    <li style="margin-bottom: 10px;"><strong>Gareth Mallory</strong> (Era Daniel Craig / Ralph Fiennes)
+                    </li>
+                    <li style="margin-bottom: 10px;"><strong>Miles Messervy</strong> (Novelas originales / Bernard Lee)
+                    </li>
+                </ul>
+            </div>
+
+            <div class="story-content">
+                <h2 data-i18n="m_philosophy_title" style="margin-top: 40px;">La Carga del Mando</h2>
+                <p data-i18n="m_philosophy_desc">
+                    El jefe del MI6 no solo asigna misiones; es el último baluarte entre el orden y el caos global.
+                    Un cargo que exige decisiones imposibles y una frialdad necesaria.
+                </p>
+
+                <blockquote data-i18n="m_quote1">
+                    "Si no confío en mi propia gente, ¿qué queda de mi autoridad?" — M (Skyfall)
+                </blockquote>
+            </div>
+
+            <div class="story-content" style="margin-top: 40px;">
+                <h2 data-i18n="m_eras">Notas de Inteligencia</h2>
+                <p>M ha evolucionado de un mentor severo a una figura materna/paterna compleja para Bond,
+                    siempre priorizando la seguridad nacional sobre el bienestar individual.</p>
+            </div>
+        </main>
+
+        <section style="text-align: center; margin-top: 40px;">
+            <a href="index.html" class="btn-primary" data-i18n="nav_home"
+                style="display: inline-block; padding: 12px 30px;">Cerrar Expediente</a>
+        </section>
+    </div>
+
+    <footer style="text-align: center; padding: 60px 0; color: #555;">
+        <p data-i18n="footer_text">© 2026 Inteligencia MI6. Clasificación Omega.</p>
+            <p data-i18n="disclaimer" style="font-size: 0.65rem; color: #ff3333; margin-top: 15px; opacity: 0.8; font-family: 'JetBrains Mono', monospace;"></p>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

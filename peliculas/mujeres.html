@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>007 Forever | Bond Girls Gallery</title>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        /* Slide / Polaroid Effect */
+        .movie-card {
+            background: #fdfbf7;
+            /* Blanco hueso/papel */
+            padding: 12px 12px 40px 12px;
+            border: none;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            position: relative;
+        }
+
+        /* Random rotations for authentic look */
+        .movie-card:nth-child(odd) {
+            transform: rotate(-2deg);
+        }
+
+        .movie-card:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .movie-card:nth-child(3n) {
+            transform: rotate(1.5deg);
+        }
+
+        .movie-card:nth-child(4n) {
+            transform: rotate(-1deg);
+        }
+
+        .movie-card:hover {
+            transform: rotate(0deg) scale(1.08) translateY(-15px);
+            z-index: 10;
+            box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .movie-card .thumb-wrapper {
+            aspect-ratio: 1/1;
+            /* Cuadrado para estilo Polaroid */
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-card img {
+            opacity: 1;
+            /* Fotos reveladas */
+            filter: contrast(1.1) brightness(1.05);
+        }
+
+        .movie-info {
+            padding: 15px 0 0 0;
+            text-align: center;
+        }
+
+        .movie-info h3 {
+            color: #222;
+            /* Texto oscuro sobre fondo claro */
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 2px;
+            font-weight: 700;
+        }
+
+        .movie-info p {
+            color: var(--accent-red);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Marker/Handwritten feel for the badge */
+        .format-badge {
+            bottom: 10px;
+            right: 10px;
+            background: rgba(139, 0, 0, 0.8);
+            font-size: 0.6rem;
+            padding: 2px 6px;
+        }
+
+        /* Adjusting hero to match the aesthetic */
+        .hero {
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.4), rgba(5, 5, 5, 1)), url('actores/Chicasbond.jpg');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">007 <span>FOREVER</span></a>
+            <nav id="mainNav">
+                <a href="index.html" data-i18n="nav_home">Inicio</a>
+                <a href="peliculas.html" data-i18n="nav_movies">Misiones</a>
+                <a href="sean_connery.html" data-i18n="nav_agents">Agentes</a>
+                <a href="criticas.html" data-i18n="nav_reviews">Críticas</a>
+                <a href="Ian Fleming.html" data-i18n="nav_fleming">Archivo Fleming</a>
+                <a href="moneypenny.html" data-i18n="nav_moneypenny">Moneypenny</a>
+                <a href="q.html" data-i18n="nav_q">Rama Q</a>
+                <a href="m.html" data-i18n="nav_m">Jefe MI6</a>
+                <a href="villanos.html" data-i18n="nav_villains">Villanos</a>
+                <a href="coches.html" data-i18n="nav_cars">Vehículos</a>
+                <a href="mujeres.html" class="active" data-i18n="nav_girls">Chicas Bond</a>
+                <a href="musica.html" data-i18n="nav_music">Música</a>
+                <a href="video.html" data-i18n="nav_video">Videoteca</a>
+                <div class="lang-switcher">
+                    <span id="lang-es" class="active">ES</span> | <span id="lang-en">EN</span>
+                </div>
+            </nav>
+        </header>
+
+        <section class="hero"
+            style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('actores/Chicasbond.jpg'); background-size: cover; background-position: center; border-radius: 20px; margin-bottom: 40px; min-height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--glass-border);">
+            <h1 data-i18n="girls_title" style="text-shadow: 0 5px 15px rgba(0,0,0,0.8);">Anexo de Inteligencia: Chicas
+                Bond</h1>
+            <p data-i18n="girls_desc" style="max-width: 800px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">Protagonistas,
+                aliadas y adversarias. Las mujeres que han definido el universo de 007.</p>
+        </section>
+
+        <main class="movie-grid" style="margin-bottom: 60px;">
+            <!-- Honey Ryder -->
+            <div class="movie-card">
+                <div class="thumb-wrapper">
+                    <img src="actores/Honey Ryder.webp" alt="Honey Ryder">
+                    <div class="format-badge" data-i18n="girls_tag_icon">ICONO</div>
+                </div>
+                <div class="movie-info">
+                    <h3 data-i18n="bg_honey_name">Honey Ryder</h3>
+                    <p style="color: var(--accent-gold); font-size: 0.9rem;" data-i18n="bg_honey_actress">Ursula Andress
+                    </p>
+                    <p style="color: var(--text-dim); font-size: 0.8rem;">Dr. No (1962)</p>
+                </div>
+            </div>
+
+            <!-- Pussy Galore -->
+            <div class="movie-card">
+                <div class="thumb-wrapper">
+                    <img src="actores/Pussy Galore.webp" alt="Pussy Galore">
+                    <div class="format-badge" data-i18n="girls_tag_icon">ICONO</div>
+                </div>
+                <div class="movie-info">
+                    <h3 data-i18n="bg_pussy_name">Pussy Galore</h3>
+                    <p style="color: var(--accent-gold); font-size: 0.9rem;" data-i18n="bg_pussy_actress">Honor Blackman
+                    </p>
+                    <p style="color: var(--text-dim); font-size: 0.8rem;">Goldfinger (1964)</p>
+                </div>
+            </div>
+
+            <!-- Tracy Bond -->
+            <div class="movie-card">
+                <div class="thumb-wrapper">
+                    <img src="actores/Tracy di Vicenzo.webp" alt="Tracy di Vicenzo">
+                    <div class="format-badge" data-i18n="girls_tag_icon">ICONO</div>
+                </div>
+                <div class="movie-info">
+                    <h3 data-i18n="bg_tracy_name">Tracy di Vicenzo</h3>
+                    <p style="color: var(--accent-gold); font-size: 0.9rem;" data-i18n="bg_tracy_actress">Diana Rigg</p>
+                    <p style="color: var(--text-dim); font-size: 0.8rem;">On Her Majesty's Secret Service (1969)</p>
+                </div>
+            </div>
+
+            <!-- Anya Amasova -->
+            <div class="movie-card">
+                <div class="thumb-wrapper">
+                    <img src="actores/Anya Amasova.webp" alt="Anya Amasova">
+                    <div class="format-badge" data-i18n="girls_tag_agent">AGENTE</div>
+                </div>
+                <div class="movie-info">
+                    <h3 data-i18n="bg_anya_name">Anya Amasova</h3>
+                    <p style="color: var(--accent-gold); font-size: 0.9rem;" data-i18n="bg_anya_actress">Barbara Bach
+                    </p>
+                    <p style="color: var(--text-dim); font-size: 0.8rem;">The Spy Who Loved Me (1977)</p>
+                </div>
+            </div>
+
+            <!-- Natalya Simonova -->
+            <div class="movie-card">
+                <div class="thumb-wrapper">
+                    <img src="actores/Natalia Simonova.jpg" alt="Natalya Simonova">
+                    <div class="format-badge" data-i18n="girls_tag_ally">ALIADA</div>
+                </div>
+                <div class="movie-info">
+                    <h3 data-i18n="bg_natalya_name">Natalya Simonova</h3>
+                    <p style="color: var(--accent-gold); font-size: 0.9rem;" data-i18n="bg_natalya_actress">Izabella
+                        Scorupco</p>
+                    <p style="color: var(--text-dim); font-size: 0.8rem;">GoldenEye (1995)</p>
+                </div>
+            </div>
+
+            <!-- Xenia Onatopp -->
+            <div class="movie-card">
+                <div class="thumb-wrapper">
+                    <img src="actores/Xenia Onatopp.webp" alt="Xenia Onatopp">
+                    <div class="format-badge" style="background: rgba(200, 0, 0, 0.6);">ADVERSARIA</div>
+                </div>
+                <div class="movie-info">
+                    <h3 data-i18n="bg_xenia_name">Xenia Onatopp</h3>
+                    <p style="color: var(--accent-gold); font-size: 0.9rem;" data-i18n="bg_xenia_actress">Famke Janssen
+                    </p>
+                    <p style="color: var(--text-dim); font-size: 0.8rem;">GoldenEye (1995)</p>
+                </div>
+            </div>
+
+            <!-- Jinx Johnson -->
+            <div class="movie-card">
+                <div class="thumb-wrapper">
+                    <img src="actores/Giacinta 'Jinx' Johnson.jpg" alt="Jinx Johnson">
+                    <div class="format-badge" data-i18n="girls_tag_agent">AGENTE</div>
+                </div>
+                <div class="movie-info">
+                    <h3 data-i18n="bg_jinx_name">Jinx Johnson</h3>
+                    <p style="color: var(--accent-gold); font-size: 0.9rem;" data-i18n="bg_jinx_actress">Halle Berry</p>
+                    <p style="color: var(--text-dim); font-size: 0.8rem;">Die Another Day (2002)</p>
+                </div>
+            </div>
+
+            <!-- Solitaire -->
+            <div class="movie-card">
+                <div class="thumb-wrapper">
+                    <img src="actores/Solitaire.webp" alt="Solitaire">
+                    <div class="format-badge" data-i18n="girls_tag_ally">ALIADA</div>
+                </div>
+                <div class="movie-info">
+                    <h3 data-i18n="bg_solitaire_name">Solitaire</h3>
+                    <p style="color: var(--accent-gold); font-size: 0.9rem;" data-i18n="bg_solitaire_actress">Jane
+                        Seymour</p>
+                    <p style="color: var(--text-dim); font-size: 0.8rem;">Live and Let Die (1973)</p>
+                </div>
+            </div>
+
+            <!-- Wai Lin -->
+            <div class="movie-card">
+                <div class="thumb-wrapper">
+                    <img src="actores/Wai Ling.png" alt="Wai Lin">
+                    <div class="format-badge" data-i18n="girls_tag_ally">ALIADA</div>
+                </div>
+                <div class="movie-info">
+                    <h3 data-i18n="bg_wailin_name">Wai Lin</h3>
+                    <p style="color: var(--accent-gold); font-size: 0.9rem;" data-i18n="bg_wailin_actress">Michelle
+                        Yeoh</p>
+                    <p style="color: var(--text-dim); font-size: 0.8rem;">Tomorrow Never Dies (1997)</p>
+                </div>
+            </div>
+
+            <!-- Elektra King -->
+            <div class="movie-card">
+                <div class="thumb-wrapper">
+                    <img src="actores/Electra King.webp" alt="Elektra King">
+                    <div class="format-badge" style="background: rgba(200, 0, 0, 0.6);">ADVERSARIA</div>
+                </div>
+                <div class="movie-info">
+                    <h3 data-i18n="bg_elektra_name">Elektra King</h3>
+                    <p style="color: var(--accent-gold); font-size: 0.9rem;" data-i18n="bg_elektra_actress">Sophie
+                        Marceau</p>
+                    <p style="color: var(--text-dim); font-size: 0.8rem;">The World Is Not Enough (1999)</p>
+                </div>
+            </div>
+
+            <!-- Vesper Lynd -->
+            <div class="movie-card">
+                <div class="thumb-wrapper">
+                    <img src="actores/Vesper Lynd.webp" alt="Vesper Lynd">
+                    <div class="format-badge" data-i18n="girls_tag_icon">AMOR TRÁGICO</div>
+                </div>
+                <div class="movie-info">
+                    <h3 data-i18n="bg_vesper_name">Vesper Lynd</h3>
+                    <p style="color: var(--accent-gold); font-size: 0.9rem;" data-i18n="bg_vesper_actress">Eva Green</p>
+                    <p style="color: var(--text-dim); font-size: 0.8rem;">Casino Royale (2006)</p>
+                </div>
+            </div>
+
+            <!-- Madeleine Swann -->
+            <div class="movie-card">
+                <div class="thumb-wrapper">
+                    <img src="actores/Dr. Madeleine Swann.webp" alt="Madeleine Swann">
+                </div>
+                <div class="movie-info">
+                    <h3 data-i18n="bg_madeleine_name">Madeleine Swann</h3>
+                    <p style="color: var(--accent-gold); font-size: 0.9rem;" data-i18n="bg_madeleine_actress">Léa
+                        Seydoux</p>
+                    <p style="color: var(--text-dim); font-size: 0.8rem;">Spectre (2015), No Time To Die (2021)</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer
+        style="text-align: center; padding: 60px 0; color: var(--text-dim); border-top: 1px solid var(--glass-border);">
+        <p data-i18n="footer_text">© 2026 Proyecto Fan 007 Forever. Solo para fines educativos.</p>
+        <p data-i18n="disclaimer"
+            style="font-size: 0.65rem; color: #ff3333; margin-top: 15px; opacity: 0.8; font-family: 'JetBrains Mono', monospace;">
+        </p>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

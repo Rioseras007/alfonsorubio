@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>007 Forever | Miss Moneypenny Dossier</title>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper-bg: #fdfbf7;
+            --paper-shadow: rgba(0, 0, 0, 0.15);
+            --postit-yellow: #fff782;
+            --postit-pink: #ffafd2;
+        }
+
+        body {
+            background-color: #2c2c2c;
+            /* Mesa de madera oscura */
+            background-image: radial-gradient(#3a3a3a 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .hero h1 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+
+        /* Paper Sheet Style */
+        .section-story {
+            background: var(--paper-bg) !important;
+            color: #333 !important;
+            padding: 60px !important;
+            border-radius: 2px !important;
+            box-shadow:
+                5px 5px 15px var(--paper-shadow),
+                10px 10px 0px -2px #eee,
+                10px 10px 15px var(--paper-shadow) !important;
+            border: none !important;
+            font-family: 'Special Elite', cursive;
+            position: relative;
+            transform: rotate(-0.5deg);
+            max-width: 900px;
+            margin: 0 auto 40px !important;
+        }
+
+        .section-story::before {
+            content: "";
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(to right, #ccc, #eee, #ccc);
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .story-content h2 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            color: #444;
+            font-size: 1.5rem;
+        }
+
+        .story-content ul li strong {
+            color: #d35400;
+            /* Color de bolígrafo */
+        }
+
+        .story-content p,
+        .story-content li {
+            font-size: 1.1rem;
+            line-height: 1.4;
+            color: #2c3e50 !important;
+        }
+
+        /* Post-it Notes */
+        .post-it {
+            background: var(--postit-yellow);
+            padding: 20px;
+            width: 250px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            transform: rotate(3deg);
+            position: absolute;
+            right: -100px;
+            top: 100px;
+            font-family: 'Special Elite', cursive;
+            color: #333;
+            z-index: 5;
+            border-left: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .post-it.pink {
+            background: var(--postit-pink);
+            transform: rotate(-4deg);
+            top: 400px;
+            right: -80px;
+        }
+
+        .post-it h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .post-it ul {
+            list-style: none;
+            padding: 0;
+            font-size: 0.9rem;
+        }
+
+        .post-it li {
+            margin-bottom: 8px;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+        }
+
+        /* Clip Effect */
+        .paper-clip {
+            position: absolute;
+            top: -15px;
+            left: 50px;
+            width: 20px;
+            height: 50px;
+            border: 3px solid #999;
+            border-radius: 10px;
+            z-index: 20;
+            background: transparent;
+        }
+
+        .actor-link {
+            color: #2980b9 !important;
+            text-decoration: underline wavy #3498db;
+        }
+
+        .actor-link:hover {
+            color: #d35400 !important;
+        }
+
+        @media (max-width: 1200px) {
+            .post-it {
+                position: relative;
+                right: 0;
+                top: 20px;
+                margin: 20px auto;
+                transform: rotate(1deg);
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="position: relative;">
+        <header>
+            <a href="index.html" class="logo">007 <span>FOREVER</span></a>
+            <nav id="mainNav">
+                <a href="index.html" data-i18n="nav_home">Inicio</a>
+                <a href="peliculas.html" data-i18n="nav_movies">Misiones</a>
+                <a href="sean_connery.html" data-i18n="nav_agents">Agentes</a>
+                <a href="criticas.html" data-i18n="nav_reviews">Críticas</a>
+                <a href="Ian Fleming.html" data-i18n="nav_fleming">Archivo Fleming</a>
+                <a href="moneypenny.html" class="active" data-i18n="nav_moneypenny">Moneypenny</a>
+                <a href="q.html" data-i18n="nav_q">Rama Q</a>
+                <a href="m.html" data-i18n="nav_m">Jefe MI6</a>
+                <a href="villanos.html" data-i18n="nav_villains">Villanos</a>
+                <a href="coches.html" data-i18n="nav_cars">Vehículos</a>
+                <a href="mujeres.html" data-i18n="nav_girls">Chicas Bond</a>
+                <a href="musica.html" data-i18n="nav_music">Música</a>
+                <a href="video.html" data-i18n="nav_video">Videoteca</a>
+                <div class="lang-switcher">
+                    <span id="lang-es" class="active">ES</span> | <span id="lang-en">EN</span>
+                </div>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1 data-i18n="mp_title">Ficha de Personaje: Miss Moneypenny</h1>
+            <div style="margin-top: 20px; position: relative; display: inline-block;">
+                <div class="paper-clip"></div>
+                <img src="actores/Moneypenny.jpeg" alt="Miss Moneypenny"
+                    style="width: 280px; padding: 10px; background: #fff; border: 1px solid #ddd; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); transform: rotate(2deg);">
+            </div>
+        </section>
+
+        <main class="section-story" id="mp-dossier">
+            <div class="story-content">
+                <h2 data-i18n="mp_general">Información General</h2>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 10px;"><strong><span data-i18n="mp_full_name">Nombre
+                                completo</span>:</strong> <span data-i18n="mp_name_val">Eve Moneypenny</span></li>
+                    <li style="margin-bottom: 10px;"><strong><span
+                                data-i18n="mp_affiliation">Afiliación</span>:</strong> MI6</li>
+                    <li style="margin-bottom: 10px;"><strong><span data-i18n="mp_role">Rol</span>:</strong> <span
+                            data-i18n="mp_role_val">Secretaria de M / Analista</span></li>
+                    <li style="margin-bottom: 10px;"><strong><span data-i18n="mp_first_app">Primera
+                                aparición</span>:</strong> <em>Dr. No</em> (1962)</li>
+                    <li style="margin-bottom: 10px;"><strong><span data-i18n="mp_creator">Creador</span>:</strong> Ian
+                        Fleming</li>
+                </ul>
+
+                <h2 data-i18n="mp_actresses">Actrices</h2>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 8px;"><a href="https://es.wikipedia.org/wiki/Lois_Maxwell" target="_blank"
+                            class="actor-link">Lois Maxwell</a> (1962–1985)</li>
+                    <li style="margin-bottom: 8px;"><a href="https://es.wikipedia.org/wiki/Caroline_Bliss"
+                            target="_blank" class="actor-link">Caroline Bliss</a> (1987–1989)</li>
+                    <li style="margin-bottom: 8px;"><a href="https://es.wikipedia.org/wiki/Samantha_Bond"
+                            target="_blank" class="actor-link">Samantha Bond</a> (1995–2002)</li>
+                    <li style="margin-bottom: 8px;"><a href="https://es.wikipedia.org/wiki/Naomie_Harris"
+                            target="_blank" class="actor-link">Naomie Harris</a> (2012–2021)</li>
+                </ul>
+            </div>
+
+            <div class="story-content">
+                <h2 data-i18n="mp_evolution">Evolución</h2>
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #c0392b;">Etapa clásica</h3>
+                    <p data-i18n="mp_era_classic_desc">Secretaria ingeniosa y elegante.</p>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #c0392b;">Etapa moderna</h3>
+                    <p data-i18n="mp_era_modern_desc">Más irónica y segura.</p>
+                </div>
+            </div>
+
+            <!-- Post-it Notes -->
+            <div class="post-it">
+                <h2 data-i18n="mp_curiosities">Curiosidades</h2>
+                <ul>
+                    <li data-i18n="mp_cur1">Lois Maxwell pidió interpretar a M.</li>
+                    <li data-i18n="mp_cur3">Naomie Harris le disparó a Bond.</li>
+                </ul>
+            </div>
+
+            <div class="post-it pink">
+                <h2 data-i18n="mp_moments">Momentos</h2>
+                <ul>
+                    <li data-i18n="mp_moment1">Coqueteos legendarios.</li>
+                    <li data-i18n="mp_moment4">El disparo en Skyfall.</li>
+                </ul>
+            </div>
+        </main>
+
+        <section style="text-align: center; margin-top: 40px;">
+            <a href="index.html" class="btn-primary" data-i18n="nav_home"
+                style="display: inline-block; padding: 12px 30px; transform: rotate(-2deg);">Inicio</a>
+        </section>
+    </div>
+
+    <footer style="text-align: center; padding: 60px 0; color: #fff; opacity: 0.6;">
+        <p data-i18n="footer_text">© 2026 Proyecto Fan 007 Forever. Archivo MI6.</p>
+            <p data-i18n="disclaimer" style="font-size: 0.65rem; color: #ff3333; margin-top: 15px; opacity: 0.8; font-family: 'JetBrains Mono', monospace;"></p>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

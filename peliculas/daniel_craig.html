@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personnel File: Daniel Craig | MI6 Archive</title>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="index.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --paper-color: #1a1a1a;
+            --folder-accent: #333;
+            --text-dark: #eee;
+            --stamp-red: #d9534f;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: var(--text-dark);
+            font-family: 'JetBrains Mono', monospace;
+            padding: 20px;
+        }
+
+        .dossier-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--paper-color);
+            padding: 50px;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            border-left: 15px solid var(--folder-accent);
+        }
+
+        .classified-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        .archive-info {
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+        }
+
+        .stamp {
+            border: 3px solid var(--stamp-red);
+            color: var(--stamp-red);
+            padding: 5px 15px;
+            font-weight: 900;
+            transform: rotate(-15deg);
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            height: fit-content;
+        }
+
+        .actor-profile {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+        }
+
+        .photo-area {
+            position: relative;
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: auto;
+            border: 5px solid #fff;
+            filter: grayscale(100%) contrast(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .id-badge {
+            background: #222;
+            padding: 15px;
+            margin-top: 20px;
+            border-top: 2px solid var(--accent-gold);
+        }
+
+        .id-badge p {
+            margin: 5px 0;
+            font-size: 0.75rem;
+        }
+
+        .id-badge span {
+            color: var(--accent-gold);
+        }
+
+        .service-record h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-top: 0;
+            color: #fff;
+            letter-spacing: -1px;
+        }
+
+        .bio-section {
+            margin-top: 30px;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            border-left: 1px solid rgba(212, 175, 55, 0.3);
+            padding-left: 20px;
+        }
+
+        .highlights {
+            margin-top: 40px;
+        }
+
+        .highlights h3 {
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .film-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .film-list li {
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .film-title {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .film-role {
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+        }
+
+        .back-nav {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 25px;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: var(--accent-gold);
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            color: #fff;
+        }
+
+        .main-back {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .main-back a {
+            color: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .main-back a:hover {
+            color: var(--accent-gold);
+        }
+    </style>
+</head>
+
+<body>
+  <div class="container">
+        <header>
+            <a href="index.html" class="logo">007 <span>FOREVER</span></a>
+            <nav id="mainNav">
+                <a href="index.html" class="active" data-i18n="nav_home">Inicio</a>
+                <a href="peliculas.html" data-i18n="nav_movies">Misiones</a>
+              
+                <a href="criticas.html" data-i18n="nav_reviews">Críticas</a>
+                <a href="Ian Fleming.html" data-i18n="nav_fleming">Archivo Fleming</a>
+                <a href="moneypenny.html" data-i18n="nav_moneypenny">Moneypenny</a>
+                <a href="q.html" data-i18n="nav_q">Rama Q</a>
+                <a href="m.html" data-i18n="nav_m">Jefe MI6</a>
+                <a href="villanos.html" data-i18n="nav_villains">Villanos</a>
+                <a href="coches.html" data-i18n="nav_cars">Vehículos</a>
+                <a href="mujeres.html" data-i18n="nav_girls">Chicas Bond</a>
+                <a href="musica.html" data-i18n="nav_music">Música</a>
+                <a href="video.html" data-i18n="nav_video">Videoteca</a>
+                <div class="lang-switcher">
+                    <span id="lang-es" class="active">ES</span> | <span id="lang-en">EN</span>
+                </div>
+            </nav>
+        </header>
+
+
+
+
+    <div class="dossier-container">
+        <div class="classified-header">
+            <div class="archive-info">
+                MI6 ARCHIVE // PERSONNEL DIVISION<br>
+                LEVEL 7 CLEARANCE REQUIRED<br>
+                FILE ID: 006
+            </div>
+            <div class="stamp">Clasificado</div>
+        </div>
+
+        <div class="actor-profile">
+            <div class="photo-area">
+                <img src="img/Daniel Craig.jpg" alt="Daniel Craig" class="profile-photo" onerror="this.src='james-bond-6-1.jpg'">
+                <div class="id-badge">
+                    <p>STATUS: <span>ACTIVE RECORD</span></p>
+                    <p>ORIGIN: <span>Inglés</span></p>
+                    <p>TENURE: <span>1992 - Presente</span></p>
+                    <p>RECOGNITION: <span>2 Nominaciones Globo de Oro, 1 Primetime Emmy</span></p>
+                </div>
+            </div>
+
+            <div class="service-record">
+                <h1>Daniel Craig</h1>
+                <div class="bio-section">
+                    El agente brutal y humano. Reimaginó a Bond para el siglo XXI, dándole una vulnerabilidad física y emocional sin precedentes. Ha consolidado una de las carreras más sólidas tras dejar el papel.
+                </div>
+
+                <div class="highlights">
+                    <h3>OPERATIONAL HIGHLIGHTS (Filmografía Destacada)</h3>
+                    <ul class="film-list">
+                        <li><span class="film-title">Knives Out (2019)</span> <span class="film-role">Benoit Blanc</span></li><li><span class="film-title">Layer Cake (2004)</span> <span class="film-role">XXXX</span></li><li><span class="film-title">Munich (2005)</span> <span class="film-role">Steve</span></li><li><span class="film-title">The Girl with the Dragon Tattoo (2011)</span> <span class="film-role">Mikael Blomkvist</span></li><li><span class="film-title">Logan Lucky (2017)</span> <span class="film-role">Joe Bang</span></li><li><span class="film-title">Glass Onion (2022)</span> <span class="film-role">Benoit Blanc</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-nav">
+            <a href="pierce_brosnan.html" class="nav-btn">← Agente Anterior</a>
+            <div></div>
+        </div>
+
+        <div class="main-back">
+            <a href="index.html">⚓ Volver a la Base Principal</a>
+        </div>
+    </div>
+
+    <!-- Gunshot Sound Logic -->
+    <audio id="gunshotSound" src="fxsounds/walther.mp3" preload="auto"></audio>
+    <script>
+        function playGunshotAndNavigate(url) {
+            const sound = document.getElementById('gunshotSound');
+            if (sound) {
+                sound.currentTime = 0;
+                sound.play();
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 300);
+            } else {
+                window.location.href = url;
+            }
+        }
+
+        document.querySelectorAll('.nav-btn, .main-back a').forEach(el => {
+            el.addEventListener('click', function (e) {
+                e.preventDefault();
+                playGunshotAndNavigate(this.href);
+            });
+        });
+    </script>
+</body>
+
+</html>
