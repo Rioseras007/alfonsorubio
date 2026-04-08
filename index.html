@@ -70,35 +70,17 @@
       </div>
     </div>
 
-    <section class="hero">
-      <div class="hero-overlay"></div>
-    </section>
+   
 
-    <div style="align-items:center;">
-      <href="#contenido" class="hero-btn"><i class="bi bi-box-arrow-up-right"></i> Ver contenido</a>
-    </div>
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content" style="z-index: 2; width: 100%; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <h1 style="font-size: clamp(3rem, 6vw, 5rem); text-shadow: 4px 4px 15px rgba(0,0,0,1); margin-bottom: 20px; color: #ffffff;">Bienvenido a mi espacio</h1>
+    <p style="font-size: 1.8rem; font-weight: 600; text-shadow: 3px 3px 8px rgba(0,0,0,1); color: #00eaff; max-width: 800px; margin: 0 auto; text-align: center;">Explora mis servicios, proyectos y actualidad.</p>
+  </div>
+</section>
 
-
-    <!-- marquesina principal -->
-
-    <div class="marquee-container">
-      <div class="marquee">
-        <span><i class="bi bi-house"></i> Bienvenido a mi web oficial</span>
-        <span><i class="bi bi-controller"></i> Fortnite • Tecnología • Diseño</span>
-        <span><i class="bi bi-3d-glasses"></i> Impresión 3D • Proyectos creativos en
-          https://www.printables.com/@Rioseras007</span>
-        <span><i class="bi bi-globe"></i> Sígueme en redes sociales</span>
-        <span><i class="bi bi-youtube"></i> Youtube https://www.youtube.com/@AlfonsoRubioRioseras</span>
-        <span><i class="bi bi-twitch"></i> Twitch https://www.twitch.tv/ps3rioseras007</span>
-      </div>
-    </div>
-
-    <!-- enlaces patrocinados -->
-    <div>
-      <iframe src="submenu.html" width="100%" height="58px" scrolling="no" style="border-color: green;"></iframe>
-    </div>
-
-    <br><br><br>
+<section class="section">
 
     <div class="d-flex" style="padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); margin-bottom: 20px;
         background-color:beige;">
@@ -132,10 +114,36 @@
 
 
     </div>
+</section>
+  
+  
 
+
+    <!-- marquesina principal -->
+
+    <div class="marquee-container">
+      <div class="marquee">
+        <span><i class="bi bi-house"></i> Bienvenido a mi web oficial</span>
+        <span><i class="bi bi-controller"></i> Fortnite • Tecnología • Diseño</span>
+        <span><i class="bi bi-3d-glasses"></i> Impresión 3D • Proyectos creativos en
+          https://www.printables.com/@Rioseras007</span>
+        <span><i class="bi bi-globe"></i> Sígueme en redes sociales</span>
+        <span><i class="bi bi-youtube"></i> Youtube https://www.youtube.com/@AlfonsoRubioRioseras</span>
+        <span><i class="bi bi-twitch"></i> Twitch https://www.twitch.tv/ps3rioseras007</span>
+      </div>
+    </div>
+
+    <!-- enlaces patrocinados -->
+    <div>
+      <iframe src="submenu.html" width="100%" height="58px" scrolling="no" style="border-color: green;"></iframe>
+    </div>
 
     <br><br><br>
 
+   
+
+
+  
 
     <!-- BUSCADOR WEB google-->
     <div class="search-box" id="contenido">
@@ -1109,28 +1117,27 @@
     setInterval(actualizar, 1000);
   </script>
 
-  <!-- Cambia el color de la página según el día del año -->
+  <!-- Cambia el color de la página según el día de la semana (Arcoíris) -->
 
   <script>
   (function() {
-    // Cálculo exacto del día del año (evita errores con el horario de verano/invierno)
-    function obtenerDiaDelAño(fecha) {
-      const inicio = new Date(fecha.getFullYear(), 0, 0);
-      const diferencia = (fecha - inicio) + ((inicio.getTimezoneOffset() - fecha.getTimezoneOffset()) * 60000);
-      return Math.floor(diferencia / 86400000);
-    }
+    // Colores del arcoíris en grados Hue de HSL:
+    // 0: Domingo (Rojo), 1: Lunes (Naranja), 2: Martes (Amarillo), 
+    // 3: Miércoles (Verde), 4: Jueves (Azul), 5: Viernes (Índigo), 6: Sábado (Violeta)
+    const rainbowHues = [0, 30, 60, 120, 240, 275, 300];
+    
+    // Obtener el día de la semana actual (0-6)
+    const diaSemana = new Date().getDay();
 
-    const diaDelAño = obtenerDiaDelAño(new Date());
-
-    // Generar la tonalidad (hue) (0–360) basada en el día
-    const hue = Math.floor((diaDelAño / 365) * 360);
+    // Seleccionar la tonalidad (hue) correspondiente
+    const hue = rainbowHues[diaSemana];
 
     // Mantenemos colores oscuros y sutiles (dark mode) para que el texto blanco siempre sea legible
     const color1 = `hsl(${hue}, 60%, 12%)`; 
     const color2 = `hsl(${(hue + 45) % 360}, 50%, 8%)`;
     const color3 = `hsl(${(hue - 45 + 360) % 360}, 70%, 10%)`;
 
-    // Aplicar un suavizado y mantener el tamaño gigante para respaldar tu animación CSS "gradiente"
+    // Aplicar al fondo con la animación "gradiente" existente
     document.body.style.transition = "background-image 2s ease";
     document.body.style.background = `linear-gradient(135deg, ${color1}, ${color2}, ${color3})`;
     document.body.style.backgroundSize = "400% 400%";
