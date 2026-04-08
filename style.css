@@ -561,7 +561,7 @@ position: relative;
 }
 
 
-.hero {
+.herobis {
   position: relative;
   background-image: url("covers/hero-banner.png");
   background-size: cover;
@@ -809,6 +809,7 @@ position: relative;
     .whatsapp:hover    { background: #25d366; }
     .linkedin:hover    { background: #0a66c2; }
     .github:hover      { background: #171515; }
+    .printables:hover  { background: #f0ac02; }
 
     .footer-bottom {
       text-align: center;
@@ -827,7 +828,76 @@ position: relative;
     }
  
 
+/* HERO */
 
+.hero{
+  position:relative;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  overflow:hidden;
+  background-image: url("covers/hero-banner.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
+}
+
+/* capas */
+
+.layer{
+position:absolute;
+width:100%;
+height:120%;
+object-fit:cover;
+}
+
+/* fondo */
+
+.bg{
+z-index:1;
+}
+
+/* imagen intermedia */
+
+.middle{
+z-index:2;
+width:900px;
+top:40%;
+left:50%;
+transform:translate(-50%,-50%);
+}
+
+/* texto */
+
+.content{
+position:relative;
+z-index:3;
+}
+
+.content h1{
+font-size:60px;
+letter-spacing:2px;
+}
+
+.content p{
+font-size:20px;
+margin-top:10px;
+}
+
+/* secciones normales */
+
+.section{
+height:500px
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:40px;
+background:#f2f2f2;
+}
 
 
 
