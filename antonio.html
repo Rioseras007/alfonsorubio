@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🔥 Antonio Level Up 🔥</title>
+
+<!-- Tipografías PRO -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: black;
+    color: white;
+    overflow: hidden;
+}
+
+/* ===== PANTALLA INICIAL ===== */
+#startScreen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    flex-direction: column;
+}
+
+#startScreen h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4em;
+    color: red;
+    text-shadow: 0 0 20px red;
+    animation: blink 1.2s infinite;
+    cursor: pointer;
+}
+
+@keyframes blink {
+    0%,100% {opacity:1;}
+    50% {opacity:0.3;}
+}
+
+/* ===== CONTENIDO PRINCIPAL ===== */
+#main {
+    display: none;
+    height: 100vh;
+    background: url('fondo.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+/* Overlay oscuro */
+#main::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 0;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+/* TITULO */
+h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5em;
+    color: #ff2e2e;
+    text-shadow: 0 0 20px red, 0 0 40px red;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px red; }
+    to { text-shadow: 0 0 40px red; }
+}
+
+.subtitle {
+    margin-top: 10px;
+    font-size: 1.2em;
+    opacity: 0.8;
+}
+
+/* CARD */
+.card {
+    margin-top: 40px;
+    padding: 30px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(255,0,0,0.6);
+}
+
+/* AUDIO */
+audio {
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* BOTÓN */
+button {
+    margin-top: 25px;
+    padding: 15px 30px;
+    font-size: 1em;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(45deg, red, orange);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px red;
+}
+
+/* FOOTER */
+footer {
+    margin-top: 30px;
+    font-size: 0.8em;
+    opacity: 0.6;
+}
+.chica {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.8);
+    transition: 0.4s;
+    animation: float 3s ease-in-out infinite;
+}
+
+.chica:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px red;
+}
+
+/* Animación flotante */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PANTALLA INICIAL -->
+<div id="startScreen">
+    <h1 onclick="start()">▶ PRESS START</h1>
+</div>
+
+<!-- CONTENIDO -->
+<div id="main">
+    <div class="content">
+        <h1>🔥 ANTONIO 🔥</h1>
+        <p class="subtitle">LEVEL UP • MODO LEYENDA ACTIVADO 🎮</p>
+
+        <div class="card">
+            <h2>🎸 HIMNO OFICIAL</h2>
+            <p>Sube el volumen y disfruta 🤘</p>
+
+            <audio id="audio" controls>
+                <source src="cancion.mp3" type="audio/mpeg">
+            </audio>
+
+            <button onclick="fiesta()">🍻 ACTIVAR MODO FIESTA</button>
+        </div>
+<img src="chica.png" alt="Chica cumpleaños" class="chica">
+        <footer>
+            Squad eterno • Victory Royale asegurada 🔥
+        </footer>
+    </div>
+</div>
+
+<script>
+function start() {
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("main").style.display = "flex";
+
+    // autoplay tras interacción
+    document.getElementById("audio").play();
+}
+
+function fiesta() {
+    alert("🔥 ¡FELIZ CUMPLEAÑOS ANTONIO! HOY SE GANA, SE COME… Y SE BEBE! 🍻🎮");
+}
+</script>
+
+</body>
+</html>
