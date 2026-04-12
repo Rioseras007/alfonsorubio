@@ -321,11 +321,7 @@ footer {
     mix-blend-mode: screen;
 }
  
-  .icono {
-            width: 48px;   /* Tamaño del icono de juanjo */
-            height: 48px;
-        }
-
+ 
 
     /* Contenedor del reloj */
     #container {
@@ -412,22 +408,23 @@ footer {
 
   .viwers{
 
-position: relative;
+   position: relative;
 
     top: auto;
     right: 33%;
     left: 42%;
 
-  display: flex;
+   display: flex;
    align-items: center; /* Centra verticalmente */
    justify-content: center; /* Opcional: centra horizontalmente */
    height: 100vh; /* Ajusta según el tamaño del contenedor */
+   background: #2a419b;
+   background: linear-gradient(90deg, rgba(42, 65, 155, 1) 0%, rgba(101, 126, 207, 1) 50%, rgba(83, 101, 237, 1) 100%);
    
-    background: linear-gradient(135deg, rgb(77, 189, 138), green, blue);
     color: white;
     border-radius: 10px;
     padding: 5px;
-    max-width: 320px;
+    max-width: 200px;
     max-height: 200px;
     contain: layout style;
   }
@@ -452,82 +449,6 @@ position: relative;
     height: auto;
     
   }
-
-
-
-
-
-   .webjuanjo{
-    position: relative;
-
-      display: flex;               /* Activa Flexbox */
-  justify-content: center;     /* Centra horizontalmente */
-  align-items: center; 
-
-    top: 200px;
-    right: 25%;
-    left: 25%;
-
-    min-width: 7%;
-    min-height: 7%;
-
-     max-width: 8%;
-    max-height: 8%;
-
-
-   background: #ab9fde;
-    color: white;
-    border-radius: 10px;
-    padding: 5px;
-  }
-
-.boton-epico {
-    display: flex;
-    align-items: center;
-    gap: 12px; /* espacio entre logo y texto */
-    background: linear-gradient(45deg, #ff416c, #ff4b2b);
-    color: white;
-    border: none;
-    padding: 14px 28px;
-    font-size: 12px;
-    font-weight: bold;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.boton-epico:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-}
-
-.boton-epico::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: rgba(255,255,255,0.2);
-    transform: rotate(45deg);
-    transition: all 0.5s ease;
-}
-
-.boton-epico:hover::before {
-    top: 100%;
-    left: 100%;
-}
-
-.icono {
-    width: 48px;
-    height: 48px;
-}
-
-
-
 
 
 .search-box {
@@ -901,11 +822,29 @@ font-size:40px;
 background:#226fa2;
 }
 
+.clocks {
+    position: relative;
+    top: auto;
+    right: 33%;
+    left: 42%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+background: #2a419b;
+background: linear-gradient(90deg, rgba(42, 65, 155, 1) 0%, rgba(80, 54, 194, 0.75) 60%, rgba(83, 101, 237, 1) 100%);
 
 
+}
 
-
-
+hr.gradient {
+  border: 0;
+  height: 10px;              /* grosor de la línea */
+  background: linear-gradient(90deg, #4d36ce, #6c0ac7);
+  border-radius: 999px;     /* opcional: bordes redondeados */
+  width: 95%;              /* ancho de la línea */
+  margin: 20px auto;      /* centrado y espacio vertical */
+}
 
 
 
