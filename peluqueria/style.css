@@ -21,11 +21,12 @@
 }
 
 body {
-    font-family: 'Outfit', sans-serif;
+   
     background: var(--secondary);
     color: var(--text-dark);
     line-height: 1.6;
     overflow-x: hidden;
+    font-size: 1.3rem;
 }
 
 section {
@@ -40,6 +41,7 @@ h1,
 h2,
 h3 {
     color: var(--text-dark);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
 .highlight {
@@ -139,6 +141,8 @@ nav {
     justify-content: center;
     align-items: center;
     padding: 100px 10%;
+   
+  
 }
 
 .hero-section::before {
@@ -149,20 +153,51 @@ nav {
     width: 100%;
     height: 100%;
     background: linear-gradient(rgba(253, 250, 247, 0.7), rgba(253, 250, 247, 0.7)), url('image.jpg') center/cover;
-    filter: grayscale(1);
+  
+    filter: contrast(110%);
+    filter: brightness(110%);
+  
     transition: filter 3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: -1;
 }
 
 .hero-section.reveal-color::before {
-    filter: grayscale(0);
+    filter: contrast(100%) brightness(100%);
+    opacity: 100%;
 }
 
-.hero-section h1,
-.hero-section p,
-.hero-section div {
+.hero-content {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(15px);
+    padding: 60px 40px;
+    border-radius: 30px;
+    max-width: 850px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 50px rgba(150, 113, 91, 0.15);
     position: relative;
     z-index: 1;
+}
+
+.hero-section h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    line-height: 1.1;
+    color: var(--text-dark);
+}
+
+.hero-section p {
+    font-size: 1.3rem;
+    color: var(--text-muted);
+    margin-bottom: 35px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-btns {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 @media (max-width: 768px) {
@@ -205,6 +240,53 @@ nav {
     flex: 1.5;
 }
 
+.bio-values {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.bio-value-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    background: #faf7f5;
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+.bio-value-item:hover {
+    transform: translateX(10px);
+    background: #f5f0ed;
+}
+
+.bio-value-item i {
+    font-size: 1.5rem;
+    color: var(--primary);
+    background: #fff;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.bio-value-item strong {
+    display: block;
+    color: var(--text-dark);
+    margin-bottom: 2px;
+}
+
+.bio-value-item p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
 .gallery-filters {
     display: flex;
     justify-content: center;
@@ -231,28 +313,82 @@ nav {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
 }
 
 .gallery-item {
     position: relative;
     aspect-ratio: 4/5;
-    border-radius: 20px;
+    border-radius: 18px;
     overflow: hidden;
-    box-shadow: var(--shadow);
+    box-shadow: 0 6px 20px rgba(150, 113, 91, 0.12);
     transition: var(--transition);
-    background: var(--secondary);
+    cursor: pointer;
 }
 
 .gallery-item:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(150, 113, 91, 0.2);
 }
 
 .gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.06);
+}
+
+/* Overlay al hacer hover */
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(150, 113, 91, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-overlay-icon {
+    font-size: 2.5rem;
+    color: #fff;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+}
+
+/* Badge de categoría */
+.gallery-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    backdrop-filter: blur(8px);
+}
+
+.mujer-badge {
+    background: rgba(212, 163, 115, 0.85);
+    color: #fff;
+}
+
+.hombre-badge {
+    background: rgba(74, 111, 165, 0.85);
+    color: #fff;
 }
 
 .gallery-caption {
@@ -260,44 +396,138 @@ nav {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 20px;
-    background: linear-gradient(transparent, rgba(74, 63, 53, 0.8));
+    padding: 40px 20px 18px;
+    background: linear-gradient(transparent, rgba(40, 30, 20, 0.75));
     color: #fff;
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.3px;
 }
+
 
 
 .faq-container {
-    max-width: 700px;
+    max-width: 750px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .faq-item {
-    margin-bottom: 20px;
     background: #fff;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(150, 113, 91, 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(150, 113, 91, 0.05);
+    transition: var(--transition);
+}
+
+.faq-item:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 20px rgba(150, 113, 91, 0.12);
 }
 
 .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 25px;
     font-weight: 600;
-    color: var(--primary);
-    margin-bottom: 10px;
+    color: var(--text-dark);
+    cursor: pointer;
+    gap: 15px;
+    user-select: none;
+    transition: var(--transition);
 }
 
+.faq-question:hover {
+    color: var(--primary);
+}
+
+.faq-question span {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.faq-icon {
+    font-size: 1.2rem;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.faq-chevron {
+    font-size: 1rem;
+    color: var(--primary);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.faq-item.open .faq-chevron {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 25px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+}
+
+.faq-item.open .faq-answer {
+    max-height: 200px;
+    padding: 0 25px 20px;
+}
+
+
+
 .testimonial-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.testimonial-quote {
+    font-size: 3rem;
+    color: var(--accent);
+    opacity: 0.5;
+    line-height: 1;
+    margin-bottom: -10px;
+}
+
+.testimonial-stars {
+    display: flex;
+    gap: 4px;
+    color: #f4a723;
+    font-size: 1rem;
+}
+
+.testimonial-text {
     font-style: italic;
     color: var(--text-muted);
+    font-size: 1rem;
+    flex: 1;
 }
 
 .testimonial-author {
-    display: block;
-    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
     font-style: normal;
     font-weight: 600;
     color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.testimonial-author i {
+    font-size: 1.3rem;
+    color: var(--primary);
 }
 
 .map-container {
@@ -334,10 +564,45 @@ nav {
     transform: translateY(-5px);
 }
 
+/* Icono de servicios */
+.service-icon {
+    font-size: 2.2rem;
+    color: var(--primary);
+    margin-bottom: 18px;
+    width: 60px;
+    height: 60px;
+    background: rgba(150, 113, 91, 0.1);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.card:hover .service-icon {
+    background: var(--primary);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Icono de consejos */
 .tip-icon {
     font-size: 2rem;
     margin-bottom: 20px;
     color: var(--primary);
+    width: 56px;
+    height: 56px;
+    background: rgba(150, 113, 91, 0.1);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.tip-card:hover .tip-icon {
+    background: var(--primary);
+    color: #fff;
 }
 
 .tip-card h3 {
@@ -380,4 +645,140 @@ nav {
     section {
         padding: 60px 20px;
     }
+
+
+
+
+
+/* RESET BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY - texto general */
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    color: #222;
+    background-color: #fff;
+    line-height: 1.6;
+}
+
+/* TÍTULOS (estilo elegante) */
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #111;
+}
+
+/* TAMAÑOS DE TÍTULOS */
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2.2rem;
+}
+
+h3 {
+    font-size: 1.6rem;
+}
+
+/* PÁRRAFOS */
+p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+/* MENÚ */
+nav {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #222;
+    margin: 0 15px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #c59d5f; /* tono dorado elegante */
+}
+
+/* BOTONES */
+button, .btn {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #c59d5f;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+button:hover, .btn:hover {
+    background-color: #a67c3b;
+}
+
+/* SECCIONES */
+section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* DETALLE DECORATIVO (muy usado en peluquerías) */
+.subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #c59d5f;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+/* Efecto Ripple */
+.ripple-effect {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transform: scale(0);
+    pointer-events: none;
+    animation: ripple-animation 0.6s linear;
+    z-index: 10;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Asegurar que los botones tengan position relative para el ripple */
+.btn, .filter-btn, .logo, .nav-links a, .faq-question {
+    position: relative;
+    overflow: hidden;
 }
