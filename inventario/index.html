@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promoción de Modelos | Portfolio Exclusivo</title>
+    <meta name="description" content="Portfolio exclusivo de nuestras modelos.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <header>
+        <div class="header-content">
+        <h1>Nuestros Modelos Disponibles en Printables.com</h1>
+           <div class="info">Printables.com es una plataforma en línea dedicada a compartir y descargar modelos 3D listos para imprimir, especialmente pensada para usuarios de impresoras 3D. Fue creada por Prusa Research, la misma empresa detrás de las populares impresoras Prusa i3. En esta web, diseñadores y aficionados de todo el mundo publican gratuitamente objetos tridimensionales como herramientas, juguetes, piezas decorativas, accesorios para el hogar o repuestos.
+
+                Los usuarios pueden buscar modelos por categorías, descargarlos en formatos compatibles con impresión 3D y valorar los diseños de otros creadores. Además, la plataforma fomenta una comunidad activa donde se pueden seguir autores, comentar proyectos y participar en concursos o retos creativos.
+                
+                Una de las ventajas de Printables.com es su sistema de recompensas, que anima a los usuarios a compartir diseños de calidad ofreciendo puntos canjeables por productos o descuentos. Esto ha convertido la plataforma en un espacio muy popular dentro de la comunidad maker.
+                
+                En resumen, Printables.com es una comunidad colaborativa que facilita el acceso a miles de modelos 3D gratuitos, promoviendo la creatividad, el aprendizaje y la colaboración entre entusiastas de la impresión 3D.
+           </div>
+
+           
+            <p>Descubrelos en esta direccion web.</p>
+            <a href="https://www.printables.com/@Rioseras007/models" target="_blank">Aquí</a>
+            <p>Descarga el tema musical del video prmocional gratis</p>
+            <a href="Liga de Acero.mp3" target="_blank">Aquí</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="video-section">
+            <h2>Vídeo Promocional</h2>
+            <div class="video-container glass-panel">
+                <video width="960" height="540" controls autoplay>
+                    <!-- Fuentes alternativas para compatibilidad -->
+                    <source src="video.mp4" type="video/mp4">
+                    <source src="video.webm" type="video/webm">
+                    <source src="video.ogv" type="video/ogg">
+                    <!-- Mensaje si el navegador no soporta video -->
+                    Tu navegador no soporta la etiqueta de video HTML5.
+                </video>
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <h2>Galería de Imágenes</h2>
+            <div class="masonry-gallery" id="gallery">
+                <!-- Las imágenes se cargarán dinámicamente con JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para ver imágenes en grande -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="expandedImg">
+        <div id="caption"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Promoción de Modelos. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
