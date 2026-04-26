@@ -2,10 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const images = [
         { src: "../modelos/batgirl.png", link: "https://www.printables.com/model/1625336-batgirl" },
-        { src: "../modelos/blackwidow.png", link: "https://www.printables.com/model/1684304-black-widow" },
+        { src: "../modelos/Viuda megra.png", link: "https://www.printables.com/model/1684304-black-widow" },
         { src: "../modelos/catwoman.png", link: "https://www.printables.com/model/1614733-catwoman" },
-        { src: "../modelos/heroina.png", link: "https://www.printables.com/model/1690267-heroina-sexy" },
-        { src: "../modelos/Hulka.png", link: "https://www.printables.com/model/1614690-hulka" },
+        { src: "../modelos/Heroina sexy.png", link: "https://www.printables.com/model/1690267-heroina-sexy" },
+        { src: "../modelos/She-Hulk.png", link: "https://www.printables.com/model/1614690-hulka" },
         { src: "../modelos/Spider Woman.png", link: "https://www.printables.com/model/1617016-spider-woman" },
         { src: "../modelos/Bruja escarlata.png", link: "https://www.printables.com/model/1616997-bruja-escarlata" },
         { src: "../modelos/Poison Ivy.png", link: "https://www.printables.com/model/1675062-poison-ivy" },
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { src: "../modelos/Rogue.png", link: "https://www.printables.com/model/1621854-rogue" },
         { src: "../modelos/Saturngirl.png", link: "https://www.printables.com/model/1700066-saturn-girl" },
         { src: "../modelos/Sungirl.png", link: "https://www.printables.com/model/1680251-sungirl" },
-        { src: "Supergirl.png", link: "https://www.printables.com/model/1651267-supergirl-18" },
+        { src: "../modelos/Supergirl.png", link: "https://www.printables.com/model/1651267-supergirl-18" },
         { src: "../modelos/Titania.png", link: "https://www.printables.com/model/1666376-titania-18" },
         { src: "../modelos/Storm.png", link: "https://www.printables.com/model/1615981-tormenta-x-men-mutante" },
         { src: "../modelos/Wonder Woman.png", link: "https://www.printables.com/model/1613204-wonder-woman" }
