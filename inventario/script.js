@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { src: "Rogue.png", link: "https://www.printables.com/model/1621854-rogue" },
         { src: "Saturngirl.png", link: "https://www.printables.com/model/1700066-saturn-girl" },
         { src: "Sungirl.png", link: "https://www.printables.com/model/1680251-sungirl" },
-        { src: "Supergirl.png", link: "https://www.printables.com/model/1700066-saturn-girl" },
+        { src: "Supergirl.png", link: "https://www.printables.com/model/1651267-supergirl-18" },
         { src: "Titania.png", link: "https://www.printables.com/model/1666376-titania-18" },
         { src: "Storm.png", link: "https://www.printables.com/model/1615981-tormenta-x-men-mutante" },
         { src: "Wonder Woman.png", link: "https://www.printables.com/model/1613204-wonder-woman" }
