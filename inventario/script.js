@@ -2,11 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const images = [
         { src: "../modelos/batgirl.png", link: "https://www.printables.com/model/1625336-batgirl" },
-        { src: "../modelos/Viuda negra.png", link: "https://www.printables.com/model/1684304-black-widow" },
+        { src: "../modelos/Viudanegra.png", link: "https://www.printables.com/model/1684304-black-widow" },
         { src: "../modelos/catwoman.png", link: "https://www.printables.com/model/1614733-catwoman" },
-        { src: "../modelos/Heroina sexy.png", link: "https://www.printables.com/model/1690267-heroina-sexy" },
-        { src: "../modelos/She-Hulk.png", link: "https://www.printables.com/model/1614690-hulka" },
-        { src: "../modelos/Spider Woman.png", link: "https://www.printables.com/model/1617016-spider-woman" },
+        { src: "../modelos/Heroinasexy.png", link: "https://www.printables.com/model/1690267-heroina-sexy" },
+        { src: "../modelos/SheHulk.png", link: "https://www.printables.com/model/1614690-hulka" },
+        { src: "../modelos/SpiderWoman.png", link: "https://www.printables.com/model/1617016-spider-woman" },
         { src: "../modelos/Bruja escarlata.png", link: "https://www.printables.com/model/1616997-bruja-escarlata" },
         { src: "../modelos/Poison Ivy.png", link: "https://www.printables.com/model/1675062-poison-ivy" },
         { src: "../modelos/Mamba negra.png", link: "https://www.printables.com/model/1696056-mamba-negra-tanya-sealy" },
