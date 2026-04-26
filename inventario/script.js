@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { src: "../modelos/Mamba negra.png", link: "https://www.printables.com/model/1696056-mamba-negra-tanya-sealy" },
         { src: "../modelos/Killer Frost.png", link: "https://www.printables.com/model/1673838-killer-frost" },
         { src: "../modelos/Susan Storm.png", link: "https://www.printables.com/model/1628621-susan-storm" },
-        { src: "../modelos/Power girl.png", link: "https://www.printables.com/model/1659485-power-girl-18" },
+        { src: "../modelos/Powergirl.png", link: "https://www.printables.com/model/1659485-power-girl-18" },
         { src: "../modelos/Rogue.png", link: "https://www.printables.com/model/1621854-rogue" },
         { src: "../modelos/Saturngirl.png", link: "https://www.printables.com/model/1700066-saturn-girl" },
         { src: "../modelos/Sungirl.png", link: "https://www.printables.com/model/1680251-sungirl" },
