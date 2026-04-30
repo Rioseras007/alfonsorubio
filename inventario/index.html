@@ -3,76 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promoción de Modelos | Portfolio Exclusivo</title>
-    <meta name="description" content="Portfolio exclusivo de nuestras modelos.">
+    <title>Modelos 3D | Coleccion destacada en Printables</title>
+    <meta name="description" content="Coleccion visual de modelos 3D publicados en Printables con video, musica y galeria interactiva.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="background-animation"></div>
-    
-    <header>
-        <div class="header-content">
-        <h1>Nuestros Modelos Disponibles en Printables.com</h1>
-           <div class="info">Printables.com es una plataforma en línea dedicada a compartir y descargar modelos 3D listos para imprimir, especialmente pensada para usuarios de impresoras 3D. Fue creada por Prusa Research, la misma empresa detrás de las populares impresoras Prusa i3. En esta web, diseñadores y aficionados de todo el mundo publican gratuitamente objetos tridimensionales como herramientas, juguetes, piezas decorativas, accesorios para el hogar o repuestos.
+    <div class="background-animation" aria-hidden="true"></div>
 
-                Los usuarios pueden buscar modelos por categorías, descargarlos en formatos compatibles con impresión 3D y valorar los diseños de otros creadores. Además, la plataforma fomenta una comunidad activa donde se pueden seguir autores, comentar proyectos y participar en concursos o retos creativos.
-                
-                Una de las ventajas de Printables.com es su sistema de recompensas, que anima a los usuarios a compartir diseños de calidad ofreciendo puntos canjeables por productos o descuentos. Esto ha convertido la plataforma en un espacio muy popular dentro de la comunidad maker.
-                
-                En resumen, Printables.com es una comunidad colaborativa que facilita el acceso a miles de modelos 3D gratuitos, promoviendo la creatividad, el aprendizaje y la colaboración entre entusiastas de la impresión 3D.
-           </div>
+    <header class="hero">
+        <div class="hero-copy">
+            <p class="eyebrow">Coleccion original para impresion 3D</p>
+            <h1>Modelos con presencia, detalle y estilo listos para descubrir en Printables</h1>
+            <p class="hero-text">
+                Una seleccion de figuras con caracter, preparadas para destacar en tu catalogo, en tu impresora y en tu vitrina.
+                Reune lanzamientos, video promocional, musica original y acceso directo a cada modelo.
+            </p>
 
-           
-            <p>Descubrelos en esta direccion web.</p>
-            <a href="https://www.printables.com/@Rioseras007/models" target="_blank">Aquí</a>
-            <br>
-            <br>
-            <p>Mira el video promocional </p>
-            <br>
-            <a href="https://drive.google.com/file/d/1N0z57myLoYUcjfywg31MbxsC3Aw7OsXG/view?usp=drive_link" target="_blank">Aquí</a>
-            <br>
-            <p>Descarga el tema musical del video prmocional gratis</p>
-            <br>
-            <a href="Liga de Acero.mp3" target="_blank">Aquí</a>
-            <br>
-            <br>
-            <audio src="Liga de Acero.mp3" controls muted></audio>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="https://www.printables.com/@Rioseras007/models" target="_blank" rel="noreferrer">Ver perfil en Printables</a>
+                <a class="btn btn-secondary" href="#galeria">Explorar galeria</a>
+            </div>
+
+            <div class="hero-stats" aria-label="Resumen del portfolio">
+                <article class="stat-card glass-panel">
+                    <strong id="modelCount">19</strong>
+                    <span>modelos destacados</span>
+                </article>
+                <article class="stat-card glass-panel">
+                    <strong>1</strong>
+                    <span>video promocional</span>
+                </article>
+                <article class="stat-card glass-panel">
+                    <strong>1</strong>
+                    <span>tema musical original</span>
+                </article>
+            </div>
         </div>
+
+        <aside class="hero-panel glass-panel">
+            <h2>Que vas a encontrar aqui</h2>
+            <ul class="feature-list">
+                <li>Acceso rapido a la coleccion publicada.</li>
+                <li>Presentacion audiovisual para compartir y promocionar.</li>
+                <li>Galeria navegable con vista ampliada.</li>
+                <li>Enlaces directos para descargar cada diseño.</li>
+            </ul>
+            <div class="hero-links">
+                <a href="https://drive.google.com/file/d/1N0z57myLoYUcjfywg31MbxsC3Aw7OsXG/view?usp=drive_link" target="_blank" rel="noreferrer">Ver video externo</a>
+                <a href="Liga de Acero.mp3" target="_blank" rel="noreferrer">Escuchar tema musical</a>
+            </div>
+            <audio src="Liga de Acero.mp3" controls preload="metadata"></audio>
+        </aside>
     </header>
 
     <main>
-        <section class="video-section">
-            <h2>Vídeo Promocional</h2>
-            <div class="video-container glass-panel">
-                <video width="960" height="540" controls autoplay>
-                    <!-- Fuentes alternativas para compatibilidad -->
-                    <source src="vid.mp4" type="video/mp4">
-                    <source src="vid.webm" type="video/webm">
-                    <source src="vid.ogv" type="video/ogg">
-                    <!-- Mensaje si el navegador no soporta video -->
-                    Tu navegador no soporta la etiqueta de video HTML5.
-                </video>
+        <section class="about glass-panel" aria-labelledby="sobre-printables">
+            <div class="section-heading">
+                <p class="eyebrow">Contexto</p>
+                <h2 id="sobre-printables">Por que Printables</h2>
+            </div>
+            <div class="about-grid">
+                <p>
+                    Printables es una plataforma de Prusa Research centrada en compartir y descargar modelos 3D listos para imprimir.
+                    Su comunidad facilita descubrir piezas utiles, decorativas y creativas con una experiencia muy orientada al mundo maker.
+                </p>
+                <p>
+                    Ademas de alojar diseños, impulsa la participacion con valoraciones, comentarios, retos y un sistema de recompensas.
+                    Eso convierte el perfil en una vitrina perfecta para dar visibilidad a una coleccion bien cuidada.
+                </p>
             </div>
         </section>
 
-        <section class="gallery-section">
-            <h2>Galería de Imágenes</h2>
-            <div class="masonry-gallery" id="gallery">
-                <!-- Las imágenes se cargarán dinámicamente con JS -->
+        <section class="video-section" aria-labelledby="video-promocional">
+            <div class="section-heading">
+                <p class="eyebrow">Presentacion</p>
+                <h2 id="video-promocional">Video promocional</h2>
             </div>
+            <div class="video-layout">
+                <div class="video-container glass-panel">
+                    <video controls preload="metadata" playsinline poster="modelos/batgirl.png">
+                        <source src="vid.mp4" type="video/mp4">
+                        <source src="vid.webm" type="video/webm">
+                        <source src="vid.ogv" type="video/ogg">
+                        Tu navegador no soporta video HTML5.
+                    </video>
+                </div>
+
+                <div class="media-copy glass-panel">
+                    <h3>Una presentacion pensada para compartir</h3>
+                    <p>
+                        La pieza audiovisual resume la energia de la coleccion y funciona como apoyo para redes, mensajes promocionales
+                        o presentaciones del portfolio.
+                    </p>
+                    <div class="media-actions">
+                        <a class="btn btn-primary" href="https://drive.google.com/file/d/1N0z57myLoYUcjfywg31MbxsC3Aw7OsXG/view?usp=drive_link" target="_blank" rel="noreferrer">Abrir video en Drive</a>
+                        <a class="btn btn-secondary" href="Liga de Acero.mp3" target="_blank" rel="noreferrer">Descargar musica</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery-section" id="galeria" aria-labelledby="galeria-modelos">
+            <div class="section-heading section-heading-split">
+                <div>
+                    <p class="eyebrow">Coleccion</p>
+                    <h2 id="galeria-modelos">Galeria de modelos</h2>
+                </div>
+                <label class="search-box" for="gallerySearch">
+                    <span>Buscar modelo</span>
+                    <input id="gallerySearch" type="search" placeholder="Ej. Batgirl, Storm, Wonder Woman">
+                </label>
+            </div>
+
+            <div class="gallery-meta">
+                <p id="galleryStatus">Cargando modelos...</p>
+            </div>
+
+            <div class="gallery-grid" id="gallery" aria-live="polite"></div>
         </section>
     </main>
 
-    <!-- Modal para ver imágenes en grande -->
-    <div id="imageModal" class="modal">
-        <span class="close-modal">&times;</span>
-        <img class="modal-content" id="expandedImg">
-        <div id="caption"></div>
+    <div id="imageModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="caption">
+        <button class="close-modal" type="button" aria-label="Cerrar imagen ampliada">&times;</button>
+        <div class="modal-shell">
+            <img class="modal-content" id="expandedImg" alt="">
+            <div class="modal-details">
+                <p id="caption"></p>
+                <a id="modalLink" class="btn btn-primary" href="#" target="_blank" rel="noreferrer">Abrir modelo en Printables</a>
+            </div>
+        </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 Promoción de Modelos. Todos los derechos reservados.</p>
+        <p>&copy; 2026 Promocion de Modelos. Portfolio visual para Printables.</p>
     </footer>
 
     <script src="script.js"></script>
