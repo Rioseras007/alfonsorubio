@@ -1,0 +1,248 @@
+:root {
+    --fondo-principal: #09131f;
+    --fondo-secundario: #13263d;
+    --panel: rgba(8, 18, 31, 0.78);
+    --panel-borde: rgba(255, 255, 255, 0.12);
+    --texto-principal: #f4efe6;
+    --texto-secundario: #b9c7d8;
+    --dorado: #d4af37;
+    --sombra: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--texto-principal);
+    background:
+        radial-gradient(circle at top, rgba(212, 175, 55, 0.18), transparent 30%),
+        linear-gradient(135deg, var(--fondo-principal), var(--fondo-secundario));
+    font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.contenedor {
+    width: min(80%, calc(100% - 2rem));
+    margin-left: 200px;
+    padding: 3.5rem 0.5rem 4rem;
+}
+
+.hero {
+    padding: 2rem clamp(1.2rem, 2vw, 2rem);
+    margin-bottom: 2.5rem;
+    text-align: center;
+    border: 1px solid var(--panel-borde);
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    box-shadow: var(--sombra);
+    backdrop-filter: blur(10px);
+}
+
+.hero__eyebrow {
+    margin: 0 0 0.75rem;
+    color: var(--dorado);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.28rem;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0;
+    font-family: "Bodoni MT", "Didot", "Times New Roman", serif;
+    font-size: clamp(2.3rem, 5vw, 4.4rem);
+    line-height: 1.05;
+    text-wrap: balance;
+}
+
+.hero__intro {
+    width: min(700px, 100%);
+    margin: 1.2rem auto 0;
+    color: var(--texto-secundario);
+    font-size: 1.08rem;
+    line-height: 1.7;
+}
+
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.tarjeta-firma {
+    margin: 0;
+    padding: 1.15rem;
+    border: 1px solid var(--panel-borde);
+    border-radius: 24px;
+    background: var(--panel);
+    box-shadow: var(--sombra);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tarjeta-firma:hover {
+    transform: translateY(-6px);
+    border-color: rgba(212, 175, 55, 0.45);
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.42);
+}
+
+.tarjeta-firma img {
+    border-radius: 18px;
+    border: 1px solid rgba(212, 175, 55, 0.18);
+    background: linear-gradient(180deg, #ffffff, #eef2f6);
+    padding: 0.8rem;
+}
+
+.ampliar-firma {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: zoom-in;
+    border-radius: 18px;
+}
+
+.ampliar-firma:focus-visible {
+    outline: 3px solid rgba(212, 175, 55, 0.8);
+    outline-offset: 6px;
+}
+
+.ampliar-firma__texto {
+    position: absolute;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    background: rgba(8, 18, 31, 0.8);
+    color: #f9f5ec;
+    font-size: 0.9rem;
+    letter-spacing: 0.03rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+}
+
+.ampliar-firma:hover .ampliar-firma__texto,
+.ampliar-firma:focus-visible .ampliar-firma__texto {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tarjeta-firma figcaption {
+    margin-top: 1rem;
+    color: var(--texto-principal);
+    font-family: "Bodoni MT", "Didot", "Times New Roman", serif;
+    font-size: 1.35rem;
+    letter-spacing: 0.03rem;
+    text-align: center;
+}
+
+.visor-firma {
+    width: min(92vw, 1100px);
+    padding: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 28px;
+    background: rgba(4, 12, 21, 0.94);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
+
+.visor-firma::backdrop {
+    background: rgba(3, 8, 14, 0.82);
+    backdrop-filter: blur(8px);
+}
+
+.visor-firma__cerrar {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-left: auto;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--texto-principal);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.visor-firma__contenido {
+    margin: 0.75rem 0 0;
+}
+
+.visor-firma__imagen {
+    width: 100%;
+    max-height: 76vh;
+    object-fit: contain;
+    border-radius: 18px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: linear-gradient(180deg, #ffffff, #eef2f6);
+    padding: 1rem;
+}
+
+.visor-firma__pie {
+    margin-top: 1rem;
+    text-align: center;
+    color: var(--texto-principal);
+    font-family: "Bodoni MT", "Didot", "Times New Roman", serif;
+    font-size: clamp(1.25rem, 2vw, 1.7rem);
+}
+
+@media (max-width: 640px) {
+    .contenedor {
+        width: min(100% - 1.2rem, 1120px);
+        padding: 1.4rem 0 2.2rem;
+    }
+
+    .hero {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 22px;
+    }
+
+    .hero__eyebrow {
+        letter-spacing: 0.2rem;
+    }
+
+    .hero__intro {
+        font-size: 1rem;
+    }
+
+    .galeria {
+        gap: 1rem;
+    }
+
+    .tarjeta-firma {
+        padding: 0.9rem;
+        border-radius: 20px;
+    }
+
+    .ampliar-firma__texto {
+        right: 0.9rem;
+        bottom: 0.9rem;
+        padding: 0.45rem 0.75rem;
+        font-size: 0.82rem;
+        opacity: 1;
+        transform: none;
+    }
+
+    .visor-firma {
+        width: min(96vw, 1100px);
+        padding: 1rem;
+        border-radius: 22px;
+    }
+
+    .visor-firma__imagen {
+        max-height: 68vh;
+        padding: 0.7rem;
+    }
+}
