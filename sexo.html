@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sexo.css">
+    <title>Formulario Confidencial - Hábitos Sexuales</title>
+  
+
+</head>
+<body>
+    <h1>Formulario Confidencial sobre Hábitos Sexuales</h1>
+    
+    <div class="disclaimer">
+        <strong>Nota importante:</strong> Este formulario es solo para fines informativos o de investigación. 
+        Todos los datos se tratan de forma anónima. No se recopila información personal identificable.
+    </div>
+
+    <form id="sexualHabitsForm" action="#" method="POST" onsubmit="handleSubmit(event)">
+        
+        <!-- Sección 1: Datos demográficos -->
+        <div class="form-section">
+            <h2>1. Datos demográficos</h2>
+            
+            <label>Edad</label>
+            <input type="number" name="edad" min="18" max="100" required>
+
+            <label>Género</label>
+            <div class="radio-group">
+                <input type="radio" name="genero" value="hombre" id="hombre"> 
+                <label for="hombre">Hombre</label><br>
+                <input type="radio" name="genero" value="mujer" id="mujer"> 
+                <label for="mujer">Mujer</label><br>
+                <input type="radio" name="genero" value="no_binario" id="no_binario"> 
+                <label for="no_binario">No binario</label><br>
+                <input type="radio" name="genero" value="otro" id="otro"> 
+                <label for="otro">Otro / Prefiero no decir</label>
+            </div>
+
+            <label>Orientación sexual</label>
+            <select name="orientacion" required>
+                <option value="">Selecciona una opción</option>
+                <option value="heterosexual">Heterosexual</option>
+                <option value="homosexual">Homosexual</option>
+                <option value="bisexual">Bisexual</option>
+                <option value="pansexual">Pansexual</option>
+                <option value="asexual">Asexual</option>
+                <option value="otro">Otro / Prefiero no decir</option>
+            </select>
+        </div>
+
+        <!-- Sección 2: Actividad sexual -->
+        <div class="form-section">
+            <h2>2. Actividad sexual actual</h2>
+            
+            <label>¿Tienes actividad sexual actualmente?</label>
+            <div class="radio-group">
+                <input type="radio" name="actividad_actual" value="si" id="act_si" required> 
+                <label for="act_si">Sí</label><br>
+                <input type="radio" name="actividad_actual" value="no" id="act_no"> 
+                <label for="act_no">No</label>
+            </div>
+
+            <label>¿Con qué frecuencia tienes relaciones sexuales?</label>
+            <select name="frecuencia">
+                <option value="">Selecciona una opción</option>
+                <option value="diario">Diario o casi diario</option>
+                <option value="varias_semana">Varias veces por semana</option>
+                <option value="semanal">Una vez por semana</option>
+                <option value="quincenal">Cada 15 días</option>
+                <option value="mensual">1-3 veces al mes</option>
+                <option value="ocasional">Ocasionalmente</option>
+                <option value="ninguna">Ninguna en los últimos 6 meses</option>
+            </select>
+
+            <label>Número aproximado de parejas sexuales en los últimos 12 meses</label>
+            <input type="number" name="parejas_12meses" min="0" value="0">
+        </div>
+
+        <!-- Sección 3: Prácticas y hábitos -->
+        <div class="form-section">
+            <h2>3. Prácticas y hábitos sexuales</h2>
+            
+            <label>¿Qué prácticas sexuales realizas habitualmente? (selecciona todas las que apliquen)</label>
+            <div class="checkbox-group">
+                <input type="checkbox" name="practicas" value="vaginal"> Sexo vaginal<br>
+                <input type="checkbox" name="practicas" value="anal"> Sexo anal<br>
+                <input type="checkbox" name="practicas" value="oral"> Sexo oral<br>
+                <input type="checkbox" name="practicas" value="masturbacion_mutua"> Masturbación mutua<br>
+                <input type="checkbox" name="practicas" value="juguetes"> Uso de juguetes sexuales<br>
+                <input type="checkbox" name="practicas" value="bdsm"> Prácticas BDSM / Bondage<br>
+                <input type="checkbox" name="practicas" value="otro"> Otro
+            </div>
+
+            <label>¿Usas preservativo u otros métodos de barrera habitualmente?</label>
+            <div class="radio-group">
+                <input type="radio" name="preservativo" value="siempre"> Siempre<br>
+                <input type="radio" name="preservativo" value="casi_siempre"> Casi siempre<br>
+                <input type="radio" name="preservativo" value="a_veces"> A veces<br>
+                <input type="radio" name="preservativo" value="nunca"> Nunca<br>
+            </div>
+
+            <label>¿Cuántas parejas sexuales simultáneas (no monógamas) tienes actualmente?</label>
+            <input type="number" name="parejas_simultaneas" min="0" value="0">
+        </div>
+
+        <!-- Sección 4: Satisfacción y salud -->
+        <div class="form-section">
+            <h2>4. Satisfacción y salud sexual</h2>
+            
+            <label>Del 1 al 10, ¿qué nivel de satisfacción tienes con tu vida sexual actual?</label>
+            <input type="number" name="satisfaccion" min="1" max="10" placeholder="1-10">
+
+            <label>¿Has tenido alguna ITS (Infección de Transmisión Sexual) en los últimos 5 años?</label>
+            <div class="radio-group">
+                <input type="radio" name="its" value="si"> Sí<br>
+                <input type="radio" name="its" value="no"> No<br>
+                <input type="radio" name="its" value="prefiero_no"> Prefiero no decir
+            </div>
+
+            <label>Observaciones o comentarios adicionales (opcional)</label>
+            <textarea name="comentarios" rows="5" placeholder="Escribe aquí cualquier información adicional..."></textarea>
+        </div>
+
+        <button type="submit">Enviar formulario (anónimamente)</button>
+    </form>
+
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert("Formulario enviado de forma anónima. ¡Gracias por tu participación!");
+            // Aquí podrías añadir código para enviar los datos a un servidor o guardarlos localmente
+            console.log("Datos recogidos (solo para demostración)");
+        }
+    </script>
+</body>
+</html>
