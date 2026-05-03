@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar chicas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f4f7fa;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 14px 40px;
+            font-size: 18px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover { 
+            background: #13b25d; 
+        }
+
+        /* Contenedor de imágenes */
+        .contenedor-imagenes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        /* ===================== ESTILOS DE LAS IMÁGENES ===================== */
+        .chica1 {
+            width: 180px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 3px solid #fff;
+        }
+
+        /* Hover */
+        .chica1:hover {
+            transform: scale(1.08);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: #ff69b4;
+            z-index: 10;
+        }
+
+        /* Click */
+        .chica1:active {
+            transform: scale(0.95);
+            filter: brightness(0.85);
+        }
+
+        /* Focus accesibilidad */
+        .chica1:focus {
+            outline: none;
+            box-shadow: 0 0 0 5px rgba(52, 152, 219, 0.6);
+            border-color: #ff1493;
+        }
+
+        /* Animación de entrada suave */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        .chica1 {
+            animation: fadeIn 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧠 Test para probar tus gustos más íntimos</h1>
+
+    <div id="contenido"></div>
+
+    <button onclick="generarChica()">Chica</button>
+    <button onclick="generarChico()">Chico</button>
+    <button onclick="recargarPagina()">Volver a probar</button>
+
+    <script>
+        function generarChica() {
+            document.getElementById('contenido').innerHTML = `
+                <h3>Chicas que te recomienda la I.A</h3>
+                <p style="text-align:center; font-size:18px;">Escoge la que más te guste</p>
+                
+                <div class="contenedor-imagenes">
+                    <img class="chica1" src="chica1.jpg" alt="Chica 1">
+                    <img class="chica1" src="chica2.jpg" alt="Chica 2">
+                    <img class="chica1" src="chica3.jpg" alt="Chica 3">
+                    <img class="chica1" src="chica4.jpg" alt="Chica 4">
+                </div>
+            `;
+        }
+
+        function generarChico() {
+            document.getElementById('contenido').innerHTML = `
+                <h3>Chicos que te recomienda la I.A</h3>
+                <p style="text-align:center; font-size:18px;">Escoge el que más te guste</p>
+                
+                <div class="contenedor-imagenes">
+                    <img class="chica1" src="chico1.jpg" alt="Chico 1">
+                    <img class="chica1" src="chico2.jpg" alt="Chico 2">
+                    <img class="chica1" src="chico3.jpg" alt="Chico 3">
+                    <img class="chica1" src="chico4.jpg" alt="Chico 4">
+                </div>
+            `;
+        }
+
+        function recargarPagina() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
