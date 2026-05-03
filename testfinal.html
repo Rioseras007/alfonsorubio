@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+DE+SAS:wght@100..400&display=swap" rel="stylesheet">
     <title>Generar chicas</title>
     <style>
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: "Playwrite DE SAS", cursive;
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
@@ -49,13 +52,23 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 25px;
-            margin-top: 20px;
+            margin-top: 100px;
+            margin-bottom: auto;
+        }
+
+        .botones {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 300px;
+            margin-bottom: auto;
         }
 
         /* ===================== ESTILOS DE LAS IMÁGENES ===================== */
         .chica1 {
-            width: 180px;
-            height: 240px;
+            width: 220px;
+            height:400px;
             object-fit: cover;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -66,8 +79,8 @@
 
         /* Hover */
         .chica1:hover {
-            transform: scale(1.08);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(1.7);
+            box-shadow: 0 15px 30px rgba(76, 37, 160, 0.3);
             border-color: #ff69b4;
             z-index: 10;
         }
@@ -104,18 +117,22 @@
 </head>
 <body>
     <h1>🧠 Test para probar tus gustos más íntimos</h1>
+   
 
     <div id="contenido"></div>
+
+    <div class="botones"></div>
 
     <button onclick="generarChica()">Chica</button>
     <button onclick="generarChico()">Chico</button>
     <button onclick="recargarPagina()">Volver a probar</button>
+    </div>
 
     <script>
         function generarChica() {
             document.getElementById('contenido').innerHTML = `
                 <h3>Chicas que te recomienda la I.A</h3>
-                <p style="text-align:center; font-size:18px;">Escoge la que más te guste</p>
+                <p style="text-align:center; font-size:32px;">Escoge la que más te guste</p>
                 
                 <div class="contenedor-imagenes">
                     <img class="chica1" src="chica1.jpg" alt="Chica 1">
