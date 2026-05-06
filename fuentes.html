@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejemplo fuente local</title>
+
+    <style>
+        /* 1. Declaramos las fuentes una declaracion por fuente no vale todas a la vez */
+
+        /* Fuente 1 */
+@font-face {
+    font-family: 'MiFuente1';
+    src: url('fonts/mifuente_1.ttf') format('truetype');
+}
+
+/* Fuente 2 */
+@font-face {
+    font-family: 'MiFuente2';
+    src: url('fonts/mifuente_2.otf') format('opentype');
+}
+
+/* Fuente 3 */
+@font-face {
+    font-family: 'MiFuente3';
+    src: url('fonts/mifuente_3.otf') format('opentype');
+}
+
+/* Fuente 4 */
+@font-face {
+    font-family: 'future';
+    src: url('fonts/BTTF.ttf') format('opentype');
+}
+
+       
+
+        /* 2. La usamos */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            font-family: 'future', Arial, sans-serif;
+            color: blue;
+            font-size: 4rem;
+        }
+
+        .p1 {
+            font-family: 'MiFuente1', Arial, sans-serif;
+            color: blue;
+            font-size: 4rem;
+        }
+
+        .p2 {
+            font-family: 'MiFuente2', Arial, sans-serif;
+            color: red;
+            font-size: 4rem;
+        }
+
+        .p3 {
+            font-family: 'MiFuente3', Arial, sans-serif;
+            color: green;
+            font-size: 4rem;
+        }
+
+        .future {
+            font-family: 'future', Arial, sans-serif;
+            color: green;
+            font-size: 4rem;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>BIENVENIDO AL FUTURO</h1>
+   
+    <p>H1 usando la fuente del futuro.</p>
+  
+    <p>Los parafos usando otras fuentes locales que hemos obtenido de Internet sin usar Google Fonts.</p>
+
+
+<p class="p1" >El primer debate electoral de las elecciones autonómicas de Andalucía, transmitido por RTVE, estuvo centrado en dos ejes fundamentales: el acceso a la vivienda y la política sanitaria. En el programa participaron los cinco candidatos con representación en el Parlamento andaluz: Manuel Gavira (Vox), José Ignacio García (Adelante Andalucía), María Jesús Montero (PSOE), Juanma Moreno (PP) y Antonio Maíllo (Por Andalucía).</p>
+<br>
+<p class="p2">El primer debate electoral de las elecciones autonómicas de Andalucía, transmitido por RTVE, estuvo centrado en dos ejes fundamentales: el acceso a la vivienda y la política sanitaria. En el programa participaron los cinco candidatos con representación en el Parlamento andaluz: Manuel Gavira (Vox), José Ignacio García (Adelante Andalucía), María Jesús Montero (PSOE), Juanma Moreno (PP) y Antonio Maíllo (Por Andalucía).</p>
+<br>
+<p class="p3">El primer debate electoral de las elecciones autonómicas de Andalucía, transmitido por RTVE, estuvo centrado en dos ejes fundamentales: el acceso a la vivienda y la política sanitaria. En el programa participaron los cinco candidatos con representación en el Parlamento andaluz: Manuel Gavira (Vox), José Ignacio García (Adelante Andalucía), María Jesús Montero (PSOE), Juanma Moreno (PP) y Antonio Maíllo (Por Andalucía).</p>
+<br>
+
+
+
+
+</body>
+
+
+</html>
