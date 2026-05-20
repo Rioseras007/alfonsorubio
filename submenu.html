@@ -1,101 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 
-<title>Navegación Gradient Moderno</title>
+    <title>Navegación Gradient Moderno</title>
+    <style>
+        /* ===== RESET SUAVE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-    body {
-        margin: 0;
-        font-family: system-ui, sans-serif;
-        background: #0f172a;
-        color: #fff;
-    }
+        /* ===== BARRA DE NAVEGACIÓN ===== */
+        nav {
+            width: 100%;
+            padding: 16px 30px;
 
-    /* Barra de navegación moderna con degradado animado */
-    nav {
-        width: 100%;
-        padding: 15px 0;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 999;
+            position: fixed;
+            top: 0;
+            left: 0px;
+            z-index: 2;
 
-        background: linear-gradient(90deg,
-            #6366f1,
-            #a855f7,
-            #ec4899,
-            #f43f5e
-        );
-        background-size: 400% 400%;
-        animation: gradientMove 12s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
 
-        box-shadow: 0 2px 15px rgba(0,0,0,0.35);
-    }
+            backdrop-filter: blur(12px);
 
-    /* Animación del degradado */
-    @keyframes gradientMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
+            background: linear-gradient(135deg,
+                    #065206,
+                    #29b36b,
+                    #2fe356,
+                    #059435);
 
-    nav ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 25px;
-    }
+            background-size: 300% 300%;
+            animation: gradientMove 10s ease infinite;
+            border:#141414 2px solid;
 
-    nav a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 1.1rem;
-        padding: 6px 10px;
-        font-weight: 500;
-        transition: 0.25s;
-    }
+           
+            border-radius: 20px;
+            border-top:  #101010 2px solid;
+            border-bottom: #101010 5px solid;
+            border-left:  #101010 2px solid;
+            border-right:  #101010 2px solid;
 
-    nav a:hover {
-        transform: translateY(-2px);
-        text-shadow: 0 0 10px rgba(255,255,255,0.9);
-    }
 
-    /* Espacio para que el contenido no quede debajo del menú */
-    main {
-        padding-top: 100px;
-    }
-</style>
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.25),
+                0 0 15px rgba(72, 236, 165, 0.25);
+        }
+
+        /* ===== ANIMACIÓN DEL FONDO ===== */
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* ===== ENLACES ===== */
+        nav a {
+            position: relative;
+
+            color: rgb(232, 233, 248);
+            text-decoration: none;
+
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+
+            padding: 10px 18px;
+            border-radius: 12px;
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        /* ===== EFECTO HOVER ===== */
+        nav a:hover {
+            transform: translateY(-3px);
+
+            background: rgba(255, 255, 255, 0.15);
+
+            box-shadow:
+                0 4px 12px rgba(5, 177, 57, 0.393),
+                0 0 12px rgba(255, 255, 255, 0.4);
+        }
+
+        /* ===== EFECTO ACTIVO ===== */
+        nav a:active {
+            transform: scale(1.1);
+        }
+
+        /* ===== LÍNEA ANIMADA ===== */
+        nav a::after {
+            content: "";
+
+            position: absolute;
+            left: 50%;
+            bottom: 4px;
+
+            width: 0%;
+            height: 3px;
+
+            background: rgb(231, 13, 13);
+
+            transition: 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after {
+            width: 90%;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+
+            nav {
+                gap: 10px;
+                padding: 14px 10px;
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                font-size: 1.5rem;
+                padding: 8px 14px;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
 
-<nav>
-    <ul>
-        <li><a href="index.html" target="_blank">INICO  <i class="bi bi-house-door"></i></a></li>
-        <li><a href="https://www.instagram.com/" target="_blank">Instagram <i class="bi bi-instagram"></i></a></li>
-        <li><a href="https://chatgpt.com/" target="_blank">Chat GPT <i class="bi bi-openai"></i></i></a></li>
-        <li><a href="https://grok.com/" target="_blank">Grok <i class="bi bi-gear"></i></a></li>
-        <li><a href="https://www.youtube.com/@AlfonsoRubioRioseras?sub_confirmation=1" target="_blank">Suscribe a mi canal de Youtube <i class="bi bi-youtube"></i></a></li>
-         <li><a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=alfonsorubiorioseras" target="_blank">Sigueme en Linkedin <i class="bi bi-linkedin"></i></a></li>
-        <li><a href="discord.html" target="_blank">Discord <i class="bi bi-discord"></i></a></li>
-         <li><a href="https://antonio2709.synology.me/pc.html" target="_blank">Web Nas Juanjo <i class="bi bi-hdd-network-fill"></i></a></li>
-    </ul>
-</nav>
+    <main>
+        <nav class="nav">
+            <a class="nav-link active" href="index.html" target="_blank">INICO <i class="bi bi-house-door"></i></a>
+            <a class="nav-link" href="https://www.instagram.com/" target="_blank">Instagram <iclass="bi bi-instagram">
+                    </i></a>
+            <a class="nav-link" href="https://chatgpt.com/" target="_blank">Chat GPT <i
+                    class="bi bi-openai"></i></i></a>
+            <a class="nav-link" href="https://grok.com/" target="_blank">Grok <i class="bi bi-gear"></i></a>
+            <a class="nav-link" href="https://www.youtube.com/@AlfonsoRubioRioseras?sub_confirmation=1"
+                target="_blank">Suscribe a mi canal de Youtube <i class="bi bi-youtube"></i></a>
+            <a class="nav-link" href="discord.html" target="_blank">Discord <i class="bi bi-discord"></i></a>
+            <a class="nav-link" href="https://antonio2709.synology.me/pc.html" target="_blank">Web Nas Juanjo <i class="bi bi-hdd-network-fill"></i></a>
+            <a class="nav-link" href="https://www.printables.com/@Rioseras007" target="_blank">Printables <i class="bi bi-printer"></i></a>
+        </nav>
 
-<main>
-<br>
-</main>
+    </main>
 
 </body>
+
 </html>
