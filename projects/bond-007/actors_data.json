@@ -1,0 +1,216 @@
+[
+    {
+        "id": "001",
+        "name": "Sean Connery",
+        "slug": "sean_connery",
+        "image": "img/Sean Conney.jpg",
+        "birth": "1930 - 2020",
+        "nationality": "Escocés",
+        "years_active": "1954 - 2003",
+        "awards": "1 Oscar (The Untouchables), 2 BAFTA, 3 Golden Globes",
+        "filmography": [
+            {
+                "title": "The Untouchables (1987)",
+                "role": "Jim Malone"
+            },
+            {
+                "title": "Indiana Jones and the Last Crusade (1989)",
+                "role": "Henry Jones Sr."
+            },
+            {
+                "title": "The Hunt for Red October (1990)",
+                "role": "Marko Ramius"
+            },
+            {
+                "title": "The Name of the Rose (1986)",
+                "role": "William of Baskerville"
+            },
+            {
+                "title": "The Rock (1996)",
+                "role": "John Patrick Mason"
+            },
+            {
+                "title": "Marnie (1964)",
+                "role": "Mark Rutland"
+            }
+        ],
+        "biography": "El agente original. Antes de ser Bond, Connery fue culturista y marinero. Su carrera post-007 fue estelar, culminando en un Oscar por 'The Untouchables'. Un caballero del Imperio Británico que definió la elegancia ruda."
+    },
+    {
+        "id": "002",
+        "name": "George Lazenby",
+        "slug": "george_lazenby",
+        "image": "img/George Lazenby.jpg",
+        "birth": "1939 - Presente",
+        "nationality": "Australiano",
+        "years_active": "1960s - Presente",
+        "awards": "Nominación Globo de Oro (Revelación)",
+        "filmography": [
+            {
+                "title": "Universal Soldier (1971)",
+                "role": "Ryker"
+            },
+            {
+                "title": "Who Saw Her Die? (1972)",
+                "role": "Franco Serpieri"
+            },
+            {
+                "title": "The Man from Hong Kong (1975)",
+                "role": "Jack Wilton"
+            },
+            {
+                "title": "Gettysburg (1993)",
+                "role": "Johnston Pettigrew"
+            },
+            {
+                "title": "Becoming Bond (2017)",
+                "role": "Él mismo"
+            }
+        ],
+        "biography": "El modelo que se convirtió en agente. Sin experiencia previa en actuación, consiguió el papel más codiciado del mundo. Tras una sola misión, decidió abandonar la saga, convirtiéndose en una figura de culto."
+    },
+    {
+        "id": "003",
+        "name": "Roger Moore",
+        "slug": "roger_moore",
+        "image": "img/Roger Moore.jpg",
+        "birth": "1927 - 2017",
+        "nationality": "Inglés",
+        "years_active": "1945 - 2017",
+        "awards": "2 Golden Globes (UNICEF), Sir del Imperio Británico",
+        "filmography": [
+            {
+                "title": "The Saint (TV Series 1962-1969)",
+                "role": "Simon Templar"
+            },
+            {
+                "title": "The Persuaders! (1971-1972)",
+                "role": "Lord Brett Sinclair"
+            },
+            {
+                "title": "Wild Geese (1978)",
+                "role": "Lt. Shawn Fynn"
+            },
+            {
+                "title": "The Cannonball Run (1981)",
+                "role": "Seymour Goldfarb Jr."
+            },
+            {
+                "title": "The Man Who Haunted Himself (1970)",
+                "role": "Harold Pelham"
+            }
+        ],
+        "biography": "El agente más carismático y sofisticado. Antes de 007, ya era una estrella mundial gracias a 'El Santo'. Su tenencia como Bond fue la más larga, aportando un humor y elegancia únicos a la saga."
+    },
+    {
+        "id": "004",
+        "name": "Timothy Dalton",
+        "slug": "timothy_dalton",
+        "image": "img/Timothy Dalton.jpg",
+        "birth": "1946 - Presente",
+        "nationality": "Galés",
+        "years_active": "1964 - Presente",
+        "awards": "Aclamación por la Royal Shakespeare Company",
+        "filmography": [
+            {
+                "title": "The Lion in Winter (1968)",
+                "role": "King Philip II"
+            },
+            {
+                "title": "Flash Gordon (1980)",
+                "role": "Prince Barin"
+            },
+            {
+                "title": "The Rocketeer (1991)",
+                "role": "Neville Sinclair"
+            },
+            {
+                "title": "Hot Fuzz (2007)",
+                "role": "Simon Skinner"
+            },
+            {
+                "title": "Penny Dreadful (2014-2016)",
+                "role": "Sir Malcolm Murray"
+            },
+            {
+                "title": "Jane Eyre (1983)",
+                "role": "Rochester"
+            }
+        ],
+        "biography": "El agente shakesperiano. Aportó una intensidad y realismo a Bond que se adelantó dos décadas a su tiempo. Es un actor de teatro clásico consumado, capaz de oscilar entre la villanía y el heroísmo con maestría."
+    },
+    {
+        "id": "005",
+        "name": "Pierce Brosnan",
+        "slug": "pierce_brosnan",
+        "image": "img/Pierce Brosman.jpg",
+        "birth": "1953 - Presente",
+        "nationality": "Irlandés",
+        "years_active": "1977 - Presente",
+        "awards": "Nominación Globo de Oro (The Matador)",
+        "filmography": [
+            {
+                "title": "Remington Steele (TV 1982-1987)",
+                "role": "Remington Steele"
+            },
+            {
+                "title": "The Thomas Crown Affair (1999)",
+                "role": "Thomas Crown"
+            },
+            {
+                "title": "The Matador (2005)",
+                "role": "Julian Noble"
+            },
+            {
+                "title": "The Ghost Writer (2010)",
+                "role": "Adam Lang"
+            },
+            {
+                "title": "Mamma Mia! (2008)",
+                "role": "Sam Carmichael"
+            },
+            {
+                "title": "Mrs. Doubtfire (1993)",
+                "role": "Stu"
+            }
+        ],
+        "biography": "El agente del renacimiento. Tras el éxito de 'Remington Steele', revitalizó la saga 007 en los 90. Sus trabajos posteriores han demostrado un rango que incluye la comedia musical y el thriller político."
+    },
+    {
+        "id": "006",
+        "name": "Daniel Craig",
+        "slug": "daniel_craig",
+        "image": "img/Daniel Craig.jpg",
+        "birth": "1968 - Presente",
+        "nationality": "Inglés",
+        "years_active": "1992 - Presente",
+        "awards": "2 Nominaciones Globo de Oro, 1 Primetime Emmy",
+        "filmography": [
+            {
+                "title": "Knives Out (2019)",
+                "role": "Benoit Blanc"
+            },
+            {
+                "title": "Layer Cake (2004)",
+                "role": "XXXX"
+            },
+            {
+                "title": "Munich (2005)",
+                "role": "Steve"
+            },
+            {
+                "title": "The Girl with the Dragon Tattoo (2011)",
+                "role": "Mikael Blomkvist"
+            },
+            {
+                "title": "Logan Lucky (2017)",
+                "role": "Joe Bang"
+            },
+            {
+                "title": "Glass Onion (2022)",
+                "role": "Benoit Blanc"
+            }
+        ],
+        "biography": "El agente brutal y humano. Reimaginó a Bond para el siglo XXI, dándole una vulnerabilidad física y emocional sin precedentes. Ha consolidado una de las carreras más sólidas tras dejar el papel."
+    }
+]

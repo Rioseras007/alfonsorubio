@@ -1,0 +1,79 @@
+Processing title from JSON: [Agente 007 contra el Dr. No (1962)]
+  -> Slug: dr_no, Filename: dr_no.html
+  -> Successfully generated: dr_no.html
+Processing title from JSON: [Desde Rusia con amor (1963)]
+  -> Slug: desde_rusia_con_amor, Filename: desde_rusia_con_amor.html
+  -> Successfully generated: desde_rusia_con_amor.html
+Processing title from JSON: [James Bond Contra Goldfinger (1964)]
+  -> Slug: james_bond_contra_goldfinger, Filename: james_bond_contra_goldfinger.html
+  -> Successfully generated: james_bond_contra_goldfinger.html
+Processing title from JSON: [Operacion Trueno (1965)]
+  -> Slug: operacion_trueno, Filename: operacion_trueno.html
+  -> Successfully generated: operacion_trueno.html
+Processing title from JSON: [Casino Royale (1967)]
+  -> Title [Casino Royale (1967)] NOT in SLUG_MAP. Skipping.
+Processing title from JSON: [Solo Se Vive Dos Veces (1967)]
+  -> Slug: solo_se_vive_dos_veces, Filename: solo_se_vive_dos_veces.html
+  -> Successfully generated: solo_se_vive_dos_veces.html
+Processing title from JSON: [Al Servicio Secreto de su Majestad (1969)]
+  -> Slug: al_servicio_secreto_de_su_majestad, Filename: al_servicio_secreto_de_su_majestad.html
+  -> Successfully generated: al_servicio_secreto_de_su_majestad.html
+Processing title from JSON: [Diamantes para La Eternidad (1971)]
+  -> Slug: diamantes_para_la_eternidad, Filename: diamantes_para_la_eternidad.html
+  -> Successfully generated: diamantes_para_la_eternidad.html
+Processing title from JSON: [Vive y deja Morir (1973)]
+  -> Slug: vive_y_deja_morir, Filename: vive_y_deja_morir.html
+  -> Successfully generated: vive_y_deja_morir.html
+Processing title from JSON: [El hombre de la pistola de oro (1974)]
+  -> Slug: el_hombre_de_la_pistola_de_oro, Filename: el_hombre_de_la_pistola_de_oro.html
+  -> Successfully generated: el_hombre_de_la_pistola_de_oro.html
+Processing title from JSON: [La Espia Que Me Amo (1977)]
+  -> Slug: la_espia_que_me_amo, Filename: la_espia_que_me_amo.html
+  -> Successfully generated: la_espia_que_me_amo.html
+Processing title from JSON: [Moonraker (1979)]
+  -> Slug: moonraker, Filename: moonraker.html
+  -> Successfully generated: moonraker.html
+Processing title from JSON: [Solo para sus Ojos (1981)]
+  -> Slug: solo_para_sus_ojos, Filename: solo_para_sus_ojos.html
+  -> Successfully generated: solo_para_sus_ojos.html
+Processing title from JSON: [Nunca digas nunca Jamas (1983)]
+  -> Title [Nunca digas nunca Jamas (1983)] NOT in SLUG_MAP. Skipping.
+Processing title from JSON: [Octopussy (1983)]
+  -> Slug: octopussy, Filename: octopussy.html
+  -> Successfully generated: octopussy.html
+Processing title from JSON: [Panorama para Matar (1985)]
+  -> Slug: panorama_para_matar, Filename: panorama_para_matar.html
+  -> Successfully generated: panorama_para_matar.html
+Processing title from JSON: [Alta tension (1987)]
+  -> Slug: alta_tension, Filename: alta_tension.html
+  -> Successfully generated: alta_tension.html
+Processing title from JSON: [Licencia para Matar (1989)]
+  -> Slug: licencia_para_matar, Filename: licencia_para_matar.html
+  -> Successfully generated: licencia_para_matar.html
+Processing title from JSON: [Goldeneye (1995)]
+  -> Slug: goldeneye, Filename: goldeneye.html
+  -> Successfully generated: goldeneye.html
+Processing title from JSON: [El Mañana nunca Muere (1997)]
+  -> Slug: el_manana_nunca_muere, Filename: el_manana_nunca_muere.html
+  -> Successfully generated: el_manana_nunca_muere.html
+Processing title from JSON: [El Mundo nunca es Suficiente (1999)]
+  -> Slug: el_mundo_nunca_es_suficiente, Filename: el_mundo_nunca_es_suficiente.html
+  -> Successfully generated: el_mundo_nunca_es_suficiente.html
+Processing title from JSON: [Muere otro Dia (2002)]
+  -> Slug: muere_otro_dia, Filename: muere_otro_dia.html
+  -> Successfully generated: muere_otro_dia.html
+Processing title from JSON: [Casino Royale (2006)]
+  -> Slug: casino_royale_2006, Filename: casino_royale_2006.html
+  -> Successfully generated: casino_royale_2006.html
+Processing title from JSON: [Quantum Of Solace (2008)]
+  -> Slug: quantum_of_solace, Filename: quantum_of_solace.html
+  -> Successfully generated: quantum_of_solace.html
+Processing title from JSON: [Skyfall (2012)]
+  -> Slug: skyfall, Filename: skyfall.html
+  -> Successfully generated: skyfall.html
+Processing title from JSON: [Spectre (2015)]
+  -> Slug: spectre, Filename: spectre.html
+  -> Successfully generated: spectre.html
+Processing title from JSON: [Sin tiempo para morir (2022)]
+  -> Slug: sin_tiempo_para_morir, Filename: sin_tiempo_para_morir.html
+  -> Successfully generated: sin_tiempo_para_morir.html

@@ -1,0 +1,169 @@
+body {
+    margin: 0;
+    background: #111;
+    font-family: Arial;
+}
+
+
+h1{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 2rem;
+    color: white;
+}
+
+/* ESTANTERÍA */
+.estanteria {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    padding: 100px 40px 0;
+    background: linear-gradient(#2a2a2a, #1a1a1a);
+    border-bottom: 30px solid #Eed09d;
+    perspective: 1000px;
+}
+
+a{
+
+    text-decoration: none;
+    color: inherit;
+}
+
+/* LOMO */
+.juego {
+    width: 64px;
+    height: 600px; /* tu tamaño */
+    position: relative;
+
+    border: 4px solid rgba(0,0,0,0.4);
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 0.3s;
+     flex-shrink: 0;
+}
+
+
+
+
+/* COLORES Y TIPOGRAFÍAS */
+.ps { background: #0070CD; border: 3px solid #4d0d9b;}
+.ps .vertical-text { font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: -1px; }
+
+.xbox { background: #10B981; }
+.xbox .vertical-text { font-family: 'Poppins', sans-serif; font-weight: 800; }
+
+.xbox360 { background: #4ADE80; }
+.xbox360 .vertical-text { font-family: 'Poppins', sans-serif; font-weight: 800; }
+
+.switch { background: #E60012; }
+.switch .vertical-text { font-family: 'Poppins', sans-serif; font-weight: 700; letter-spacing: 0.5px; }
+
+.umdvideo { background:#838686; }
+.umdvideo .vertical-text { font-family: 'Space Mono', monospace; font-weight: 700; font-size:1.33rem; color:black; letter-spacing: -0.1cap; }
+
+.psp { background: #A8D8FF; }
+.psp .vertical-text { font-family: 'Roboto', sans-serif; font-weight: 900; }
+
+.ps4 { background: #0070CD; }
+.ps4 .vertical-text { font-family: 'Roboto', sans-serif; font-weight: 900; }
+
+.ps5 { background: #0070CD; }
+.ps5 .vertical-text { font-family: 'Roboto', sans-serif; font-weight: 900; }
+
+.ps2 { background: #0057B8; }
+.ps2 .vertical-text { font-family: 'Righteous', cursive; font-weight: 400; }
+
+.xboxclasica { background: #0E8A16; }
+.xboxclasica .vertical-text { font-family: 'Poppins', sans-serif; font-weight: 800; }
+
+.wiiu { background: #3560A5; }
+.wiiu .vertical-text { font-family: 'Poppins', sans-serif; font-weight: 700; }
+
+.dvdvideo { background:#dbd9de; }
+.dvdvideo .vertical-text { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.4rem; }
+
+
+
+/* 🔥 TÍTULO PERFECTAMENTE CENTRADO */
+.titulo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%) rotate(-90deg);
+
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 60px;
+    opacity: 0.8;
+    width: 60px;
+    height: 60px;
+    z-index: 5;
+}
+
+
+.logosup
+ {
+    position: absolute;
+    bottom: 530px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 60px;
+    opacity: 100;
+    width: 100px;
+    height: 300px;
+    z-index: 5;
+    width: 64px;
+    height: 50px;
+}
+
+
+.logoleon
+ {
+    position: absolute;
+    bottom: 530px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 60px;
+    opacity: 100;
+    width: 100px;
+    height: 300px;
+    z-index: 5;
+    width: 64px;
+    height: 50px;
+}
+
+
+
+
+
+/* 🔥 EFECTO SACAR DE BALDA */
+.juego:hover {
+    transform: translateY(-40px) scale(1.08);
+    z-index: 10;
+    box-shadow: 0 25px 35px rgba(0,0,0,0.6);
+}
+
+.vertical-text {
+    writing-mode: vertical-rl;       /* Texto de arriba a abajo */
+    text-orientation: upleft;   /* Mantiene las letras en posición normal */
+    font-size: 1.9rem;
+  
+    padding: 10px;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>007 Forever | The Ultimate James Bond Collection</title>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">007 <span>FOREVER</span></a>
+            <nav id="mainNav">
+                <a href="index.html" data-i18n="nav_home">Inicio</a>
+                <a href="peliculas.html" class="active" data-i18n="nav_movies">Misiones</a>
+                <a href="sean_connery.html" data-i18n="nav_agents">Agentes</a>
+                <a href="criticas.html" data-i18n="nav_reviews">Críticas</a>
+                <a href="Ian Fleming.html" data-i18n="nav_fleming">Archivo Fleming</a>
+                <a href="moneypenny.html" data-i18n="nav_moneypenny">Moneypenny</a>
+                <a href="q.html" data-i18n="nav_q">Rama Q</a>
+                <a href="m.html" data-i18n="nav_m">Jefe MI6</a>
+                <a href="villanos.html" data-i18n="nav_villains">Villanos</a>
+                <a href="coches.html" data-i18n="nav_cars">Vehículos</a>
+                <a href="mujeres.html" data-i18n="nav_girls">Chicas Bond</a>
+                <a href="musica.html" data-i18n="nav_music">Música</a>
+                <a href="video.html" data-i18n="nav_video">Videoteca</a>
+                <div class="lang-switcher">
+                    <span id="lang-es" class="active">ES</span> | <span id="lang-en">EN</span>
+                </div>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1 data-i18n="cat_hero_title">Dossier Clasificado</h1>
+            <p data-i18n="cat_hero_desc">Bienvenido al archivo digital definitivo del agente más selecto de Su Majestad.
+                Explora la colección completa de misiones de 007, optimizadas para tu placer visual.</p>
+
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all" data-i18n="filter_all">Todas</button>
+                <button class="filter-btn" data-filter="Sean Connery">Connery</button>
+                <button class="filter-btn" data-filter="George Lazenby">Lazenby</button>
+                <button class="filter-btn" data-filter="Roger Moore">Moore</button>
+                <button class="filter-btn" data-filter="Timothy Dalton">Dalton</button>
+                <button class="filter-btn" data-filter="Pierce Brosnan">Brosnan</button>
+                <button class="filter-btn" data-filter="Daniel Craig">Craig</button>
+            </div>
+
+            <div class="search-container"
+                style="margin-top: 25px; max-width: 500px; margin-left: auto; margin-right: auto;">
+                <input type="text" id="movieSearch" placeholder="🔍 BUSCAR MISIÓN O AGENTE..."
+                    style="width: 100%; padding: 12px 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--accent-gold); color: #fff; border-radius: 2px; font-family: 'Inter', sans-serif; letter-spacing: 1px;">
+            </div>
+
+            <div style="margin-top: 20px; display: flex; gap: 10px; align-items: center; justify-content: center;">
+                <span style="color: var(--text-dim); font-size: 0.9rem;">Ordenar:</span>
+                <button class="filter-btn active" id="sortChrono" style="font-size: 0.85rem; padding: 8px 16px;">📅
+                    Cronológico</button>
+                <button class="filter-btn" id="sortAlpha" style="font-size: 0.85rem; padding: 8px 16px;">🔤
+                    Alfabético</button>
+            </div>
+        </section>
+
+        <main class="movie-grid" id="movieGrid">
+            <!-- Movies injected via JavaScript -->
+        </main>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <video id="mainPlayer" controls></video>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>007 Forever | Banda Sonora</title>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .music-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('img/bondmusica.jpg') center/cover;
+            padding: 80px 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .decade-section {
+            margin-bottom: 50px;
+        }
+
+        .decade-title {
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .song-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* Cassette Mixtape Style */
+        .song-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 15px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #333;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+        }
+
+        /* Reel Holes */
+        .song-card::before,
+        .song-card::after {
+            content: "";
+            position: absolute;
+            top: 25px;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #000 30%, #333 35%, #000 40%, #555 60%);
+            border-radius: 50%;
+            z-index: 2;
+            box-shadow: inset 0 0 10px #000;
+        }
+
+        .song-card::before {
+            left: 60px;
+        }
+
+        .song-card::after {
+            right: 60px;
+        }
+
+        .song-card:hover::before,
+        .song-card:hover::after {
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Cassette Label Area */
+        .cassette-label {
+            background: #e8e6e1;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+            background-size: 100% 24px;
+            padding: 10px 15px;
+            border-radius: 4px;
+            position: relative;
+            z-index: 3;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+        }
+
+        .song-title {
+            color: #222;
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 2px;
+        }
+
+        .song-artist {
+            color: #d35400;
+            /* Color boli BIC azul/naranja degradado */
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .song-year {
+            color: #666;
+            font-size: 0.75rem;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .song-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .youtube-btn {
+            background: #b22222;
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 700;
+            transition: var(--transition);
+            margin-top: 10px;
+            display: inline-block;
+            align-self: flex-start;
+            z-index: 4;
+        }
+
+        .youtube-btn:hover {
+            background: #FF0000;
+            transform: scale(1.1);
+        }
+
+        /* Decade Specific Cassette Colors */
+        .decade-60s .song-card {
+            background-color: #121212;
+        }
+
+        .decade-70s .song-card {
+            background-color: #2c3e50;
+        }
+
+        .decade-80s .song-card {
+            background-color: #8e44ad;
+        }
+
+        .decade-90s .song-card {
+            background-color: #2980b9;
+        }
+
+        .decade-10s .song-card {
+            background-color: #16a085;
+        }
+
+        .external-link-box {
+            background: linear-gradient(135deg, var(--accent-gold), #c9a846);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .external-link-box h2 {
+            color: #000;
+            margin-bottom: 15px;
+        }
+
+        .external-link-box p {
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+        .external-link-box a {
+            display: inline-block;
+            background: #000;
+            color: var(--accent-gold);
+            padding: 15px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .external-link-box a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">007 <span>FOREVER</span></a>
+            <nav id="mainNav">
+                <a href="index.html" data-i18n="nav_home">Inicio</a>
+                <a href="peliculas.html" data-i18n="nav_movies">Misiones</a>
+                <a href="sean_connery.html" data-i18n="nav_agents">Agentes</a>
+                <a href="criticas.html" data-i18n="nav_reviews">Críticas</a>
+                <a href="Ian Fleming.html" data-i18n="nav_fleming">Archivo Fleming</a>
+                <a href="moneypenny.html" data-i18n="nav_moneypenny">Moneypenny</a>
+                <a href="q.html" data-i18n="nav_q">Rama Q</a>
+                <a href="m.html" data-i18n="nav_m">Jefe MI6</a>
+                <a href="villanos.html" data-i18n="nav_villains">Villanos</a>
+                <a href="coches.html" data-i18n="nav_cars">Vehículos</a>
+                <a href="mujeres.html" data-i18n="nav_girls">Chicas Bond</a>
+                <a href="musica.html" class="active" data-i18n="nav_music">Música</a>
+                <a href="video.html" data-i18n="nav_video">Videoteca</a>
+                <div class="lang-switcher">
+                    <span id="lang-es" class="active">ES</span> | <span id="lang-en">EN</span>
+                </div>
+            </nav>
+        </header>
+
+        <section class="music-hero">
+            <h1 data-i18n="music_hero_title">🎵 La Banda Sonora de 007</h1>
+            <p data-i18n="music_hero_desc" style="max-width: 700px; margin: 0 auto; font-size: 1.1rem;">
+                Desde el icónico "James Bond Theme" hasta "No Time to Die", cada película de Bond ha sido definida por
+                su música inolvidable.
+            </p>
+        </section>
+
+        <!-- External Link -->
+        <div class="external-link-box">
+            <h2>🎧 Colección Completa de Bandas Sonoras</h2>
+            <p>Escucha todas las bandas sonoras originales de James Bond en nuestra plataforma de streaming.</p>
+            <a href="https://antonio2709.synology.me/musica_sonso/index.html" target="_blank" rel="noopener">
+                ▶️ Abrir Reproductor de Música
+            </a>
+        </div>
+
+        <main style="padding: 20px 0;">
+            <div class="decade-section decade-60s">
+                <h2 class="decade-title">🎼 Década de 1960</h2>
+                <div class="song-grid">
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">James Bond Theme</div>
+                            <div class="song-artist">John Barry & Orchestra</div>
+                            <div class="song-year">Dr. No (1962)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=John+Barry+Orchestra+James+Bond+Theme+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">
+                            ▶️ Ver en YouTube
+                        </a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">From Russia with Love</div>
+                            <div class="song-artist">Matt Monro</div>
+                            <div class="song-year">From Russia with Love (1963)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Matt+Monro+From+Russia+with+Love+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">
+                            ▶️ Ver en YouTube
+                        </a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">Goldfinger</div>
+                            <div class="song-artist">Shirley Bassey</div>
+                            <div class="song-year">Goldfinger (1964)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Shirley+Bassey+Goldfinger+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">
+                            ▶️ Ver en YouTube
+                        </a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">Thunderball</div>
+                            <div class="song-artist">Tom Jones</div>
+                            <div class="song-year">Thunderball (1965)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Tom+Jones+Thunderball+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">
+                            ▶️ Ver en YouTube
+                        </a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">You Only Live Twice</div>
+                            <div class="song-artist">Nancy Sinatra</div>
+                            <div class="song-year">You Only Live Twice (1967)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Nancy+Sinatra+You+Only+Live+Twice+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">
+                            ▶️ Ver en YouTube
+                        </a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">On Her Majesty's Secret Service</div>
+                            <div class="song-artist">John Barry Orchestra</div>
+                            <div class="song-year">On Her Majesty's Secret Service (1969)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=John+Barry+Orchestra+On+Her+Majestys+Secret+Service+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">
+                            ▶️ Ver en YouTube
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="decade-section decade-70s">
+                <h2 class="decade-title">🎸 Década de 1970</h2>
+                <div class="song-grid">
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">Diamonds Are Forever</div>
+                            <div class="song-artist">Shirley Bassey</div>
+                            <div class="song-year">Diamonds Are Forever (1971)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Shirley+Bassey+Diamonds+Are+Forever+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">Live and Let Die</div>
+                            <div class="song-artist">Paul McCartney & Wings</div>
+                            <div class="song-year">Live and Let Die (1973)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Paul+McCartney+Wings+Live+and+Let+Die+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">The Man with the Golden Gun</div>
+                            <div class="song-artist">Lulu</div>
+                            <div class="song-year">The Man with the Golden Gun (1974)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Lulu+The+Man+with+the+Golden+Gun+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">Nobody Does It Better</div>
+                            <div class="song-artist">Carly Simon</div>
+                            <div class="song-year">The Spy Who Loved Me (1977)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Carly+Simon+Nobody+Does+It+Better+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">Moonraker</div>
+                            <div class="song-artist">Shirley Bassey</div>
+                            <div class="song-year">Moonraker (1979)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Shirley+Bassey+Moonraker+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="decade-section decade-80s">
+                <h2 class="decade-title">🎹 Década de 1980</h2>
+                <div class="song-grid">
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">For Your Eyes Only</div>
+                            <div class="song-artist">Sheena Easton</div>
+                            <div class="song-year">For Your Eyes Only (1981)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Sheena+Easton+For+Your+Eyes+Only+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">All Time High</div>
+                            <div class="song-artist">Rita Coolidge</div>
+                            <div class="song-year">Octopussy (1983)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Rita+Coolidge+All+Time+High+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">A View to a Kill</div>
+                            <div class="song-artist">Duran Duran</div>
+                            <div class="song-year">A View to a Kill (1985)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Duran+Duran+A+View+to+a+Kill+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">The Living Daylights</div>
+                            <div class="song-artist">a-ha</div>
+                            <div class="song-year">The Living Daylights (1987)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=a-ha+The+Living+Daylights+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">Licence to Kill</div>
+                            <div class="song-artist">Gladys Knight</div>
+                            <div class="song-year">Licence to Kill (1989)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Gladys+Knight+Licence+to+Kill+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="decade-section decade-90s">
+                <h2 class="decade-title">🎤 Década de 1990-2000s</h2>
+                <div class="song-grid">
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">GoldenEye</div>
+                            <div class="song-artist">Tina Turner</div>
+                            <div class="song-year">GoldenEye (1995)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Tina+Turner+GoldenEye+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">Tomorrow Never Dies</div>
+                            <div class="song-artist">Sheryl Crow</div>
+                            <div class="song-year">Tomorrow Never Dies (1997)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Sheryl+Crow+Tomorrow+Never+Dies+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">The World Is Not Enough</div>
+                            <div class="song-artist">Garbage</div>
+                            <div class="song-year">The World Is Not Enough (1999)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Garbage+The+World+Is+Not+Enough+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">Die Another Day</div>
+                            <div class="song-artist">Madonna</div>
+                            <div class="song-year">Die Another Day (2002)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Madonna+Die+Another+Day+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">You Know My Name</div>
+                            <div class="song-artist">Chris Cornell</div>
+                            <div class="song-year">Casino Royale (2006)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Chris+Cornell+You+Know+My+Name+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">Another Way to Die</div>
+                            <div class="song-artist">Jack White & Alicia Keys</div>
+                            <div class="song-year">Quantum of Solace (2008)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Jack+White+Alicia+Keys+Another+Way+to+Die+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="decade-section decade-10s">
+                <h2 class="decade-title">🎧 Década de 2010-2020s</h2>
+                <div class="song-grid">
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">Skyfall</div>
+                            <div class="song-artist">Adele</div>
+                            <div class="song-year">Skyfall (2012)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Adele+Skyfall+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">Writing's on the Wall</div>
+                            <div class="song-artist">Sam Smith</div>
+                            <div class="song-year">Spectre (2015)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Sam+Smith+Writings+on+the+Wall+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                    <div class="song-card">
+                        <div class="cassette-label">
+                            <div class="song-title">No Time to Die</div>
+                            <div class="song-artist">Billie Eilish</div>
+                            <div class="song-year">No Time to Die (2021)</div>
+                        </div>
+                        <a href="https://www.youtube.com/results?search_query=Billie+Eilish+No+Time+to+Die+James+Bond+official+music+video"
+                            target="_blank" rel="noopener" class="youtube-btn">▶️ Ver en YouTube</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer
+        style="text-align: center; padding: 60px 0; color: var(--text-dim); border-top: 1px solid var(--glass-border);">
+        <p data-i18n="footer_text">© 2026 Proyecto Fan 007 Forever. Solo para fines educativos.</p>
+            <p data-i18n="disclaimer" style="font-size: 0.65rem; color: #ff3333; margin-top: 15px; opacity: 0.8; font-family: 'JetBrains Mono', monospace;"></p>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

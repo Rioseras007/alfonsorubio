@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>007 Forever | Q Branch Dossier</title>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --q-blue: #001a33;
+            --q-cyan: #00ffff;
+            --q-cyan-glow: rgba(0, 255, 255, 0.4);
+            --q-grid: rgba(0, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--q-blue);
+            background-image:
+                linear-gradient(var(--q-grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--q-grid) 1px, transparent 1px);
+            background-size: 30px 30px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hero h1 {
+            color: var(--q-cyan);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px var(--q-cyan-glow);
+        }
+
+        /* Technical Blueprint Frame */
+        .section-story {
+            background: rgba(0, 26, 51, 0.9) !important;
+            border: 1px solid var(--q-cyan) !important;
+            padding: 40px !important;
+            border-radius: 0 !important;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1) !important;
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto 50px !important;
+        }
+
+        /* HUD Corners */
+        .section-story::before,
+        .section-story::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--q-cyan);
+        }
+
+        .section-story::before {
+            top: -5px;
+            left: -5px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .section-story::after {
+            bottom: -5px;
+            right: -5px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .story-content h2 {
+            color: var(--q-cyan);
+            font-size: 1.2rem;
+            border-left: 5px solid var(--q-cyan);
+            padding-left: 15px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        /* Scan Animation */
+        .photo-container {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            border: 2px solid var(--q-cyan);
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--q-cyan);
+            box-shadow: 0 0 15px var(--q-cyan);
+            z-index: 10;
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% {
+                top: 0;
+            }
+
+            50% {
+                top: 100%;
+            }
+
+            100% {
+                top: 0;
+            }
+        }
+
+        .story-content p,
+        .story-content li {
+            color: #acd8f0 !important;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .story-content strong {
+            color: var(--q-cyan);
+        }
+
+        /* Tech Badges */
+        .tech-badge {
+            display: inline-block;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid var(--q-cyan);
+            color: var(--q-cyan);
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            margin-bottom: 10px;
+        }
+
+        .invention-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 2px solid var(--q-cyan);
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .invention-card:hover {
+            background: rgba(0, 255, 255, 0.08);
+            transform: translateX(10px);
+        }
+
+        blockquote {
+            border: 1px dashed var(--q-cyan) !important;
+            background: rgba(0, 0, 0, 0.3) !important;
+            padding: 20px !important;
+            color: var(--q-cyan) !important;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">007 <span>FOREVER</span></a>
+            <nav id="mainNav">
+                <a href="index.html" data-i18n="nav_home">Inicio</a>
+                <a href="peliculas.html" data-i18n="nav_movies">Misiones</a>
+                <a href="sean_connery.html" data-i18n="nav_agents">Agentes</a>
+                <a href="criticas.html" data-i18n="nav_reviews">Críticas</a>
+                <a href="Ian Fleming.html" data-i18n="nav_fleming">Archivo Fleming</a>
+                <a href="moneypenny.html" data-i18n="nav_moneypenny">Moneypenny</a>
+                <a href="q.html" class="active" data-i18n="nav_q">Rama Q</a>
+                <a href="m.html" data-i18n="nav_m">Jefe MI6</a>
+                <a href="villanos.html" data-i18n="nav_villains">Villanos</a>
+                <a href="coches.html" data-i18n="nav_cars">Vehículos</a>
+                <a href="mujeres.html" data-i18n="nav_girls">Chicas Bond</a>
+                <a href="musica.html" data-i18n="nav_music">Música</a>
+                <a href="video.html" data-i18n="nav_video">Videoteca</a>
+                <div class="lang-switcher">
+                    <span id="lang-es" class="active">ES</span> | <span id="lang-en">EN</span>
+                </div>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1 data-i18n="q_title">Departamento de Investigación: Rama Q</h1>
+            <div style="margin-top: 20px;">
+                <div class="photo-container">
+                    <div class="scan-line"></div>
+                    <img src="actores/Q.jpg" alt="Q"
+                        style="width: 250px; display: block; filter: brightness(0.8) sepia(0.5) hue-rotate(150deg);">
+                </div>
+            </div>
+        </section>
+
+        <main class="section-story">
+            <div class="story-content">
+                <div class="tech-badge">RESEARCH MODULE: QB-INT-01</div>
+                <h2 data-i18n="q_general">Ficha del Intendente</h2>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 10px;"><strong>Designación:</strong> Q (Quartermaster)</li>
+                    <li style="margin-bottom: 10px;"><strong>Afiliación:</strong> MI6 - Rama de Equipamiento</li>
+                    <li style="margin-bottom: 10px;"><strong>Especialidad:</strong> I+D / Ciberseguridad / Gadgets</li>
+                    <li style="margin-bottom: 10px;"><strong>Personal destacado:</strong> Desmond Llewelyn, John Cleese,
+                        Ben Whishaw</li>
+                </ul>
+
+                <h2 data-i18n="q_dynamic_title" style="margin-top: 40px;">Protocolo Operativo</h2>
+                <p data-i18n="q_dynamic_desc">
+                    El Mayor Boothroyd y sus sucesores mantienen la superioridad táctica del MI6.
+                    Su labor es fundamental: proporcionar al agente 007 las herramientas necesarias para sobrevivir
+                    donde el entrenamiento estándar no es suficiente.
+                </p>
+
+                <blockquote data-i18n="q_quote">
+                    "Intente devolver el equipo en una pieza por una vez, 007."
+                </blockquote>
+            </div>
+
+            <div class="story-content">
+                <div class="tech-badge">GIZMOS & SPECS</div>
+                <h2 data-i18n="q_inventions">Inventos en Activo</h2>
+
+                <div class="invention-card">
+                    <strong data-i18n="q_inv1">Aston Martin DB5 (Mod. Q)</strong>
+                    <p>Asiento eyector, ametralladoras y escudo antibalas. El estándar de oro.</p>
+                </div>
+
+                <div class="invention-card">
+                    <strong data-i18n="q_inv2">Reloj Omega Multifunción</strong>
+                    <p>Láser de alta potencia y detonador remoto integrado.</p>
+                </div>
+
+                <div class="invention-card">
+                    <strong data-i18n="q_inv4">Bolígrafo Parker Jotter</strong>
+                    <p>Explosivo de activación por tres clics. Discreto y letal.</p>
+                </div>
+
+                <div class="tech-badge" style="margin-top: 20px;">SYSTEM STATUS: ONLINE</div>
+            </div>
+        </main>
+
+        <section style="text-align: center; margin-top: 40px;">
+            <a href="index.html" class="btn-primary" data-i18n="nav_home"
+                style="display: inline-block; padding: 12px 30px; border: 1px solid var(--q-cyan); background: transparent; color: var(--q-cyan);">
+                TERMINAR SESIÓN
+            </a>
+        </section>
+    </div>
+
+    <footer style="text-align: center; padding: 60px 0; color: var(--q-cyan); opacity: 0.5;">
+        <p data-i18n="footer_text">© 2026 Q Branch Systems. Encriptación de 2048 bits.</p>
+            <p data-i18n="disclaimer" style="font-size: 0.65rem; color: #ff3333; margin-top: 15px; opacity: 0.8; font-family: 'JetBrains Mono', monospace;"></p>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>007 Forever | Surveillance Room: Reviews</title>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --monitor-border: #333;
+            --scanline-color: rgba(18, 16, 16, 0.2);
+            --monitor-glow: rgba(0, 255, 65, 0.05);
+        }
+
+        body {
+            background-color: #050505;
+            overflow-x: hidden;
+        }
+
+        .surveillance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .monitor-frame {
+            background: #111;
+            border: 10px solid var(--monitor-border);
+            border-radius: 5px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), inset 0 0 50px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+        }
+
+        .monitor-frame:hover {
+            border-color: var(--accent-gold);
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .monitor-header {
+            background: var(--monitor-border);
+            color: #888;
+            font-size: 0.7rem;
+            padding: 5px 15px;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .monitor-screen {
+            position: relative;
+            width: 100%;
+            height: 225px;
+            /* Fixed height for consistency */
+            background: #000;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .monitor-screen img.static-screen {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(1) sepia(1) hue-rotate(90deg) brightness(0.8) contrast(1.2);
+            opacity: 0.6;
+        }
+
+        /* Scanline effect layer enhanced for static image */
+        .monitor-screen::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0.3) 50%, rgba(0, 0, 0, 0) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.03), rgba(0, 0, 255, 0.05));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .monitor-screen .signal-text {
+            position: absolute;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px #00ff41;
+            z-index: 3;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .video-info {
+            padding: 15px;
+            border-top: 2px solid var(--monitor-border);
+        }
+
+        .video-info h3 {
+            font-size: 1rem;
+            margin: 0 0 5px 0;
+            color: var(--accent-gold);
+        }
+
+        .video-info p {
+            font-size: 0.8rem;
+            margin: 0;
+            color: #888;
+        }
+
+        .channel-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-intro {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        .section-intro h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .system-status {
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .blinking-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff41;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+  <div class="container">
+        <header>
+            <a href="index.html" class="logo">007 <span>FOREVER</span></a>
+            <nav id="mainNav">
+                <a href="index.html" class="active" data-i18n="nav_home">Inicio</a>
+                <a href="peliculas.html" data-i18n="nav_movies">Misiones</a>
+                <a href="sean_connery.html" data-i18n="nav_agents">Agentes</a>
+               
+                <a href="Ian Fleming.html" data-i18n="nav_fleming">Archivo Fleming</a>
+                <a href="moneypenny.html" data-i18n="nav_moneypenny">Moneypenny</a>
+                <a href="q.html" data-i18n="nav_q">Rama Q</a>
+                <a href="m.html" data-i18n="nav_m">Jefe MI6</a>
+                <a href="villanos.html" data-i18n="nav_villains">Villanos</a>
+                <a href="coches.html" data-i18n="nav_cars">Vehículos</a>
+                <a href="mujeres.html" data-i18n="nav_girls">Chicas Bond</a>
+                <a href="musica.html" data-i18n="nav_music">Música</a>
+                <a href="video.html" data-i18n="nav_video">Videoteca</a>
+                <div class="lang-switcher">
+                    <span id="lang-es" class="active">ES</span> | <span id="lang-en">EN</span>
+                </div>
+            </nav>
+        </header>
+
+        <section class="section-intro">
+            <h1 data-i18n="reviews_title">SALA DE VIGILANCIA</h1>
+            <p data-i18n="reviews_desc">Interceptación de análisis críticos y misiones de inteligencia externa.</p>
+            <div class="system-status">
+                <span class="blinking-dot"></span> FEED DIRECTO: CANALES DE INTELIGENCIA ACTIVOS
+            </div>
+        </section>
+
+        <main class="surveillance-grid">
+            <!-- Video 1: Ente de Ficción -->
+            <div class="monitor-frame">
+                <div class="monitor-header">
+                    <span>MONITOR 01 // ENTE DE FICCIÓN</span>
+                    <span>SIGNAL: STABLE</span>
+                </div>
+                <div class="monitor-screen">
+                    <img src="img/pantalla_antigua.png" alt="MI6 Monitor" class="static-screen">
+                    <div class="signal-text">ENCRYPTED FEED<br>MON-01</div>
+                </div>
+                <div class="video-info">
+                    <h3>Sin Tiempo para Morir: El Final de una Era</h3>
+                    <p>Análisis exhaustivo del adiós de Daniel Craig y el legado de la etapa moderna.</p>
+                    <span class="channel-badge">CANAL: ENTE DE FICCIÓN</span>
+                    <a href="https://www.youtube.com/watch?v=-TgamCkg9mA" target="_blank"
+                        style="display: block; margin-top: 10px; color: var(--accent-gold); font-size: 0.7rem; text-decoration: none; border: 1px solid var(--accent-gold); padding: 5px; text-align: center; background: rgba(212,175,55,0.05);">
+                        <i class="fab fa-youtube"></i> DESCRIPTAR SEÑAL: VER EN YOUTUBE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Video 2: Te lo resumo (Craig) -->
+            <div class="monitor-frame">
+                <div class="monitor-header">
+                    <span>MONITOR 02 // INTEL RESUMEN</span>
+                    <span>ENCRYPTED RECAP</span>
+                </div>
+                <div class="monitor-screen">
+                    <img src="img/pantalla_antigua.png" alt="MI6 Monitor" class="static-screen">
+                    <div class="signal-text">RECAP DOWNLOAD<br>MON-02</div>
+                </div>
+                <div class="video-info">
+                    <h3>La Era Craig: Resumen y Crítica</h3>
+                    <p>Un repaso dinámico y satírico a la etapa más emocional del agente 007.</p>
+                    <span class="channel-badge">CANAL: TE LO RESUMO ASÍ NOMÁS</span>
+                    <a href="https://www.youtube.com/watch?v=gNrIdqqFbI0" target="_blank"
+                        style="display: block; margin-top: 10px; color: var(--accent-gold); font-size: 0.7rem; text-decoration: none; border: 1px solid var(--accent-gold); padding: 5px; text-align: center; background: rgba(212,175,55,0.05);">
+                        <i class="fab fa-youtube"></i> DESCRIPTAR SEÑAL: VER EN YOUTUBE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Video 3: Te lo resumo (Connery) -->
+            <div class="monitor-frame">
+                <div class="monitor-header">
+                    <span>MONITOR 03 // ORIGIN FILE</span>
+                    <span>HISTORICAL DATA</span>
+                </div>
+                <div class="monitor-screen">
+                    <img src="img/pantalla_antigua.png" alt="MI6 Monitor" class="static-screen">
+                    <div class="signal-text">ORIGIN FILE<br>MON-03</div>
+                </div>
+                <div class="video-info">
+                    <h3>Sean Connery: El James Bond Original</h3>
+                    <p>Análisis de las misiones que definieron los cimientos de la franquicia.</p>
+                    <span class="channel-badge">CANAL: TE LO RESUMO ASÍ NOMÁS</span>
+                    <a href="https://www.youtube.com/watch?v=HoUF4vFykwA" target="_blank"
+                        style="display: block; margin-top: 10px; color: var(--accent-gold); font-size: 0.7rem; text-decoration: none; border: 1px solid var(--accent-gold); padding: 5px; text-align: center; background: rgba(212,175,55,0.05);">
+                        <i class="fab fa-youtube"></i> DESCRIPTAR SEÑAL: VER EN YOUTUBE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Video 4: SensaCine -->
+            <div class="monitor-frame">
+                <div class="monitor-header">
+                    <span>MONITOR 04 // PRESS ARCHIVE</span>
+                    <span>MEDIA ANALYSIS</span>
+                </div>
+                <div class="monitor-screen">
+                    <img src="img/pantalla_antigua.png" alt="MI6 Monitor" class="static-screen">
+                    <div class="signal-text">MEDIA ANALYSIS<br>MON-04</div>
+                </div>
+                <div class="video-info">
+                    <h3>Roger Moore: El Bond Más Promiscuo</h3>
+                    <p>Análisis del Bond del encanto, el humor y la aventura extravagante.</p>
+                    <span class="channel-badge">CANAL: TE LO RESUMO ASÍ NOMÁS</span>
+                    <a href="https://www.youtube.com/watch?v=UB0DEKNFb3k" target="_blank"
+                        style="display: block; margin-top: 10px; color: var(--accent-gold); font-size: 0.7rem; text-decoration: none; border: 1px solid var(--accent-gold); padding: 5px; text-align: center; background: rgba(212,175,55,0.05);">
+                        <i class="fab fa-youtube"></i> DESCRIPTAR SEÑAL: VER EN YOUTUBE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Video 5: Te lo resumo (Brosnan) -->
+            <div class="monitor-frame">
+                <div class="monitor-header">
+                    <span>MONITOR 05 // 90s ARCHIVE</span>
+                    <span>RENAISSANCE DATA</span>
+                </div>
+                <div class="monitor-screen">
+                    <img src="img/pantalla_antigua.png" alt="MI6 Monitor" class="static-screen">
+                    <div class="signal-text">RENAISSANCE DATA<br>MON-05</div>
+                </div>
+                <div class="video-info">
+                    <h3>Pierce Brosnan: El Bond del Renacimiento</h3>
+                    <p>Repaso a la era que revitalizó la saga para el nuevo milenio.</p>
+                    <span class="channel-badge">CANAL: TE LO RESUMO ASÍ NOMÁS</span>
+                    <a href="https://www.youtube.com/watch?v=n0JmPIzcsZI" target="_blank"
+                        style="display: block; margin-top: 10px; color: var(--accent-gold); font-size: 0.7rem; text-decoration: none; border: 1px solid var(--accent-gold); padding: 5px; text-align: center; background: rgba(212,175,55,0.05);">
+                        <i class="fab fa-youtube"></i> DESCRIPTAR SEÑAL: VER EN YOUTUBE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Video 6: Te lo resumo Evolución -->
+            <div class="monitor-frame">
+                <div class="monitor-header">
+                    <span>MONITOR 06 // EVOLUTION FILE</span>
+                    <span>SIGNAL: STABLE</span>
+                </div>
+                <div class="monitor-screen">
+                    <img src="img/pantalla_antigua.png" alt="MI6 Monitor" class="static-screen">
+                    <div class="signal-text">CULTURAL EVOL<br>MON-06</div>
+                </div>
+                <div class="video-info">
+                    <h3>La Evolución de James Bond</h3>
+                    <p>De un viejo misógino a un aliado moderno: el cambio cultural del agente 007.</p>
+                    <span class="channel-badge">CANAL: TE LO RESUMO ASÍ NOMÁS</span>
+                    <a href="https://www.youtube.com/watch?v=hjP6tp4-3Fw" target="_blank"
+                        style="display: block; margin-top: 10px; color: var(--accent-gold); font-size: 0.7rem; text-decoration: none; border: 1px solid var(--accent-gold); padding: 5px; text-align: center; background: rgba(212,175,55,0.05);">
+                        <i class="fab fa-youtube"></i> DESCRIPTAR SEÑAL: VER EN YOUTUBE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Video 7: Nuevo Enlace -->
+            <div class="monitor-frame">
+                <div class="monitor-header">
+                    <span>MONITOR 07 // INTEL FEED</span>
+                    <span>NEW SIGNAL DETECTED</span>
+                </div>
+                <div class="monitor-screen">
+                    <img src="img/pantalla_antigua.png" alt="MI6 Monitor" class="static-screen">
+                    <div class="signal-text">INTEL FEED<br>MON-07</div>
+                </div>
+                <div class="video-info">
+                    <h3>Expediente Clasificado: Análisis 007</h3>
+                    <p>Nueva interceptación de datos críticos sobre la saga James Bond.</p>
+                    <span class="channel-badge">CANAL: INTELIGENCIA EXTERNA</span>
+                    <a href="https://www.youtube.com/watch?v=HsCIP4F9o5E" target="_blank"
+                        style="display: block; margin-top: 10px; color: var(--accent-gold); font-size: 0.7rem; text-decoration: none; border: 1px solid var(--accent-gold); padding: 5px; text-align: center; background: rgba(212,175,55,0.05);">
+                        <i class="fab fa-youtube"></i> DESCRIPTAR SEÑAL: VER EN YOUTUBE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Video 8: Enlace de Simetría -->
+            <div class="monitor-frame">
+                <div class="monitor-header">
+                    <span>MONITOR 08 // GRID STABILIZER</span>
+                    <span>SYMMETRY ACHIEVED</span>
+                </div>
+                <div class="monitor-screen">
+                    <img src="img/pantalla_antigua.png" alt="MI6 Monitor" class="static-screen">
+                    <div class="signal-text">FINAL DATA<br>MON-08</div>
+                </div>
+                <div class="video-info">
+                    <h3>Archivo de Inteligencia 08</h3>
+                    <p>Expediente final para la estabilización de la cuadrícula de vigilancia.</p>
+                    <span class="channel-badge">CANAL: RECURSOS MI6</span>
+                    <a href="https://www.youtube.com/watch?v=N_7aW2LDZA0" target="_blank"
+                        style="display: block; margin-top: 10px; color: var(--accent-gold); font-size: 0.7rem; text-decoration: none; border: 1px solid var(--accent-gold); padding: 5px; text-align: center; background: rgba(212,175,55,0.05);">
+                        <i class="fab fa-youtube"></i> DESCRIPTAR SEÑAL: VER EN YOUTUBE
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <footer
+            style="text-align: center; padding: 60px 0; color: var(--text-dim); border-top: 1px solid var(--glass-border);">
+            <p data-i18n="footer_text">© 2026 Proyecto Fan 007 Forever. Solo para fines educativos.</p>
+            <p data-i18n="disclaimer" style="font-size: 0.65rem; color: #ff3333; margin-top: 15px; opacity: 0.8; font-family: 'JetBrains Mono', monospace;"></p>
+        </footer>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
