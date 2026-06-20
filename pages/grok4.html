@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Periódica Interactiva - Versión Final</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f9f9f9;
+            margin: 0;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .search-container {
+            max-width: 600px;
+            margin: 20px auto;
+            display: flex;
+            gap: 10px;
+        }
+        #search {
+            flex: 1;
+            padding: 12px;
+            font-size: 1em;
+            border: 1px solid #444;
+            border-radius: 6px;
+        }
+        #clear-search {
+            padding: 12px 20px;
+            background: #eee;
+            border: 1px solid #444;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .periodic-table {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .table-container {
+            overflow-x: auto;
+            flex: 1 1 800px;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        td {
+            border: 1px solid #444;
+            width: 70px;
+            height: 70px;
+            text-align: center;
+            vertical-align: middle;
+            padding: 4px;
+            position: relative;
+            transition: transform 0.3s, opacity 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .number {
+            font-size: 0.8em;
+            color: #666;
+        }
+        .symbol {
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        .mass {
+            font-size: 0.7em;
+            color: #555;
+        }
+        .name {
+            font-size: 0.65em;
+            color: #333;
+            margin-top: 2px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        /* Colores por grupo */
+        .alkali { background: #FFCDD2; }
+        .alkaline { background: #F8BBD0; }
+        .transition { background: #BBDEFB; }
+        .posttransition { background: #C8E6C9; }
+        .metalloid { background: #FFF9C4; }
+        .nonmetal { background: #DCEDC8; }
+        .halogen { background: #FFECB3; }
+        .noble { background: #B2DFDB; }
+        .lanthanoid { background: #E1BEE7; }
+        .actinoid { background: #D1C4E9; }
+
+        /* Interactividad */
+        td.element:hover {
+            transform: scale(1.15);
+            z-index: 10;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+        td.selected, td.highlight {
+            transform: scale(1.25) !important;
+            z-index: 20 !important;
+            box-shadow: 0 0 30px gold !important;
+        }
+        td.dim {
+            opacity: 0.3;
+        }
+
+        .info-panel {
+            min-width: 280px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            align-self: flex-start;
+            position: sticky;
+            top: 20px;
+        }
+        .info-panel h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        .category-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            color: white;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .legend {
+            max-width: 900px;
+            margin: 40px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            font-size: 0.9em;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #444;
+        }
+        .note {
+            text-align: center;
+            margin: 20px;
+            font-style: italic;
+            color: #555;
+        }
+
+        @media (max-width: 1100px) {
+            .periodic-table {
+                flex-direction: column;
+            }
+            .info-panel {
+                position: static;
+                max-width: 600px;
+                margin: 20px auto;
+            }
+        }
+        @media (max-width: 800px) {
+            td {
+                width: 55px;
+                height: 60px;
+            }
+            .symbol { font-size: 1.2em; }
+            .name { font-size: 0.6em; }
+        }
+    </style>
+</head>
+<body>
+    <h2>Tabla Periódica Interactiva - 118 Elementos</h2>
+
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Buscar por nombre, símbolo o número (ej. oro, Au, 79)...">
+        <button id="clear-search">Limpiar</button>
+    </div>
+
+    <div class="periodic-table">
+        <div class="table-container">
+            <table>
+                <!-- Fila 1 -->
+                <tr>
+                    <td class="nonmetal element" data-name="Hidrógeno" data-number="1">
+                        <span class="number">1</span>
+                        <span class="symbol">H</span>
+                        <span class="mass">1.008</span>
+                        <span class="name">Hidrógeno</span>
+                    </td>
+                    <td colspan="16"></td>
+                    <td class="noble element" data-name="Helio" data-number="2">
+                        <span class="number">2</span>
+                        <span class="symbol">He</span>
+                        <span class="mass">4.003</span>
+                        <span class="name">Helio</span>
+                    </td>
+                </tr>
+                <!-- Fila 2 -->
+                <tr>
+                    <td class="alkali element" data-name="Litio" data-number="3">
+                        <span class="number">3</span>
+                        <span class="symbol">Li</span>
+                        <span class="mass">6.941</span>
+                        <span class="name">Litio</span>
+                    </td>
+                    <td class="alkaline element" data-name="Berilio" data-number="4">
+                        <span class="number">4</span>
+                        <span class="symbol">Be</span>
+                        <span class="mass">9.012</span>
+                        <span class="name">Berilio</span>
+                    </td>
+                    <td colspan="10"></td>
+                    <td class="metalloid element" data-name="Boro" data-number="5">
+                        <span class="number">5</span>
+                        <span class="symbol">B</span>
+                        <span class="mass">10.81</span>
+                        <span class="name">Boro</span>
+                    </td>
+                    <td class="nonmetal element" data-name="Carbono" data-number="6">
+                        <span class="number">6</span>
+                        <span class="symbol">C</span>
+                        <span class="mass">12.01</span>
+                        <span class="name">Carbono</span>
+                    </td>
+                    <td class="nonmetal element" data-name="Nitrógeno" data-number="7">
+                        <span class="number">7</span>
+                        <span class="symbol">N</span>
+                        <span class="mass">14.01</span>
+                        <span class="name">Nitrógeno</span>
+                    </td>
+                    <td class="nonmetal element" data-name="Oxígeno" data-number="8">
+                        <span class="number">8</span>
+                        <span class="symbol">O</span>
+                        <span class="mass">16.00</span>
+                        <span class="name">Oxígeno</span>
+                    </td>
+                    <td class="halogen element" data-name="Flúor" data-number="9">
+                        <span class="number">9</span>
+                        <span class="symbol">F</span>
+                        <span class="mass">19.00</span>
+                        <span class="name">Flúor</span>
+                    </td>
+                    <td class="noble element" data-name="Neón" data-number="10">
+                        <span class="number">10</span>
+                        <span class="symbol">Ne</span>
+                        <span class="mass">20.18</span>
+                        <span class="name">Neón</span>
+                    </td>
+                </tr>
+                <!-- Fila 3 -->
+                <tr>
+                    <td class="alkali element" data-name="Sodio" data-number="11">
+                        <span class="number">11</span>
+                        <span class="symbol">Na</span>
+                        <span class="mass">22.99</span>
+                        <span class="name">Sodio</span>
+                    </td>
+                    <td class="alkaline element" data-name="Magnesio" data-number="12">
+                        <span class="number">12</span>
+                        <span class="symbol">Mg</span>
+                        <span class="mass">24.31</span>
+                        <span class="name">Magnesio</span>
+                    </td>
+                    <td colspan="10"></td>
+                    <td class="posttransition element" data-name="Aluminio" data-number="13">
+                        <span class="number">13</span>
+                        <span class="symbol">Al</span>
+                        <span class="mass">26.98</span>
+                        <span class="name">Aluminio</span>
+                    </td>
+                    <td class="metalloid element" data-name="Silicio" data-number="14">
+                        <span class="number">14</span>
+                        <span class="symbol">Si</span>
+                        <span class="mass">28.09</span>
+                        <span class="name">Silicio</span>
+                    </td>
+                    <td class="nonmetal element" data-name="Fósforo" data-number="15">
+                        <span class="number">15</span>
+                        <span class="symbol">P</span>
+                        <span class="mass">30.97</span>
+                        <span class="name">Fósforo</span>
+                    </td>
+                    <td class="nonmetal element" data-name="Azufre" data-number="16">
+                        <span class="number">16</span>
+                        <span class="symbol">S</span>
+                        <span class="mass">32.07</span>
+                        <span class="name">Azufre</span>
+                    </td>
+                    <td class="halogen element" data-name="Cloro" data-number="17">
+                        <span class="number">17</span>
+                        <span class="symbol">Cl</span>
+                        <span class="mass">35.45</span>
+                        <span class="name">Cloro</span>
+                    </td>
+                    <td class="noble element" data-name="Argón" data-number="18">
+                        <span class="number">18</span>
+                        <span class="symbol">Ar</span>
+                        <span class="mass">39.95</span>
+                        <span class="name">Argón</span>
+                    </td>
+                </tr>
+                <!-- Fila 4 -->
+                <tr>
+                    <td class="alkali element" data-name="Potasio" data-number="19">
+                        <span class="number">19</span>
+                        <span class="symbol">K</span>
+                        <span class="mass">39.10</span>
+                        <span class="name">Potasio</span>
+                    </td>
+                    <td class="alkaline element" data-name="Calcio" data-number="20">
+                        <span class="number">20</span>
+                        <span class="symbol">Ca</span>
+                        <span class="mass">40.08</span>
+                        <span class="name">Calcio</span>
+                    </td>
+                    <td class="transition element" data-name="Escandio" data-number="21">
+                        <span class="number">21</span>
+                        <span class="symbol">Sc</span>
+                        <span class="mass">44.96</span>
+                        <span class="name">Escandio</span>
+                    </td>
+                    <td class="transition element" data-name="Titanio" data-number="22">
+                        <span class="number">22</span>
+                        <span class="symbol">Ti</span>
+                        <span class="mass">47.87</span>
+                        <span class="name">Titanio</span>
+                    </td>
+                    <td class="transition element" data-name="Vanadio" data-number="23">
+                        <span class="number">23</span>
+                        <span class="symbol">V</span>
+                        <span class="mass">50.94</span>
+                        <span class="name">Vanadio</span>
+                    </td>
+                    <td class="transition element" data-name="Cromo" data-number="24">
+                        <span class="number">24</span>
+                        <span class="symbol">Cr</span>
+                        <span class="mass">52.00</span>
+                        <span class="name">Cromo</span>
+                    </td>
+                    <td class="transition element" data-name="Manganeso" data-number="25">
+                        <span class="number">25</span>
+                        <span class="symbol">Mn</span>
+                        <span class="mass">54.94</span>
+                        <span class="name">Manganeso</span>
+                    </td>
+                    <td class="transition element" data-name="Hierro" data-number="26">
+                        <span class="number">26</span>
+                        <span class="symbol">Fe</span>
+                        <span class="mass">55.85</span>
+                        <span class="name">Hierro</span>
+                    </td>
+                    <td class="transition element" data-name="Cobalto" data-number="27">
+                        <span class="number">27</span>
+                        <span class="symbol">Co</span>
+                        <span class="mass">58.93</span>
+                        <span class="name">Cobalto</span>
+                    </td>
+                    <td class="transition element" data-name="Níquel" data-number="28">
+                        <span class="number">28</span>
+                        <span class="symbol">Ni</span>
+                        <span class="mass">58.69</span>
+                        <span class="name">Níquel</span>
+                    </td>
+                    <td class="transition element" data-name="Cobre" data-number="29">
+                        <span class="number">29</span>
+                        <span class="symbol">Cu</span>
+                        <span class="mass">63.55</span>
+                        <span class="name">Cobre</span>
+                    </td>
+                    <td class="transition element" data-name="Cinc" data-number="30">
+                        <span class="number">30</span>
+                        <span class="symbol">Zn</span>
+                        <span class="mass">65.38</span>
+                        <span class="name">Cinc</span>
+                    </td>
+                    <td class="posttransition element" data-name="Galio" data-number="31">
+                        <span class="number">31</span>
+                        <span class="symbol">Ga</span>
+                        <span class="mass">69.72</span>
+                        <span class="name">Galio</span>
+                    </td>
+                    <td class="metalloid element" data-name="Germanio" data-number="32">
+                        <span class="number">32</span>
+                        <span class="symbol">Ge</span>
+                        <span class="mass">72.63</span>
+                        <span class="name">Germanio</span>
+                    </td>
+                    <td class="metalloid element" data-name="Arsénico" data-number="33">
+                        <span class="number">33</span>
+                        <span class="symbol">As</span>
+                        <span class="mass">74.92</span>
+                        <span class="name">Arsénico</span>
+                    </td>
+                    <td class="nonmetal element" data-name="Selenio" data-number="34">
+                        <span class="number">34</span>
+                        <span class="symbol">Se</span>
+                        <span class="mass">78.97</span>
+                        <span class="name">Selenio</span>
+                    </td>
+                    <td class="halogen element" data-name="Bromo" data-number="35">
+                        <span class="number">35</span>
+                        <span class="symbol">Br</span>
+                        <span class="mass">79.90</span>
+                        <span class="name">Bromo</span>
+                    </td>
+                    <td class="noble element" data-name="Kriptón" data-number="36">
+                        <span class="number">36</span>
+                        <span class="symbol">Kr</span>
+                        <span class="mass">83.80</span>
+                        <span class="name">Kriptón</span>
+                    </td>
+                </tr>
+                <!-- Fila 5 -->
+                <tr>
+                    <td class="alkali element" data-name="Rubidio" data-number="37">
+                        <span class="number">37</span>
+                        <span class="symbol">Rb</span>
+                        <span class="mass">85.47</span>
+                        <span class="name">Rubidio</span>
+                    </td>
+                    <td class="alkaline element" data-name="Estroncio" data-number="38">
+                        <span class="number">38</span>
+                        <span class="symbol">Sr</span>
+                        <span class="mass">87.62</span>
+                        <span class="name">Estroncio</span>
+                    </td>
+                    <td class="transition element" data-name="Itrio" data-number="39">
+                        <span class="number">39</span>
+                        <span class="symbol">Y</span>
+                        <span class="mass">88.91</span>
+                        <span class="name">Itrio</span>
+                    </td>
+                    <td class="transition element" data-name="Circonio" data-number="40">
+                        <span class="number">40</span>
+                        <span class="symbol">Zr</span>
+                        <span class="mass">91.22</span>
+                        <span class="name">Circonio</span>
+                    </td>
+                    <td class="transition element" data-name="Niobio" data-number="41">
+                        <span class="number">41</span>
+                        <span class="symbol">Nb</span>
+                        <span class="mass">92.91</span>
+                        <span class="name">Niobio</span>
+                    </td>
+                    <td class="transition element" data-name="Molibdeno" data-number="42">
+                        <span class="number">42</span>
+                        <span class="symbol">Mo</span>
+                        <span class="mass">95.95</span>
+                        <span class="name">Molibdeno</span>
+                    </td>
+                    <td class="transition element" data-name="Tecnecio" data-number="43">
+                        <span class="number">43</span>
+                        <span class="symbol">Tc</span>
+                        <span class="mass">98</span>
+                        <span class="name">Tecnecio</span>
+                    </td>
+                    <td class="transition element" data-name="Rutenio" data-number="44">
+                        <span class="number">44</span>
+                        <span class="symbol">Ru</span>
+                        <span class="mass">101.07</span>
+                        <span class="name">Rutenio</span>
+                    </td>
+                    <td class="transition element" data-name="Rodio" data-number="45">
+                        <span class="number">45</span>
+                        <span class="symbol">Rh</span>
+                        <span class="mass">102.91</span>
+                        <span class="name">Rodio</span>
+                    </td>
+                    <td class="transition element" data-name="Paladio" data-number="46">
+                        <span class="number">46</span>
+                        <span class="symbol">Pd</span>
+                        <span class="mass">106.42</span>
+                        <span class="name">Paladio</span>
+                    </td>
+                    <td class="transition element" data-name="Plata" data-number="47">
+                        <span class="number">47</span>
+                        <span class="symbol">Ag</span>
+                        <span class="mass">107.87</span>
+                        <span class="name">Plata</span>
+                    </td>
+                    <td class="transition element" data-name="Cadmio" data-number="48">
+                        <span class="number">48</span>
+                        <span class="symbol">Cd</span>
+                        <span class="mass">112.41</span>
+                        <span class="name">Cadmio</span>
+                    </td>
+                    <td class="posttransition element" data-name="Indio" data-number="49">
+                        <span class="number">49</span>
+                        <span class="symbol">In</span>
+                        <span class="mass">114.82</span>
+                        <span class="name">Indio</span>
+                    </td>
+                    <td class="posttransition element" data-name="Estaño" data-number="50">
+                        <span class="number">50</span>
+                        <span class="symbol">Sn</span>
+                        <span class="mass">118.71</span>
+                        <span class="name">Estaño</span>
+                    </td>
+                    <td class="metalloid element" data-name="Antimonio" data-number="51">
+                        <span class="number">51</span>
+                        <span class="symbol">Sb</span>
+                        <span class="mass">121.76</span>
+                        <span class="name">Antimonio</span>
+                    </td>
+                    <td class="metalloid element" data-name="Telurio" data-number="52">
+                        <span class="number">52</span>
+                        <span class="symbol">Te</span>
+                        <span class="mass">127.60</span>
+                        <span class="name">Telurio</span>
+                    </td>
+                    <td class="halogen element" data-name="Yodo" data-number="53">
+                        <span class="number">53</span>
+                        <span class="symbol">I</span>
+                        <span class="mass">126.90</span>
+                        <span class="name">Yodo</span>
+                    </td>
+                    <td class="noble element" data-name="Xenón" data-number="54">
+                        <span class="number">54</span>
+                        <span class="symbol">Xe</span>
+                        <span class="mass">131.29</span>
+                        <span class="name">Xenón</span>
+                    </td>
+                </tr>
+                <!-- Fila 6 -->
+                <tr>
+                    <td class="alkali element" data-name="Cesio" data-number="55">
+                        <span class="number">55</span>
+                        <span class="symbol">Cs</span>
+                        <span class="mass">132.91</span>
+                        <span class="name">Cesio</span>
+                    </td>
+                    <td class="alkaline element" data-name="Bario" data-number="56">
+                        <span class="number">56</span>
+                        <span class="symbol">Ba</span>
+                        <span class="mass">137.33</span>
+                        <span class="name">Bario</span>
+                    </td>
+                    <td class="lanthanoid">*</td>
+                    <td class="transition element" data-name="Hafnio" data-number="72">
+                        <span class="number">72</span>
+                        <span class="symbol">Hf</span>
+                        <span class="mass">178.49</span>
+                        <span class="name">Hafnio</span>
+                    </td>
+                    <td class="transition element" data-name="Tantalio" data-number="73">
+                        <span class="number">73</span>
+                        <span class="symbol">Ta</span>
+                        <span class="mass">180.95</span>
+                        <span class="name">Tantalio</span>
+                    </td>
+                    <td class="transition element" data-name="Wolframio" data-number="74">
+                        <span class="number">74</span>
+                        <span class="symbol">W</span>
+                        <span class="mass">183.84</span>
+                        <span class="name">Wolframio</span>
+                    </td>
+                    <td class="transition element" data-name="Renio" data-number="75">
+                        <span class="number">75</span>
+                        <span class="symbol">Re</span>
+                        <span class="mass">186.21</span>
+                        <span class="name">Renio</span>
+                    </td>
+                    <td class="transition element" data-name="Osmio" data-number="76">
+                        <span class="number">76</span>
+                        <span class="symbol">Os</span>
+                        <span class="mass">190.23</span>
+                        <span class="name">Osmio</span>
+                    </td>
+                    <td class="transition element" data-name="Iridio" data-number="77">
+                        <span class="number">77</span>
+                        <span class="symbol">Ir</span>
+                        <span class="mass">192.22</span>
+                        <span class="name">Iridio</span>
+                    </td>
+                    <td class="transition element" data-name="Platino" data-number="78">
+                        <span class="number">78</span>
+                        <span class="symbol">Pt</span>
+                        <span class="mass">195.08</span>
+                        <span class="name">Platino</span>
+                    </td>
+                    <td class="transition element" data-name="Oro" data-number="79">
+                        <span class="number">79</span>
+                        <span class="symbol">Au</span>
+                        <span class="mass">196.97</span>
+                        <span class="name">Oro</span>
+                    </td>
+                    <td class="transition element" data-name="Mercurio" data-number="80">
+                        <span class="number">80</span>
+                        <span class="symbol">Hg</span>
+                        <span class="mass">200.59</span>
+                        <span class="name">Mercurio</span>
+                    </td>
+                    <td class="posttransition element" data-name="Talio" data-number="81">
+                        <span class="number">81</span>
+                        <span class="symbol">Tl</span>
+                        <span class="mass">204.38</span>
+                        <span class="name">Talio</span>
+                    </td>
+                    <td class="posttransition element" data-name="Plomo" data-number="82">
+                        <span class="number">82</span>
+                        <span class="symbol">Pb</span>
+                        <span class="mass">207.2</span>
+                        <span class="name">Plomo</span>
+                    </td>
+                    <td class="posttransition element" data-name="Bismuto" data-number="83">
+                        <span class="number">83</span>
+                        <span class="symbol">Bi</span>
+                        <span class="mass">208.98</span>
+                        <span class="name">Bismuto</span>
+                    </td>
+                    <td class="posttransition element" data-name="Polonio" data-number="84">
+                        <span class="number">84</span>
+                        <span class="symbol">Po</span>
+                        <span class="mass">209</span>
+                        <span class="name">Polonio</span>
+                    </td>
+                    <td class="halogen element" data-name="Ástato" data-number="85">
+                        <span class="number">85</span>
+                        <span class="symbol">At</span>
+                        <span class="mass">210</span>
+                        <span class="name">Ástato</span>
+                    </td>
+                    <td class="noble element" data-name="Radón" data-number="86">
+                        <span class="number">86</span>
+                        <span class="symbol">Rn</span>
+                        <span class="mass">222</span>
+                        <span class="name">Radón</span>
+                    </td>
+                </tr>
+                <!-- Fila 7 -->
+                <tr>
+                    <td class="alkali element" data-name="Francio" data-number="87">
+                        <span class="number">87</span>
+                        <span class="symbol">Fr</span>
+                        <span class="mass">223</span>
+                        <span class="name">Francio</span>
+                    </td>
+                    <td class="alkaline element" data-name="Radio" data-number="88">
+                        <span class="number">88</span>
+                        <span class="symbol">Ra</span>
+                        <span class="mass">226</span>
+                        <span class="name">Radio</span>
+                    </td>
+                    <td class="actinoid">**</td>
+                    <td class="transition element" data-name="Rutherfordio" data-number="104">
+                        <span class="number">104</span>
+                        <span class="symbol">Rf</span>
+                        <span class="mass">267</span>
+                        <span class="name">Rutherfordio</span>
+                    </td>
+                    <td class="transition element" data-name="Dubnio" data-number="105">
+                        <span class="number">105</span>
+                        <span class="symbol">Db</span>
+                        <span class="mass">268</span>
+                        <span class="name">Dubnio</span>
+                    </td>
+                    <td class="transition element" data-name="Seaborgio" data-number="106">
+                        <span class="number">106</span>
+                        <span class="symbol">Sg</span>
+                        <span class="mass">271</span>
+                        <span class="name">Seaborgio</span>
+                    </td>
+                    <td class="transition element" data-name="Bohrio" data-number="107">
+                        <span class="number">107</span>
+                        <span class="symbol">Bh</span>
+                        <span class="mass">272</span>
+                        <span class="name">Bohrio</span>
+                    </td>
+                    <td class="transition element" data-name="Hassio" data-number="108">
+                        <span class="number">108</span>
+                        <span class="symbol">Hs</span>
+                        <span class="mass">270</span>
+                        <span class="name">Hassio</span>
+                    </td>
+                    <td class="transition element" data-name="Meitnerio" data-number="109">
+                        <span class="number">109</span>
+                        <span class="symbol">Mt</span>
+                        <span class="mass">278</span>
+                        <span class="name">Meitnerio</span>
+                    </td>
+                    <td class="transition element" data-name="Darmstadtio" data-number="110">
+                        <span class="number">110</span>
+                        <span class="symbol">Ds</span>
+                        <span class="mass">281</span>
+                        <span class="name">Darmstadtio</span>
+                    </td>
+                    <td class="transition element" data-name="Roentgenio" data-number="111">
+                        <span class="number">111</span>
+                        <span class="symbol">Rg</span>
+                        <span class="mass">282</span>
+                        <span class="name">Roentgenio</span>
+                    </td>
+                    <td class="transition element" data-name="Copernicio" data-number="112">
+                        <span class="number">112</span>
+                        <span class="symbol">Cn</span>
+                        <span class="mass">285</span>
+                        <span class="name">Copernicio</span>
+                    </td>
+                    <td class="posttransition element" data-name="Nihonio" data-number="113">
+                        <span class="number">113</span>
+                        <span class="symbol">Nh</span>
+                        <span class="mass">286</span>
+                        <span class="name">Nihonio</span>
+                    </td>
+                    <td class="posttransition element" data-name="Flerovio" data-number="114">
+                        <span class="number">114</span>
+                        <span class="symbol">Fl</span>
+                        <span class="mass">289</span>
+                        <span class="name">Flerovio</span>
+                    </td>
+                    <td class="posttransition element" data-name="Moscovio" data-number="115">
+                        <span class="number">115</span>
+                        <span class="symbol">Mc</span>
+                        <span class="mass">290</span>
+                        <span class="name">Moscovio</span>
+                    </td>
+                    <td class="posttransition element" data-name="Livermorio" data-number="116">
+                        <span class="number">116</span>
+                        <span class="symbol">Lv</span>
+                        <span class="mass">293</span>
+                        <span class="name">Livermorio</span>
+                    </td>
+                    <td class="halogen element" data-name="Teneso" data-number="117">
+                        <span class="number">117</span>
+                        <span class="symbol">Ts</span>
+                        <span class="mass">294</span>
+                        <span class="name">Teneso</span>
+                    </td>
+                    <td class="noble element" data-name="Oganesón" data-number="118">
+                        <span class="number">118</span>
+                        <span class="symbol">Og</span>
+                        <span class="mass">294</span>
+                        <span class="name">Oganesón</span>
+                    </td>
+                </tr>
+                <!-- Lantánidos -->
+                <tr>
+                    <td colspan="3"></td>
+                    <td class="lanthanoid element" data-name="Lantano" data-number="57">
+                        <span class="number">57</span>
+                        <span class="symbol">La</span>
+                        <span class="mass">138.91</span>
+                        <span class="name">Lantano</span>
+                    </td>
+                    <td class="lanthanoid element" data-name="Cerio" data-number="58">
+                        <span class="number">58</span>
+                        <span class="symbol">Ce</span>
+                        <span class="mass">140.12</span>
+                        <span class="name">Cerio</span>
+                    </td>
+                    <td class="lanthanoid element" data-name="Praseodimio" data-number="59">
+                        <span class="number">59</span>
+                        <span class="symbol">Pr</span>
+                        <span class="mass">140.91</span>
+                        <span class="name">Praseodimio</span>
+                    </td>
+                    <td class="lanthanoid element" data-name="Neodimio" data-number="60">
+                        <span class="number">60</span>
+                        <span class="symbol">Nd</span>
+                        <span class="mass">144.24</span>
+                        <span class="name">Neodimio</span>
+                    </td>
+                    <td class="lanthanoid element" data-name="Prometio" data-number="61">
+                        <span class="number">61</span>
+                        <span class="symbol">Pm</span>
+                        <span class="mass">145</span>
+                        <span class="name">Prometio</span>
+                    </td>
+                    <td class="lanthanoid element" data-name="Samario" data-number="62">
+                        <span class="number">62</span>
+                        <span class="symbol">Sm</span>
+                        <span class="mass">150.36</span>
+                        <span class="name">Samario</span>
+                    </td>
+                    <td class="lanthanoid element" data-name="Europio" data-number="63">
+                        <span class="number">63</span>
+                        <span class="symbol">Eu</span>
+                        <span class="mass">151.96</span>
+                        <span class="name">Europio</span>
+                    </td>
+                    <td class="lanthanoid element" data-name="Gadolinio" data-number="64">
+                        <span class="number">64</span>
+                        <span class="symbol">Gd</span>
+                        <span class="mass">157.25</span>
+                        <span class="name">Gadolinio</span>
+                    </td>
+                    <td class="lanthanoid element" data-name="Terbio" data-number="65">
+                        <span class="number">65</span>
+                        <span class="symbol">Tb</span>
+                        <span class="mass">158.93</span>
+                        <span class="name">Terbio</span>
+                    </td>
+                    <td class="lanthanoid element" data-name="Disprosio" data-number="66">
+                        <span class="number">66</span>
+                        <span class="symbol">Dy</span>
+                        <span class="mass">162.50</span>
+                        <span class="name">Disprosio</span>
+                    </td>
+                    <td class="lanthanoid element" data-name="Holmio" data-number="67">
+                        <span class="number">67</span>
+                        <span class="symbol">Ho</span>
+                        <span class="mass">164.93</span>
+                        <span class="name">Holmio</span>
+                    </td>
+                    <td class="lanthanoid element" data-name="Erbio" data-number="68">
+                        <span class="number">68</span>
+                        <span class="symbol">Er</span>
+                        <span class="mass">167.26</span>
+                        <span class="name">Erbio</span>
+                    </td>
+                    <td class="lanthanoid element" data-name="Tulio" data-number="69">
+                        <span class="number">69</span>
+                        <span class="symbol">Tm</span>
+                        <span class="mass">168.93</span>
+                        <span class="name">Tulio</span>
+                    </td>
+                    <td class="lanthanoid element" data-name="Iterbio" data-number="70">
+                        <span class="number">70</span>
+                        <span class="symbol">Yb</span>
+                        <span class="mass">173.05</span>
+                        <span class="name">Iterbio</span>
+                    </td>
+                    <td class="lanthanoid element" data-name="Lutecio" data-number="71">
+                        <span class="number">71</span>
+                        <span class="symbol">Lu</span>
+                        <span class="mass">174.97</span>
+                        <span class="name">Lutecio</span>
+                    </td>
+                </tr>
+                <!-- Actínidos -->
+                <tr>
+                    <td colspan="3"></td>
+                    <td class="actinoid element" data-name="Actinio" data-number="89">
+                        <span class="number">89</span>
+                        <span class="symbol">Ac</span>
+                        <span class="mass">227</span>
+                        <span class="name">Actinio</span>
+                    </td>
+                    <td class="actinoid element" data-name="Torio" data-number="90">
+                        <span class="number">90</span>
+                        <span class="symbol">Th</span>
+                        <span class="mass">232.04</span>
+                        <span class="name">Torio</span>
+                    </td>
+                    <td class="actinoid element" data-name="Protactinio" data-number="91">
+                        <span class="number">91</span>
+                        <span class="symbol">Pa</span>
+                        <span class="mass">231.04</span>
+                        <span class="name">Protactinio</span>
+                    </td>
+                    <td class="actinoid element" data-name="Uranio" data-number="92">
+                        <span class="number">92</span>
+                        <span class="symbol">U</span>
+                        <span class="mass">238.03</span>
+                        <span class="name">Uranio</span>
+                    </td>
+                    <td class="actinoid element" data-name="Neptunio" data-number="93">
+                        <span class="number">93</span>
+                        <span class="symbol">Np</span>
+                        <span class="mass">237</span>
+                        <span class="name">Neptunio</span>
+                    </td>
+                    <td class="actinoid element" data-name="Plutonio" data-number="94">
+                        <span class="number">94</span>
+                        <span class="symbol">Pu</span>
+                        <span class="mass">244</span>
+                        <span class="name">Plutonio</span>
+                    </td>
+                    <td class="actinoid element" data-name="Americio" data-number="95">
+                        <span class="number">95</span>
+                        <span class="symbol">Am</span>
+                        <span class="mass">243</span>
+                        <span class="name">Americio</span>
+                    </td>
+                    <td class="actinoid element" data-name="Curio" data-number="96">
+                        <span class="number">96</span>
+                        <span class="symbol">Cm</span>
+                        <span class="mass">247</span>
+                        <span class="name">Curio</span>
+                    </td>
+                    <td class="actinoid element" data-name="Berkelio" data-number="97">
+                        <span class="number">97</span>
+                        <span class="symbol">Bk</span>
+                        <span class="mass">247</span>
+                        <span class="name">Berkelio</span>
+                    </td>
+                    <td class="actinoid element" data-name="Californio" data-number="98">
+                        <span class="number">98</span>
+                        <span class="symbol">Cf</span>
+                        <span class="mass">251</span>
+                        <span class="name">Californio</span>
+                    </td>
+                    <td class="actinoid element" data-name="Einstenio" data-number="99">
+                        <span class="number">99</span>
+                        <span class="symbol">Es</span>
+                        <span class="mass">252</span>
+                        <span class="name">Einstenio</span>
+                    </td>
+                    <td class="actinoid element" data-name="Fermio" data-number="100">
+                        <span class="number">100</span>
+                        <span class="symbol">Fm</span>
+                        <span class="mass">257</span>
+                        <span class="name">Fermio</span>
+                    </td>
+                    <td class="actinoid element" data-name="Mendelevio" data-number="101">
+                        <span class="number">101</span>
+                        <span class="symbol">Md</span>
+                        <span class="mass">258</span>
+                        <span class="name">Mendelevio</span>
+                    </td>
+                    <td class="actinoid element" data-name="Nobelio" data-number="102">
+                        <span class="number">102</span>
+                        <span class="symbol">No</span>
+                        <span class="mass">259</span>
+                        <span class="name">Nobelio</span>
+                    </td>
+                    <td class="actinoid element" data-name="Lawrencio" data-number="103">
+                        <span class="number">103</span>
+                        <span class="symbol">Lr</span>
+                        <span class="mass">266</span>
+                        <span class="name">Lawrencio</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="info-panel">
+            <h3 id="element-name">Selecciona o pasa el ratón sobre un elemento</h3>
+            <p><strong>Número atómico:</strong> <span id="element-number">-</span></p>
+            <p><strong>Símbolo:</strong> <span id="element-symbol">-</span></p>
+            <p><strong>Masa atómica:</strong> <span id="element-mass">-</span></p>
+            <div><strong>Categoría:</strong> <span class="category-badge" id="element-category">-</span></div>
+        </div>
+    </div>
+
+    <p class="note">
+        * Los lantánidos (57-71) se muestran en la fila inferior<br>
+        ** Los actínidos (89-103) se muestran en la fila inferior
+    </p>
+
+    <div class="legend">
+        <div class="legend-item"><div class="legend-color" style="background:#FFCDD2;"></div> Metales alcalinos</div>
+        <div class="legend-item"><div class="legend-color" style="background:#F8BBD0;"></div> Metales alcalinotérreos</div>
+        <div class="legend-item"><div class="legend-color" style="background:#BBDEFB;"></div> Metales de transición</div>
+        <div class="legend-item"><div class="legend-color" style="background:#C8E6C9;"></div> Otros metales</div>
+        <div class="legend-item"><div class="legend-color" style="background:#FFF9C4;"></div> Metaloides</div>
+        <div class="legend-item"><div class="legend-color" style="background:#DCEDC8;"></div> No metales</div>
+        <div class="legend-item"><div class="legend-color" style="background:#FFECB3;"></div> Halógenos</div>
+        <div class="legend-item"><div class="legend-color" style="background:#B2DFDB;"></div> Gases nobles</div>
+        <div class="legend-item"><div class="legend-color" style="background:#E1BEE7;"></div> Lantánidos</div>
+        <div class="legend-item"><div class="legend-color" style="background:#D1C4E9;"></div> Actínidos</div>
+    </div>
+
+    <script>
+        const categoryNames = {
+            alkali: {name: 'Metales alcalinos', color: '#FFCDD2'},
+            alkaline: {name: 'Metales alcalinotérreos', color: '#F8BBD0'},
+            transition: {name: 'Metales de transición', color: '#BBDEFB'},
+            posttransition: {name: 'Otros metales', color: '#C8E6C9'},
+            metalloid: {name: 'Metaloides', color: '#FFF9C4'},
+            nonmetal: {name: 'No metales', color: '#DCEDC8'},
+            halogen: {name: 'Halógenos', color: '#FFECB3'},
+            noble: {name: 'Gases nobles', color: '#B2DFDB'},
+            lanthanoid: {name: 'Lantánidos', color: '#E1BEE7'},
+            actinoid: {name: 'Actínidos', color: '#D1C4E9'}
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('search');
+            const clearBtn = document.getElementById('clear-search');
+            const nameEl = document.getElementById('element-name');
+            const numberEl = document.getElementById('element-number');
+            const symbolEl = document.getElementById('element-symbol');
+            const massEl = document.getElementById('element-mass');
+            const categoryEl = document.getElementById('element-category');
+            let selectedCell = null;
+
+            const updatePanel = (cell) => {
+                const number = cell.dataset.number || cell.querySelector('.number').textContent;
+                const symbol = cell.querySelector('.symbol').textContent;
+                const mass = cell.querySelector('.mass').textContent;
+                const name = cell.dataset.name;
+                const classes = Array.from(cell.classList);
+                const catClass = classes.find(c => categoryNames[c]);
+                const cat = categoryNames[catClass] || {name: 'Desconocida', color: '#ccc'};
+
+                nameEl.textContent = name;
+                numberEl.textContent = number;
+                symbolEl.textContent = symbol;
+                massEl.textContent = mass;
+                categoryEl.textContent = cat.name;
+                categoryEl.style.backgroundColor = cat.color;
+            };
+
+            const clearSelection = () => {
+                if (selectedCell) {
+                    selectedCell.classList.remove('selected');
+                    selectedCell = null;
+                }
+                nameEl.textContent = 'Selecciona o pasa el ratón sobre un elemento';
+                numberEl.textContent = '-';
+                symbolEl.textContent = '-';
+                massEl.textContent = '-';
+                categoryEl.textContent = '-';
+                categoryEl.style.backgroundColor = 'transparent';
+            };
+
+            const performSearch = () => {
+                const term = searchInput.value.trim().toLowerCase();
+                document.querySelectorAll('td.element').forEach(cell => {
+                    const name = cell.dataset.name.toLowerCase();
+                    const symbol = cell.querySelector('.symbol').textContent.toLowerCase();
+                    const number = cell.dataset.number;
+                    const matches = term === '' || name.includes(term) || symbol.includes(term) || number === term;
+                    if (matches) {
+                        cell.classList.remove('dim');
+                        if (term !== '') cell.classList.add('highlight');
+                        else cell.classList.remove('highlight');
+                    } else {
+                        cell.classList.add('dim');
+                        cell.classList.remove('highlight');
+                    }
+                });
+            };
+
+            searchInput.addEventListener('input', performSearch);
+            clearBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                performSearch();
+            });
+
+            document.querySelectorAll('td.element').forEach(cell => {
+                cell.addEventListener('mouseenter', () => {
+                    if (!selectedCell) updatePanel(cell);
+                });
+                cell.addEventListener('mouseleave', () => {
+                    if (!selectedCell) clearSelection();
+                });
+
+                cell.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (selectedCell === cell) {
+                        clearSelection();
+                    } else {
+                        if (selectedCell) selectedCell.classList.remove('selected');
+                        selectedCell = cell;
+                        cell.classList.add('selected');
+                        updatePanel(cell);
+                    }
+                });
+            });
+
+            document.addEventListener('click', clearSelection);
+        });
+    </script>
+</body>
+</html>

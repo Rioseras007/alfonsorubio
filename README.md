@@ -1,51 +1,43 @@
-<header>
+# Web Personal y Panel de Servicios - Alfonso Rubio Rioseras
 
-<!--
-  <<< Author notes: Course header >>>
-  Include a 1280×640 image, course title in sentence case, and a concise description in emphasis.
-  In your repository settings: enable template repository, add your 1280×640 social image, auto delete head branches.
-  Add your open source license, GitHub uses MIT license.
--->
+Este proyecto contiene la página web personal de Alfonso Rubio Rioseras, así como un panel unificado de acceso rápido a herramientas, redes sociales, servicios, y diversos subproyectos de diseño, desarrollo web y aficiones.
 
-# GitHub Pages
+## Estructura del Proyecto
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
+El proyecto está organizado en una estructura profesional para facilitar su mantenimiento:
 
-</header>
+- **`/css/`**: Hojas de estilo globales (`style.css`, `style2.css`, etc.)
+- **`/js/`**: Scripts globales y lógica de la interfaz principal.
+- **`/assets/`**: Recursos multimedia centralizados (imágenes, audios, fuentes).
+- **`/pages/`**: Páginas independientes accesibles desde la raíz (juegos, utilidades, listados).
+- **`/projects/`**: Subproyectos modulares, cada uno en su propia carpeta (Gestor de Contraseñas, Calendario Épico, Colecciones de Música, etc.)
+- **`/styles/`**: Contiene exclusivamente el `favicon.ico` del sitio.
+- **`/tools/`**: Scripts de utilidad (ej. Python) para automatización de tareas.
 
-<!--
-  <<< Author notes: Step 3 >>>
-  Start this step by acknowledging the previous step.
-  Define terms and link to docs.github.com.
-  Historic note: previous version checked the homepage content was not empty.
--->
+## Subproyectos Destacados (`/projects/`)
 
-## Step 3: Customize your homepage
+- **Gestor Passwords**: Un gestor de contraseñas seguro tipo PWA (anteriormente Vaultify).
+- **Calendario Épico**: Un calendario mensual interactivo con temas dinámicos.
+- **Colección de Música**: Varios reproductores web para álbumes de Julio Iglesias, Raphael, Pink Floyd y Bandas Sonoras de James Bond.
+- **Bond 007**: Completa wiki y catálogo para fans de la saga de James Bond (películas, actores, coches, etc.)
+- **CV**: Currículum vitae en formato web.
+- **Inventario 3D**: Catálogo de impresiones y modelos 3D.
 
-_Nice work setting the theme! :sparkles:_
+## Tecnologías Utilizadas
 
-You can customize your homepage by adding content to either an `index.md` file or the `README.md` file. GitHub Pages first looks for an `index.md` file. Your repository has an `index.md` file so we can update it to include your personalized content.
+- **Frontend**: HTML5 Semántico, CSS3, JavaScript Vanilla.
+- **Frameworks/Librerías**: Bootstrap 5, FontAwesome, Bootstrap Icons, Moment.js.
+- **Multimedia**: Web Audio API para efectos de sonido, iframes para reproductores embebidos y calculadoras de Google Sheets.
+- **Automatización**: Scripts de Python para procesamiento por lotes (disponibles en `/tools/` y en subcarpetas).
 
-### :keyboard: Activity: Create your homepage
+## Despliegue
 
-1. Browse to the `index.md` file in the `my-pages` branch.
-1. In the upper right corner, open the file editor.
-1. Type the content you want on your homepage. You can use Markdown formatting on this page.
-1. (optional) You can also modify `title:` or just ignore it for now. We'll discuss it in the next step.
-1. Commit your changes to the `my-pages` branch.
-1. Wait about 20 seconds then refresh this page (the one you're following instructions from). [GitHub Actions](https://docs.github.com/en/actions) will automatically update to the next step.
+La página está preparada para ser servida como un sitio estático. No requiere servidor backend, por lo que puede ser desplegada de inmediato en plataformas como **GitHub Pages**, **Vercel** o **Netlify**.
 
-<footer>
+> **Nota sobre archivos pesados:** Algunos subproyectos contienen archivos multimedia voluminosos (`.mp4`, `.mp3`). Estos están excluidos del control de versiones mediante el `.gitignore`.
 
-<!--
-  <<< Author notes: Footer >>>
-  Add a link to get support, GitHub status page, code of conduct, license link.
--->
+## Contacto y Redes Sociales
 
----
-
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/github-pages) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
-
-&copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
-
-</footer>
+- [YouTube](https://www.youtube.com/@AlfonsoRubioRioseras)
+- [Twitch](https://www.twitch.tv/ps3rioseras007)
+- [Printables](https://www.printables.com/@Rioseras007)

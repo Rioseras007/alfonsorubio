@@ -1,0 +1,176 @@
+
+
+
+body{
+
+ font-family: "Indie Flower", cursive;
+ background-color:·#a92929;
+}
+
+h1,h2,h3,h4,h5,h6{  
+ font-family: "Fredericka the Great", cursive;
+ font-weight: 200
+
+}
+
+h1
+{
+ text-align: center;
+ font-size: 3rem
+}
+.polaroid{
+ background-color: white;
+ padding: 15px;
+width: 23%;
+-webkit-box-shadow: 0px 0px 4px 0px #595959;
+box-shadow: 0px 0px 4px 0px #595959;
+display: inline-block;
+border-width: 3px;
+border-style: solid;
+border-color: #180101;
+
+
+}
+
+
+.polaroid img{
+ width: 100%;
+ height: 350px;
+ object-fit: cover;
+
+}
+
+.polaroid figcaption{
+ text-align: center;
+font-size: 1.4em;
+color:blue
+
+}
+
+.rot-a{
+ transform: rotate(3deg);
+}
+
+.rot-b{
+ transform: rotate(-2);
+}   
+
+.rot-c{
+ transform: rotate(1eg);
+}
+
+.rot-d{
+ transform: rotate(-4eg);
+}
+
+.rot-e{
+ transform: rotate(3deg);
+}
+
+.padre
+{
+ position: relative;
+}
+
+.hijo
+{
+ position: absolute;
+ top: 0;
+ left: 0;
+}
+
+.desp-a
+{
+ top:5px;
+ left: 10x;
+
+}   
+.desp-b
+{
+ top: 20x;
+ left:60x;
+
+}
+.desp-c
+{
+ top: 3px;
+ left: 8px;
+}
+.desp-d
+{
+ top: 10px;
+ left: 20px;
+}
+.desp-e
+{
+ top: 50px;
+ left: 30px;
+}
+
+.z5
+{
+ z-index: 5;
+}
+.z4
+{
+ z-index: 4;
+}
+.z3
+{
+ z-index: 3;
+}
+.z2
+{
+ z-index: 2;
+}
+.z1
+{
+ z-index: 1;
+}
+
+
+#titulo-absolute:hover+.padre .desp-a
+{
+ top: 10px;
+ left: 700px;
+ transition: 1s;
+ transform: rotate(90deg);
+
+}
+
+#titulo-absolute:hover+.padre .desp-b
+{
+ top: 10px;
+ left: 700px;
+ transition: 1s;
+ transform: rotate(120deg);
+
+}
+
+#titulo-absolute:hover+.padre .desp-c
+{
+ top: 10px;
+ left: 700px;
+ transition: 1s;
+ transform: rotate(180deg);
+
+}
+
+#titulo-absolute:hover+.padre .desp-d
+{
+ top: 10px;
+ left: 700px;
+ transition: 1s;
+ transform: rotate(270deg);
+
+}
+
+#titulo-absolute:hover+.padre .desp-e
+{
+ top: 10px;
+ left: 700px;
+ transition: 1s;
+ transform: rotate(360deg);
+
+
+}

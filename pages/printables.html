@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mythic Prints Studio</title>
+<style>
+    * {margin:0; padding:0; box-sizing:border-box;}
+
+    body {
+        font-family: 'Arial Black', sans-serif;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(circle at 50% 50%, #0a0a0a, #000000 80%);
+        overflow: hidden;
+        color: #fff;
+    }
+
+    /* FONDO ANIMADO TIPO GALAXIA */
+    .background {
+        position: absolute;
+        top:0; left:0; width:100%; height:100%;
+        background:
+            radial-gradient(circle at 20% 30%, #ff0000, transparent 30%),
+            radial-gradient(circle at 70% 40%, #00ffcc, transparent 30%),
+            radial-gradient(circle at 50% 80%, #ffcc00, transparent 30%);
+        background-blend-mode: screen;
+        animation: rotateBG 60s linear infinite;
+        z-index: 0;
+    }
+
+    @keyframes rotateBG {
+        0% {transform: rotate(0deg);}
+        100% {transform: rotate(360deg);}
+    }
+
+    .container {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        max-width: 900px;
+        padding: 50px;
+        background: rgba(0,0,0,0.6);
+        border-radius: 20px;
+        box-shadow: 0 0 50px rgba(255,204,0,0.9);
+        animation: fadeIn 2s ease forwards;
+    }
+
+    h1 {
+        font-size: 2.5em;
+        margin-bottom: 25px;
+        color: #ffcc00;
+        text-transform: uppercase;
+        text-shadow:
+            0 0 5px #ffcc00,
+            0 0 10px #ff9900,
+            0 0 20px #ffcc00,
+            0 0 40px #ff9900;
+        animation: neonGlow 2s ease-in-out infinite alternate;
+    }
+
+    p {
+        font-size: 1em;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        opacity: 0;
+        animation: slideUp 1.5s ease forwards;
+    }
+    p:nth-child(2) {animation-delay: 0.5s;}
+    p:nth-child(3) {animation-delay: 1s;}
+    p:nth-child(4) {animation-delay: 1.5s;}
+
+    @keyframes fadeIn { from {opacity:0; transform: scale(0.8);} to {opacity:1; transform: scale(1);} }
+    @keyframes neonGlow {
+        0% {text-shadow:0 0 10px #ffcc00,0 0 20px #ff9900,0 0 30px #ffcc00;}
+        50% {text-shadow:0 0 20px #ffcc00,0 0 40px #ff9900,0 0 60px #ffcc00;}
+        100% {text-shadow:0 0 10px #ffcc00,0 0 20px #ff9900,0 0 30px #ffcc00;}
+    }
+    @keyframes slideUp { from {opacity:0; transform: translateY(30px);} to {opacity:1; transform: translateY(0);} }
+
+    /* Siluetas geométricas estilo figuras */
+    .shapes {
+        position: absolute;
+        width: 100%; height: 100%;
+        z-index: 1;
+        overflow: hidden;
+    }
+    .shape {
+        position: absolute;
+        width: 50px; height: 50px;
+        border: 2px solid #ffcc00;
+        border-radius: 10%;
+        opacity: 0.5;
+        animation: floatShape linear infinite;
+    }
+    @keyframes floatShape {
+        0% {transform: translateY(100vh) rotate(0deg);}
+        100% {transform: translateY(-10vh) rotate(360deg);}
+    }
+</style>
+</head>
+<body>
+<div class="image-container">
+    <img src="portada.png" alt="Portada">
+</div>
+<div class="background"></div>
+<div class="shapes" id="shapes"></div>
+
+
+<div class="container">
+    <h1>Mythic Prints Studio</h1>
+    <p>Somos un grupo de diseñadores 3D donde la imaginación y la tecnología se fusionan en cada figura.</p>
+    <p>Reinterpretamos héroes de cómic, leyendas de Star Wars y los iconos más poderosos del pop en diseños únicos para impresión 3D.</p>
+    <p>La IA nos permite explorar mundos imposibles, haciendo de cada creación una obra épica que celebra la cultura geek y pop.</p>
+    <p>Únete a nosotros en esta aventura creativa y descubre cómo la tecnología puede dar vida a tus personajes favoritos.</p>
+    <p>Si estás interesado en colaborar o tienes alguna idea que quieras desarrollar, no dudes en contactarnos.</p>
+    <p>Si te gusta lo que ves unete al grupo de Printables!</p>
+</div>
+
+
+<script>
+    // Generar siluetas geométricas flotantes
+    const shapesContainer = document.getElementById('shapes');
+    const numShapes = 40;
+    for(let i=0;i<numShapes;i++){
+        const shape = document.createElement('div');
+        shape.classList.add('shape');
+        let size = 20 + Math.random()*40;
+        shape.style.width = shape.style.height = size+'px';
+        shape.style.left = Math.random()*100+'vw';
+        shape.style.animationDuration = (5 + Math.random()*10)+'s';
+        shape.style.animationDelay = Math.random()*5+'s';
+        shapesContainer.appendChild(shape);
+    }
+</script>
+
+</body>
+</html>

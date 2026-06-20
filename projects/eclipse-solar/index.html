@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eclipses en España (2026 - 2028) | El Trienio Dorado de la Astronomía</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Guía interactiva de los tres eclipses solares históricos que cruzarán España en 2026, 2027 y 2028. Contadores regresivos, mapas, consejos de observación y recursos científicos.">
+    <meta name="keywords" content="eclipse solar españa, eclipse 2026, eclipse 2027, eclipse 2028, astronomía, observar eclipse, eclipse total, anillo de fuego">
+    <meta name="author" content="Portal de Eclipses España">
+    
+    <!-- Open Graph (Facebook / LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Eclipses en España (2026 - 2028) | El Trienio Dorado">
+    <meta property="og:description" content="Prepárate para los tres grandes eclipses solares en España. Cuenta atrás, información de seguridad, mapas de totalidad y puntos de observación.">
+    <meta property="og:image" content="valladolid.jpeg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Space Particles / Nebula effect -->
+    <div class="stars-container">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+        <div class="eclipse-glow-bg"></div>
+    </div>
+
+    <!-- Header / Navigation Bar -->
+    <header class="navbar-container">
+        <div class="navbar-wrapper">
+            <a href="#inicio" class="logo" id="nav-logo">
+                <div class="logo-icon">
+                    <span class="corona"></span>
+                    <span class="moon"></span>
+                </div>
+                <span class="logo-text">ESPAÑA<span>ECLIPSE</span></span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul>
+                    <li><a href="#inicio" class="nav-link active" data-target="inicio"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                    <li><a href="#eclipse-2026" class="nav-link" data-target="eclipse-2026"><i class="fa-solid fa-circle-nodes"></i> Total 2026</a></li>
+                    <li><a href="#eclipse-2027" class="nav-link" data-target="eclipse-2027"><i class="fa-solid fa-sun"></i> Total 2027</a></li>
+                    <li><a href="#eclipse-2028" class="nav-link" data-target="eclipse-2028"><i class="fa-solid fa-ring"></i> Anular 2028</a></li>
+                    <li><a href="#recursos" class="nav-link" data-target="recursos"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+        
+        <!-- SECTION 1: INICIO (HOME) -->
+        <section id="inicio" class="content-section active">
+            <div class="hero-section">
+                <span class="badge">Fenómeno Astronómico Único</span>
+                <h1 class="main-title">El Trienio Dorado de la Astronomía en España</h1>
+                <p class="hero-subtitle">
+                    España se convertirá en el epicentro mundial de la observación solar al albergar 
+                    <strong>tres eclipses solares consecutivos</strong> en 2026, 2027 y 2028. Un acontecimiento sin precedentes en la historia reciente.
+                </p>
+            </div>
+
+            <!-- Eclipse Selector & Countdowns -->
+            <div class="countdown-grid">
+                <!-- Eclipse 2026 -->
+                <div class="countdown-card card-2026" data-target-sec="eclipse-2026">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="eclipse-badge badge-2026">12 Ago 2026</div>
+                        <h2 class="card-title">Eclipse Total 2026</h2>
+                        <p class="card-desc">El primero en la España peninsular en más de un siglo. Visibilidad en el norte y centro al atardecer.</p>
+                        
+                        <div class="timer" id="timer-2026">
+                            <div class="time-block"><span class="days">00</span><label>Días</label></div>
+                            <div class="time-block"><span class="hours">00</span><label>Horas</label></div>
+                            <div class="time-block"><span class="minutes">00</span><label>Min</label></div>
+                            <div class="time-block"><span class="seconds">00</span><label>Seg</label></div>
+                        </div>
+                        <a href="#eclipse-2026" class="card-btn btn-2026">Ver Trayectoria &amp; Fotos <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Eclipse 2027 -->
+                <div class="countdown-card card-2027" data-target-sec="eclipse-2027">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="eclipse-badge badge-2027">02 Ago 2027</div>
+                        <h2 class="card-title">Eclipse Total 2027</h2>
+                        <p class="card-desc">Uno de los más largos del siglo. Totalidad de más de 4 minutos y medio en el Estrecho de Gibraltar.</p>
+                        
+                        <div class="timer" id="timer-2027">
+                            <div class="time-block"><span class="days">00</span><label>Días</label></div>
+                            <div class="time-block"><span class="hours">00</span><label>Horas</label></div>
+                            <div class="time-block"><span class="minutes">00</span><label>Min</label></div>
+                            <div class="time-block"><span class="seconds">00</span><label>Seg</label></div>
+                        </div>
+                        <a href="#eclipse-2027" class="card-btn btn-2027">Detalles de la Corona <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Eclipse 2028 -->
+                <div class="countdown-card card-2028" data-target-sec="eclipse-2028">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="eclipse-badge badge-2028">26 Ene 2028</div>
+                        <h2 class="card-title">Eclipse Anular 2028</h2>
+                        <p class="card-desc">El espectacular "Anillo de Fuego" visible durante el atardecer, cruzando España de Suroeste a Noreste.</p>
+                        
+                        <div class="timer" id="timer-2028">
+                            <div class="time-block"><span class="days">00</span><label>Días</label></div>
+                            <div class="time-block"><span class="hours">00</span><label>Horas</label></div>
+                            <div class="time-block"><span class="minutes">00</span><label>Min</label></div>
+                            <div class="time-block"><span class="seconds">00</span><label>Seg</label></div>
+                        </div>
+                        <a href="#eclipse-2028" class="card-btn btn-2028">Ver Anillo de Fuego <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Section -->
+            <div class="video-container-section glass-card">
+                <div class="video-text">
+                    <h3 class="section-title"><i class="fa-solid fa-video text-orange"></i> La Majestuosidad del Sol en Movimiento</h3>
+                    <p>Visualiza la impresionante corona solar, las eyecciones de masa coronal y la inmensa energía de nuestra estrella. Este metraje nos recuerda la belleza de la dinámica solar que quedará expuesta al ocultarse tras la Luna durante la totalidad.</p>
+                    <div class="video-stats">
+                        <div class="stat-item"><i class="fa-solid fa-sun text-yellow"></i> <span>Actividad Solar Dinámica</span></div>
+                        <div class="stat-item"><i class="fa-solid fa-microscope text-orange"></i> <span>Estudio de la Corona</span></div>
+                    </div>
+                </div>
+                <div class="video-wrapper">
+                    <!-- Standard video node with customizable appearance -->
+                    <video id="eclipse-video" controls poster="cervatos.jpeg">
+                        <source src="SOL.webm" type="video/webm">
+                        Tu navegador no soporta la reproducción de video HTML5.
+                    </video>
+                </div>
+            </div>
+
+            <!-- Affiliate Glasses Store Section -->
+            <div class="affiliate-store-section glass-card">
+                <div class="store-header">
+                    <span class="badge badge-2026"><i class="fa-solid fa-cart-shopping"></i> Tienda Recomendada</span>
+                    <h3 class="section-title"><i class="fa-solid fa-glasses text-orange"></i> Consigue tus Gafas de Eclipse Homologadas</h3>
+                    <p class="store-lead">
+                        La seguridad es lo primero. Para observar los eclipses solares (y obligatoriamente para el eclipse anular de 2028 y las fases parciales de 2026/2027), necesitas usar <strong>gafas con certificación ISO 12312-2</strong>. Aquí tienes dos opciones recomendadas de alta calidad en Amazon:
+                    </p>
+                </div>
+
+                <div class="products-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="gafas-eclipses-nobg.png" alt="Gafas de eclipse solar de polímero" class="product-img-float">
+                        </div>
+                        <div class="product-info">
+                            <h4>Pack de Gafas de Eclipse Solar Homologadas (Cartón / Polímero Negro)</h4>
+                            <p class="product-desc">Pack ideal para familias y grupos de amigos. Fabricadas con cartón resistente y filtros de polímero negro que bloquean el 100% de la radiación ultravioleta e infrarroja nociva. Certificación CE e ISO 12312-2 para una observación segura.</p>
+                            <a href="https://amzn.to/4e2aoU1" target="_blank" rel="noopener" class="buy-btn"><i class="fa-brands fa-amazon"></i> Comprar en Amazon</a>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="gafas.jpg" alt="Gafas de observación solar premium" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <h4>Gafas de Observación Solar Premium (Protección Reforzada)</h4>
+                            <p class="product-desc">Gafas individuales de diseño ergonómico y ajuste cómodo. Equipadas con filtros solares de polímero de calidad óptica superior que proporcionan una imagen limpia y de color naranja natural del disco solar sin fatiga ocular.</p>
+                            <a href="https://amzn.to/42VDFJR" target="_blank" rel="noopener" class="buy-btn"><i class="fa-brands fa-amazon"></i> Comprar en Amazon</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Affiliate Disclaimer -->
+                <div class="affiliate-disclaimer">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <p><strong>Nota de Afiliación:</strong> Al comprar a través de estos enlaces, este portal recibe una pequeña comisión de afiliado de Amazon (sin ningún coste adicional para ti). Esto ayuda a financiar el mantenimiento de este sitio web en nuestro NAS y la recopilación de recursos de astronomía. ¡Muchas gracias por tu apoyo!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: ECLIPSE 2026 -->
+        <section id="eclipse-2026" class="content-section">
+            <div class="section-header">
+                <span class="badge badge-2026">12 de Agosto de 2026</span>
+                <h2 class="section-title-large">Eclipse Solar Total 2026</h2>
+                <p class="section-lead">El reencuentro de la península ibérica con la noche diurna después de 121 años.</p>
+            </div>
+
+            <div class="info-grid">
+                <div class="glass-card main-info-card">
+                    <h3><i class="fa-solid fa-circle-info text-2026"></i> Circunstancias Clave</h3>
+                    <ul class="details-list">
+                        <li><strong>Tipo de Eclipse:</strong> Total</li>
+                        <li><strong>Hora de la Totalidad:</strong> ~20:27 a 20:32 CEST (cerca del ocaso)</li>
+                        <li><strong>Duración de la Totalidad:</strong> Entre 1m 30s y 1m 50s</li>
+                        <li><strong>Altura del Sol:</strong> Muy baja (entre 10° y 2° sobre el horizonte oeste-noroeste)</li>
+                        <li><strong>Visibilidad en España:</strong> Una ancha banda diagonal que cruza de Noroeste a Sudeste, desde Galicia y Asturias hasta Aragón, Comunidad Valenciana y Baleares.</li>
+                    </ul>
+                    <div class="warning-box">
+                        <i class="fa-solid fa-triangle-exclamation text-2026"></i>
+                        <p><strong>Efecto del Ocaso:</strong> Al ocurrir muy cerca de la puesta de sol, es crucial buscar un lugar de observación elevado con el horizonte oeste-noroeste completamente despejado de obstáculos (montañas, edificios o árboles).</p>
+                    </div>
+                </div>
+
+                <div class="glass-card path-card">
+                    <h3><i class="fa-solid fa-map-location-dot text-2026"></i> Franja de Totality</h3>
+                    <p>La sombra de la Luna entrará por la costa atlántica de Galicia y Asturias, desplazándose a gran velocidad hacia el sudeste. Ciudades como Gijón, Oviedo, Santander, Bilbao, Burgos, Palencia, León, Valladolid, Zaragoza, Castellón y Palma de Mallorca experimentarán la oscuridad total al atardecer.</p>
+                    <div class="altitude-indicator">
+                        <div class="alt-bar"><div class="alt-progress" style="width: 10%"></div></div>
+                        <span>Ángulo del Sol: ~8° (Muy Bajo)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Observation gallery - Castilla y León images -->
+            <div class="gallery-section glass-card">
+                <h3><i class="fa-solid fa-camera-retro text-2026"></i> Puntos Destacados de Observación (Castilla y León)</h3>
+                <p class="gallery-intro">La meseta norte española ofrece las mejores condiciones de probabilidad de cielos despejados de toda la franja de totalidad. Aquí se muestran tres localizaciones excelentes:</p>
+                
+                <div class="gallery-grid">
+                    <!-- Card 1: Valladolid -->
+                    <div class="gallery-card">
+                        <div class="img-wrapper">
+                            <img src="valladolid.jpeg" alt="Valladolid bajo el sol de la tarde">
+                            <div class="img-overlay">
+                                <span>Altitud Sol: ~7.5°</span>
+                            </div>
+                        </div>
+                        <div class="gallery-card-content">
+                            <h4>Valladolid</h4>
+                            <p>En el corazón de la meseta norte. La amplitud de sus campiñas y cerros circundantes (como el cerro de San Cristóbal) proporciona vistas perfectas del horizonte oeste. Tendrá alrededor de 1m 29s de totalidad.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Cervatos -->
+                    <div class="gallery-card">
+                        <div class="img-wrapper">
+                            <img src="cervatos.jpeg" alt="Paisaje natural de Cervatos">
+                            <div class="img-overlay">
+                                <span>Altitud Sol: ~9.0°</span>
+                            </div>
+                        </div>
+                        <div class="gallery-card-content">
+                            <h4>Cervatos de la Cueza (Palencia)</h4>
+                            <p>Zona elevada de transición montañosa y valles altos. Con cielos limpios de contaminación lumínica y baja humedad, es una ubicación espectacular para fotógrafos que buscan encuadrar el eclipse con relieve alpino.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Barruelo -->
+                    <div class="gallery-card">
+                        <div class="img-wrapper">
+                            <img src="barruelo.jpeg" alt="Barruelo de Santullán entre montañas">
+                            <div class="img-overlay">
+                                <span>Altitud Sol: ~8.8°</span>
+                            </div>
+                        </div>
+                        <div class="gallery-card-content">
+                            <h4>Barruelo de Santullán (Palencia)</h4>
+                            <p>Situado en la Montaña Palentina, ofrece miradores naturales de gran altitud. La transparencia atmosférica a esta elevación reduce la atenuación del sol bajo, maximizando el contraste de la corona solar.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: ECLIPSE 2027 -->
+        <section id="eclipse-2027" class="content-section">
+            <div class="section-header">
+                <span class="badge badge-2027">2 de Agosto de 2027</span>
+                <h2 class="section-title-large">Eclipse Solar Total 2027</h2>
+                <p class="section-lead">El gigante del siglo XXI en el sur de la península ibérica.</p>
+            </div>
+
+            <div class="info-grid">
+                <div class="glass-card main-info-card">
+                    <h3><i class="fa-solid fa-circle-info text-2027"></i> Circunstancias Clave</h3>
+                    <ul class="details-list">
+                        <li><strong>Tipo de Eclipse:</strong> Total</li>
+                        <li><strong>Hora de la Totalidad:</strong> ~10:40 CEST (Media mañana)</li>
+                        <li><strong>Duración de la Totalidad:</strong> Hasta 4m 30s en España (casi el triple que en 2026)</li>
+                        <li><strong>Altura del Sol:</strong> Muy alta (más de 50° sobre el horizonte sur-sudeste)</li>
+                        <li><strong>Visibilidad en España:</strong> Exclusivo del extremo sur de Andalucía (Cádiz, Málaga, Algeciras, Tarifa) y las ciudades autónomas de Ceuta y Melilla.</li>
+                    </ul>
+                    <div class="warning-box info-box">
+                        <i class="fa-solid fa-circle-check text-2027"></i>
+                        <p><strong>Climatología Perfecta:</strong> Agosto en el sur de España garantiza prácticamente un 95% de probabilidad de cielos totalmente despejados. Es, científicamente, una de las mejores oportunidades de observación de las próximas décadas.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card path-card">
+                    <h3><i class="fa-solid fa-map-location-dot text-2027"></i> La Sombra sobre el Estrecho</h3>
+                    <p>La franja de totalidad cruzará el Estrecho de Gibraltar y el mar de Alborán. La máxima duración de la totalidad terrestre mundial de este eclipse se alcanzará en Egipto (~6m 23s), pero la costa andaluza, especialmente Tarifa y Cádiz, disfrutarán de unos colosales 4 minutos y 30 segundos de día oscurecido.</p>
+                    <div class="altitude-indicator">
+                        <div class="alt-bar"><div class="alt-progress progress-2027" style="width: 70%"></div></div>
+                        <span>Ángulo del Sol: ~55° (Muy Alto)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-info glass-card">
+                <div class="highlight-icon"><i class="fa-solid fa-hourglass-half text-2027"></i></div>
+                <div class="highlight-content">
+                    <h4>¿Por qué es tan especial la duración de 2027?</h4>
+                    <p>La duración de un eclipse solar total depende de la distancia de la Luna a la Tierra (debe estar en el perigeo, cerca de su punto más cercano, para verse más grande) y de la Tierra al Sol. En agosto de 2027, la Luna estará muy cerca de la Tierra y cubrirá ampliamente el disco solar, creando una de las sombras más anchas y oscuras que se recuerdan en Europa.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: ECLIPSE 2028 -->
+        <section id="eclipse-2028" class="content-section">
+            <div class="section-header">
+                <span class="badge badge-2028">26 de Enero de 2028</span>
+                <h2 class="section-title-large">Eclipse Solar Anular 2028</h2>
+                <p class="section-lead">El mágico "Anillo de Fuego" hundiéndose en el horizonte mediterráneo.</p>
+            </div>
+
+            <div class="info-grid">
+                <div class="glass-card main-info-card">
+                    <h3><i class="fa-solid fa-circle-info text-2028"></i> Circunstancias Clave</h3>
+                    <ul class="details-list">
+                        <li><strong>Tipo de Eclipse:</strong> Anular (la Luna no cubre por completo el Sol)</li>
+                        <li><strong>Hora de la Anularidad:</strong> ~17:55 a 18:03 CET (coincidiendo con la puesta de sol)</li>
+                        <li><strong>Duración del Anillo:</strong> Alrededor de 7 minutos en su trayectoria máxima</li>
+                        <li><strong>Altura del Sol:</strong> Extremadamente baja (0° a 3° sobre el horizonte oeste, al ocaso)</li>
+                        <li><strong>Visibilidad en España:</strong> Cruza en diagonal de Suroeste a Nordeste, pasando por Andalucía (Sevilla, Málaga), Murcia, Comunidad Valenciana (Alicante, Valencia) y las Islas Baleares.</li>
+                    </ul>
+                    <div class="warning-box warning-anular">
+                        <i class="fa-solid fa-eye-slash text-2028"></i>
+                        <p><strong>Protección Obligatoria en Todo Momento:</strong> Al ser un eclipse anular, el Sol NUNCA llega a taparse por completo. Siempre queda un anillo de luz solar expuesto. <strong>Es obligatorio usar filtros solares durante todo el eclipse</strong>; no hay fase segura para mirar a simple vista.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card path-card">
+                    <h3><i class="fa-solid fa-ring text-2028"></i> ¿Qué es un Eclipse Anular?</h3>
+                    <p>Ocurre cuando la Luna se encuentra cerca del apogeo (su punto más lejano a la Tierra). Al estar más alejada, su tamaño aparente es menor que el del Sol. Al alinearse, la Luna se sitúa perfectamente en el centro del Sol, pero deja un brillante anillo de luz solar alrededor, conocido popularmente como el "Anillo de Fuego".</p>
+                    <div class="altitude-indicator">
+                        <div class="alt-bar"><div class="alt-progress progress-2028" style="width: 2%"></div></div>
+                        <span>Ángulo del Sol: ~1.5° (En el Horizonte)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: RECURSOS Y ARTÍCULOS -->
+        <section id="recursos" class="content-section">
+            <div class="section-header">
+                <span class="badge"><i class="fa-solid fa-graduation-cap"></i> Divulgación Científica</span>
+                <h2 class="section-title-large">Biblioteca de Recursos y Guías</h2>
+                <p class="section-lead">Todo lo que necesitas saber para comprender y disfrutar de los eclipses de forma segura.</p>
+            </div>
+
+            <!-- Resources Table-Dashboard with glassmorphism style -->
+            <div class="table-container glass-card">
+                <div class="table-actions">
+                    <h3><i class="fa-solid fa-list-check text-orange"></i> Temas Disponibles</h3>
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="resource-search" placeholder="Buscar tema...">
+                    </div>
+                </div>
+                
+                <table class="resources-table" id="resources-table">
+                    <thead>
+                        <tr>
+                            <th>Tema</th>
+                            <th>Categoría</th>
+                            <th>Descripción Breve</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-resource="que-es">
+                            <td class="theme-title">¿Qué es un Eclipse Solar?</td>
+                            <td><span class="cat-badge cat-ciencia">Ciencia</span></td>
+                            <td>Explicación astronómica de la alineación cósmica y los tipos de eclipse.</td>
+                            <td><button class="btn-read-resource" data-open="que-es"><i class="fa-regular fa-eye"></i> Leer</button></td>
+                        </tr>
+                        <tr data-resource="seguridad">
+                            <td class="theme-title">Observación Segura</td>
+                            <td><span class="cat-badge cat-seguridad">Seguridad</span></td>
+                            <td>Normas y métodos indispensables para proteger tus ojos y tus equipos ópticos.</td>
+                            <td><button class="btn-read-resource" data-open="seguridad"><i class="fa-regular fa-eye"></i> Leer</button></td>
+                        </tr>
+                        <tr data-resource="que-se-ve">
+                            <td class="theme-title">¿Qué se ve en la Totalidad?</td>
+                            <td><span class="cat-badge cat-observacion">Observación</span></td>
+                            <td>La corona solar, las perlas de Baily, las sombras volantes y otros fenómenos únicos.</td>
+                            <td><button class="btn-read-resource" data-open="que-se-ve"><i class="fa-regular fa-eye"></i> Leer</button></td>
+                        </tr>
+                        <tr data-resource="ciencia">
+                            <td class="theme-title">La Ciencia de los Eclipses</td>
+                            <td><span class="cat-badge cat-ciencia">Ciencia</span></td>
+                            <td>Desde la física del viento solar hasta la comprobación de la relatividad general.</td>
+                            <td><button class="btn-read-resource" data-open="ciencia"><i class="fa-regular fa-eye"></i> Leer</button></td>
+                        </tr>
+                        <tr data-resource="historia">
+                            <td class="theme-title">Eclipses en la Historia</td>
+                            <td><span class="cat-badge cat-cultura">Historia</span></td>
+                            <td>Cómo los eclipses cambiaron el curso de batallas y aterrorizaron a imperios antiguos.</td>
+                            <td><button class="btn-read-resource" data-open="historia"><i class="fa-regular fa-eye"></i> Leer</button></td>
+                        </tr>
+                        <tr data-resource="arte-mitologia">
+                            <td class="theme-title">Mitología y Arte</td>
+                            <td><span class="cat-badge cat-cultura">Cultura</span></td>
+                            <td>El Sol devorado por dragones y la representación del eclipse en la historia artística.</td>
+                            <td><button class="btn-read-resource" data-open="arte-mitologia"><i class="fa-regular fa-eye"></i> Leer</button></td>
+                        </tr>
+                        <tr data-resource="clima">
+                            <td class="theme-title">Condiciones en España</td>
+                            <td><span class="cat-badge cat-observacion">Logística</span></td>
+                            <td>Análisis climatológico del verano y el invierno español para predecir cielos despejados.</td>
+                            <td><button class="btn-read-resource" data-open="clima"><i class="fa-regular fa-eye"></i> Leer</button></td>
+                        </tr>
+                        <tr data-resource="recomendaciones">
+                            <td class="theme-title">Recomendaciones Prácticas</td>
+                            <td><span class="cat-badge cat-observacion">Logística</span></td>
+                            <td>Planificación del viaje, reservas, movilidad y elección del sitio ideal.</td>
+                            <td><button class="btn-read-resource" data-open="recomendaciones"><i class="fa-regular fa-eye"></i> Leer</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Detailed Resource Modal Overlay -->
+    <div class="modal-overlay" id="resource-modal">
+        <div class="modal-card glass-card">
+            <div class="modal-header">
+                <span class="modal-badge" id="modal-category">Ciencia</span>
+                <button class="modal-close" id="modal-close" aria-label="Cerrar modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3 id="modal-title">Título del recurso</h3>
+                <div class="modal-content" id="modal-content">
+                    <!-- Dynamic content will be injected here by app.js -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-wrapper">
+            <div class="footer-logo">
+                <div class="logo-icon scale-75">
+                    <span class="corona"></span>
+                    <span class="moon"></span>
+                </div>
+                <span>Eclipses España</span>
+            </div>
+            <p>Diseño premium desarrollado para Hosting NAS local. Contadores sincronizados en tiempo real.</p>
+            <p class="copyright">&copy; 2026 Portal de Divulgación de Eclipses. Creado con fines educativos y de planificación astronómica.</p>
+        </div>
+    </footer>
+
+    <!-- Core Javascript logic -->
+    <script src="app.js"></script>
+</body>
+</html>

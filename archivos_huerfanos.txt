@@ -1,0 +1,26 @@
+REPORTE DE ARCHIVOS HUÉRFANOS
+=============================
+Estos archivos están en el proyecto pero su nombre no aparece en el código.
+Por favor, revisa manualmente antes de eliminar nada.
+
+submenu.html
+assets\images\img\hero-bannerold.png
+assets\sounds\button-09a.wav
+assets\sounds\button-10.wav
+css\style2.css
+pages\antonio.html
+pages\favicon.html
+pages\formulario.html
+pages\fuentes.html
+pages\grok4.html
+pages\overlay.html
+pages\printables.html
+pages\regalo-rocio.html
+pages\regaloro.html
+pages\repaso.html
+pages\secreto.html
+pages\tablagrok.html
+pages\tablamejorada.html
+pages\topvisitados.html
+pages\juegos\ahorcado.html
+peliculas\MP4\Spectre (2015).mp4
