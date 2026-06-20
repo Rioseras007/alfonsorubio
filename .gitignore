@@ -64,14 +64,7 @@ retrocasete/
 *.mkv
 *.webm
 *.avi
-*.mp3
-*.wav
-*.m4a
-*.flac
-*.jpg
-*.jpeg
-*.png
-*.svg
+
 
 # Excepciones
 !styles/favicon.ico
