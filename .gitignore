@@ -39,40 +39,22 @@ Thumbs.db
 # Node
 node_modules/
 
-# Carpetas de medios pesados (Videos y Música)
-projects/bond-007/
-projects/musica-bond/
-projects/musica-raphael/
-projects/musica-julio-emociones/
-projects/musica-julio-tango/
-projects/musica-pink-floyd/
-projects/musica-sergio-dalma/
-projects/patrulla-canina/
-assets/covers/
-assets/sounds/
-assets/miniaturas/
-assets/audio/
-assets/images/img/
-
-# Otros subproyectos ignorados (si existieran)
-Starwars/
-proyectoAmazon/
-retrocasete/
-
-# Extensiones de medios pesados (como precaución general)
+# Video files
 *.mp4
 *.mkv
 *.webm
 *.avi
-*.mp3
-*.wav
-*.m4a
-*.flac
-*.jpg
-*.jpeg
-*.png
-*.svg
+*.mov
+*.wmv
+*.m4v
+*.mpeg
+*.mpg
+*.3gp
+*.flv
+*.ts
+*.m2ts
+*.ogv
 
-# Excepciones
-!styles/favicon.ico
-!assets/images/faviconcurso.png
+# Nested local repositories excluded from the main sync
+projects/examen/
+projects/proyectoAmazon/
