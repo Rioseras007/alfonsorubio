@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="utf-8" />
+    <title>Tabla de Resultados Mundial 2026</title>
+    <meta name="description" content="Evuluar resultados del mundial 2026 de Futbol Copa del Mundo" />
+    <meta name="keywords" content="html,css,javascript,web,curso,ejercicio" />
+    <meta name="author" content="Alfonso Rubio Rioseras" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/fav-icon.png" />
+    <!-- Cargo iconos básicos de bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap-icons.min.css">
+    <!-- Cargo hoja de estilos de bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- Cargo mi hoja de estilos (cargar siempre al final) -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- Cargo mi fichero .js -->
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+    <header>
+    </header>
+
+    <main class="container mt-5">
+
+        <div class="portada"> <img src="img/portada.png" class="banner"></div>
+
+        <div id="countdown-container" class="text-center my-4">
+            <h3>Cuenta atrás hasta la final (19 de julio de 2026)</h3>
+            <div id="countdown" aria-live="polite" class="d-flex justify-content-center gap-3">
+                <div class="count-part">
+                    <span id="cd-days" class="count-number">0</span>
+                    <div class="count-label">Días</div>
+                </div>
+                <div class="count-part">
+                    <span id="cd-hours" class="count-number">0</span>
+                    <div class="count-label">Horas</div>
+                </div>
+                <div class="count-part">
+                    <span id="cd-minutes" class="count-number">0</span>
+                    <div class="count-label">Minutos</div>
+                </div>
+                <div class="count-part">
+                    <span id="cd-seconds" class="count-number">0</span>
+                    <div class="count-label">Segundos</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="tematica">
+            <h2>Temática</h2>
+            <p>Esta página está pensada para evaluar resultados de la fase de grupos del Mundial de Fútbol 2026. También
+                puedes usarla con resultados ficticios si modificas equipos o fechas en el código.</p>
+            <ul>
+                <li>Introduce el marcador de cada partido en los campos numéricos.</li>
+                <li>Los valores válidos van de <strong>0</strong> a <strong>149</strong>.</li>
+                <li>Se calcularán automáticamente <strong>puntos</strong>, <strong>goles a favor</strong>, <strong>goles
+                        en contra</strong> y <strong>diferencia</strong>.</li>
+                <li>El botón <strong>EVALUAR RESULTADOS</strong> se habilita cuando en cada grupo hay al menos un
+                    partido distinto de <strong>0-0</strong>.</li>
+            </ul>
+            <p class="emphasis">Después de evaluar, se mostrará un resumen completo en la página de evaluación con la
+                clasificación y las estadísticas de cada grupo.</p>
+        </div>
+
+
+        <!-- SECCIÓN: grupo A -->
+
+        <form action="evaluacion.html">
+            <section class="glass-card" onmouseover="handleGrupoHover('A')">
+                <h1>GRUPO A</h1>
+                <h2>Jornada 1 <small class="fecha-jornada">(11 / 12 jun)</small></h2>
+                <div class="fixture">
+                    <span id="grupoA_J1_a" class="equipo-local"></span>
+                    <img src="img/banderas/mexico.png" alt="México">
+                    <input type="number" name="A_J1_1_local" class="form-control" value="0" min="0" max="149">
+                    <span class="vs">VS</span>
+                    <input type="number" name="A_J1_1_away" class="form-control" value="0" min="0" max="149"
+                        maxlength="3">
+                    <img src="img/banderas/republicacheca.png" alt="República Checa">
+                    <span id="grupoA_J1_b" class="equipo-visitante"></span>
+                </div>
+                <div class="fixture">
+                    <span id="grupoA_J1_c" class="equipo-local"></span>
+                    <img src="img/banderas/coreadelsur.png" alt="Corea del Sur">
+                    <input type="number" name="A_J1_2_local" class="form-control" value="0" min="0" max="149">
+                    <span class="vs">VS</span>
+                    <input type="number" name="A_J1_2_away" class="form-control" value="0" min="0" max="149">
+                    <img src="img/banderas/sudafrica.png" alt="Sudáfrica">
+                    <span id="grupoA_J1_d" class="equipo-visitante"></span>
+                </div>
+
+                <h2>Jornada 2 <small class="fecha-jornada">(18 / 19 jun)</small></h2>
+                <div class="fixture">
+                    <span id="grupoA_J1_e" class="equipo-local"></span>
+                    <img src="img/banderas/mexico.png" alt="México">
+                    <input type="number" name="A_J2_1_local" class="form-control" value="0" min="0" max="149">
+                    <span class="vs">VS</span>
+                    <input type="number" name="A_J2_1_away" class="form-control" value="0" min="0" max="149">
+                    <img src="img/banderas/sudafrica.png" alt="Sudáfrica">
+                    <span id="grupoA_J1_f" class="equipo-visitante"></span>
+                </div>
+                <div class="fixture">
+                    <span id="grupoA_J1_g" class="equipo-local"></span>
+                    <img src="img/banderas/coreadelsur.png" alt="Corea del Sur">
+                    <input type="number" name="A_J2_2_local" class="form-control" value="0" min="0" max="149">
+                    <span class="vs">VS</span>
+                    <input type="number" name="A_J2_2_away" class="form-control" value="0" min="0" max="149">
+                    <img src="img/banderas/republicacheca.png" alt="República Checa">
+                    <span id="grupoA_J1_h" class="equipo-visitante"></span>
+                </div>
+
+                <h2>Jornada 3 <small class="fecha-jornada">(25 jun)</small></h2>
+                <div class="fixture">
+                    <span id="grupoA_J1_i" class="equipo-local"></span>
+                    <img src="img/banderas/mexico.png" alt="México">
+                    <input type="number" name="A_J3_1_local" class="form-control" value="0" min="0" max="149">
+                    <span class="vs">VS</span>
+                    <input type="number" name="A_J3_1_away" class="form-control" value="0" min="0" max="149">
+                    <img src="img/banderas/coreadelsur.png" alt="Corea del Sur">
+                    <span id="grupoA_J1_j" class="equipo-visitante"></span>
+                </div>
+                <div class="fixture">
+                    <span id="grupoA_J1_k" class="equipo-local"></span>
+                    <img src="img/banderas/republicacheca.png" alt="República Checa">
+                    <input type="number" name="A_J3_2_local" class="form-control" value="0" min="0" max="149">
+                    <span class="vs">VS</span>
+                    <input type="number" name="A_J3_2_away" class="form-control" value="0" min="0" max="149">
+                    <img src="img/banderas/sudafrica.png" alt="Sudáfrica">
+                    <span id="grupoA_J1_l" class="equipo-visitante"></span>
+                </div>
+
+
+
+
+                <h2>Clasificacion grupo A</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Equipo</th>
+                                <th>Puntos</th>
+                                <th>GOLES A FAVOR</th>
+                                <th>GOLES EN CONTRA</th>
+                                <th>DIFERENCIA GOLES F/C</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaA_body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+
+            <!-- SECCIÓN: grupo B -->
+            <section class="glass-card" onmouseover="handleGrupoHover('B')">
+                <h1>GRUPO B</h1>
+                <h2> Jornada 1 <small class="fecha-jornada">(12 / 13 jun)</small></h2>
+                <div class="fixture"><span id="grupoB_J1_a"></span><img src="img/banderas/canada.png"
+                        alt="Canadá"><input type="number" name="B_J1_1_local" onchange="rellenarGrupo_B()"
+                        class="form-control" value="0" min="0" max="149"><span id="grupoB_J1_b"></span><img
+                        src="img/banderas/bosniaharzegobina.png" alt="Bosnia y Herzegovina"><input type="number"
+                        name="B_J1_1_away" class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"><span id="grupoB_J1_c"></span><img src="img/banderas/suiza.png" alt="Suiza"><input
+                        type="number" name="B_J1_2_local" class="form-control" value="0" min="0" max="149"><span
+                        id="grupoB_J1_d"></span><img src="img/banderas/qatar.png" alt="Qatar"><input type="number"
+                        name="B_J1_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 2 <small class="fecha-jornada">(18 jun)</small></h2>
+                <div class="fixture"> <span id="grupoB_J1_e"></span><img src="img/banderas/canada.png"
+                        alt="Canadá"><input type="number" name="B_J2_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoB_J1_f"></span><img src="img/banderas/qatar.png" alt="Qatar"><input
+                        type="number" name="B_J2_1_away" class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"> <span id="grupoB_J1_g"></span><img src="img/banderas/suiza.png" alt="Suiza"><input
+                        type="number" name="B_J2_2_local" class="form-control" value="0" min="0" max="149"><span
+                        id="grupoB_J1_h"></span><img src="img/banderas/bosniaharzegobina.png"
+                        alt="Bosnia y Herzegovina"><input type="number" name="B_J2_2_away" class="form-control"
+                        value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 3 <small class="fecha-jornada">(24 jun)</small></h2>
+                <div class="fixture"> <span id="grupoB_J1_i"></span><img src="img/banderas/canada.png"
+                        alt="Canadá"><input type="number" name="B_J3_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoB_J1_j"></span><img src="img/banderas/suiza.png" alt="Suiza"><input
+                        type="number" name="B_J3_1_away" class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"> <span id="grupoB_J1_k"></span><img src="img/banderas/bosniaharzegobina.png"
+                        alt="Bosnia y Herzegovina"><input type="number" name="B_J3_2_local" class="form-control"
+                        value="0" min="0" max="149"><span id="grupoB_J1_l"></span><img src="img/banderas/qatar.png"
+                        alt="Qatar"><input type="number" name="B_J3_2_away" class="form-control" value="0" min="0"
+                        max="149"> </div>
+
+                <h2>Clasificacion grupo B</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Equipo</th>
+                                <th>Puntos</th>
+                                <th>GOLES A FAVOR</th>
+                                <th>GOLES EN CONTRA</th>
+                                <th>DIFERENCIA GOLES F/C</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaB_body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: grupo C -->
+            <section class="glass-card" onmouseover="handleGrupoHover('C')">
+                <h1>GRUPO C</h1>
+                <h2> Jornada 1 <small class="fecha-jornada">(13 / 14 jun)</small></h2>
+                <div class="fixture"><span id="grupoC_J1_a"></span><img src="img/banderas/brasil.png"
+                        alt="Brasil"><input type="number" name="C_J1_1_local" onchange="rellenarGrupo_C()"
+                        class="form-control" value="0" min="0" max="149"><span id="grupoC_J1_b"></span><img
+                        src="img/banderas/escocia.png" alt="Escocia"><input type="number" name="C_J1_1_away"
+                        class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"><span id="grupoC_J1_c"></span><img src="img/banderas/marruecos.png"
+                        alt="Marruecos"><input type="number" name="C_J1_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoC_J1_d"></span><img src="img/banderas/haiti.png" alt="Haití"><input
+                        type="number" name="C_J1_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 2 <small class="fecha-jornada">(19 / 20 jun)</small></h2>
+                <div class="fixture"> <span id="grupoC_J1_e"></span><img src="img/banderas/brasil.png"
+                        alt="Brasil"><input type="number" name="C_J2_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoC_J1_f"></span><img src="img/banderas/haiti.png" alt="Haití"><input
+                        type="number" name="C_J2_1_away" class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"> <span id="grupoC_J1_g"></span><img src="img/banderas/marruecos.png"
+                        alt="Marruecos"><input type="number" name="C_J2_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoC_J1_h"></span><img src="img/banderas/escocia.png" alt="Escocia"><input
+                        type="number" name="C_J2_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 3 <small class="fecha-jornada">(24 jun)</small></h2>
+                <div class="fixture"> <span id="grupoC_J1_i"></span><img src="img/banderas/brasil.png"
+                        alt="Brasil"><input type="number" name="C_J3_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoC_J1_j"></span><img src="img/banderas/marruecos.png"
+                        alt="Marruecos"><input type="number" name="C_J3_1_away" class="form-control" value="0" min="0"
+                        max="149"> </div>
+                <div class="fixture"> <span id="grupoC_J1_k"></span><img src="img/banderas/escocia.png"
+                        alt="Escocia"><input type="number" name="C_J3_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoC_J1_l"></span><img src="img/banderas/haiti.png" alt="Haití"><input
+                        type="number" name="C_J3_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2>Clasificacion grupo C</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Equipo</th>
+                                <th>Puntos</th>
+                                <th>GOLES A FAVOR</th>
+                                <th>GOLES EN CONTRA</th>
+                                <th>DIFERENCIA GOLES F/C</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaC_body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: grupo D -->
+            <section class="glass-card" onmouseover="handleGrupoHover('D')">
+                <h1>GRUPO D</h1>
+                <h2> Jornada 1 <small class="fecha-jornada">(12 / 14 jun)</small></h2>
+                <div class="fixture"><span id="grupoD_J1_a"></span><img src="img/banderas/estadosunidos.png"
+                        alt="Estados Unidos"><input type="number" name="D_J1_1_local" onchange="rellenarGrupo_D()"
+                        class="form-control" value="0" min="0" max="149"><span id="grupoD_J1_b"></span><img
+                        src="img/banderas/paraguay.png" alt="Paraguay"><input type="number" name="D_J1_1_away"
+                        class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"><span id="grupoD_J1_c"></span><img src="img/banderas/australia.png"
+                        alt="Australia"><input type="number" name="D_J1_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoD_J1_d"></span><img src="img/banderas/turquia.png" alt="Turquía"><input
+                        type="number" name="D_J1_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 2 <small class="fecha-jornada">(19 / 20 jun)</small></h2>
+                <div class="fixture"> <span id="grupoD_J1_e"></span><img src="img/banderas/estadosunidos.png"
+                        alt="Estados Unidos"><input type="number" name="D_J2_1_local" class="form-control" value="0"
+                        min="0" max="149"><span id="grupoD_J1_f"></span><img src="img/banderas/turquia.png"
+                        alt="Turquía"><input type="number" name="D_J2_1_away" class="form-control" value="0" min="0"
+                        max="149"> </div>
+                <div class="fixture"> <span id="grupoD_J1_g"></span><img src="img/banderas/australia.png"
+                        alt="Australia"><input type="number" name="D_J2_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoD_J1_h"></span><img src="img/banderas/paraguay.png"
+                        alt="Paraguay"><input type="number" name="D_J2_2_away" class="form-control" value="0" min="0"
+                        max="149"> </div>
+
+                <h2> Jornada 3 <small class="fecha-jornada">(26 jun)</small></h2>
+                <div class="fixture"> <span id="grupoD_J1_i"></span><img src="img/banderas/estadosunidos.png"
+                        alt="Estados Unidos"><input type="number" name="D_J3_1_local" class="form-control" value="0"
+                        min="0" max="149"><span id="grupoD_J1_j"></span><img src="img/banderas/australia.png"
+                        alt="Australia"><input type="number" name="D_J3_1_away" class="form-control" value="0" min="0"
+                        max="149"> </div>
+                <div class="fixture"> <span id="grupoD_J1_k"></span><img src="img/banderas/paraguay.png"
+                        alt="Paraguay"><input type="number" name="D_J3_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoD_J1_l"></span><img src="img/banderas/turquia.png" alt="Turquía"><input
+                        type="number" name="D_J3_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2>Clasificacion grupo D</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Equipo</th>
+                                <th>Puntos</th>
+                                <th>GOLES A FAVOR</th>
+                                <th>GOLES EN CONTRA</th>
+                                <th>DIFERENCIA GOLES F/C</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaD_body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: grupo E -->
+            <section class="glass-card" onmouseover="handleGrupoHover('E')">
+                <h1>GRUPO E</h1>
+                <h2> Jornada 1 <small class="fecha-jornada">(13 / 15 jun)</small></h2>
+                <div class="fixture"><span id="grupoE_J1_a"></span><img src="img/banderas/Alemania.png"
+                        alt="Alemania"><input type="number" name="E_J1_1_local" onchange="rellenarGrupo_E()"
+                        class="form-control" value="0" min="0" max="149"><span id="grupoE_J1_b"></span><img
+                        src="img/banderas/curazao.png" alt="Curazao"><input type="number" name="E_J1_1_away"
+                        class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"><span id="grupoE_J1_c"></span><img src="img/banderas/ecuador.png"
+                        alt="Ecuador"><input type="number" name="E_J1_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoE_J1_d"></span><img src="img/banderas/Costa de marfil.png"
+                        alt="Costa de Marfil"><input type="number" name="E_J1_2_away" class="form-control" value="0"
+                        min="0" max="149"> </div>
+
+                <h2> Jornada 2 <small class="fecha-jornada">(20 / 21 jun)</small></h2>
+                <div class="fixture"> <span id="grupoE_J1_e"></span><img src="img/banderas/Alemania.png"
+                        alt="Alemania"><input type="number" name="E_J2_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoE_J1_f"></span><img src="img/banderas/Costa de marfil.png"
+                        alt="Costa de Marfil"><input type="number" name="E_J2_1_away" class="form-control" value="0"
+                        min="0" max="149"> </div>
+                <div class="fixture"> <span id="grupoE_J1_g"></span><img src="img/banderas/ecuador.png"
+                        alt="Ecuador"><input type="number" name="E_J2_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoE_J1_h"></span><img src="img/banderas/curazao.png" alt="Curazao"><input
+                        type="number" name="E_J2_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 3 <small class="fecha-jornada">(25 jun)</small></h2>
+                <div class="fixture"> <span id="grupoE_J1_i"></span><img src="img/banderas/Alemania.png"
+                        alt="Alemania"><input type="number" name="E_J3_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoE_J1_j"></span><img src="img/banderas/ecuador.png" alt="Ecuador"><input
+                        type="number" name="E_J3_1_away" class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"> <span id="grupoE_J1_k"></span><img src="img/banderas/curazao.png"
+                        alt="Curazao"><input type="number" name="E_J3_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoE_J1_l"></span><img src="img/banderas/Costa de marfil.png"
+                        alt="Costa de Marfil"><input type="number" name="E_J3_2_away" class="form-control" value="0"
+                        min="0" max="149"> </div>
+
+                <h2>Clasificacion grupo E</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Equipo</th>
+                                <th>Puntos</th>
+                                <th>GOLES A FAVOR</th>
+                                <th>GOLES EN CONTRA</th>
+                                <th>DIFERENCIA GOLES F/C</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaE_body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: grupo F -->
+            <section class="glass-card" onmouseover="handleGrupoHover('F')">
+                <h1>GRUPO F</h1>
+                <h2> Jornada 1 <small class="fecha-jornada">(14 jun)</small></h2>
+                <div class="fixture"><span id="grupoF_J1_a"></span><img src="img/banderas/paises bajos.png"
+                        alt="Paises Bajos"><input type="number" name="F_J1_1_local" onchange="rellenarGrupo_F()"
+                        class="form-control" value="0" min="0" max="149"><span id="grupoF_J1_b"></span><img
+                        src="img/banderas/suecia.png" alt="Suecia"><input type="number" name="F_J1_1_away"
+                        class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"><span id="grupoF_J1_c"></span><img src="img/banderas/japon.png" alt="Japón"><input
+                        type="number" name="F_J1_2_local" class="form-control" value="0" min="0" max="149"><span
+                        id="grupoF_J1_d"></span><img src="img/banderas/tunez.png" alt="Túnez"><input type="number"
+                        name="F_J1_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 2 <small class="fecha-jornada">(20 / 21 jun)</small></h2>
+                <div class="fixture"> <span id="grupoF_J1_e"></span><img src="img/banderas/paises bajos.png"
+                        alt="Paises Bajos"><input type="number" name="F_J2_1_local" class="form-control" value="0"
+                        min="0" max="149"><span id="grupoF_J1_f"></span><img src="img/banderas/tunez.png"
+                        alt="Túnez"><input type="number" name="F_J2_1_away" class="form-control" value="0" min="0"
+                        max="149"> </div>
+                <div class="fixture"> <span id="grupoF_J1_g"></span><img src="img/banderas/japon.png" alt="Japón"><input
+                        type="number" name="F_J2_2_local" class="form-control" value="0" min="0" max="149"><span
+                        id="grupoF_J1_h"></span><img src="img/banderas/suecia.png" alt="Suecia"><input type="number"
+                        name="F_J2_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 3 <small class="fecha-jornada">(25 jun)</small></h2>
+                <div class="fixture"> <span id="grupoF_J1_i"></span><img src="img/banderas/paises bajos.png"
+                        alt="Paises Bajos"><input type="number" name="F_J3_1_local" class="form-control" value="0"
+                        min="0" max="149"><span id="grupoF_J1_j"></span><img src="img/banderas/japon.png"
+                        alt="Japón"><input type="number" name="F_J3_1_away" class="form-control" value="0" min="0"
+                        max="149"> </div>
+                <div class="fixture"> <span id="grupoF_J1_k"></span><img src="img/banderas/suecia.png"
+                        alt="Suecia"><input type="number" name="F_J3_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoF_J1_l"></span><img src="img/banderas/tunez.png" alt="Túnez"><input
+                        type="number" name="F_J3_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2>Clasificacion grupo F</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Equipo</th>
+                                <th>Puntos</th>
+                                <th>GOLES A FAVOR</th>
+                                <th>GOLES EN CONTRA</th>
+                                <th>DIFERENCIA GOLES F/C</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaF_body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: grupo G -->
+            <section class="glass-card" onmouseover="handleGrupoHover('G')">
+                <h1>GRUPO G</h1>
+                <h2> Jornada 1 <small class="fecha-jornada">(15 jun)</small></h2>
+                <div class="fixture"><span id="grupoG_J1_a"></span><img src="img/banderas/egipto.png"
+                        alt="Egipto"><input type="number" name="G_J1_1_local" onchange="rellenarGrupo_G()"
+                        class="form-control" value="0" min="0" max="149"><span id="grupoG_J1_b"></span><img
+                        src="img/banderas/belgica.png" alt="Bélgica"><input type="number" name="G_J1_1_away"
+                        class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"><span id="grupoG_J1_c"></span><img src="img/banderas/iran.png" alt="Irán"><input
+                        type="number" name="G_J1_2_local" class="form-control" value="0" min="0" max="149"><span
+                        id="grupoG_J1_d"></span><img src="img/banderas/nuevazelanda.png" alt="Nueva Zelanda"><input
+                        type="number" name="G_J1_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 2 <small class="fecha-jornada">(21 jun)</small></h2>
+                <div class="fixture"> <span id="grupoG_J1_e"></span><img src="img/banderas/egipto.png"
+                        alt="Egipto"><input type="number" name="G_J2_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoG_J1_f"></span><img src="img/banderas/nuevazelanda.png"
+                        alt="Nueva Zelanda"><input type="number" name="G_J2_1_away" class="form-control" value="0"
+                        min="0" max="149"> </div>
+                <div class="fixture"> <span id="grupoG_J1_g"></span><img src="img/banderas/iran.png" alt="Irán"><input
+                        type="number" name="G_J2_2_local" class="form-control" value="0" min="0" max="149"><span
+                        id="grupoG_J1_h"></span><img src="img/banderas/belgica.png" alt="Bélgica"><input type="number"
+                        name="G_J2_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 3 <small class="fecha-jornada">(26 jun)</small></h2>
+                <div class="fixture"> <span id="grupoG_J1_i"></span><img src="img/banderas/egipto.png"
+                        alt="Egipto"><input type="number" name="G_J3_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoG_J1_j"></span><img src="img/banderas/iran.png" alt="Irán"><input
+                        type="number" name="G_J3_1_away" class="form-control" value="0" min="0" max="149">
+                </div>
+                <div class="fixture"> <span id="grupoG_J1_k"></span><img src="img/banderas/belgica.png"
+                        alt="Bélgica"><input type="number" name="G_J3_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoG_J1_l"></span><img src="img/banderas/nuevazelanda.png"
+                        alt="Nueva Zelanda"><input type="number" name="G_J3_2_away" class="form-control" value="0"
+                        min="0" max="149"> </div>
+
+                <h2>Clasificacion grupo G</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Equipo</th>
+                                <th>Puntos</th>
+                                <th>GOLES A FAVOR</th>
+                                <th>GOLES EN CONTRA</th>
+                                <th>DIFERENCIA GOLES F/C</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaG_body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: grupo H -->
+            <section class="glass-card" onmouseover="handleGrupoHover('H')">
+                <h1>GRUPO H</h1>
+                <h2> Jornada 1 <small class="fecha-jornada">(11 / 12 jun)</small></h2>
+                <div class="fixture"><span id="grupoH_J1_a"></span><img src="img/banderas/españa.png"
+                        alt="España"><input type="number" name="H_J1_1_local" onchange="rellenarGrupo_H()"
+                        class="form-control" value="0" min="0" max="149"><span id="grupoH_J1_b"></span><img
+                        src="img/banderas/caboverde.png" alt="Cabo Verde"><input type="number" name="H_J1_1_away"
+                        class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"><span id="grupoH_J1_c"></span><img src="img/banderas/uruguay.png"
+                        alt="Uruguay"><input type="number" name="H_J1_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoH_J1_d"></span><img src="img/banderas/arabiasaudita.png"
+                        alt="Arabia Saudita"><input type="number" name="H_J1_2_away" class="form-control" value="0"
+                        min="0" max="149"> </div>
+
+                <h2> Jornada 2 <small class="fecha-jornada">(17 / 18 jun)</small></h2>
+                <div class="fixture"> <span id="grupoH_J1_e"></span><img src="img/banderas/españa.png"
+                        alt="España"><input type="number" name="H_J2_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoH_J1_f"></span><img src="img/banderas/arabiasaudita.png"
+                        alt="Arabia Saudita"><input type="number" name="H_J2_1_away" class="form-control" value="0"
+                        min="0" max="149"> </div>
+                <div class="fixture"> <span id="grupoH_J1_g"></span><img src="img/banderas/uruguay.png"
+                        alt="Uruguay"><input type="number" name="H_J2_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoH_J1_h"></span><img src="img/banderas/caboverde.png"
+                        alt="Cabo Verde"><input type="number" name="H_J2_2_away" class="form-control" value="0" min="0"
+                        max="149"> </div>
+
+                <h2> Jornada 3 <small class="fecha-jornada">(26 jun)</small></h2>
+                <div class="fixture"> <span id="grupoH_J1_i"></span><img src="img/banderas/españa.png"
+                        alt="España"><input type="number" name="H_J3_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoH_J1_j"></span><img src="img/banderas/uruguay.png" alt="Uruguay"><input
+                        type="number" name="H_J3_1_away" class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"> <span id="grupoH_J1_k"></span><img src="img/banderas/caboverde.png"
+                        alt="Cabo Verde"><input type="number" name="H_J3_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoH_J1_l"></span><img src="img/banderas/arabiasaudita.png"
+                        alt="Arabia Saudita"><input type="number" name="H_J3_2_away" class="form-control" value="0"
+                        min="0" max="149"> </div>
+
+                <h2>Clasificacion grupo H</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Equipo</th>
+                                <th>Puntos</th>
+                                <th>GOLES A FAVOR</th>
+                                <th>GOLES EN CONTRA</th>
+                                <th>DIFERENCIA GOLES F/C</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaH_body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: grupo I -->
+            <section class="glass-card" onmouseover="handleGrupoHover('I')">
+                <h1>GRUPO I</h1>
+                <h2> Jornada 1 <small class="fecha-jornada">(16 jun)</small></h2>
+                <div class="fixture"><span id="grupoI_J1_a"></span><img src="img/banderas/francia.png"
+                        alt="Francia"><input type="number" name="I_J1_1_local" onchange="rellenarGrupo_I()"
+                        class="form-control" value="0" min="0" max="149"><span id="grupoI_J1_b"></span><img
+                        src="img/banderas/senegal.png" alt="Senegal"><input type="number" name="I_J1_1_away"
+                        class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"><span id="grupoI_J1_c"></span><img src="img/banderas/noruega.png"
+                        alt="Noruega"><input type="number" name="I_J1_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoI_J1_d"></span><img src="img/banderas/irak.png" alt="Irak"><input
+                        type="number" name="I_J1_2_away" class="form-control" value="0" min="0" max="149">
+                </div>
+
+                <h2> Jornada 2 <small class="fecha-jornada">(22 jun)</small></h2>
+                <div class="fixture"> <span id="grupoI_J1_e"></span><img src="img/banderas/francia.png"
+                        alt="Francia"><input type="number" name="I_J2_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoI_J1_f"></span><img src="img/banderas/irak.png" alt="Irak"><input
+                        type="number" name="I_J2_1_away" class="form-control" value="0" min="0" max="149">
+                </div>
+                <div class="fixture"> <span id="grupoI_J1_g"></span><img src="img/banderas/noruega.png"
+                        alt="Noruega"><input type="number" name="I_J2_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoI_J1_h"></span><img src="img/banderas/senegal.png" alt="Senegal"><input
+                        type="number" name="I_J2_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 3 <small class="fecha-jornada">(26 jun)</small></h2>
+                <div class="fixture"> <span id="grupoI_J1_i"></span><img src="img/banderas/francia.png"
+                        alt="Francia"><input type="number" name="I_J3_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoI_J1_j"></span><img src="img/banderas/noruega.png" alt="Noruega"><input
+                        type="number" name="I_J3_1_away" class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"> <span id="grupoI_J1_k"></span><img src="img/banderas/senegal.png"
+                        alt="Senegal"><input type="number" name="I_J3_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoI_J1_l"></span><img src="img/banderas/irak.png" alt="Irak"><input
+                        type="number" name="I_J3_2_away" class="form-control" value="0" min="0" max="149">
+                </div>
+
+                <h2>Clasificacion grupo I</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Equipo</th>
+                                <th>Puntos</th>
+                                <th>GOLES A FAVOR</th>
+                                <th>GOLES EN CONTRA</th>
+                                <th>DIFERENCIA GOLES F/C</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaI_body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: grupo J -->
+            <section class="glass-card" onmouseover="handleGrupoHover('J')">
+                <h1>GRUPO J</h1>
+                <h2> Jornada 1 <small class="fecha-jornada">(15 / 16 jun)</small></h2>
+                <div class="fixture"><span id="grupoJ_J1_a"></span><img src="img/banderas/argentina.png"
+                        alt="Argentina"><input type="number" name="J_J1_1_local" onchange="rellenarGrupo_J()"
+                        class="form-control" value="0" min="0" max="149"><span id="grupoJ_J1_b"></span><img
+                        src="img/banderas/argelia.png" alt="Argelia"><input type="number" name="J_J1_1_away"
+                        class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"><span id="grupoJ_J1_c"></span><img src="img/banderas/jordania.png"
+                        alt="Jordania"><input type="number" name="J_J1_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoJ_J1_d"></span><img src="img/banderas/austria.png" alt="Austria"><input
+                        type="number" name="J_J1_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 2 <small class="fecha-jornada">(21 / 22 jun)</small></h2>
+                <div class="fixture"> <span id="grupoJ_J1_e"></span><img src="img/banderas/argentina.png"
+                        alt="Argentina"><input type="number" name="J_J2_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoJ_J1_f"></span><img src="img/banderas/austria.png" alt="Austria"><input
+                        type="number" name="J_J2_1_away" class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"> <span id="grupoJ_J1_g"></span><img src="img/banderas/jordania.png"
+                        alt="Jordania"><input type="number" name="J_J2_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoJ_J1_h"></span><img src="img/banderas/argelia.png" alt="Argelia"><input
+                        type="number" name="J_J2_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 3 <small class="fecha-jornada">(27 jun)</small></h2>
+                <div class="fixture"> <span id="grupoJ_J1_i"></span><img src="img/banderas/argentina.png"
+                        alt="Argentina"><input type="number" name="J_J3_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoJ_J1_j"></span><img src="img/banderas/jordania.png"
+                        alt="Jordania"><input type="number" name="J_J3_1_away" class="form-control" value="0" min="0"
+                        max="149"> </div>
+                <div class="fixture"> <span id="grupoJ_J1_k"></span><img src="img/banderas/argelia.png"
+                        alt="Argelia"><input type="number" name="J_J3_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoJ_J1_l"></span><img src="img/banderas/austria.png" alt="Austria"><input
+                        type="number" name="J_J3_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2>Clasificacion grupo J</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Equipo</th>
+                                <th>Puntos</th>
+                                <th>GOLES A FAVOR</th>
+                                <th>GOLES EN CONTRA</th>
+                                <th>DIFERENCIA GOLES F/C</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaJ_body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: grupo K -->
+            <section class="glass-card" onmouseover="handleGrupoHover('K')">
+                <h1>GRUPO K</h1>
+                <h2> Jornada 1 <small class="fecha-jornada">(13 / 14 jun)</small></h2>
+                <div class="fixture"><span id="grupoK_J1_a"></span><img src="img/banderas/colombia.png"
+                        alt="Colombia"><input type="number" name="K_J1_1_local" onchange="rellenarGrupo_K()"
+                        class="form-control" value="0" min="0" max="149"><span id="grupoK_J1_b"></span><img
+                        src="img/banderas/portugal.png" alt="Portugal"><input type="number" name="K_J1_1_away"
+                        class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"><span id="grupoK_J1_c"></span><img src="img/banderas/rdcongo.png"
+                        alt="Republica Democratica del Congo"><input type="number" name="K_J1_2_local"
+                        class="form-control" value="0" min="0" max="149"><span id="grupoK_J1_d"></span><img
+                        src="img/banderas/uzbekistan.png" alt="Uzbekistán"><input type="number" name="K_J1_2_away"
+                        class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 2 <small class="fecha-jornada">(19 / 23 jun)</small></h2>
+                <div class="fixture"> <span id="grupoK_J1_e"></span><img src="img/banderas/colombia.png"
+                        alt="Colombia"><input type="number" name="K_J2_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoK_J1_f"></span><img src="img/banderas/uzbekistan.png"
+                        alt="Uzbekistán"><input type="number" name="K_J2_1_away" class="form-control" value="0" min="0"
+                        max="149"> </div>
+                <div class="fixture"> <span id="grupoK_J1_g"></span><img src="img/banderas/rdcongo.png"
+                        alt="Republica Democratica del Congo"><input type="number" name="K_J2_2_local"
+                        class="form-control" value="0" min="0" max="149"><span id="grupoK_J1_h"></span><img
+                        src="img/banderas/portugal.png" alt="Portugal"><input type="number" name="K_J2_2_away"
+                        class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 3 <small class="fecha-jornada">(27 jun)</small></h2>
+                <div class="fixture"> <span id="grupoK_J1_i"></span><img src="img/banderas/colombia.png"
+                        alt="Colombia"><input type="number" name="K_J3_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoK_J1_j"></span><img src="img/banderas/rdcongo.png"
+                        alt="Republica Democratica del Congo"><input type="number" name="K_J3_1_away"
+                        class="form-control" value="0" min="0" max="149">
+                </div>
+                <div class="fixture"> <span id="grupoK_J1_k"></span><img src="img/banderas/portugal.png"
+                        alt="Portugal"><input type="number" name="K_J3_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoK_J1_l"></span><img src="img/banderas/uzbekistan.png"
+                        alt="Uzbekistán"><input type="number" name="K_J3_2_away" class="form-control" value="0" min="0"
+                        max="149"> </div>
+
+                <h2>Clasificacion grupo K</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Equipo</th>
+                                <th>Puntos</th>
+                                <th>GOLES A FAVOR</th>
+                                <th>GOLES EN CONTRA</th>
+                                <th>DIFERENCIA GOLES F/C</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaK_body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: grupo L -->
+            <section class="glass-card" onmouseover="handleGrupoHover('L')">
+                <h1>GRUPO L</h1>
+                <h2> Jornada 1 <small class="fecha-jornada">(13 / 14 jun)</small></h2>
+                <div class="fixture"><span id="grupoL_J1_a"></span><img src="img/banderas/inglaterra.png"
+                        alt="Inglaterra"><input type="number" name="L_J1_1_local" onchange="rellenarGrupo_L()"
+                        class="form-control" value="0" min="0" max="149"><span id="grupoL_J1_b"></span><img
+                        src="img/banderas/panama.png" alt="Panamá"><input type="number" name="L_J1_1_away"
+                        class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"><span id="grupoL_J1_c"></span><img src="img/banderas/ghana.png" alt="Ghana"><input
+                        type="number" name="L_J1_2_local" class="form-control" value="0" min="0" max="149"><span
+                        id="grupoL_J1_d"></span><img src="img/banderas/croacia.png" alt="Croacia"><input type="number"
+                        name="L_J1_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 2 <small class="fecha-jornada">(23 jun)</small></h2>
+                <div class="fixture"> <span id="grupoL_J1_e"></span><img src="img/banderas/inglaterra.png"
+                        alt="Inglaterra"><input type="number" name="L_J2_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoL_J1_f"></span><img src="img/banderas/croacia.png" alt="Croacia"><input
+                        type="number" name="L_J2_1_away" class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"> <span id="grupoL_J1_g"></span><img src="img/banderas/ghana.png" alt="Ghana"><input
+                        type="number" name="L_J2_2_local" class="form-control" value="0" min="0" max="149"><span
+                        id="grupoL_J1_h"></span><img src="img/banderas/panama.png" alt="Panamá"><input type="number"
+                        name="L_J2_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2> Jornada 3 <small class="fecha-jornada">(27 jun)</small></h2>
+                <div class="fixture"> <span id="grupoL_J1_i"></span><img src="img/banderas/inglaterra.png"
+                        alt="Inglaterra"><input type="number" name="L_J3_1_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoL_J1_j"></span><img src="img/banderas/ghana.png" alt="Ghana"><input
+                        type="number" name="L_J3_1_away" class="form-control" value="0" min="0" max="149"> </div>
+                <div class="fixture"> <span id="grupoL_J1_k"></span><img src="img/banderas/panama.png"
+                        alt="Panamá"><input type="number" name="L_J3_2_local" class="form-control" value="0" min="0"
+                        max="149"><span id="grupoL_J1_l"></span><img src="img/banderas/croacia.png" alt="Croacia"><input
+                        type="number" name="L_J3_2_away" class="form-control" value="0" min="0" max="149"> </div>
+
+                <h2>Clasificacion grupo L</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Equipo</th>
+                                <th>Puntos</th>
+                                <th>GOLES A FAVOR</th>
+                                <th>GOLES EN CONTRA</th>
+                                <th>DIFERENCIA GOLES F/C</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaL_body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <button id="evaluate-button" type="submit" disabled>EVALUAR RESULTADOS</button>
+        </form>
+
+        <br>
+        <br>
+
+
+        <section class="glass-card" id="calendario">
+
+            <h2> Fecha inicio mundial</h2>
+
+            <div id="incio"></div>
+
+
+            <h2> Fecha actual </h2>
+            <div id="fecha_actual"></div>
+
+            <div id="reloj" style="font-size: x-large;"><span id="hora"></span>:<span id="minutos">:</span>:<span
+                    id="segundos"></span></div>
+
+
+            <h2> Fecha fin mundial</h2>
+
+            <div id="fecha_final"></div>
+
+           
+
+
+
+
+
+        </section>
+    </main>
+
+    <footer>
+
+        ©️Alfonso Rubio Rioseras 2026 & VS CODE IA
+    </footer>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
