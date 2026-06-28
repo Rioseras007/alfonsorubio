@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoevaluación FINAL JavaScript (1-100)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-dark: #1f2937;
+            --text-muted: #6b7280;
+            --success: #10b981;
+            --success-bg: #d1fae5;
+            --error: #ef4444;
+            --error-bg: #fee2e2;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+        .question {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .question p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.2);
+            accent-color: var(--primary);
+        }
+
+        .options label:hover {
+            background: #f8fafc;
+            border-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.1);
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            color: white;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            margin: 50px auto;
+            display: block;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(79, 70, 229, 0.4);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .marked-correct {
+            background: var(--success-bg) !important;
+            border-color: var(--success) !important;
+            color: #065f46;
+            font-weight: 600;
+        }
+
+        .marked-incorrect {
+            background: var(--error-bg) !important;
+            border-color: var(--error) !important;
+            color: #991b1b;
+            font-weight: 600;
+        }
+
+        .summary {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            color: var(--text-dark);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 40px 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .summary h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .summary p {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+        
+        .summary h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            padding: 15px;
+            background: #f1f5f9;
+            border-radius: 12px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧠 AUTOEVALUACIÓN - FINAL JAVASCRIPT (Preguntas 1-100)</h1>
+    <h2>Repaso de Nuevos Contenidos (JavaScript y DOM)</h2>
+
+    <div class="question" id="q1">
+        <p><strong>1.</strong> ¿Dónde recomienda el estándar HTML colocar el script?</p>
+        <div class="options">
+            <label><input type="radio" name="q1" value="a"> a. En el cuerpo de la página.</label>
+            <label><input type="radio" name="q1" value="b"> b. Entre las etiquetas <head> y </head>.</label>
+            <label><input type="radio" name="q1" value="c"> c. Dentro del título de la página.</label>
+            <label><input type="radio" name="q1" value="d"> d. Dentro del encabezado de la página.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q2">
+        <p><strong>2.</strong> ¿Qué es un evento?</p>
+        <div class="options">
+            <label><input type="radio" name="q2" value="a"> a. Un evento es una acción que realiza el usuario sobre un elemento.</label>
+            <label><input type="radio" name="q2" value="b"> b. Un evento es una acción que realiza el usuario sobre algún elemento de nuestra página o una acción que ocurre de forma programada.</label>
+            <label><input type="radio" name="q2" value="c"> c. Un evento es una acción que ocurre de forma programada.</label>
+            <label><input type="radio" name="q2" value="d"> d. Un evento es un elemento de JavaScript que realiza una acción sobre una función.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q3">
+        <p><strong>3.</strong> ¿Qué palabra clave usaremos para hacer referencia a un objeto que ha sido causado por el evento que se ha disparado?</p>
+        <div class="options">
+            <label><input type="radio" name="q3" value="a"> a. Usaremos la palabra clave else.</label>
+            <label><input type="radio" name="q3" value="b"> b. Usaremos la palabra clave try.</label>
+            <label><input type="radio" name="q3" value="c"> c. Usaremos la palabra clave true.</label>
+            <label><input type="radio" name="q3" value="d"> d. Usaremos la palabra clave this.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q4">
+        <p><strong>4.</strong> ¿Cuál es el primer paso para configurar un manipulador de eventos?</p>
+        <div class="options">
+            <label><input type="radio" name="q4" value="a"> a. Añadir un objeto al manipulador de eventos.</label>
+            <label><input type="radio" name="q4" value="b"> b. Añadir una sentencia al manipulador de eventos.</label>
+            <label><input type="radio" name="q4" value="c"> c. Añadir el atributo de configuración del valor.</label>
+            <label><input type="radio" name="q4" value="d"> d. Añadir el atributo de configuración del manipulador de eventos adecuado a la etiqueta HTML del objeto.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q5">
+        <p><strong>5.</strong> ¿Por qué se producen los errores en tiempo de ejecución?</p>
+        <div class="options">
+            <label><input type="radio" name="q5" value="a"> a. Por un defecto en la lógica de procedimiento.</label>
+            <label><input type="radio" name="q5" value="b"> b. Por tratar de utilizar una variable no declarada o inicializada en una expresión, o por usar una propiedad o método con el objeto.</label>
+            <label><input type="radio" name="q5" value="c"> c. Por un mal uso de un boolean.</label>
+            <label><input type="radio" name="q5" value="d"> d. Por usar una mala sintaxis.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q6">
+        <p><strong>6.</strong> ¿Cuál es el segundo paso para configurar un manipulador de eventos?</p>
+        <div class="options">
+            <label><input type="radio" name="q6" value="a"> a. Configurar el atributo a ejecutar manipulando el evento.</label>
+            <label><input type="radio" name="q6" value="b"> b. Añadir el atributo de configuración del manipulador de eventos adecuado a la etiqueta HTML.</label>
+            <label><input type="radio" name="q6" value="c"> c. Configurar el valor del atributo igual a la sentencia o función que deseemos que actúe como manipulador de eventos.</label>
+            <label><input type="radio" name="q6" value="d"> d. Configurar el valor del atributo de forma diferente a la sentencia que deseemos que actúe como manipulador de eventos.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q7">
+        <p><strong>7.</strong> ¿Qué dos tipos de algoritmos existen?</p>
+        <div class="options">
+            <label><input type="radio" name="q7" value="a"> a. Numéricos y computacionales.</label>
+            <label><input type="radio" name="q7" value="b"> b. Computacionales y lógicos.</label>
+            <label><input type="radio" name="q7" value="c"> c. Informales y de texto.</label>
+            <label><input type="radio" name="q7" value="d"> d. Informales y computacionales.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q8">
+        <p><strong>8.</strong> ¿Qué representa una variable?</p>
+        <div class="options">
+            <label><input type="radio" name="q8" value="a"> a. Un espacio de memoria para usar los datos que se almacenen al momento.</label>
+            <label><input type="radio" name="q8" value="b"> b. Un espacio de memoria donde almacenar datos que necesitaremos posteriormente para realizar acciones en nuestro código.</label>
+            <label><input type="radio" name="q8" value="c"> c. Una representación de un dato que no se usará.</label>
+            <label><input type="radio" name="q8" value="d"> d. Un espacio de memoria que almacena datos pero que no realiza acciones.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q9">
+        <p><strong>9.</strong> ¿Qué elemento nos permite decir lo mismo que los algoritmos pero a partir de símbolos?</p>
+        <div class="options">
+            <label><input type="radio" name="q9" value="a"> a. Grafismos.</label>
+            <label><input type="radio" name="q9" value="b"> b. Contantes.</label>
+            <label><input type="radio" name="q9" value="c"> c. Pseudocódigo.</label>
+            <label><input type="radio" name="q9" value="d"> d. Diagrama de flujo.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q10">
+        <p><strong>10.</strong> ¿Cuál es la propiedad principal de los objetos en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q10" value="a"> a. Cambiar su aspecto.</label>
+            <label><input type="radio" name="q10" value="b"> b. Recopilar información.</label>
+            <label><input type="radio" name="q10" value="c"> c. Recopilar información, cambiar la configuración de un objeto o su aspecto.</label>
+            <label><input type="radio" name="q10" value="d"> d. Cambiar la información de un objeto o su aspecto.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q11">
+        <p><strong>11.</strong> ¿Cuáles son los campos o controles del objeto Forms?</p>
+        <div class="options">
+            <label><input type="radio" name="q11" value="a"> a. Botones de comando y Listas.</label>
+            <label><input type="radio" name="q11" value="b"> b. Campos de texto y Botones de comando.</label>
+            <label><input type="radio" name="q11" value="c"> c. Botones de comando, Flujo de escritura, Otros botones y Listas.</label>
+            <label><input type="radio" name="q11" value="d"> d. Botones de comando, Campos de texto, Otros tipos de botones y Listas.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q12">
+        <p><strong>12.</strong> ¿Qué es la clase de un objeto?</p>
+        <div class="options">
+            <label><input type="radio" name="q12" value="a"> a. La clase define a una función y asigna una función ya existente.</label>
+            <label><input type="radio" name="q12" value="b"> b. La clase permite que un método tenga múltiples implementaciones, que se seleccionan en base al tipo objeto indicado al solicitar la ejecución del método.</label>
+            <label><input type="radio" name="q12" value="c"> c. La clase es una plantilla que define las variables y los métodos que son comunes para todos los objetos de un cierto tipo.</label>
+            <label><input type="radio" name="q12" value="d"> d. La clase nos permite definir nuevos objetos a partir de otros que ya existe, los cuales heredan automáticamente todo su comportamiento, pero además pueden introducir características propias que las diferencian.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q13">
+        <p><strong>13.</strong> ¿Qué es Firebug?</p>
+        <div class="options">
+            <label><input type="radio" name="q13" value="a"> a. Una herramienta de desarrollo que se usa para depurar código perteneciente al navegador Opera.</label>
+            <label><input type="radio" name="q13" value="b"> b. Una herramienta de desarrollo que se usa para depurar código perteneciente al navegador Google Chrome.</label>
+            <label><input type="radio" name="q13" value="c"> c. Una herramienta de desarrollo que se usa para depurar código perteneciente al navegador Mozilla Firefox.</label>
+            <label><input type="radio" name="q13" value="d"> d. Una consola para buscar errores pertenecientes al navegador Mozilla Firefox.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q14">
+        <p><strong>14.</strong> ¿Cómo se identifica el operador de asignación?</p>
+        <div class="options">
+            <label><input type="radio" name="q14" value="a"> a. Por el símbolo de suma (+).</label>
+            <label><input type="radio" name="q14" value="b"> b. Por el símbolo de igualdad (==).</label>
+            <label><input type="radio" name="q14" value="c"> c. Por el símbolo mayor o igual que (>=).</label>
+            <label><input type="radio" name="q14" value="d"> d. Por el símbolo igual (=).</label>
+        </div>
+    </div>
+
+    <div class="question" id="q15">
+        <p><strong>15.</strong> ¿Cuál es el fragmento que se debe integrar dentro de un documento HTML?</p>
+        <div class="options">
+            <label><input type="radio" name="q15" value="a"> a. < script type.</label>
+            <label><input type="radio" name="q15" value="b"> b. < script type = text / javascript >.</label>
+            <label><input type="radio" name="q15" value="c"> c. < script tipe = >.</label>
+            <label><input type="radio" name="q15" value="d"> d. = < script type = .</label>
+        </div>
+    </div>
+
+    <div class="question" id="q16">
+        <p><strong>16.</strong> ¿Qué elemento usaremos cuando necesitemos ejecutar un conjunto de acciones de forma habitual?</p>
+        <div class="options">
+            <label><input type="radio" name="q16" value="a"> a. Eventos.</label>
+            <label><input type="radio" name="q16" value="b"> b. Funciones.</label>
+            <label><input type="radio" name="q16" value="c"> c. Objetos.</label>
+            <label><input type="radio" name="q16" value="d"> d. Instrucciones.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q17">
+        <p><strong>17.</strong> ¿Cómo se crea una función?</p>
+        <div class="options">
+            <label><input type="radio" name="q17" value="a"> a. Primero usaremos la palabra function, después indicamos el nombre de ésta, y seguidamente las acciones. Después ésta es llamada incluyendo en el script una sentencia con el nombre de la función.</label>
+            <label><input type="radio" name="q17" value="b"> b. Primero usamos la palabra function, después indicamos el nombre que queramos que tenga la función seguida obligatoriamente de paréntesis y escribimos las acciones que realizará la función encerradas entre corchetes formando un bloque. Seguidamente deberá ser llamada incluyendo en el script una sentencia con el nombre de la función, seguida de los paréntesis.</label>
+            <label><input type="radio" name="q17" value="c"> c. Se indica el nombre de la función y entre corchete incluimos las acciones. Seguidamente ésta es llamada por una sentencia.</label>
+            <label><input type="radio" name="q17" value="d"> d. Primero usamos la palabra function, después indicamos el nombre de la función, seguida de paréntesis, y después es llamada incluyendo en el script una sentencia con el nombre de la función.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q18">
+        <p><strong>18.</strong> ¿Qué ocurre cuando se genera un error en tiempo de ejecución?</p>
+        <div class="options">
+            <label><input type="radio" name="q18" value="a"> a. Se produce cuando el script realiza una acción que el sistema no puede ejecutar, pero no podremos tener información sobre el error.</label>
+            <label><input type="radio" name="q18" value="b"> b. Se produce cuando el script intenta realizar una acción que el sistema no puede ejecutar, lo cual crea una instancia de la clase Error, con información sobre el número del error o información descriptiva en una cadena de caracteres.</label>
+            <label><input type="radio" name="q18" value="c"> c. Se produce cuando el script intenta realizar una acción que el sistema no puede ejecutar, pero solo podremos tener información sobre el número que le identifica.</label>
+            <label><input type="radio" name="q18" value="d"> d. Los scripts no suelen presentar errores.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q19">
+        <p><strong>19.</strong> ¿Para qué sirve el objeto Document?</p>
+        <div class="options">
+            <label><input type="radio" name="q19" value="a"> a. Para cambiar el contenido visualizado dentro de la ventana o marco, como el texto, imágenes, enlaces, formularios, colores o el título.</label>
+            <label><input type="radio" name="q19" value="b"> b. Para cambiar los enlaces del documento.</label>
+            <label><input type="radio" name="q19" value="c"> c. Para hacer referencia a un documento actual.</label>
+            <label><input type="radio" name="q19" value="d"> d. Para almacenar el historial de visitas del navegador.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q20">
+        <p><strong>20.</strong> ¿Qué página visitaremos en la que podremos encontrar información sobre el lenguaje de guiones y su estandarización?</p>
+        <div class="options">
+            <label><input type="radio" name="q20" value="a"> a. ECMAScript.</label>
+            <label><input type="radio" name="q20" value="b"> b. ECMA.</label>
+            <label><input type="radio" name="q20" value="c"> c. JAVA.</label>
+            <label><input type="radio" name="q20" value="d"> d. JavaScript.</label>
+        </div>
+    </div>
+
+    <div class="question" id="q21">
+        <p><strong>21.</strong> ¿Qué método se utiliza para mostrar un mensaje de alerta en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q21" value="a"> a. msgBox()</label>
+            <label><input type="radio" name="q21" value="b"> b. alert()</label>
+            <label><input type="radio" name="q21" value="c"> c. console.log()</label>
+            <label><input type="radio" name="q21" value="d"> d. document.write()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q22">
+        <p><strong>22.</strong> ¿Cuál es la forma correcta de crear un array en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q22" value="a"> a. var colors = 1 = ('red'), 2 = ('green'), 3 = ('blue')</label>
+            <label><input type="radio" name="q22" value="b"> b. var colors = 'red', 'green', 'blue'</label>
+            <label><input type="radio" name="q22" value="c"> c. var colors = ['red', 'green', 'blue']</label>
+            <label><input type="radio" name="q22" value="d"> d. var colors = (1:'red', 2:'green', 3:'blue')</label>
+        </div>
+    </div>
+
+    <div class="question" id="q23">
+        <p><strong>23.</strong> ¿Qué método de un array se usa para añadir un elemento al final?</p>
+        <div class="options">
+            <label><input type="radio" name="q23" value="a"> a. push()</label>
+            <label><input type="radio" name="q23" value="b"> b. pop()</label>
+            <label><input type="radio" name="q23" value="c"> c. shift()</label>
+            <label><input type="radio" name="q23" value="d"> d. unshift()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q24">
+        <p><strong>24.</strong> ¿Cómo se escribe un comentario de una línea en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q24" value="a"> a. <!-- Comentario --></label>
+            <label><input type="radio" name="q24" value="b"> b. ' Comentario</label>
+            <label><input type="radio" name="q24" value="c"> c. // Comentario</label>
+            <label><input type="radio" name="q24" value="d"> d. /* Comentario */</label>
+        </div>
+    </div>
+
+    <div class="question" id="q25">
+        <p><strong>25.</strong> ¿Qué método se usa para convertir una cadena a número entero en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q25" value="a"> a. parseInt()</label>
+            <label><input type="radio" name="q25" value="b"> b. parseFloat()</label>
+            <label><input type="radio" name="q25" value="c"> c. toNumber()</label>
+            <label><input type="radio" name="q25" value="d"> d. convertInt()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q26">
+        <p><strong>26.</strong> ¿Cuál es el resultado de 3 + '3' en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q26" value="a"> a. 6</label>
+            <label><input type="radio" name="q26" value="b"> b. '6'</label>
+            <label><input type="radio" name="q26" value="c"> c. '33'</label>
+            <label><input type="radio" name="q26" value="d"> d. NaN</label>
+        </div>
+    </div>
+
+    <div class="question" id="q27">
+        <p><strong>27.</strong> ¿Qué operador se utiliza para comparar el valor y el tipo de dato?</p>
+        <div class="options">
+            <label><input type="radio" name="q27" value="a"> a. ==</label>
+            <label><input type="radio" name="q27" value="b"> b. =</label>
+            <label><input type="radio" name="q27" value="c"> c. ===</label>
+            <label><input type="radio" name="q27" value="d"> d. !=</label>
+        </div>
+    </div>
+
+    <div class="question" id="q28">
+        <p><strong>28.</strong> ¿Cuál de estas no es una estructura de control en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q28" value="a"> a. if</label>
+            <label><input type="radio" name="q28" value="b"> b. switch</label>
+            <label><input type="radio" name="q28" value="c"> c. for</label>
+            <label><input type="radio" name="q28" value="d"> d. include</label>
+        </div>
+    </div>
+
+    <div class="question" id="q29">
+        <p><strong>29.</strong> ¿Qué palabra clave se usa para declarar una constante?</p>
+        <div class="options">
+            <label><input type="radio" name="q29" value="a"> a. var</label>
+            <label><input type="radio" name="q29" value="b"> b. let</label>
+            <label><input type="radio" name="q29" value="c"> c. const</label>
+            <label><input type="radio" name="q29" value="d"> d. constant</label>
+        </div>
+    </div>
+
+    <div class="question" id="q30">
+        <p><strong>30.</strong> ¿Cuál es el objeto global en un navegador web?</p>
+        <div class="options">
+            <label><input type="radio" name="q30" value="a"> a. document</label>
+            <label><input type="radio" name="q30" value="b"> b. window</label>
+            <label><input type="radio" name="q30" value="c"> c. navigator</label>
+            <label><input type="radio" name="q30" value="d"> d. global</label>
+        </div>
+    </div>
+
+    <div class="question" id="q31">
+        <p><strong>31.</strong> ¿Qué evento ocurre cuando un usuario hace clic en un elemento HTML?</p>
+        <div class="options">
+            <label><input type="radio" name="q31" value="a"> a. onchange</label>
+            <label><input type="radio" name="q31" value="b"> b. onmouseclick</label>
+            <label><input type="radio" name="q31" value="c"> c. onclick</label>
+            <label><input type="radio" name="q31" value="d"> d. onmouseover</label>
+        </div>
+    </div>
+
+    <div class="question" id="q32">
+        <p><strong>32.</strong> ¿Cómo se puede obtener el elemento con id 'demo'?</p>
+        <div class="options">
+            <label><input type="radio" name="q32" value="a"> a. document.getElementById('demo')</label>
+            <label><input type="radio" name="q32" value="b"> b. document.getElementByName('demo')</label>
+            <label><input type="radio" name="q32" value="c"> c. document.querySelector('#demo')</label>
+            <label><input type="radio" name="q32" value="d"> d. Tanto A como C son correctas</label>
+        </div>
+    </div>
+
+    <div class="question" id="q33">
+        <p><strong>33.</strong> ¿Qué significa JSON?</p>
+        <div class="options">
+            <label><input type="radio" name="q33" value="a"> a. JavaScript Object Notation</label>
+            <label><input type="radio" name="q33" value="b"> b. JavaScript Oriented Notation</label>
+            <label><input type="radio" name="q33" value="c"> c. Java Standard Object Network</label>
+            <label><input type="radio" name="q33" value="d"> d. JavaScript Object Network</label>
+        </div>
+    </div>
+
+    <div class="question" id="q34">
+        <p><strong>34.</strong> ¿Cuál de los siguientes métodos convierte un objeto JavaScript en una cadena JSON?</p>
+        <div class="options">
+            <label><input type="radio" name="q34" value="a"> a. JSON.parse()</label>
+            <label><input type="radio" name="q34" value="b"> b. JSON.stringify()</label>
+            <label><input type="radio" name="q34" value="c"> c. JSON.toString()</label>
+            <label><input type="radio" name="q34" value="d"> d. JSON.objectify()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q35">
+        <p><strong>35.</strong> ¿Qué método se usa para parsear una cadena JSON y convertirla en un objeto?</p>
+        <div class="options">
+            <label><input type="radio" name="q35" value="a"> a. JSON.parse()</label>
+            <label><input type="radio" name="q35" value="b"> b. JSON.stringify()</label>
+            <label><input type="radio" name="q35" value="c"> c. JSON.toObject()</label>
+            <label><input type="radio" name="q35" value="d"> d. JSON.parseObject()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q36">
+        <p><strong>36.</strong> ¿Cómo se define un objeto en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q36" value="a"> a. var obj = [];</label>
+            <label><input type="radio" name="q36" value="b"> b. var obj = {};</label>
+            <label><input type="radio" name="q36" value="c"> c. var obj = ();</label>
+            <label><input type="radio" name="q36" value="d"> d. var obj = <></label>
+        </div>
+    </div>
+
+    <div class="question" id="q37">
+        <p><strong>37.</strong> ¿Cuál es la función de 'typeof' en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q37" value="a"> a. Devuelve el valor de una variable</label>
+            <label><input type="radio" name="q37" value="b"> b. Devuelve el tipo de dato de una variable</label>
+            <label><input type="radio" name="q37" value="c"> c. Convierte el tipo de una variable</label>
+            <label><input type="radio" name="q37" value="d"> d. Comprueba si una variable existe</label>
+        </div>
+    </div>
+
+    <div class="question" id="q38">
+        <p><strong>38.</strong> ¿Qué es DOM en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q38" value="a"> a. Data Object Model</label>
+            <label><input type="radio" name="q38" value="b"> b. Document Object Model</label>
+            <label><input type="radio" name="q38" value="c"> c. Document Oriented Model</label>
+            <label><input type="radio" name="q38" value="d"> d. Data Oriented Model</label>
+        </div>
+    </div>
+
+    <div class="question" id="q39">
+        <p><strong>39.</strong> ¿Qué método añade un nuevo nodo hijo a un elemento?</p>
+        <div class="options">
+            <label><input type="radio" name="q39" value="a"> a. appendChild()</label>
+            <label><input type="radio" name="q39" value="b"> b. addChild()</label>
+            <label><input type="radio" name="q39" value="c"> c. insertChild()</label>
+            <label><input type="radio" name="q39" value="d"> d. appendNode()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q40">
+        <p><strong>40.</strong> ¿Qué propiedad se usa para cambiar el contenido HTML de un elemento?</p>
+        <div class="options">
+            <label><input type="radio" name="q40" value="a"> a. innerText</label>
+            <label><input type="radio" name="q40" value="b"> b. textContent</label>
+            <label><input type="radio" name="q40" value="c"> c. innerHTML</label>
+            <label><input type="radio" name="q40" value="d"> d. htmlContent</label>
+        </div>
+    </div>
+
+    <div class="question" id="q41">
+        <p><strong>41.</strong> ¿Qué significa NaN en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q41" value="a"> a. Not a Network</label>
+            <label><input type="radio" name="q41" value="b"> b. New and Null</label>
+            <label><input type="radio" name="q41" value="c"> c. Not a Number</label>
+            <label><input type="radio" name="q41" value="d"> d. Null and None</label>
+        </div>
+    </div>
+
+    <div class="question" id="q42">
+        <p><strong>42.</strong> ¿Cómo se declara una función flecha (arrow function) en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q42" value="a"> a. function => {}</label>
+            <label><input type="radio" name="q42" value="b"> b. () => {}</label>
+            <label><input type="radio" name="q42" value="c"> c. => function() {}</label>
+            <label><input type="radio" name="q42" value="d"> d. () -> {}</label>
+        </div>
+    </div>
+
+    <div class="question" id="q43">
+        <p><strong>43.</strong> ¿Cuál es la forma de ejecutar una función cada cierto tiempo?</p>
+        <div class="options">
+            <label><input type="radio" name="q43" value="a"> a. setTimeout()</label>
+            <label><input type="radio" name="q43" value="b"> b. setInterval()</label>
+            <label><input type="radio" name="q43" value="c"> c. delay()</label>
+            <label><input type="radio" name="q43" value="d"> d. timeOut()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q44">
+        <p><strong>44.</strong> ¿Cómo se cancela la ejecución programada con setInterval?</p>
+        <div class="options">
+            <label><input type="radio" name="q44" value="a"> a. stopInterval()</label>
+            <label><input type="radio" name="q44" value="b"> b. clearInterval()</label>
+            <label><input type="radio" name="q44" value="c"> c. cancelInterval()</label>
+            <label><input type="radio" name="q44" value="d"> d. removeInterval()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q45">
+        <p><strong>45.</strong> ¿Qué representa 'this' en un método de un objeto?</p>
+        <div class="options">
+            <label><input type="radio" name="q45" value="a"> a. El objeto global</label>
+            <label><input type="radio" name="q45" value="b"> b. La función actual</label>
+            <label><input type="radio" name="q45" value="c"> c. El objeto al que pertenece el método</label>
+            <label><input type="radio" name="q45" value="d"> d. Ninguna de las anteriores</label>
+        </div>
+    </div>
+
+    <div class="question" id="q46">
+        <p><strong>46.</strong> ¿Qué operador lógico representa el 'Y' lógico (AND)?</p>
+        <div class="options">
+            <label><input type="radio" name="q46" value="a"> a. ||</label>
+            <label><input type="radio" name="q46" value="b"> b. &&</label>
+            <label><input type="radio" name="q46" value="c"> c. !</label>
+            <label><input type="radio" name="q46" value="d"> d. &</label>
+        </div>
+    </div>
+
+    <div class="question" id="q47">
+        <p><strong>47.</strong> ¿Qué operador lógico representa el 'O' lógico (OR)?</p>
+        <div class="options">
+            <label><input type="radio" name="q47" value="a"> a. ||</label>
+            <label><input type="radio" name="q47" value="b"> b. &&</label>
+            <label><input type="radio" name="q47" value="c"> c. !</label>
+            <label><input type="radio" name="q47" value="d"> d. |</label>
+        </div>
+    </div>
+
+    <div class="question" id="q48">
+        <p><strong>48.</strong> ¿Qué valor booleano devuelve la expresión 5 > 4?</p>
+        <div class="options">
+            <label><input type="radio" name="q48" value="a"> a. true</label>
+            <label><input type="radio" name="q48" value="b"> b. false</label>
+            <label><input type="radio" name="q48" value="c"> c. undefined</label>
+            <label><input type="radio" name="q48" value="d"> d. null</label>
+        </div>
+    </div>
+
+    <div class="question" id="q49">
+        <p><strong>49.</strong> ¿Qué tipo de bucle se ejecuta al menos una vez antes de evaluar la condición?</p>
+        <div class="options">
+            <label><input type="radio" name="q49" value="a"> a. for</label>
+            <label><input type="radio" name="q49" value="b"> b. while</label>
+            <label><input type="radio" name="q49" value="c"> c. do...while</label>
+            <label><input type="radio" name="q49" value="d"> d. for...in</label>
+        </div>
+    </div>
+
+    <div class="question" id="q50">
+        <p><strong>50.</strong> ¿Cómo se accede al tercer elemento de un array llamado 'datos'?</p>
+        <div class="options">
+            <label><input type="radio" name="q50" value="a"> a. datos[3]</label>
+            <label><input type="radio" name="q50" value="b"> b. datos(3)</label>
+            <label><input type="radio" name="q50" value="c"> c. datos[2]</label>
+            <label><input type="radio" name="q50" value="d"> d. datos.2</label>
+        </div>
+    </div>
+
+    <div class="question" id="q51">
+        <p><strong>51.</strong> ¿Qué método de los arrays sirve para unir todos sus elementos en una cadena?</p>
+        <div class="options">
+            <label><input type="radio" name="q51" value="a"> a. join()</label>
+            <label><input type="radio" name="q51" value="b"> b. concat()</label>
+            <label><input type="radio" name="q51" value="c"> c. split()</label>
+            <label><input type="radio" name="q51" value="d"> d. merge()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q52">
+        <p><strong>52.</strong> ¿Cuál de estas no es una palabra reservada en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q52" value="a"> a. break</label>
+            <label><input type="radio" name="q52" value="b"> b. continue</label>
+            <label><input type="radio" name="q52" value="c"> c. return</label>
+            <label><input type="radio" name="q52" value="d"> d. jump</label>
+        </div>
+    </div>
+
+    <div class="question" id="q53">
+        <p><strong>53.</strong> ¿Qué atributo HTML se usa para enlazar un archivo JavaScript externo?</p>
+        <div class="options">
+            <label><input type="radio" name="q53" value="a"> a. href</label>
+            <label><input type="radio" name="q53" value="b"> b. src</label>
+            <label><input type="radio" name="q53" value="c"> c. link</label>
+            <label><input type="radio" name="q53" value="d"> d. rel</label>
+        </div>
+    </div>
+
+    <div class="question" id="q54">
+        <p><strong>54.</strong> ¿En qué parte del documento HTML se puede incluir JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q54" value="a"> a. Solo en el <head></label>
+            <label><input type="radio" name="q54" value="b"> b. Solo en el <body></label>
+            <label><input type="radio" name="q54" value="c"> c. En el <head> y en el <body></label>
+            <label><input type="radio" name="q54" value="d"> d. En ninguna de las anteriores</label>
+        </div>
+    </div>
+
+    <div class="question" id="q55">
+        <p><strong>55.</strong> ¿Cómo se llama el proceso de buscar y solucionar errores en el código?</p>
+        <div class="options">
+            <label><input type="radio" name="q55" value="a"> a. Compiling</label>
+            <label><input type="radio" name="q55" value="b"> b. Debugging</label>
+            <label><input type="radio" name="q55" value="c"> c. Running</label>
+            <label><input type="radio" name="q55" value="d"> d. Executing</label>
+        </div>
+    </div>
+
+    <div class="question" id="q56">
+        <p><strong>56.</strong> ¿Qué método se utiliza para eliminar el último elemento de un array?</p>
+        <div class="options">
+            <label><input type="radio" name="q56" value="a"> a. pop()</label>
+            <label><input type="radio" name="q56" value="b"> b. shift()</label>
+            <label><input type="radio" name="q56" value="c"> c. slice()</label>
+            <label><input type="radio" name="q56" value="d"> d. splice()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q57">
+        <p><strong>57.</strong> ¿Qué evento se dispara cuando la página termina de cargar?</p>
+        <div class="options">
+            <label><input type="radio" name="q57" value="a"> a. onready</label>
+            <label><input type="radio" name="q57" value="b"> b. onfinish</label>
+            <label><input type="radio" name="q57" value="c"> c. onload</label>
+            <label><input type="radio" name="q57" value="d"> d. oncomplete</label>
+        </div>
+    </div>
+
+    <div class="question" id="q58">
+        <p><strong>58.</strong> ¿Qué función matemática se usa para redondear un número al entero más cercano?</p>
+        <div class="options">
+            <label><input type="radio" name="q58" value="a"> a. Math.round()</label>
+            <label><input type="radio" name="q58" value="b"> b. Math.ceil()</label>
+            <label><input type="radio" name="q58" value="c"> c. Math.floor()</label>
+            <label><input type="radio" name="q58" value="d"> d. Math.random()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q59">
+        <p><strong>59.</strong> ¿Qué función matemática se usa para obtener un número aleatorio?</p>
+        <div class="options">
+            <label><input type="radio" name="q59" value="a"> a. Math.random()</label>
+            <label><input type="radio" name="q59" value="b"> b. Math.rnd()</label>
+            <label><input type="radio" name="q59" value="c"> c. Math.rand()</label>
+            <label><input type="radio" name="q59" value="d"> d. Math.randomize()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q60">
+        <p><strong>60.</strong> ¿Qué propiedad devuelve el número de elementos en un array?</p>
+        <div class="options">
+            <label><input type="radio" name="q60" value="a"> a. size</label>
+            <label><input type="radio" name="q60" value="b"> b. count</label>
+            <label><input type="radio" name="q60" value="c"> c. length</label>
+            <label><input type="radio" name="q60" value="d"> d. index</label>
+        </div>
+    </div>
+
+    <div class="question" id="q61">
+        <p><strong>61.</strong> ¿Qué función se utiliza para decodificar una URI?</p>
+        <div class="options">
+            <label><input type="radio" name="q61" value="a"> a. decodeURI()</label>
+            <label><input type="radio" name="q61" value="b"> b. encodeURI()</label>
+            <label><input type="radio" name="q61" value="c"> c. parseURI()</label>
+            <label><input type="radio" name="q61" value="d"> d. unparseURI()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q62">
+        <p><strong>62.</strong> ¿Qué método elimina el primer elemento de un array?</p>
+        <div class="options">
+            <label><input type="radio" name="q62" value="a"> a. shift()</label>
+            <label><input type="radio" name="q62" value="b"> b. unshift()</label>
+            <label><input type="radio" name="q62" value="c"> c. pop()</label>
+            <label><input type="radio" name="q62" value="d"> d. remove()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q63">
+        <p><strong>63.</strong> ¿Cuál es la sintaxis correcta para comprobar si 'x' no es igual a 'y'?</p>
+        <div class="options">
+            <label><input type="radio" name="q63" value="a"> a. if (x != y)</label>
+            <label><input type="radio" name="q63" value="b"> b. if x <> y</label>
+            <label><input type="radio" name="q63" value="c"> c. if (x <> y)</label>
+            <label><input type="radio" name="q63" value="d"> d. if (x not y)</label>
+        </div>
+    </div>
+
+    <div class="question" id="q64">
+        <p><strong>64.</strong> ¿Qué objeto de JavaScript sirve para trabajar con fechas y horas?</p>
+        <div class="options">
+            <label><input type="radio" name="q64" value="a"> a. Time</label>
+            <label><input type="radio" name="q64" value="b"> b. Clock</label>
+            <label><input type="radio" name="q64" value="c"> c. Date</label>
+            <label><input type="radio" name="q64" value="d"> d. Calendar</label>
+        </div>
+    </div>
+
+    <div class="question" id="q65">
+        <p><strong>65.</strong> ¿Cómo se obtiene el año completo de un objeto fecha 'f'?</p>
+        <div class="options">
+            <label><input type="radio" name="q65" value="a"> a. f.getYear()</label>
+            <label><input type="radio" name="q65" value="b"> b. f.getFullYear()</label>
+            <label><input type="radio" name="q65" value="c"> c. f.Year()</label>
+            <label><input type="radio" name="q65" value="d"> d. f.getFull()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q66">
+        <p><strong>66.</strong> ¿Qué evento ocurre cuando el usuario quita el foco de un campo de formulario?</p>
+        <div class="options">
+            <label><input type="radio" name="q66" value="a"> a. onblur</label>
+            <label><input type="radio" name="q66" value="b"> b. onfocus</label>
+            <label><input type="radio" name="q66" value="c"> c. onchange</label>
+            <label><input type="radio" name="q66" value="d"> d. onleave</label>
+        </div>
+    </div>
+
+    <div class="question" id="q67">
+        <p><strong>67.</strong> ¿Qué método selecciona todos los elementos que coinciden con un selector CSS?</p>
+        <div class="options">
+            <label><input type="radio" name="q67" value="a"> a. querySelectorAll()</label>
+            <label><input type="radio" name="q67" value="b"> b. querySelector()</label>
+            <label><input type="radio" name="q67" value="c"> c. getElementsByCss()</label>
+            <label><input type="radio" name="q67" value="d"> d. selectAll()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q68">
+        <p><strong>68.</strong> ¿Cuál de estas opciones permite recorrer los elementos de un array de forma iterativa?</p>
+        <div class="options">
+            <label><input type="radio" name="q68" value="a"> a. forEach()</label>
+            <label><input type="radio" name="q68" value="b"> b. loop()</label>
+            <label><input type="radio" name="q68" value="c"> c. iterate()</label>
+            <label><input type="radio" name="q68" value="d"> d. mapAll()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q69">
+        <p><strong>69.</strong> ¿Qué método se usa para combinar dos o más arrays?</p>
+        <div class="options">
+            <label><input type="radio" name="q69" value="a"> a. concat()</label>
+            <label><input type="radio" name="q69" value="b"> b. join()</label>
+            <label><input type="radio" name="q69" value="c"> c. merge()</label>
+            <label><input type="radio" name="q69" value="d"> d. append()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q70">
+        <p><strong>70.</strong> ¿Cómo se comprueba si una variable 'v' es un array?</p>
+        <div class="options">
+            <label><input type="radio" name="q70" value="a"> a. v.isArray()</label>
+            <label><input type="radio" name="q70" value="b"> b. Array.isArray(v)</label>
+            <label><input type="radio" name="q70" value="c"> c. typeof v == 'array'</label>
+            <label><input type="radio" name="q70" value="d"> d. v instanceof array</label>
+        </div>
+    </div>
+
+    <div class="question" id="q71">
+        <p><strong>71.</strong> ¿Qué significa AJAX?</p>
+        <div class="options">
+            <label><input type="radio" name="q71" value="a"> a. Asynchronous JavaScript and XML</label>
+            <label><input type="radio" name="q71" value="b"> b. Advanced JavaScript and XML</label>
+            <label><input type="radio" name="q71" value="c"> c. Asynchronous Java and XML</label>
+            <label><input type="radio" name="q71" value="d"> d. Asynchronous JavaScript and XHTML</label>
+        </div>
+    </div>
+
+    <div class="question" id="q72">
+        <p><strong>72.</strong> ¿Qué objeto se utiliza en AJAX para realizar peticiones al servidor?</p>
+        <div class="options">
+            <label><input type="radio" name="q72" value="a"> a. HttpRequest</label>
+            <label><input type="radio" name="q72" value="b"> b. XMLHttpRequest</label>
+            <label><input type="radio" name="q72" value="c"> c. XMLRequest</label>
+            <label><input type="radio" name="q72" value="d"> d. ServerRequest</label>
+        </div>
+    </div>
+
+    <div class="question" id="q73">
+        <p><strong>73.</strong> ¿Qué propiedad de un elemento DOM contiene sus estilos CSS en línea?</p>
+        <div class="options">
+            <label><input type="radio" name="q73" value="a"> a. styles</label>
+            <label><input type="radio" name="q73" value="b"> b. css</label>
+            <label><input type="radio" name="q73" value="c"> c. style</label>
+            <label><input type="radio" name="q73" value="d"> d. design</label>
+        </div>
+    </div>
+
+    <div class="question" id="q74">
+        <p><strong>74.</strong> ¿Cuál es el valor por defecto de una variable declarada sin asignar valor?</p>
+        <div class="options">
+            <label><input type="radio" name="q74" value="a"> a. null</label>
+            <label><input type="radio" name="q74" value="b"> b. undefined</label>
+            <label><input type="radio" name="q74" value="c"> c. 0</label>
+            <label><input type="radio" name="q74" value="d"> d. false</label>
+        </div>
+    </div>
+
+    <div class="question" id="q75">
+        <p><strong>75.</strong> ¿Qué palabra clave se usa para detener la ejecución de un bucle?</p>
+        <div class="options">
+            <label><input type="radio" name="q75" value="a"> a. stop</label>
+            <label><input type="radio" name="q75" value="b"> b. halt</label>
+            <label><input type="radio" name="q75" value="c"> c. break</label>
+            <label><input type="radio" name="q75" value="d"> d. exit</label>
+        </div>
+    </div>
+
+    <div class="question" id="q76">
+        <p><strong>76.</strong> ¿Qué palabra clave salta a la siguiente iteración de un bucle?</p>
+        <div class="options">
+            <label><input type="radio" name="q76" value="a"> a. next</label>
+            <label><input type="radio" name="q76" value="b"> b. continue</label>
+            <label><input type="radio" name="q76" value="c"> c. skip</label>
+            <label><input type="radio" name="q76" value="d"> d. jump</label>
+        </div>
+    </div>
+
+    <div class="question" id="q77">
+        <p><strong>77.</strong> ¿Qué método de String devuelve la posición de la primera ocurrencia de un texto?</p>
+        <div class="options">
+            <label><input type="radio" name="q77" value="a"> a. search()</label>
+            <label><input type="radio" name="q77" value="b"> b. find()</label>
+            <label><input type="radio" name="q77" value="c"> c. indexOf()</label>
+            <label><input type="radio" name="q77" value="d"> d. position()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q78">
+        <p><strong>78.</strong> ¿Qué método extrae una parte de una cadena de texto y devuelve otra cadena nueva?</p>
+        <div class="options">
+            <label><input type="radio" name="q78" value="a"> a. slice()</label>
+            <label><input type="radio" name="q78" value="b"> b. cut()</label>
+            <label><input type="radio" name="q78" value="c"> c. extract()</label>
+            <label><input type="radio" name="q78" value="d"> d. split()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q79">
+        <p><strong>79.</strong> ¿Cómo se llama al conjunto de variables que están disponibles en un contexto particular?</p>
+        <div class="options">
+            <label><input type="radio" name="q79" value="a"> a. Closure</label>
+            <label><input type="radio" name="q79" value="b"> b. Scope</label>
+            <label><input type="radio" name="q79" value="c"> c. Environment</label>
+            <label><input type="radio" name="q79" value="d"> d. Context</label>
+        </div>
+    </div>
+
+    <div class="question" id="q80">
+        <p><strong>80.</strong> ¿Qué permite la declaración 'use strict' en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q80" value="a"> a. Acelerar la ejecución</label>
+            <label><input type="radio" name="q80" value="b"> b. Obligar a usar una sintaxis más rigurosa</label>
+            <label><input type="radio" name="q80" value="c"> c. Evitar el uso de bucles</label>
+            <label><input type="radio" name="q80" value="d"> d. Deshabilitar las funciones asíncronas</label>
+        </div>
+    </div>
+
+    <div class="question" id="q81">
+        <p><strong>81.</strong> ¿Qué objeto representa la ventana del navegador en el BOM?</p>
+        <div class="options">
+            <label><input type="radio" name="q81" value="a"> a. screen</label>
+            <label><input type="radio" name="q81" value="b"> b. window</label>
+            <label><input type="radio" name="q81" value="c"> c. navigator</label>
+            <label><input type="radio" name="q81" value="d"> d. document</label>
+        </div>
+    </div>
+
+    <div class="question" id="q82">
+        <p><strong>82.</strong> ¿Qué método se usa para añadir un manejador de eventos en el modelo avanzado (W3C)?</p>
+        <div class="options">
+            <label><input type="radio" name="q82" value="a"> a. attachEvent()</label>
+            <label><input type="radio" name="q82" value="b"> b. addEventListener()</label>
+            <label><input type="radio" name="q82" value="c"> c. onEvent()</label>
+            <label><input type="radio" name="q82" value="d"> d. addHandler()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q83">
+        <p><strong>83.</strong> ¿Cuál es la sintaxis para un comentario de múltiples líneas en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q83" value="a"> a. // Comentario //</label>
+            <label><input type="radio" name="q83" value="b"> b. <!-- Comentario --></label>
+            <label><input type="radio" name="q83" value="c"> c. /* Comentario */</label>
+            <label><input type="radio" name="q83" value="d"> d. # Comentario #</label>
+        </div>
+    </div>
+
+    <div class="question" id="q84">
+        <p><strong>84.</strong> ¿Qué operador se usa para calcular el resto de una división?</p>
+        <div class="options">
+            <label><input type="radio" name="q84" value="a"> a. /</label>
+            <label><input type="radio" name="q84" value="b"> b. %</label>
+            <label><input type="radio" name="q84" value="c"> c. //</label>
+            <label><input type="radio" name="q84" value="d"> d. **</label>
+        </div>
+    </div>
+
+    <div class="question" id="q85">
+        <p><strong>85.</strong> ¿Qué significa el operador '!='?</p>
+        <div class="options">
+            <label><input type="radio" name="q85" value="a"> a. Estrictamente distinto</label>
+            <label><input type="radio" name="q85" value="b"> b. Igual</label>
+            <label><input type="radio" name="q85" value="c"> c. No es igual</label>
+            <label><input type="radio" name="q85" value="d"> d. Asignación</label>
+        </div>
+    </div>
+
+    <div class="question" id="q86">
+        <p><strong>86.</strong> ¿Cómo se llama el evento que se activa cuando el usuario pulsa una tecla?</p>
+        <div class="options">
+            <label><input type="radio" name="q86" value="a"> a. onkeypress</label>
+            <label><input type="radio" name="q86" value="b"> b. onkeydown</label>
+            <label><input type="radio" name="q86" value="c"> c. onkeyup</label>
+            <label><input type="radio" name="q86" value="d"> d. Todas las anteriores</label>
+        </div>
+    </div>
+
+    <div class="question" id="q87">
+        <p><strong>87.</strong> ¿Qué hace el método preventDefault() en un evento?</p>
+        <div class="options">
+            <label><input type="radio" name="q87" value="a"> a. Detiene la propagación del evento</label>
+            <label><input type="radio" name="q87" value="b"> b. Cancela el comportamiento por defecto del evento</label>
+            <label><input type="radio" name="q87" value="c"> c. Elimina el evento del DOM</label>
+            <label><input type="radio" name="q87" value="d"> d. Valida los datos del evento</label>
+        </div>
+    </div>
+
+    <div class="question" id="q88">
+        <p><strong>88.</strong> ¿Qué objeto de JavaScript se usa para realizar operaciones matemáticas complejas?</p>
+        <div class="options">
+            <label><input type="radio" name="q88" value="a"> a. Calc</label>
+            <label><input type="radio" name="q88" value="b"> b. Math</label>
+            <label><input type="radio" name="q88" value="c"> c. Number</label>
+            <label><input type="radio" name="q88" value="d"> d. Calculus</label>
+        </div>
+    </div>
+
+    <div class="question" id="q89">
+        <p><strong>89.</strong> ¿Qué devuelve typeof undefined?</p>
+        <div class="options">
+            <label><input type="radio" name="q89" value="a"> a. 'null'</label>
+            <label><input type="radio" name="q89" value="b"> b. 'undefined'</label>
+            <label><input type="radio" name="q89" value="c"> c. 'object'</label>
+            <label><input type="radio" name="q89" value="d"> d. 'string'</label>
+        </div>
+    </div>
+
+    <div class="question" id="q90">
+        <p><strong>90.</strong> ¿Qué tipo de dato devuelve el operador 'typeof' si se aplica a un array?</p>
+        <div class="options">
+            <label><input type="radio" name="q90" value="a"> a. 'array'</label>
+            <label><input type="radio" name="q90" value="b"> b. 'object'</label>
+            <label><input type="radio" name="q90" value="c"> c. 'list'</label>
+            <label><input type="radio" name="q90" value="d"> d. 'string'</label>
+        </div>
+    </div>
+
+    <div class="question" id="q91">
+        <p><strong>91.</strong> ¿Cómo podemos crear una instancia de un objeto Date?</p>
+        <div class="options">
+            <label><input type="radio" name="q91" value="a"> a. new Date()</label>
+            <label><input type="radio" name="q91" value="b"> b. Date.now()</label>
+            <label><input type="radio" name="q91" value="c"> c. Date.create()</label>
+            <label><input type="radio" name="q91" value="d"> d. create Date()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q92">
+        <p><strong>92.</strong> ¿Para qué sirve el método querySelector()?</p>
+        <div class="options">
+            <label><input type="radio" name="q92" value="a"> a. Devuelve una colección de elementos</label>
+            <label><input type="radio" name="q92" value="b"> b. Devuelve el primer elemento que coincide con un selector CSS especificado</label>
+            <label><input type="radio" name="q92" value="c"> c. Permite escribir consultas SQL en el cliente</label>
+            <label><input type="radio" name="q92" value="d"> d. Realiza peticiones AJAX a una URL</label>
+        </div>
+    </div>
+
+    <div class="question" id="q93">
+        <p><strong>93.</strong> ¿Qué propiedad nos permite modificar el atributo 'class' de un elemento HTML desde JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q93" value="a"> a. class</label>
+            <label><input type="radio" name="q93" value="b"> b. className</label>
+            <label><input type="radio" name="q93" value="c"> c. classList</label>
+            <label><input type="radio" name="q93" value="d"> d. Tanto B como C son correctas</label>
+        </div>
+    </div>
+
+    <div class="question" id="q94">
+        <p><strong>94.</strong> ¿Qué devuelve la función isNaN('Hola')?</p>
+        <div class="options">
+            <label><input type="radio" name="q94" value="a"> a. true</label>
+            <label><input type="radio" name="q94" value="b"> b. false</label>
+            <label><input type="radio" name="q94" value="c"> c. undefined</label>
+            <label><input type="radio" name="q94" value="d"> d. Genera un error</label>
+        </div>
+    </div>
+
+    <div class="question" id="q95">
+        <p><strong>95.</strong> ¿Cómo podemos mostrar un cuadro de diálogo para que el usuario introduzca un dato?</p>
+        <div class="options">
+            <label><input type="radio" name="q95" value="a"> a. alert()</label>
+            <label><input type="radio" name="q95" value="b"> b. confirm()</label>
+            <label><input type="radio" name="q95" value="c"> c. prompt()</label>
+            <label><input type="radio" name="q95" value="d"> d. input()</label>
+        </div>
+    </div>
+
+    <div class="question" id="q96">
+        <p><strong>96.</strong> ¿Qué método transforma todos los caracteres de una cadena a mayúsculas?</p>
+        <div class="options">
+            <label><input type="radio" name="q96" value="a"> a. toUpperCase()</label>
+            <label><input type="radio" name="q96" value="b"> b. toUpper()</label>
+            <label><input type="radio" name="q96" value="c"> c. upperCase()</label>
+            <label><input type="radio" name="q96" value="d"> d. changeCase('upper')</label>
+        </div>
+    </div>
+
+    <div class="question" id="q97">
+        <p><strong>97.</strong> ¿Qué palabra clave se usa para manejar las excepciones en JavaScript?</p>
+        <div class="options">
+            <label><input type="radio" name="q97" value="a"> a. try...catch</label>
+            <label><input type="radio" name="q97" value="b"> b. error...handle</label>
+            <label><input type="radio" name="q97" value="c"> c. throw...catch</label>
+            <label><input type="radio" name="q97" value="d"> d. exception...finally</label>
+        </div>
+    </div>
+
+    <div class="question" id="q98">
+        <p><strong>98.</strong> ¿Qué significa la sigla DOM?</p>
+        <div class="options">
+            <label><input type="radio" name="q98" value="a"> a. Document Object Module</label>
+            <label><input type="radio" name="q98" value="b"> b. Display Object Model</label>
+            <label><input type="radio" name="q98" value="c"> c. Document Object Model</label>
+            <label><input type="radio" name="q98" value="d"> d. Document Oriented Model</label>
+        </div>
+    </div>
+
+    <div class="question" id="q99">
+        <p><strong>99.</strong> ¿Cuál es la función del operador ternario (condición ? expr1 : expr2)?</p>
+        <div class="options">
+            <label><input type="radio" name="q99" value="a"> a. Realizar tres operaciones matemáticas</label>
+            <label><input type="radio" name="q99" value="b"> b. Asignar tres valores</label>
+            <label><input type="radio" name="q99" value="c"> c. Evaluar una condición y retornar uno de dos valores</label>
+            <label><input type="radio" name="q99" value="d"> d. Comparar tres variables simultáneamente</label>
+        </div>
+    </div>
+
+    <div class="question" id="q100">
+        <p><strong>100.</strong> ¿Qué método se usa para convertir un número a una cadena de texto?</p>
+        <div class="options">
+            <label><input type="radio" name="q100" value="a"> a. toNumber()</label>
+            <label><input type="radio" name="q100" value="b"> b. toString()</label>
+            <label><input type="radio" name="q100" value="c"> c. parseString()</label>
+            <label><input type="radio" name="q100" value="d"> d. stringify()</label>
+        </div>
+    </div>
+
+    <button onclick="corregirExamen()">Corregir Todo</button>
+    <div id="resultado" class="summary" style="display:none;"></div>
+
+    <script>
+        const correctas = {"q1": "b", "q2": "b", "q3": "d", "q4": "d", "q5": "b", "q6": "c", "q7": "d", "q8": "b", "q9": "d", "q10": "c", "q11": "d", "q12": "c", "q13": "c", "q14": "d", "q15": "b", "q16": "b", "q17": "b", "q18": "b", "q19": "a", "q20": "b", "q21": "b", "q22": "c", "q23": "a", "q24": "c", "q25": "a", "q26": "c", "q27": "c", "q28": "d", "q29": "c", "q30": "b", "q31": "c", "q32": "d", "q33": "a", "q34": "b", "q35": "a", "q36": "b", "q37": "b", "q38": "b", "q39": "a", "q40": "c", "q41": "c", "q42": "b", "q43": "b", "q44": "b", "q45": "c", "q46": "b", "q47": "a", "q48": "a", "q49": "c", "q50": "c", "q51": "a", "q52": "d", "q53": "b", "q54": "c", "q55": "b", "q56": "a", "q57": "c", "q58": "a", "q59": "a", "q60": "c", "q61": "a", "q62": "a", "q63": "a", "q64": "c", "q65": "b", "q66": "a", "q67": "a", "q68": "a", "q69": "a", "q70": "b", "q71": "a", "q72": "b", "q73": "c", "q74": "b", "q75": "c", "q76": "b", "q77": "c", "q78": "a", "q79": "b", "q80": "b", "q81": "b", "q82": "b", "q83": "c", "q84": "b", "q85": "c", "q86": "d", "q87": "b", "q88": "b", "q89": "b", "q90": "b", "q91": "a", "q92": "b", "q93": "d", "q94": "a", "q95": "c", "q96": "a", "q97": "a", "q98": "c", "q99": "c", "q100": "b"};
+
+        function corregirExamen() {
+            document.querySelectorAll(".marked-correct, .marked-incorrect")
+                .forEach(el => el.classList.remove("marked-correct", "marked-incorrect"));
+
+            let acertadas = 0;
+            const total = Object.keys(correctas).length;
+
+            for (let key in correctas) {
+                const radios = document.getElementsByName(key);
+                let sel = null;
+
+                for (let r of radios) {
+                    if (r.checked) sel = r.value;
+
+                    if (r.value === correctas[key]) {
+                        r.parentElement.classList.add("marked-correct");
+                    } else if (r.checked) {
+                        r.parentElement.classList.add("marked-incorrect");
+                    }
+                }
+
+                if (sel === correctas[key]) acertadas++;
+            }
+
+            const por = Math.round((acertadas / total) * 100);
+            let nota = (acertadas / total) * 10;
+            nota = nota.toFixed(1);
+
+            let calificacion = "";
+            if (nota < 5) calificacion = "Suspenso";
+            else if (nota < 6) calificacion = "Suficiente";
+            else if (nota < 7) calificacion = "Bien";
+            else if (nota < 9) calificacion = "Notable";
+            else calificacion = "Sobresaliente";
+
+            document.getElementById("resultado").innerHTML =
+                `<h2>Resultado Final</h2>
+                 <p>${acertadas} de ${total} correctas (${por}%)</p>
+                 <h3>Nota: ${nota} - ${calificacion}</h3>`;
+
+            document.getElementById("resultado").style.display = "block";
+        }
+    </script>
+</body>
+</html>
