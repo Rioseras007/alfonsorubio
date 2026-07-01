@@ -49,28 +49,51 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
     integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
     crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
 
 </head>
 
 <body>
-
   <header>
 
     <!-- Banner principal -->
 
-    <h1 style="margin-top: 20px;margin-bottom:20px;"><i class="bi bi-info-circle"></i> Alfonso Rubio Rioseras Home Page
-    </h1>
+    <h1 style="margin-top: 20px;margin-bottom:20px;">Alfonso Rubio Rioseras Home Page</h1>
+  
+    <h2 style="margin-top: 20px;margin-bottom:20px;">
+     
+      <span id="element"></span>
+    </h2>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const typedElement = document.getElementById("element");
+        if (typedElement) {
+          new Typed("#element", {
+            strings: [
+              "Comunicación independiente",
+              "Impresión 3D",
+              "Servicios web",
+              "Opinión sin filtros"
+            ],
+            typeSpeed: 60,
+            backSpeed: 30,
+            backDelay: 1500,
+            loop: true
+          });
+        }
+      });
+    </script>
     <div>
       <hr class="gradient">
     </div>
     <div class="news-marquee">
       <div class="news-track">
-        <span><i class="bi bi-house"></i> Comunicación independiente</span>
-        <span><i class="bi bi-bar-chart"></i> Análisis político y social</span>
-        <span><i class="bi bi-chat"></i> Opinión sin filtros</span>
-        <span><i class="bi bi-globe"></i> Actualidad </span>
-        <span><i class="bi bi-printer"></i> Impresión 3D </span>
-        <span><i class="bi bi-file-earmark-person"></i> Alfonso Rubio Rioseras</span>
+     
+        <span><i class="bi bi-chat"></i> Escucha música generada con I.A en Suno</span>
+        <span><i class="bi bi-globe"></i> Visita mi canal de YouTube </span>
+        <span><i class="bi bi-printer"></i> Visita mi perfil de Impresión 3D en Printables.com </span>
+        <span>©️Alfonso Rubio Rioseras 2026</span>
       </div>
     </div>
 
@@ -1214,7 +1237,7 @@
 
 
 
-
+ <script src="https://unpkg.com/typed.js@3.0.0/dist/typed.umd.js"></script>
 </body>
 
 </html>
